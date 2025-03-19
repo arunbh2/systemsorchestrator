@@ -2,17 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Systems Orchestration Fundamentals</title>
 
   <!-- D3 Library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
 
   <!-- Google Fonts -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
-    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <style>
     :root {
@@ -31,10 +28,6 @@
       --gray-700: #495057;
       --gray-800: #343a40;
       --gray-900: #212529;
-      --success: #28a745;
-      --info: #17a2b8;
-      --warning: #ffc107;
-      --danger: #dc3545;
     }
 
     * {
@@ -58,7 +51,6 @@
       margin-bottom: 1rem;
       line-height: 1.2;
     }
-
     h1 {
       font-size: 2.5rem;
       margin-bottom: 1.5rem;
@@ -67,22 +59,18 @@
       background-clip: text;
       color: transparent;
     }
-
     h2 {
       font-size: 2rem;
       color: var(--primary);
       margin-top: 2rem;
     }
-
     h3 {
       font-size: 1.5rem;
       color: var(--secondary);
     }
-
     p {
       margin-bottom: 1rem;
     }
-
     a {
       color: var(--secondary);
       text-decoration: none;
@@ -91,11 +79,9 @@
     a:hover {
       color: var(--accent);
     }
-
     ul, ol {
       margin: 1rem 0 1rem 1.5rem;
     }
-
     .container {
       max-width: 1200px;
       margin: 0 auto;
@@ -117,7 +103,7 @@
       opacity: 0.2;
     }
 
-    /* Header (Navigation) */
+    /* Header */
     header {
       background-color: rgba(255, 255, 255, 0.95);
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -207,11 +193,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(
-        135deg,
-        rgba(86, 67, 204, 0.05) 0%,
-        rgba(255, 126, 95, 0.05) 100%
-      );
+      background: linear-gradient(135deg, rgba(86, 67, 204, 0.05) 0%, rgba(255, 126, 95, 0.05) 100%);
       z-index: -1;
     }
     .section-title {
@@ -237,7 +219,7 @@
       text-align: center;
     }
 
-    /* Cards */
+    /* Cards and Content Blocks */
     .cards-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -269,44 +251,6 @@
     .card-title {
       font-size: 1.25rem;
       margin-bottom: 1rem;
-      color: var(--primary);
-    }
-
-    /* Feature Cards */
-    .feature-cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-      margin: 2rem 0;
-    }
-    .feature-card {
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .feature-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-    }
-    .feature-icon {
-      width: 60px;
-      height: 60px;
-      background: linear-gradient(45deg, var(--primary), var(--secondary));
-      color: white;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-    }
-    .feature-title {
-      font-size: 1.25rem;
-      margin-bottom: 0.5rem;
       color: var(--primary);
     }
 
@@ -355,56 +299,6 @@
       border-bottom-right-radius: 4px;
     }
 
-    /* Case Studies */
-    .case-study {
-      background-color: white;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-      padding: 2rem;
-      margin-bottom: 2rem;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .case-study.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .case-study-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
-    }
-    .case-study-title {
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
-      color: var(--primary);
-    }
-
-    /* Comparison Table */
-    .comparison-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 2rem 0;
-    }
-    .comparison-table th {
-      background-color: var(--primary);
-      color: white;
-      padding: 0.75rem 1rem;
-      text-align: left;
-    }
-    .comparison-table td {
-      padding: 0.75rem 1rem;
-      border-bottom: 1px solid var(--gray-300);
-    }
-    .comparison-table tr:nth-child(even) {
-      background-color: var(--gray-100);
-    }
-    .comparison-table .highlight {
-      background-color: rgba(255, 126, 95, 0.1);
-    }
-
     /* Framework Explorer */
     .framework-explorer {
       margin: 3rem 0;
@@ -437,124 +331,28 @@
       border-radius: 8px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
       display: none;
+      opacity: 0;
+      transform: translateY(20px);
     }
     .framework-content.active {
       display: block;
-      animation: fadeIn 0.5s ease-in-out;
+      animation: fadeInUp 0.8s ease-out forwards;
     }
 
-    /* Interactive Diagram Containers */
-    .interactive-diagram {
-      background-color: white;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-      padding: 2rem;
-      margin: 2rem 0;
-      position: relative;
-    }
-    .diagram-container {
-      width: 100%;
-      height: 400px;
-      position: relative;
-    }
-    .diagram-tooltip {
-      position: absolute;
-      background-color: white;
-      border-radius: 4px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-      padding: 0.75rem;
-      pointer-events: none;
+    /* Animation for framework diagrams on scroll */
+    .framework-diagram {
       opacity: 0;
-      transition: opacity 0.3s ease;
-      max-width: 250px;
-      z-index: 10;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .framework-diagram.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    /* Diagnostic Tool */
-    .diagnostic-tool {
-      background-color: white;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-      padding: 2rem;
-      margin: 2rem 0;
-    }
-    .tool-section {
-      margin-bottom: 2rem;
-    }
-    .question-block {
-      margin-bottom: 1.5rem;
-    }
-    .question-text {
-      font-weight: 500;
-      margin-bottom: 0.5rem;
-    }
-    .options {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-    .option {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .option input[type="radio"] {
-      appearance: none;
-      width: 16px;
-      height: 16px;
-      border: 2px solid var(--gray-400);
-      border-radius: 50%;
-      transition: border-color 0.3s ease;
-      position: relative;
-      cursor: pointer;
-    }
-    .option input[type="radio"]:checked {
-      border-color: var(--primary);
-    }
-    .option input[type="radio"]:checked::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background-color: var(--primary);
-    }
-    .option label {
-      cursor: pointer;
-    }
-    .tool-button {
-      display: inline-block;
-      padding: 0.75rem 1.5rem;
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-weight: 500;
-    }
-    .tool-button:hover {
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      transform: translateY(-2px);
-    }
-    .results-container {
-      display: none;
-      margin-top: 2rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--gray-300);
-    }
-    .results-chart {
-      height: 300px;
-      margin-bottom: 2rem;
-    }
-    .results-summary {
-      padding: 1.5rem;
-      background-color: var(--gray-100);
-      border-radius: 8px;
-      margin-bottom: 1.5rem;
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     /* Toggle Button for Network Visualization */
@@ -660,56 +458,26 @@
         display: block;
       }
     }
-
     @media (max-width: 768px) {
-      h1 {
-        font-size: 2rem;
-      }
-      h2 {
-        font-size: 1.5rem;
-      }
-      .section-intro {
-        font-size: 1rem;
-      }
-      .cards-grid {
-        grid-template-columns: 1fr;
-      }
-      .framework-explorer {
-        overflow-x: auto;
-      }
+      h1 { font-size: 2rem; }
+      h2 { font-size: 1.5rem; }
+      .section-intro { font-size: 1rem; }
+      .cards-grid { grid-template-columns: 1fr; }
+      .framework-explorer { overflow-x: auto; }
     }
-
     @media (max-width: 576px) {
-      .header-container {
-        padding: 0.75rem;
-      }
-      .logo {
-        font-size: 1.25rem;
-      }
-      section {
-        padding: 2rem 0;
-      }
-      .section-title {
-        margin-bottom: 2rem;
-      }
-      .feature-cards {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    /* Simple fadeIn animation for frameworks, etc. */
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      .header-container { padding: 0.75rem; }
+      .logo { font-size: 1.25rem; }
+      section { padding: 2rem 0; }
+      .section-title { margin-bottom: 2rem; }
     }
   </style>
 </head>
-
 <body>
   <!-- Network Visualization Background -->
   <div id="network-container"></div>
 
-  <!-- Toggle button to show/hide or intensify the network visualization -->
+  <!-- Toggle Button for Background Visualization -->
   <div class="viz-toggle" id="viz-toggle" aria-label="Toggle background visualization">
     ⟁
   </div>
@@ -745,10 +513,7 @@
       <div class="container">
         <h1 class="section-title">Understanding Systems Orchestration</h1>
         <p class="section-intro">
-          Systems orchestration refers to the strategic coordination of diverse actors and
-          resources to achieve transformative, system-wide change. Rather than implementing
-          solutions directly, a systems orchestrator acts as the "connective tissue" holding
-          together parts of a system.
+          Systems orchestration is about strategically coordinating diverse actors and resources to drive transformative, system-wide change. Rather than implementing solutions directly, a systems orchestrator acts as the “connective tissue,” aligning goals, mobilizing collective action, and enabling sustainable change.
         </p>
 
         <div class="content-block">
@@ -756,31 +521,19 @@
           <div class="cards-grid">
             <div class="card">
               <h3 class="card-title">Complex Adaptive Systems (CAS)</h3>
-              <p>
-                Systems are dynamic and unpredictable; change happens in non-linear ways.
-                Traditional planning approaches often fail in such environments.
-              </p>
+              <p>Systems are dynamic and unpredictable; change occurs in non-linear ways. Traditional approaches often fall short in such environments.</p>
             </div>
             <div class="card">
               <h3 class="card-title">Leverage Points</h3>
-              <p>
-                Change is most effective when targeting key intervention points within a system
-                (e.g., shifting incentives, influencing power structures, changing information flows).
-              </p>
+              <p>Identify key intervention points within a system (e.g., shifting incentives or power structures) to maximize impact.</p>
             </div>
             <div class="card">
               <h3 class="card-title">Systemic Feedback Loops</h3>
-              <p>
-                Identifying reinforcing (amplifying) and balancing (stabilizing) feedback loops to
-                sustain systemic change and understand system behavior.
-              </p>
+              <p>Recognize both reinforcing and balancing loops that maintain or alter system behavior over time.</p>
             </div>
             <div class="card">
               <h3 class="card-title">Emergent Strategy</h3>
-              <p>
-                Recognizing that predefined blueprints fail in complex systems, requiring adaptive,
-                iterative learning and co-creation approaches.
-              </p>
+              <p>Adapt through iterative learning and co-creation as rigid plans prove insufficient in complex contexts.</p>
             </div>
           </div>
         </div>
@@ -793,7 +546,7 @@
             <div class="diagram-tooltip" id="diagram-tooltip"></div>
           </div>
 
-          <!-- Expandable sections -->
+          <!-- Expandable Sections -->
           <div class="expandable">
             <div class="expandable-header">
               <h3 class="expandable-title">Backbone Organization</h3>
@@ -801,17 +554,10 @@
             </div>
             <div class="expandable-content">
               <div class="expandable-body">
-                <p>
-                  A coordinating entity that provides structure, resources, and neutral
-                  facilitation without controlling the system. The backbone supports the
-                  collaborative process by guiding vision and strategy, supporting aligned
-                  activities, establishing shared measurement, building public will,
-                  advancing policy, and mobilizing resources.
-                </p>
+                <p>A coordinating entity that provides structure, resources, and neutral facilitation without controlling the system. It supports collaborative processes by guiding vision, strategy, and shared measurement.</p>
               </div>
             </div>
           </div>
-
           <div class="expandable">
             <div class="expandable-header">
               <h3 class="expandable-title">Field Catalyst Approach</h3>
@@ -819,16 +565,10 @@
             </div>
             <div class="expandable-content">
               <div class="expandable-body">
-                <p>
-                  Orchestrators act as catalysts, accelerating progress by creating alignment
-                  between actors, rather than imposing solutions. They bring together different
-                  organizations to tackle complex problems with systems-level strategies,
-                  focusing on field-level outcomes rather than organizational growth.
-                </p>
+                <p>Orchestrators accelerate progress by aligning actors rather than imposing solutions, serving as catalysts for multi-stakeholder collaboration.</p>
               </div>
             </div>
           </div>
-
           <div class="expandable">
             <div class="expandable-header">
               <h3 class="expandable-title">Distributed Leadership</h3>
@@ -836,15 +576,10 @@
             </div>
             <div class="expandable-content">
               <div class="expandable-body">
-                <p>
-                  No single actor owns the change; orchestrators help coordinate collective action
-                  across multiple stakeholders. This approach recognizes that complex challenges
-                  require many leaders contributing different skills, resources, and perspectives.
-                </p>
+                <p>No single entity drives change; orchestrators enable collective action by empowering diverse leaders and bridging silos.</p>
               </div>
             </div>
           </div>
-
           <div class="expandable">
             <div class="expandable-header">
               <h3 class="expandable-title">System Mapping & Network Analysis</h3>
@@ -852,12 +587,7 @@
             </div>
             <div class="expandable-content">
               <div class="expandable-body">
-                <p>
-                  Techniques like stakeholder network mapping, causal loop diagrams, and power
-                  mapping help visualize how different system actors interact. These tools reveal
-                  relationships, power dynamics, and resource flows that might otherwise remain
-                  hidden, enabling more strategic orchestration.
-                </p>
+                <p>Utilize tools like stakeholder mapping and causal loop diagrams to visualize relationships, power dynamics, and resource flows within complex systems.</p>
               </div>
             </div>
           </div>
@@ -866,29 +596,16 @@
         <div class="content-block">
           <h2>What is Systems Orchestration?</h2>
           <p>
-            Many organizations claim to work at a systems level, but true orchestration requires
-            specific knowledge, methodologies, and strategic thinking. Systems orchestrators
-            identify shared goals, align activities, and mobilize collective action across
-            organizations and sectors.
+            True orchestration goes beyond project delivery. It is about enabling systemic change by aligning stakeholders, shaping policies, and catalyzing shared impact across sectors.
           </p>
           <div class="expandable">
             <div class="expandable-header">
-              <h3 class="expandable-title">Different names, similar concept</h3>
+              <h3 class="expandable-title">Different Names, Similar Concepts</h3>
               <div class="expandable-icon">▼</div>
             </div>
             <div class="expandable-content">
               <div class="expandable-body">
-                <p>
-                  This role has been described with various terms in literature: the Skoll
-                  Foundation calls these actors "system orchestrators," while Bridgespan uses
-                  "field catalysts" to emphasize their behind-the-scenes influence.
-                </p>
-                <p>
-                  Regardless of name, orchestrators are distinguished by their focus on enabling
-                  population-level change (not just growing one organization) and by influencing
-                  others' actions rather than acting alone. They often work subtly or "invisibly,"
-                  avoiding the spotlight so as not to compete with frontline actors.
-                </p>
+                <p>Terms like “system orchestrators” and “field catalysts” underscore the behind‐the‐scenes nature of this role. Regardless of name, effective orchestrators focus on enabling population-level change rather than championing individual success.</p>
               </div>
             </div>
           </div>
@@ -897,72 +614,8 @@
         <div class="content-block">
           <h2>Core Characteristics of Orchestrators</h2>
           <p>
-            Effective systems orchestrators exhibit a humbly collaborative leadership style. They
-            "park their egos" and facilitate cooperation among stakeholders to tackle massive
-            problems collectively.
+            Successful orchestrators work humbly to unite stakeholders, foster trust, and leverage diverse capacities. They bridge gaps, share power, and use a range of tools—from convening to policy advocacy—to drive lasting change.
           </p>
-          <div class="feature-cards">
-            <div class="feature-card">
-              <div class="feature-icon">★</div>
-              <h3 class="feature-title">Collective Impact Focus</h3>
-              <p>
-                They help coalitions achieve more together than any single entity could
-                accomplish alone.
-              </p>
-            </div>
-            <div class="feature-card">
-              <div class="feature-icon">🔗</div>
-              <h3 class="feature-title">Bridge-Building</h3>
-              <p>
-                They empower and enable other leaders by sharing power, fostering trust, and
-                elevating marginalized voices.
-              </p>
-            </div>
-            <div class="feature-card">
-              <div class="feature-icon">🧰</div>
-              <h3 class="feature-title">Multiple Tools</h3>
-              <p>
-                They deploy various approaches from convening dialogues to influencing policy
-                and funding flows.
-              </p>
-            </div>
-            <div class="feature-card">
-              <div class="feature-icon">✓</div>
-              <h3 class="feature-title">High Credibility</h3>
-              <p>
-                They develop trust with stakeholders to coordinate effectively across public,
-                private, and civil society boundaries.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Example comparison table, truncated for brevity -->
-        <!-- You can fill it with your own content -->
-        <div class="content-block">
-          <h2>Orchestration vs. Other Change Approaches</h2>
-          <table class="comparison-table">
-            <thead>
-              <tr>
-                <th>Feature</th>
-                <th>Systems Orchestration</th>
-                <th>Traditional Approach</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Focus</td>
-                <td>Enabling environment, coordination, field-level impact</td>
-                <td>Project-level outputs, short-term outcomes</td>
-              </tr>
-              <tr>
-                <td>Leadership Style</td>
-                <td>Facilitative, humble, behind-the-scenes</td>
-                <td>Top-down, directive</td>
-              </tr>
-              <!-- more rows as needed -->
-            </tbody>
-          </table>
         </div>
       </div>
     </section>
@@ -972,7 +625,7 @@
       <div class="container">
         <h2 class="section-title">Core Concepts</h2>
         <p class="section-intro">
-          Delve deeper into frameworks like Systems Thinking, Theory U, Collective Impact, and more.
+          Explore foundational theories and technical approaches that underpin effective systems orchestration.
         </p>
       </div>
     </section>
@@ -981,6 +634,9 @@
     <section id="frameworks">
       <div class="container framework-explorer">
         <h2 class="section-title">Frameworks for Systems Change</h2>
+        <p class="section-intro">
+          The following frameworks provide proven pathways for orchestrating complex systems. They illustrate how market dynamics, collective action, and transformative processes can be harnessed to drive systemic change.
+        </p>
         <div class="framework-tabs">
           <div class="framework-tab active" data-framework="msd">Market Systems Dev</div>
           <div class="framework-tab" data-framework="collective-impact">Collective Impact</div>
@@ -988,25 +644,37 @@
           <div class="framework-tab" data-framework="pathway">Orchestration Process</div>
         </div>
 
-        <!-- Each framework tab content -->
-        <div id="msd-content" class="framework-content active">
+        <!-- Framework Content Blocks with Enhanced Animations -->
+        <div id="msd-content" class="framework-content">
           <h3>Market Systems Development (MSD)</h3>
-          <div class="diagram-container" id="msd-diagram"></div>
+          <p>
+            MSD focuses on facilitating market-driven solutions by strengthening incentives for system actors rather than directly intervening. It encourages partnerships among government, private sector, and communities to shift business models and policies.
+          </p>
+          <div class="diagram-container framework-diagram" id="msd-diagram"></div>
         </div>
 
         <div id="collective-impact-content" class="framework-content">
           <h3>Collective Impact</h3>
-          <div class="diagram-container" id="collective-impact-diagram"></div>
+          <p>
+            Collective Impact relies on a shared agenda, continuous communication, and mutually reinforcing activities among partners. It uses a neutral backbone organization to guide multi-sector collaboration and create systemic change.
+          </p>
+          <div class="diagram-container framework-diagram" id="collective-impact-diagram"></div>
         </div>
 
         <div id="theory-u-content" class="framework-content">
           <h3>Theory U</h3>
-          <div class="diagram-container" id="theory-u-diagram"></div>
+          <p>
+            Theory U is a process framework that helps organizations engage in deep systemic transformation. Through stages like Co-Initiating, Co-Sensing, Presencing, Co-Creating, and Co-Evolving, it supports the emergence of innovative, adaptive solutions.
+          </p>
+          <div class="diagram-container framework-diagram" id="theory-u-diagram"></div>
         </div>
 
         <div id="pathway-content" class="framework-content">
           <h3>Orchestration Process</h3>
-          <div class="diagram-container" id="pathway-diagram"></div>
+          <p>
+            This process diagram illustrates how orchestrators move from coalition building to scaling systemic change. It maps key phases—from initiation and quick wins to institutionalization and eventual evolution—ensuring that collaborative efforts are sustainable and adaptive.
+          </p>
+          <div class="diagram-container framework-diagram" id="pathway-diagram"></div>
         </div>
       </div>
     </section>
@@ -1016,10 +684,8 @@
       <div class="container">
         <h2 class="section-title">Implementation</h2>
         <p class="section-intro">
-          Explore best practices for putting systems orchestration into action, including
-          stakeholder engagement, resource mobilization, and ongoing adaptation.
+          Discover best practices for enacting systems orchestration on the ground—engaging stakeholders, mobilizing resources, and adapting strategies as contexts change.
         </p>
-        <!-- Example diagram for contribution analysis -->
         <div class="interactive-diagram">
           <h3>Contribution Analysis Diagram</h3>
           <div class="diagram-container" id="contribution-diagram"></div>
@@ -1032,8 +698,7 @@
       <div class="container">
         <h2 class="section-title">Evaluation</h2>
         <p class="section-intro">
-          Systems-level evaluation methods differ from traditional project M&E. Learn more about
-          measuring contribution vs. attribution, tracking emergent changes, and using feedback loops.
+          Learn how to measure systemic impact through process metrics, qualitative insights, and participatory evaluation methods that capture the complexity of systems change.
         </p>
       </div>
     </section>
@@ -1043,10 +708,8 @@
       <div class="container">
         <h2 class="section-title">Case Studies</h2>
         <p class="section-intro">
-          Real-world stories of systems orchestration in action.
+          Real-world examples of systems orchestration in action illustrate how collaborative efforts have driven change across sectors.
         </p>
-
-        <!-- Example case study format -->
         <div class="case-study" id="case-study-1">
           <div class="case-study-header">
             <h3 class="case-study-title">Case Study: Improving Local Food Systems</h3>
@@ -1059,13 +722,9 @@
             <span class="case-study-tag">Policy Influence</span>
           </div>
           <p>
-            By forming a coalition of farmers, local businesses, NGOs, and government
-            agencies, the orchestrator helped scale sustainable farming practices,
-            streamline supply chains, and influence policy changes to promote local markets.
+            By forming a coalition of farmers, local businesses, NGOs, and government agencies, the orchestrator helped scale sustainable farming practices, streamline supply chains, and influence policy changes to promote local markets.
           </p>
         </div>
-
-        <!-- Add more .case-study blocks as needed -->
       </div>
     </section>
 
@@ -1074,11 +733,9 @@
       <div class="container">
         <h2 class="section-title">Diagnostic Tool</h2>
         <p class="section-intro">
-          Assess your readiness for systems orchestration. Answer the questions below to get
-          tailored recommendations.
+          Assess your readiness for systems orchestration by answering a series of questions that reveal your strengths and gaps. Tailored recommendations will help you prioritize next steps.
         </p>
         <div class="diagnostic-tool">
-          <!-- Example of dimension questions -->
           <div class="tool-section">
             <div class="question-block">
               <div class="question-text">
@@ -1107,15 +764,13 @@
                 </div>
               </div>
             </div>
-            <!-- Repeat for other dimensions (Vision & Urgency, Institutional Support, etc.) -->
+            <!-- Additional dimension questions can be added similarly -->
           </div>
 
           <button class="tool-button" id="calculate-results">Calculate Readiness</button>
 
           <div class="results-container" id="results-container">
-            <div class="results-summary" id="results-summary">
-              <!-- Populated dynamically -->
-            </div>
+            <div class="results-summary" id="results-summary"></div>
             <div class="results-chart" id="results-chart"></div>
             <div id="recommendations"></div>
           </div>
@@ -1130,8 +785,7 @@
       <div class="footer-info">
         <h4 class="footer-title">About</h4>
         <p>
-          Systems Orchestration Fundamentals aims to empower leaders, practitioners,
-          and communities to catalyze wide-scale change.
+          Systems Orchestration Fundamentals empowers leaders to catalyze system-wide change by connecting diverse stakeholders and leveraging proven frameworks.
         </p>
       </div>
       <div class="footer-info">
@@ -1148,7 +802,7 @@
       </div>
       <div class="footer-info">
         <h4 class="footer-title">Stay Connected</h4>
-        <p>Subscribe to our newsletter or follow us on social media for updates.</p>
+        <p>Subscribe for updates and follow us on social media for the latest insights on systems change.</p>
       </div>
     </div>
     <div class="container footer-bottom">
@@ -1156,162 +810,88 @@
     </div>
   </footer>
 
-  <!-- Main JavaScript (including D3 diagrams, expansions, nav toggles, etc.) -->
+  <!-- JavaScript Section -->
   <script>
-    /*****************************
-     * Mobile Navigation Toggle
-     *****************************/
+    // Mobile Navigation Toggle
     const mobileNavToggle = document.getElementById('mobile-nav-toggle');
     const navLinks = document.getElementById('nav-links');
+    mobileNavToggle.addEventListener('click', () => navLinks.classList.toggle('active'));
 
-    mobileNavToggle.addEventListener('click', function() {
-      navLinks.classList.toggle('active');
-    });
-
-    /*****************************
-     * Smooth Scrolling for Nav
-     *****************************/
+    // Smooth Scrolling for Navigation Links
     document.querySelectorAll('.nav-item').forEach(link => {
       link.addEventListener('click', function(e) {
         e.preventDefault();
-
-        // Remove active class from all links
-        document.querySelectorAll('.nav-item').forEach(item => {
-          item.classList.remove('active');
-        });
-        // Add active class to clicked link
+        document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
         this.classList.add('active');
-
-        // Grab target section
-        const targetId = this.getAttribute('href');
-        const targetSection = document.querySelector(targetId);
-
-        // Smooth scroll fallback for older browsers
-        function smoothScroll(offset) {
-          if ('scrollBehavior' in document.documentElement.style) {
-            window.scrollTo({
-              top: targetSection.offsetTop - offset,
-              behavior: 'smooth'
-            });
-          } else {
-            window.scrollTo(0, targetSection.offsetTop - offset);
-          }
+        const targetSection = document.querySelector(this.getAttribute('href'));
+        const offset = 80;
+        if ('scrollBehavior' in document.documentElement.style) {
+          window.scrollTo({ top: targetSection.offsetTop - offset, behavior: 'smooth' });
+        } else {
+          window.scrollTo(0, targetSection.offsetTop - offset);
         }
-        // Adjust offset to match fixed header
-        smoothScroll(80);
-
-        // Close mobile nav if open
         navLinks.classList.remove('active');
       });
     });
 
-    /*****************************
-     * Expandable Sections
-     *****************************/
+    // Expandable Sections Toggle
     document.querySelectorAll('.expandable-header').forEach(header => {
       header.addEventListener('click', function() {
-        const expandable = this.parentElement;
-        expandable.classList.toggle('open');
+        this.parentElement.classList.toggle('open');
       });
     });
 
-    /*****************************
-     * Framework Tab Switching
-     *****************************/
+    // Framework Tab Switching with Enhanced Animations
     document.querySelectorAll('.framework-tab').forEach(tab => {
       tab.addEventListener('click', function() {
-        // Remove 'active' from all tabs
-        document.querySelectorAll('.framework-tab').forEach(t => {
-          t.classList.remove('active');
-        });
-        // Activate this tab
+        document.querySelectorAll('.framework-tab').forEach(t => t.classList.remove('active'));
         this.classList.add('active');
-
-        // Hide all content
-        document.querySelectorAll('.framework-content').forEach(content => {
-          content.classList.remove('active');
-        });
-
-        // Show current
+        document.querySelectorAll('.framework-content').forEach(content => content.classList.remove('active'));
         const frameworkId = this.getAttribute('data-framework');
-        document.getElementById(`${frameworkId}-content`).classList.add('active');
+        document.getElementById(frameworkId + '-content').classList.add('active');
       });
     });
 
-    /*****************************
-     * Case Study Visibility on Scroll
-     *****************************/
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.1
-    };
-    const observer = new IntersectionObserver(function(entries, obs) {
+    // Intersection Observer to Animate Framework Diagrams
+    const diagramObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
         }
       });
-    }, observerOptions);
-
-    document.querySelectorAll('.case-study').forEach(study => {
-      observer.observe(study);
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.framework-diagram').forEach(diagram => {
+      diagramObserver.observe(diagram);
     });
 
-    /*****************************
-     * Network Visualization Toggle
-     *****************************/
+    // Case Study Animation on Scroll
+    const caseObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.case-study').forEach(study => caseObserver.observe(study));
+
+    // Network Visualization Toggle
     const vizToggle = document.getElementById('viz-toggle');
     const networkContainer = document.getElementById('network-container');
-    vizToggle.addEventListener('click', function() {
-      networkContainer.classList.toggle('active');
-    });
+    vizToggle.addEventListener('click', () => networkContainer.classList.toggle('active'));
 
-    /*****************************
-     * Diagnostic Tool
-     *****************************/
+    // Diagnostic Tool Functionality (Simplified Example)
     const calculateButton = document.getElementById('calculate-results');
     const resultsContainer = document.getElementById('results-container');
-
     function getDimensionFeedback(dimension, score) {
-      // Basic dimension feedback mapping
       const feedbackMap = {
         'stakeholder-cohesion': [
-          'Major work needed to build awareness and trust among key stakeholders.',
-          'Focus on relationship-building and creating opportunities for productive collaboration.',
-          'Continue strengthening connections while addressing any remaining trust issues.',
-          'Good foundation exists; consider formalizing collaborative structures.'
-        ],
-        'vision-urgency': [
-          'Work on creating awareness of shared challenges and potential for collective action.',
-          'Develop a more compelling narrative around the need for systemic change.',
-          'Build on existing momentum to create greater urgency and shared vision.',
-          'Strong alignment exists; maintain energy while moving to concrete planning.'
-        ],
-        'institutional-support': [
-          'Identify potential policy windows and institutional champions to begin creating enabling conditions.',
-          'Engage with sympathetic institutions to develop more supportive policies or mandates.',
-          'Leverage existing support while working to address remaining policy barriers.',
-          'Strong institutional backing exists; focus on formalizing commitments.'
-        ],
-        'resource-landscape': [
-          'Explore creative funding approaches and build the case for resource investment.',
-          'Target initial resources toward proof-of-concept work that can attract additional support.',
-          'Align existing resources more effectively while developing strategies for gaps.',
-          'Strong resource foundation exists; focus on long-term sustainability.'
-        ],
-        'barriers-risks': [
-          'Address most critical barriers before attempting full orchestration; consider a staged approach.',
-          'Develop specific mitigation strategies for key barriers while building on areas of opportunity.',
-          'Continue monitoring and addressing barriers as orchestration progresses.',
-          'Minimal barriers exist; maintain vigilance for emerging challenges.'
+          'Major work needed to build trust among stakeholders.',
+          'Focus on relationship-building and opportunities for collaboration.',
+          'Strengthening connections while addressing remaining trust issues.',
+          'A solid foundation exists; consider formalizing collaborative structures.'
         ]
       };
-      // Convert score to 0-3 index
       const idx = Math.min(Math.floor((parseInt(score) - 1) / 1.25), 3);
       return feedbackMap[dimension][idx];
     }
-
     function createRadarChart(scores) {
       const chartContainer = document.getElementById('results-chart');
       chartContainer.innerHTML = '';
@@ -1320,36 +900,22 @@
       const centerX = width / 2;
       const centerY = height / 2;
       const radius = Math.min(centerX, centerY) * 0.8;
-
       const svg = d3.select('#results-chart')
         .append('svg')
         .attr('width', width)
         .attr('height', height);
-
-      const dimensions = [
-        'Stakeholder Cohesion',
-        'Shared Vision & Urgency',
-        'Institutional Support',
-        'Resource Landscape',
-        'Barriers & Risks'
-      ];
-
+      const dimensions = ['Stakeholder Cohesion'];
       const angleSlice = (Math.PI * 2) / dimensions.length;
       const rScale = d3.scaleLinear().domain([0, 5]).range([0, radius]);
-
-      // Grid
       const axisGrid = svg.append('g')
         .attr('class', 'axis-grid')
         .attr('transform', `translate(${centerX}, ${centerY})`);
-
-      // Circles
       for (let j = 1; j <= 5; j++) {
         axisGrid.append('circle')
           .attr('r', rScale(j))
           .attr('fill', 'none')
           .attr('stroke', 'rgba(0,0,0,0.1)')
           .attr('stroke-dasharray', '3,3');
-
         axisGrid.append('text')
           .attr('x', 2)
           .attr('y', -rScale(j) - 2)
@@ -1357,14 +923,11 @@
           .attr('fill', 'rgba(0,0,0,0.5)')
           .text(j);
       }
-
-      // Axes
       const axes = axisGrid.selectAll('.axis')
         .data(dimensions)
         .enter()
         .append('g')
         .attr('class', 'axis');
-
       axes.append('line')
         .attr('x1', 0)
         .attr('y1', 0)
@@ -1372,29 +935,18 @@
         .attr('y2', (d, i) => rScale(5) * Math.sin(angleSlice * i - Math.PI / 2))
         .attr('stroke', 'rgba(0,0,0,0.1)')
         .attr('stroke-width', 1);
-
       axes.append('text')
         .attr('x', (d, i) => rScale(5.5) * Math.cos(angleSlice * i - Math.PI / 2))
         .attr('y', (d, i) => rScale(5.5) * Math.sin(angleSlice * i - Math.PI / 2))
         .attr('font-size', '10px')
-        .attr('text-anchor', (d, i) => {
-          if (i === 0 || i === dimensions.length / 2) return 'middle';
-          return i < dimensions.length / 2 ? 'start' : 'end';
-        })
-        .attr('dy', (d, i) => {
-          if (i === 0) return '-0.5em';
-          if (i === dimensions.length / 2) return '1em';
-          return '0.3em';
-        })
+        .attr('text-anchor', (d, i) => i === 0 || i === dimensions.length / 2 ? 'middle' : (i < dimensions.length / 2 ? 'start' : 'end'))
+        .attr('dy', (d, i) => i === 0 ? '-0.5em' : (i === dimensions.length / 2 ? '1em' : '0.3em'))
         .text(d => d);
-
-      // Radar shape
       const radarPath = axisGrid.append('path')
         .datum(scores)
         .attr('fill', 'rgba(86, 67, 204, 0.2)')
         .attr('stroke', 'rgba(86, 67, 204, 0.8)')
         .attr('stroke-width', 2);
-
       const pathData = scores.map((score, i) => {
         const x = rScale(score) * Math.cos(angleSlice * i - Math.PI / 2);
         const y = rScale(score) * Math.sin(angleSlice * i - Math.PI / 2);
@@ -1402,8 +954,6 @@
       });
       const line = d3.line();
       radarPath.attr('d', line([...pathData, pathData[0]]));
-
-      // Points
       axisGrid.selectAll('.data-point')
         .data(scores)
         .enter()
@@ -1413,8 +963,6 @@
         .attr('cy', (d, i) => rScale(d) * Math.sin(angleSlice * i - Math.PI / 2))
         .attr('r', 5)
         .attr('fill', 'rgba(255, 126, 95, 0.8)');
-
-      // Data value labels
       axisGrid.selectAll('.data-value')
         .data(scores)
         .enter()
@@ -1428,113 +976,54 @@
         .attr('text-anchor', 'middle')
         .text(d => d);
     }
-
     calculateButton.addEventListener('click', function() {
-      // Collect dimension scores
       const stakeholderCohesion = document.querySelector('input[name="stakeholder-cohesion"]:checked')?.value || 0;
-      // Repeat for other dimensions if implemented
-      // e.g., visionUrgency, institutionalSupport, resourceLandscape, barriersRisks
-
       if (stakeholderCohesion == 0) {
         alert('Please answer all questions to see your results.');
         return;
       }
-
-      // Example if we only have 1 dimension so far:
-      const scores = [ parseInt(stakeholderCohesion) ];
-      // Expand with your other dimension values, e.g.:
-      // scores.push(parseInt(visionUrgency), parseInt(institutionalSupport), ...);
-
+      const scores = [parseInt(stakeholderCohesion)];
       const average = scores.reduce((a, b) => a + b, 0) / scores.length;
-
-      // Simple text blocks for demonstration
-      let summaryText = '';
-      let recommendationsText = '';
-
+      let summaryText = '', recommendationsText = '';
       if (average < 2) {
-        summaryText = `
-          <p>Your overall readiness score is <strong>${average.toFixed(1)}</strong> out of 5,
-          indicating <strong>low readiness</strong>. Significant groundwork is needed.</p>`;
-        recommendationsText = `
-          <ol>
-            <li>Focus on building trust and relationships among key stakeholders.</li>
-            <li>Conduct awareness-raising to build shared understanding of systemic issues.</li>
-          </ol>`;
+        summaryText = `<p>Your readiness score is <strong>${average.toFixed(1)}</strong> out of 5 (low readiness). Significant groundwork is needed.</p>`;
+        recommendationsText = `<ol>
+          <li>Invest in trust-building activities.</li>
+          <li>Conduct stakeholder engagement sessions.</li>
+        </ol>`;
       } else if (average < 3.5) {
-        summaryText = `
-          <p>Your overall readiness score is <strong>${average.toFixed(1)}</strong> out of 5,
-          indicating <strong>moderate readiness</strong>.</p>`;
-        recommendationsText = `
-          <ol>
-            <li>Begin orchestration with a focused sub-system or issue area.</li>
-            <li>Invest in strengthening lower-scoring dimensions before scaling.</li>
-          </ol>`;
+        summaryText = `<p>Your readiness score is <strong>${average.toFixed(1)}</strong> out of 5 (moderate readiness).</p>`;
+        recommendationsText = `<ol>
+          <li>Focus on targeted coalition building.</li>
+          <li>Address gaps in shared vision through facilitated workshops.</li>
+        </ol>`;
       } else {
-        summaryText = `
-          <p>Your overall readiness score is <strong>${average.toFixed(1)}</strong> out of 5,
-          indicating <strong>high readiness</strong>.</p>`;
-        recommendationsText = `
-          <ol>
-            <li>Move forward with a comprehensive orchestration initiative.</li>
-            <li>Leverage stakeholder commitment to build a shared vision and roadmap.</li>
-          </ol>`;
+        summaryText = `<p>Your readiness score is <strong>${average.toFixed(1)}</strong> out of 5 (high readiness). Many enablers are in place.</p>`;
+        recommendationsText = `<ol>
+          <li>Leverage existing partnerships to scale initiatives.</li>
+          <li>Formalize governance structures to sustain collaboration.</li>
+        </ol>`;
       }
-
-      // Example dimension-specific feedback for stakeholderCohesion only
-      const dimensionFeedback = `
-        <h4>Dimension-Specific Insights:</h4>
+      const dimensionFeedback = `<h4>Dimension-Specific Insights:</h4>
         <ul>
           <li><strong>Stakeholder Cohesion:</strong> ${getDimensionFeedback('stakeholder-cohesion', stakeholderCohesion)}</li>
-        </ul>
-      `;
-
+        </ul>`;
       document.getElementById('results-summary').innerHTML = summaryText + dimensionFeedback;
       document.getElementById('recommendations').innerHTML = recommendationsText;
-
-      // Create a radar chart using the single dimension for demonstration
-      // Typically you’d pass in all five dimension scores
       createRadarChart(scores);
-
-      // Show results container
       resultsContainer.style.display = 'block';
       resultsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 
-    /*****************************
-     * D3 Visualizations
-     *****************************/
-
-    // 1. Orchestration Diagram
+    // D3 Visualizations for Diagrams
     function createOrchestrationDiagram() {
       const container = document.getElementById('orchestration-diagram');
       const width = container.clientWidth;
       const height = 400;
-
-      const svg = d3.select('#orchestration-diagram')
-        .append('svg')
-        .attr('width', width)
-        .attr('height', height);
-
-      const centerX = width / 2;
-      const centerY = height / 2;
-
-      // Orchestrator circle
-      svg.append('circle')
-        .attr('cx', centerX)
-        .attr('cy', centerY)
-        .attr('r', 30)
-        .attr('fill', '#5643cc');
-
-      svg.append('text')
-        .attr('x', centerX)
-        .attr('y', centerY)
-        .attr('dy', '.3em')
-        .attr('text-anchor', 'middle')
-        .attr('fill', 'white')
-        .attr('font-weight', 'bold')
-        .text('Orchestrator');
-
-      // Some sample stakeholders
+      const svg = d3.select('#orchestration-diagram').append('svg').attr('width', width).attr('height', height);
+      const centerX = width / 2, centerY = height / 2;
+      svg.append('circle').attr('cx', centerX).attr('cy', centerY).attr('r', 30).attr('fill', '#5643cc');
+      svg.append('text').attr('x', centerX).attr('y', centerY).attr('dy', '.3em').attr('text-anchor', 'middle').attr('fill', 'white').attr('font-weight', 'bold').text('Orchestrator');
       const stakeholders = [
         { name: 'Government', role: 'Policy maker' },
         { name: 'NGOs', role: 'Implementers' },
@@ -1543,198 +1032,60 @@
         { name: 'Funders', role: 'Resource providers' },
         { name: 'Research', role: 'Knowledge creators' }
       ];
-
       const radius = 110;
       stakeholders.forEach((st, i) => {
         const angle = (i / stakeholders.length) * 2 * Math.PI;
         const x = centerX + radius * Math.cos(angle);
         const y = centerY + radius * Math.sin(angle);
-
-        // Line to orchestrator
-        svg.append('line')
-          .attr('x1', centerX)
-          .attr('y1', centerY)
-          .attr('x2', x)
-          .attr('y2', y)
-          .attr('stroke', '#aaa')
-          .attr('stroke-width', 1.5);
-
-        // Stakeholder circle
-        svg.append('circle')
-          .attr('cx', x)
-          .attr('cy', y)
-          .attr('r', 20)
-          .attr('fill', '#ff7e5f');
-
-        // Stakeholder text
-        svg.append('text')
-          .attr('x', x)
-          .attr('y', y)
-          .attr('text-anchor', 'middle')
-          .attr('dy', '.3em')
-          .attr('fill', 'white')
-          .attr('font-size', '8px')
-          .text(st.name);
-
-        // Role label
-        svg.append('text')
-          .attr('x', x)
-          .attr('y', y + 30)
-          .attr('text-anchor', 'middle')
-          .attr('font-size', '7px')
-          .attr('fill', '#333')
-          .text(st.role);
+        svg.append('line').attr('x1', centerX).attr('y1', centerY).attr('x2', x).attr('y2', y).attr('stroke', '#aaa').attr('stroke-width', 1.5);
+        svg.append('circle').attr('cx', x).attr('cy', y).attr('r', 20).attr('fill', '#ff7e5f');
+        svg.append('text').attr('x', x).attr('y', y).attr('dy', '.3em').attr('text-anchor', 'middle').attr('fill', 'white').attr('font-size', '8px').text(st.name);
+        svg.append('text').attr('x', x).attr('y', y + 30).attr('text-anchor', 'middle').attr('font-size', '7px').attr('fill', '#333').text(st.role);
       });
-
-      // Orchestration functions near center
-      const functions = [
-        'Convene', 'Coordinate', 'Facilitate',
-        'Build Trust', 'Mobilize', 'Share Knowledge'
-      ];
+      const functions = ['Convene', 'Coordinate', 'Facilitate', 'Build Trust', 'Mobilize', 'Share Knowledge'];
       const innerRadius = 60;
       functions.forEach((func, i) => {
         const angle = (i / functions.length) * 2 * Math.PI;
         const x = centerX + innerRadius * Math.cos(angle);
         const y = centerY + innerRadius * Math.sin(angle);
-
-        svg.append('text')
-          .attr('x', x)
-          .attr('y', y)
-          .attr('text-anchor', 'middle')
-          .attr('font-size', '8px')
-          .attr('font-style', 'italic')
-          .attr('fill', '#333')
-          .text(func);
+        svg.append('text').attr('x', x).attr('y', y).attr('text-anchor', 'middle').attr('font-size', '8px').attr('font-style', 'italic').attr('fill', '#333').text(func);
       });
     }
 
-    // 2. Contribution Diagram
     function createContributionDiagram() {
       const container = document.getElementById('contribution-diagram');
       const width = container.clientWidth;
       const height = 400;
-
-      const svg = d3.select('#contribution-diagram')
-        .append('svg')
-        .attr('width', width)
-        .attr('height', height);
-
+      const svg = d3.select('#contribution-diagram').append('svg').attr('width', width).attr('height', height);
       const steps = [
-        {
-          label: 'Orchestration Activities',
-          examples: ['Convening stakeholders', 'Facilitating dialogue', 'Supporting collaboration']
-        },
-        {
-          label: 'Immediate Outcomes',
-          examples: ['New partnerships', 'Shared agenda', 'Resources aligned']
-        },
-        {
-          label: 'Intermediate Changes',
-          examples: ['Policy reforms', 'New business models', 'Innovative solutions']
-        },
-        {
-          label: 'System Impact',
-          examples: ['Widespread adoption', 'Transformed structures', 'Improved outcomes']
-        }
+        { label: 'Orchestration Activities', examples: ['Convening stakeholders', 'Facilitating dialogue', 'Supporting collaboration'] },
+        { label: 'Immediate Outcomes', examples: ['New partnerships', 'Shared agenda', 'Resources aligned'] },
+        { label: 'Intermediate Changes', examples: ['Policy reforms', 'New business models', 'Innovative solutions'] },
+        { label: 'System Impact', examples: ['Widespread adoption', 'Transformed structures', 'Improved outcomes'] }
       ];
-
-      const boxWidth = width / steps.length - 20;
-      const boxHeight = 80;
-      const boxY = height / 2 - boxHeight / 2;
-
+      const boxWidth = width / steps.length - 20, boxHeight = 80, boxY = height / 2 - boxHeight / 2;
       steps.forEach((step, i) => {
         const x = i * (boxWidth + 20) + 10;
-        svg.append('rect')
-          .attr('x', x)
-          .attr('y', boxY)
-          .attr('width', boxWidth)
-          .attr('height', boxHeight)
-          .attr('fill', d3.schemeCategory10[i % 10])
-          .attr('rx', 5)
-          .attr('ry', 5)
-          .attr('opacity', 0.7);
-
-        svg.append('text')
-          .attr('x', x + boxWidth / 2)
-          .attr('y', boxY + 20)
-          .attr('text-anchor', 'middle')
-          .attr('fill', 'white')
-          .attr('font-weight', 'bold')
-          .text(step.label);
-
+        svg.append('rect').attr('x', x).attr('y', boxY).attr('width', boxWidth).attr('height', boxHeight).attr('fill', d3.schemeCategory10[i % 10]).attr('rx', 5).attr('ry', 5).attr('opacity', 0.7);
+        svg.append('text').attr('x', x + boxWidth / 2).attr('y', boxY + 20).attr('text-anchor', 'middle').attr('fill', 'white').attr('font-weight', 'bold').text(step.label);
         step.examples.forEach((ex, j) => {
-          svg.append('text')
-            .attr('x', x + boxWidth / 2)
-            .attr('y', boxY + 40 + j * 15)
-            .attr('text-anchor', 'middle')
-            .attr('fill', 'white')
-            .attr('font-size', '9px')
-            .text(ex);
+          svg.append('text').attr('x', x + boxWidth / 2).attr('y', boxY + 40 + j * 15).attr('text-anchor', 'middle').attr('fill', 'white').attr('font-size', '9px').text(ex);
         });
-
         if (i < steps.length - 1) {
-          svg.append('line')
-            .attr('x1', x + boxWidth)
-            .attr('y1', boxY + boxHeight / 2)
-            .attr('x2', x + boxWidth + 20)
-            .attr('y2', boxY + boxHeight / 2)
-            .attr('stroke', '#333')
-            .attr('stroke-width', 2)
-            .attr('marker-end', 'url(#arrow)');
-
-          svg.append('text')
-            .attr('x', x + boxWidth + 10)
-            .attr('y', boxY + boxHeight / 2 - 10)
-            .attr('text-anchor', 'middle')
-            .attr('font-size', '8px')
-            .attr('font-style', 'italic')
-            .text('contributes to');
+          svg.append('line').attr('x1', x + boxWidth).attr('y1', boxY + boxHeight / 2).attr('x2', x + boxWidth + 20).attr('y2', boxY + boxHeight / 2).attr('stroke', '#333').attr('stroke-width', 2).attr('marker-end', 'url(#arrow)');
+          svg.append('text').attr('x', x + boxWidth + 10).attr('y', boxY + boxHeight / 2 - 10).attr('text-anchor', 'middle').attr('font-size', '8px').attr('font-style', 'italic').text('contributes to');
         }
       });
-
-      // Arrow marker
-      svg.append('defs').append('marker')
-        .attr('id', 'arrow')
-        .attr('viewBox', '0 -5 10 10')
-        .attr('refX', 8)
-        .attr('refY', 0)
-        .attr('markerWidth', 6)
-        .attr('markerHeight', 6)
-        .attr('orient', 'auto')
-        .append('path')
-        .attr('d', 'M0,-5L10,0L0,5')
-        .attr('fill', '#333');
-
-      // Attribution note
-      svg.append('text')
-        .attr('x', width / 2)
-        .attr('y', height - 30)
-        .attr('text-anchor', 'middle')
-        .attr('font-style', 'italic')
-        .attr('font-size', '10px')
-        .text('Attribution is challenging because many factors influence outcomes');
-
-      svg.append('text')
-        .attr('x', width / 2)
-        .attr('y', height - 15)
-        .attr('text-anchor', 'middle')
-        .attr('font-style', 'italic')
-        .attr('font-size', '10px')
-        .text('Focus on building evidence for contribution rather than direct attribution');
+      svg.append('defs').append('marker').attr('id', 'arrow').attr('viewBox', '0 -5 10 10').attr('refX', 8).attr('refY', 0).attr('markerWidth', 6).attr('markerHeight', 6).attr('orient', 'auto').append('path').attr('d', 'M0,-5L10,0L0,5').attr('fill', '#333');
+      svg.append('text').attr('x', width / 2).attr('y', height - 30).attr('text-anchor', 'middle').attr('font-style', 'italic').attr('font-size', '10px').text('Attribution is challenging because many factors influence outcomes');
+      svg.append('text').attr('x', width / 2).attr('y', height - 15).attr('text-anchor', 'middle').attr('font-style', 'italic').attr('font-size', '10px').text('Focus on building evidence for contribution rather than direct attribution');
     }
 
-    // 3. Other frameworks (MSD, Collective Impact, Theory U, etc.)
     function createMSDDiagram() {
       const container = document.getElementById('msd-diagram');
       const width = container.clientWidth;
       const height = 400;
-
-      const svg = d3.select('#msd-diagram')
-        .append('svg')
-        .attr('width', width)
-        .attr('height', height);
-
-      // Basic example
+      const svg = d3.select('#msd-diagram').append('svg').attr('width', width).attr('height', height);
       const nodes = [
         { id: 'market', name: 'Market System', x: width / 2, y: height / 2, r: 80 },
         { id: 'support', name: 'Supporting Functions', x: width / 4, y: height / 4, r: 60 },
@@ -1746,8 +1097,6 @@
         { source: 'market', target: 'rules' },
         { source: 'market', target: 'players' }
       ];
-
-      // Lines
       svg.selectAll('.msd-link')
         .data(links)
         .enter()
@@ -1759,20 +1108,16 @@
         .attr('y2', d => nodes.find(n => n.id === d.target).y)
         .attr('stroke', '#999')
         .attr('stroke-width', 2);
-
-      // Node groups
       const nodeElements = svg.selectAll('.msd-node')
         .data(nodes)
         .enter()
         .append('g')
         .attr('class', 'msd-node')
         .attr('transform', d => `translate(${d.x}, ${d.y})`);
-
       nodeElements.append('circle')
         .attr('r', d => d.r)
         .attr('fill', (d, i) => d3.schemeCategory10[i])
         .attr('opacity', 0.7);
-
       nodeElements.append('text')
         .attr('text-anchor', 'middle')
         .attr('dy', '.3em')
@@ -1785,48 +1130,22 @@
       const container = document.getElementById('collective-impact-diagram');
       const width = container.clientWidth;
       const height = 400;
-
-      const svg = d3.select('#collective-impact-diagram')
-        .append('svg')
-        .attr('width', width)
-        .attr('height', height);
-
-      const centerX = width / 2;
-      const centerY = height / 2;
-      const radius = Math.min(width, height) / 3;
-
-      // 5 elements
+      const svg = d3.select('#collective-impact-diagram').append('svg').attr('width', width).attr('height', height);
+      const centerX = width / 2, centerY = height / 2, radius = Math.min(width, height) / 3;
       const elements = [
         { name: 'Common Agenda', desc: 'Shared vision' },
-        { name: 'Shared Measurement', desc: 'Measuring results' },
-        { name: 'Mutually Reinforcing Activities', desc: 'Collaborative roles' },
-        { name: 'Continuous Communication', desc: 'Open channels' },
-        { name: 'Backbone Support', desc: 'Coordination staff' }
+        { name: 'Shared Measurement', desc: 'Defining success' },
+        { name: 'Mutually Reinforcing Activities', desc: 'Leveraging strengths' },
+        { name: 'Continuous Communication', desc: 'Regular feedback' },
+        { name: 'Backbone Support', desc: 'Neutral coordination' }
       ];
-
       elements.forEach((el, i) => {
         const angle = (i / elements.length) * 2 * Math.PI;
         el.x = centerX + radius * Math.cos(angle);
         el.y = centerY + radius * Math.sin(angle);
       });
-
-      // Center
-      svg.append('circle')
-        .attr('cx', centerX)
-        .attr('cy', centerY)
-        .attr('r', 40)
-        .attr('fill', '#5643cc');
-
-      svg.append('text')
-        .attr('x', centerX)
-        .attr('y', centerY)
-        .attr('text-anchor', 'middle')
-        .attr('dy', '.3em')
-        .attr('fill', 'white')
-        .attr('font-weight', 'bold')
-        .text('Collective Impact');
-
-      // Lines
+      svg.append('circle').attr('cx', centerX).attr('cy', centerY).attr('r', 40).attr('fill', '#5643cc');
+      svg.append('text').attr('x', centerX).attr('y', centerY).attr('text-anchor', 'middle').attr('dy', '.3em').attr('fill', 'white').attr('font-weight', 'bold').text('Collective Impact');
       svg.selectAll('.ci-line')
         .data(elements)
         .enter()
@@ -1838,20 +1157,16 @@
         .attr('y2', d => d.y)
         .attr('stroke', '#999')
         .attr('stroke-width', 2);
-
-      // Circles
       const elemG = svg.selectAll('.ci-element')
         .data(elements)
         .enter()
         .append('g')
         .attr('class', 'ci-element');
-
       elemG.append('circle')
         .attr('cx', d => d.x)
         .attr('cy', d => d.y)
         .attr('r', 30)
         .attr('fill', '#ff7e5f');
-
       elemG.append('text')
         .attr('x', d => d.x)
         .attr('y', d => d.y)
@@ -1867,16 +1182,9 @@
       const container = document.getElementById('theory-u-diagram');
       const width = container.clientWidth;
       const height = 400;
-
-      const svg = d3.select('#theory-u-diagram')
-        .append('svg')
-        .attr('width', width)
-        .attr('height', height);
-
+      const svg = d3.select('#theory-u-diagram').append('svg').attr('width', width).attr('height', height);
       const stages = ['Co-Initiating', 'Co-Sensing', 'Presencing', 'Co-Creating', 'Co-Evolving'];
       const lineGenerator = d3.line().curve(d3.curveCardinal);
-
-      // A "U" shape path
       const pathPoints = [
         [width * 0.1, height * 0.2],
         [width * 0.25, height * 0.5],
@@ -1884,14 +1192,7 @@
         [width * 0.75, height * 0.5],
         [width * 0.9, height * 0.2]
       ];
-
-      svg.append('path')
-        .attr('d', lineGenerator(pathPoints))
-        .attr('fill', 'none')
-        .attr('stroke', '#5643cc')
-        .attr('stroke-width', 4);
-
-      // Circles + labels
+      svg.append('path').attr('d', lineGenerator(pathPoints)).attr('fill', 'none').attr('stroke', '#5643cc').attr('stroke-width', 4);
       svg.selectAll('.stage-circle')
         .data(pathPoints)
         .enter()
@@ -1901,7 +1202,6 @@
         .attr('cy', d => d[1])
         .attr('r', 15)
         .attr('fill', '#ff7e5f');
-
       svg.selectAll('.stage-label')
         .data(stages)
         .enter()
@@ -1922,40 +1222,11 @@
       const container = document.getElementById('pathway-diagram');
       const width = container.clientWidth;
       const height = 400;
-
-      const svg = d3.select('#pathway-diagram')
-        .append('svg')
-        .attr('width', width)
-        .attr('height', height);
-
-      const phases = [
-        'Initiation & Coalition Building',
-        'Orchestration in Action',
-        'Expansion & Scaling',
-        'Graduation or Evolution'
-      ];
-
-      const timelineY = height / 2;
-      const startX = width * 0.1;
-      const endX = width * 0.9;
-      const segmentWidth = (endX - startX) / (phases.length - 1);
-
-      // Timeline line
-      svg.append('line')
-        .attr('x1', startX)
-        .attr('y1', timelineY)
-        .attr('x2', endX)
-        .attr('y2', timelineY)
-        .attr('stroke', '#aaa')
-        .attr('stroke-width', 2);
-
-      const phasePoints = phases.map((phase, i) => ({
-        name: phase,
-        x: startX + i * segmentWidth,
-        y: timelineY
-      }));
-
-      // Circles for each phase
+      const svg = d3.select('#pathway-diagram').append('svg').attr('width', width).attr('height', height);
+      const phases = ['Initiation & Coalition Building', 'Orchestration in Action', 'Expansion & Scaling', 'Graduation or Evolution'];
+      const timelineY = height / 2, startX = width * 0.1, endX = width * 0.9, segmentWidth = (endX - startX) / (phases.length - 1);
+      svg.append('line').attr('x1', startX).attr('y1', timelineY).attr('x2', endX).attr('y2', timelineY).attr('stroke', '#aaa').attr('stroke-width', 2);
+      const phasePoints = phases.map((phase, i) => ({ name: phase, x: startX + i * segmentWidth, y: timelineY }));
       svg.selectAll('.phase-circle')
         .data(phasePoints)
         .enter()
@@ -1965,8 +1236,6 @@
         .attr('cy', d => d.y)
         .attr('r', 12)
         .attr('fill', '#5643cc');
-
-      // Phase number
       svg.selectAll('.phase-number')
         .data(phasePoints)
         .enter()
@@ -1979,8 +1248,6 @@
         .attr('fill', 'white')
         .attr('font-weight', 'bold')
         .text((d, i) => i + 1);
-
-      // Phase labels
       svg.selectAll('.phase-label')
         .data(phasePoints)
         .enter()
@@ -1992,32 +1259,22 @@
         .attr('font-size', '10px')
         .attr('font-weight', 'bold')
         .text(d => d.name);
-
-      // Example bullet items under each phase
       const activities = [
         ['System mapping', 'Stakeholder analysis', 'Trust building'],
-        ['Coordinate initiatives', 'Info sharing', 'Manage conflicts'],
-        ['Bring new partners', 'Mainstream changes', 'Knowledge sharing'],
-        ['Step back', 'Institutionalize', 'Evolve to new challenge']
+        ['Coordinate initiatives', 'Information sharing', 'Conflict management'],
+        ['Expand partnerships', 'Scale pilots', 'Mainstream innovations'],
+        ['Institutionalize practices', 'Reflect & adapt', 'Plan next steps']
       ];
-
       activities.forEach((phaseActivities, i) => {
         phaseActivities.forEach((activity, j) => {
-          const x = phasePoints[i].x;
-          const y = timelineY + 60 + j * 20;
-
-          svg.append('text')
-            .attr('x', x)
-            .attr('y', y)
-            .attr('text-anchor', 'middle')
-            .attr('font-size', '9px')
-            .text(activity);
+          const x = phasePoints[i].x, y = timelineY + 60 + j * 20;
+          svg.append('text').attr('x', x).attr('y', y).attr('text-anchor', 'middle').attr('font-size', '9px').text(activity);
         });
       });
     }
 
-    // Initialize diagrams on DOM load
-    document.addEventListener('DOMContentLoaded', function() {
+    // Initialize all diagrams on DOM load
+    document.addEventListener('DOMContentLoaded', () => {
       createOrchestrationDiagram();
       createContributionDiagram();
       createMSDDiagram();
