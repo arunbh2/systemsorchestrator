@@ -4531,19 +4531,103 @@ function createPathwayDiagram() {
         .text('Orchestration Development Process');
 }
         // Call all functions when DOM is loaded
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize network visualization
-            createNetworkVisualization();
-            
-            // Initialize interactive diagrams
-createOrchestrationDiagram();
-createMSDDiagram();
-createCollectiveImpactDiagram();
-createTheoryUDiagram();
-createPathwayDiagram();
-createContributionDiagram();
-            
+        // Call all functions when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    try {
+        // Initialize network visualization
+        createNetworkVisualization();
+        
+        // Initialize interactive diagrams safely
+        const visualizations = [
+            { id: 'orchestration-diagram', func: createOrchestrationDiagram },
+            { id: 'msd-diagram', func: createMSDDiagram },
+            { id: 'collective-impact-diagram', func: createCollectiveImpactDiagram },
+            { id: 'theory-u-diagram', func: createTheoryUDiagram },
+            { id: 'pathway-diagram', func: createPathwayDiagram },
+            { id: 'contribution-diagram', func: createContributionDiagram }
+        ];
+        
+        // Initialize each visualization with error handling
+        visualizations.forEach(viz => {
+            try {
+                // Check if the container exists
+                const container = document.getElementById(viz.id);
+                if (container) {
+                    viz.func();
+                } else {
+                    console.warn(`Container not found for ${viz.id}, skipping initialization`);
+                }
+            } catch (error) {
+                console.error(`Error initializing ${viz.id}:`, error);
+                // Show fallback content
+                const container = document.getElementById(viz.id);
+                if (container) {
+                    container.classList.add('js-error');
+                }
+            }
         });
+        
+        // Initialize expand/collapse functionality for expandable sections
+        const expandables = document.querySelectorAll('.expandable');
+        expandables.forEach(expandable => {
+            const header = expandable.querySelector('.expandable-header');
+            const content = expandable.querySelector('.expandable-content');
+            
+            if (header && content) {
+                header.addEventListener('click', function() {
+                    expandable.classList.toggle('open');
+                    const expanded = expandable.classList.contains('open');
+                    header.setAttribute('aria-expanded', expanded);
+                    
+                    if (expanded) {
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                    } else {
+                        content.style.maxHeight = 0;
+                    }
+                });
+            }
+        });
+        
+        // Add touch device detection
+        if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+            document.body.classList.add('touch-device');
+            
+            // Add touch-specific handling for interactive elements
+            const touchElements = document.querySelectorAll('.card, .feature-card, .phase-circle, .condition');
+            touchElements.forEach(el => {
+                el.addEventListener('touchstart', function() {
+                    this.classList.add('touch-active');
+                });
+                
+                el.addEventListener('touchend', function() {
+                    setTimeout(() => {
+                        this.classList.remove('touch-active');
+                    }, 300);
+                });
+                
+                el.addEventListener('touchmove', function() {
+                    this.classList.remove('touch-active');
+                });
+            });
+        }
+    } catch (error) {
+        console.error("Error during initialization:", error);
+        // Show a global error message
+        const main = document.querySelector('main');
+        if (main) {
+            const errorAlert = document.createElement('div');
+            errorAlert.className = 'error-message';
+            errorAlert.style.margin = '20px auto';
+            errorAlert.style.maxWidth = '800px';
+            errorAlert.innerHTML = `
+                <h3>Something went wrong</h3>
+                <p>We encountered a problem loading the interactive elements. Some features may not work correctly.</p>
+                <button class="retry-button" onclick="location.reload()">Refresh Page</button>
+            `;
+            main.prepend(errorAlert);
+        }
+    }
+});
 
 // Global error handler to help with debugging
 window.addEventListener('error', function(event) {
