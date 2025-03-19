@@ -3473,7 +3473,543 @@
                 .attr('font-style', 'italic')
                 .text('Uploading: New patterns');
         }
+// Contribution Analysis Framework Visualization
+function createContributionDiagram() {
+    const container = document.getElementById('contribution-diagram');
+    if (!container) return;
+    
+    const width = container.clientWidth;
+    const height = container.clientHeight;
+    
+    // Create SVG
+    const svg = d3.select(container)
+        .append('svg')
+        .attr('width', width)
+        .attr('height', height);
+    
+    // Add tooltip
+    const tooltip = d3.select(container)
+        .append('div')
+        .attr('class', 'diagram-tooltip');
+    
+    // Define the steps of contribution analysis
+    const steps = [
+        {
+            id: 'observed-change',
+            title: 'Observed Change',
+            description: 'Identify the outcome or change that has been observed in the system.',
+            x: width * 0.5,
+            y: height * 0.15,
+            width: 160,
+            height: 60
+        },
+        {
+            id: 'theory-change',
+            title: 'Theory of Change',
+            description: 'Develop or revisit the theory of change that explains how orchestration efforts should lead to this outcome.',
+            x: width * 0.5,
+            y: height * 0.3,
+            width: 160,
+            height: 60
+        },
+        {
+            id: 'collect-evidence',
+            title: 'Evidence Collection',
+            description: 'Gather evidence that supports the causal link between orchestration activities and the observed outcome.',
+            x: width * 0.3,
+            y: height * 0.45,
+            width: 160,
+            height: 60
+        },
+        {
+            id: 'alternative',
+            title: 'Alternative Explanations',
+            description: 'Identify and explore other factors that might have contributed to or caused the observed outcome.',
+            x: width * 0.7,
+            y: height * 0.45,
+            width: 160,
+            height: 60
+        },
+        {
+            id: 'weigh-evidence',
+            title: 'Weigh Evidence',
+            description: 'Assess the strength of evidence for orchestration's contribution versus alternative explanations.',
+            x: width * 0.5,
+            y: height * 0.6,
+            width: 160,
+            height: 60
+        },
+        {
+            id: 'contribution-story',
+            title: 'Contribution Story',
+            description: 'Develop a narrative that explains how orchestration contributed to the observed change, acknowledging other factors.',
+            x: width * 0.5,
+            y: height * 0.75,
+            width: 160,
+            height: 60
+        }
+    ];
+    
+    // Create gradient for boxes
+    const defs = svg.append('defs');
+    
+    const boxGradient = defs.append('linearGradient')
+        .attr('id', 'boxGradient')
+        .attr('x1', '0%')
+        .attr('y1', '0%')
+        .attr('x2', '100%')
+        .attr('y2', '100%');
+    
+    boxGradient.append('stop')
+        .attr('offset', '0%')
+        .attr('stop-color', '#5643cc');
+        
+    boxGradient.append('stop')
+        .attr('offset', '100%')
+        .attr('stop-color', '#2a3990');
+    
+    // Create the connector arrows
+    for (let i = 0; i < steps.length - 1; i++) {
+        const current = steps[i];
+        const next = steps[i + 1];
+        
+        // Skip drawing arrow between "collect-evidence" and "alternative" as they are parallel
+        if (current.id === 'collect-evidence' && next.id === 'alternative') continue;
+        
+        // Create special arrows for the parallel steps
+        if (current.id === 'theory-change') {
+            // Arrow to collect-evidence
+            const collectEvidence = steps.find(s => s.id === 'collect-evidence');
+            svg.append('path')
+                .attr('class', 'contribution-arrow')
+                .attr('d', `M${current.x},${current.y + current.height/2} 
+                          C${current.x},${current.y + current.height/2 + 20} 
+                           ${collectEvidence.x},${collectEvidence.y - 40} 
+                           ${collectEvidence.x},${collectEvidence.y - current.height/2}`)
+                .attr('fill', 'none')
+                .attr('stroke', 'rgba(42, 57, 144, 0.6)')
+                .attr('stroke-width', 2)
+                .attr('marker-end', 'url(#arrowhead)')
+                .style('stroke-dasharray', '6,3')
+                .style('stroke-dashoffset', '100')
+                .transition()
+                .duration(1000)
+                .style('stroke-dashoffset', '0');
+            
+            // Arrow to alternative
+            const alternative = steps.find(s => s.id === 'alternative');
+            svg.append('path')
+                .attr('class', 'contribution-arrow')
+                .attr('d', `M${current.x},${current.y + current.height/2} 
+                          C${current.x},${current.y + current.height/2 + 20} 
+                           ${alternative.x},${alternative.y - 40} 
+                           ${alternative.x},${alternative.y - current.height/2}`)
+                .attr('fill', 'none')
+                .attr('stroke', 'rgba(42, 57, 144, 0.6)')
+                .attr('stroke-width', 2)
+                .attr('marker-end', 'url(#arrowhead)')
+                .style('stroke-dasharray', '6,3')
+                .style('stroke-dashoffset', '100')
+                .transition()
+                .duration(1000)
+                .style('stroke-dashoffset', '0');
+        } else if (current.id === 'collect-evidence' || current.id === 'alternative') {
+            // Both collect-evidence and alternative point to weigh-evidence
+            const weighEvidence = steps.find(s => s.id === 'weigh-evidence');
+            
+            svg.append('path')
+                .attr('class', 'contribution-arrow')
+                .attr('d', `M${current.x},${current.y + current.height/2} 
+                          C${current.x},${current.y + current.height/2 + 20} 
+                           ${weighEvidence.x},${weighEvidence.y - 40} 
+                           ${weighEvidence.x},${weighEvidence.y - weighEvidence.height/2}`)
+                .attr('fill', 'none')
+                .attr('stroke', 'rgba(42, 57, 144, 0.6)')
+                .attr('stroke-width', 2)
+                .attr('marker-end', 'url(#arrowhead)')
+                .style('stroke-dasharray', '6,3')
+                .style('stroke-dashoffset', '100')
+                .transition()
+                .duration(1000)
+                .delay(current.id === 'alternative' ? 200 : 0)
+                .style('stroke-dashoffset', '0');
+        } else {
+            // Standard straight arrows for other connections
+            svg.append('line')
+                .attr('class', 'contribution-arrow')
+                .attr('x1', current.x)
+                .attr('y1', current.y + current.height/2)
+                .attr('x2', next.x)
+                .attr('y2', next.y - next.height/2)
+                .attr('stroke', 'rgba(42, 57, 144, 0.6)')
+                .attr('stroke-width', 2)
+                .attr('marker-end', 'url(#arrowhead)')
+                .style('stroke-dasharray', getTotalLength)
+                .style('stroke-dashoffset', getTotalLength)
+                .transition()
+                .duration(1000)
+                .style('stroke-dashoffset', 0);
+        }
+    }
+    
+    // Create arrowhead marker
+    defs.append('marker')
+        .attr('id', 'arrowhead')
+        .attr('viewBox', '0 -5 10 10')
+        .attr('refX', 8)
+        .attr('refY', 0)
+        .attr('markerWidth', 6)
+        .attr('markerHeight', 6)
+        .attr('orient', 'auto')
+        .append('path')
+        .attr('d', 'M0,-5L10,0L0,5')
+        .attr('fill', 'rgba(42, 57, 144, 0.6)');
+    
+    // Create the boxes
+    const stepGroups = svg.selectAll('.contribution-box')
+        .data(steps)
+        .enter()
+        .append('g')
+        .attr('class', 'contribution-box')
+        .attr('transform', d => `translate(${d.x - d.width/2}, ${d.y - d.height/2})`)
+        .on('mouseover', function(event, d) {
+            d3.select(this).select('rect')
+                .transition()
+                .duration(300)
+                .attr('stroke-width', 3)
+                .attr('stroke', 'var(--accent)')
+                .attr('filter', 'drop-shadow(0 4px 6px rgba(0,0,0,0.1))');
+                
+            tooltip
+                .style('opacity', 1)
+                .html(`<strong>${d.title}</strong><br>${d.description}`)
+                .style('left', `${event.pageX - container.getBoundingClientRect().left + 10}px`)
+                .style('top', `${event.pageY - container.getBoundingClientRect().top - 40}px`);
+        })
+        .on('mouseout', function() {
+            d3.select(this).select('rect')
+                .transition()
+                .duration(300)
+                .attr('stroke-width', 2)
+                .attr('stroke', '#5643cc')
+                .attr('filter', 'none');
+                
+            tooltip.style('opacity', 0);
+        });
+    
+    stepGroups.append('rect')
+        .attr('width', d => d.width)
+        .attr('height', d => d.height)
+        .attr('rx', 8)
+        .attr('ry', 8)
+        .attr('fill', 'white')
+        .attr('stroke', '#5643cc')
+        .attr('stroke-width', 2);
+    
+    stepGroups.append('text')
+        .attr('x', d => d.width / 2)
+        .attr('y', d => d.height / 2)
+        .attr('text-anchor', 'middle')
+        .attr('dominant-baseline', 'middle')
+        .attr('font-size', '12px')
+        .attr('font-weight', '500')
+        .attr('fill', 'var(--primary)')
+        .text(d => d.title);
+    
+    // Helper function to calculate the line length for stroke-dasharray animation
+    function getTotalLength() {
+        return this.getTotalLength();
+    }
+    
+    // Add title and explanation
+    svg.append('text')
+        .attr('x', width / 2)
+        .attr('y', height - 20)
+        .attr('text-anchor', 'middle')
+        .attr('font-size', '14px')
+        .attr('font-weight', '500')
+        .attr('fill', 'var(--dark)')
+        .text('Contribution Analysis: From Correlation to Causal Contribution');
+}
 
+            // Orchestration Development Process Visualization
+function createPathwayDiagram() {
+    const container = document.getElementById('pathway-diagram');
+    if (!container) return;
+    
+    const width = container.clientWidth;
+    const height = container.clientHeight;
+    
+    // Create SVG
+    const svg = d3.select(container)
+        .append('svg')
+        .attr('width', width)
+        .attr('height', height);
+    
+    // Add tooltip
+    const tooltip = d3.select(container)
+        .append('div')
+        .attr('class', 'diagram-tooltip');
+    
+    // Define the phases
+    const phases = [
+        {
+            id: 'initiation',
+            title: 'Phase 1: Initiation & Coalition Building',
+            description: 'Map the system, build relationships, and establish a shared understanding of the problem. Identify key stakeholders and create a core coalition.',
+            activities: [
+                'Stakeholder mapping',
+                'System analysis',
+                'Relationship building',
+                'Vision development'
+            ],
+            x: width * 0.2,
+            y: height * 0.5,
+            radius: 70,
+            color: '#5643cc'
+        },
+        {
+            id: 'action',
+            title: 'Phase 2: Orchestration in Action',
+            description: 'Launch coordinated initiatives, facilitate ongoing collaboration, and manage information sharing across the network.',
+            activities: [
+                'Coordinate activities',
+                'Information sharing',
+                'Conflict resolution',
+                'Monitor progress'
+            ],
+            x: width * 0.4,
+            y: height * 0.5,
+            radius: 70,
+            color: '#5643cc'
+        },
+        {
+            id: 'expansion',
+            title: 'Phase 3: Expansion & Institutionalization',
+            description: 'Scale successful approaches, formalize structures, and embed practices into participating organizations and systems.',
+            activities: [
+                'Expand partnerships',
+                'Secure resources',
+                'Formalize governance',
+                'Document learning'
+            ],
+            x: width * 0.6,
+            y: height * 0.5,
+            radius: 70,
+            color: '#5643cc'
+        },
+        {
+            id: 'evolution',
+            title: 'Phase 4: Graduation or Evolution',
+            description: 'Transition leadership to system actors, adapt role, or exit if system is self-sustaining. May evolve to address new challenges.',
+            activities: [
+                'Transfer leadership',
+                'Embed practices',
+                'Evaluate impact',
+                'Identify next challenges'
+            ],
+            x: width * 0.8,
+            y: height * 0.5,
+            radius: 70,
+            color: '#5643cc'
+        }
+    ];
+    
+    // Create gradients for phases
+    const defs = svg.append('defs');
+    
+    phases.forEach((phase, i) => {
+        const gradient = defs.append('radialGradient')
+            .attr('id', `gradient-${phase.id}`)
+            .attr('cx', '50%')
+            .attr('cy', '50%')
+            .attr('r', '50%');
+        
+        gradient.append('stop')
+            .attr('offset', '0%')
+            .attr('stop-color', '#ffffff');
+            
+        gradient.append('stop')
+            .attr('offset', '100%')
+            .attr('stop-color', phase.color);
+    });
+    
+    // Draw arrows connecting phases
+    for (let i = 0; i < phases.length - 1; i++) {
+        const current = phases[i];
+        const next = phases[i + 1];
+        
+        svg.append('path')
+            .attr('d', `M${current.x + current.radius},${current.y} 
+                      C${current.x + current.radius + 30},${current.y} 
+                       ${next.x - next.radius - 30},${next.y} 
+                       ${next.x - next.radius},${next.y}`)
+            .attr('fill', 'none')
+            .attr('stroke', 'rgba(42, 57, 144, 0.6)')
+            .attr('stroke-width', 3)
+            .attr('marker-end', 'url(#arrow)');
+    }
+    
+    // Create arrow marker
+    defs.append('marker')
+        .attr('id', 'arrow')
+        .attr('viewBox', '0 -5 10 10')
+        .attr('refX', 8)
+        .attr('refY', 0)
+        .attr('markerWidth', 6)
+        .attr('markerHeight', 6)
+        .attr('orient', 'auto')
+        .append('path')
+        .attr('d', 'M0,-5L10,0L0,5')
+        .attr('fill', 'rgba(42, 57, 144, 0.6)');
+    
+    // Draw the circular phase boxes
+    const phaseGroups = svg.selectAll('.phase')
+        .data(phases)
+        .enter()
+        .append('g')
+        .attr('class', 'phase')
+        .attr('transform', d => `translate(${d.x}, ${d.y})`);
+    
+    phaseGroups.append('circle')
+        .attr('class', 'phase-circle')
+        .attr('r', d => d.radius)
+        .attr('fill', d => `url(#gradient-${d.id})`)
+        .attr('opacity', 0.8)
+        .attr('stroke', d => d.color)
+        .attr('stroke-width', 2)
+        .on('mouseover', function(event, d) {
+            d3.select(this)
+                .attr('r', d.radius + 5)
+                .attr('opacity', 1);
+                
+            tooltip
+                .style('opacity', 1)
+                .html(`<strong>${d.title}</strong><br>${d.description}<br><br><strong>Key Activities:</strong><ul>${d.activities.map(a => `<li>${a}</li>`).join('')}</ul>`)
+                .style('left', `${event.pageX - container.getBoundingClientRect().left + 10}px`)
+                .style('top', `${event.pageY - container.getBoundingClientRect().top - 40}px`);
+        })
+        .on('mouseout', function(event, d) {
+            d3.select(this)
+                .attr('r', d.radius)
+                .attr('opacity', 0.8);
+                
+            tooltip.style('opacity', 0);
+        });
+    
+    // Add phase number labels
+    phaseGroups.append('text')
+        .attr('class', 'phase-label')
+        .attr('y', -5)
+        .attr('text-anchor', 'middle')
+        .attr('font-size', '16px')
+        .attr('font-weight', '700')
+        .attr('fill', 'var(--dark)')
+        .text((d, i) => `Phase ${i + 1}`);
+    
+    phaseGroups.append('text')
+        .attr('class', 'phase-label')
+        .attr('y', 15)
+        .attr('text-anchor', 'middle')
+        .attr('font-size', '12px')
+        .attr('font-weight', '500')
+        .attr('fill', 'var(--dark)')
+        .text(d => d.id.charAt(0).toUpperCase() + d.id.slice(1));
+    
+    // Add the adaptation loop arrow
+    const lastPhase = phases[phases.length - 1];
+    const firstPhase = phases[0];
+    
+    svg.append('path')
+        .attr('d', `M${lastPhase.x},${lastPhase.y + lastPhase.radius} 
+                  C${lastPhase.x},${lastPhase.y + lastPhase.radius + 80} 
+                   ${firstPhase.x},${firstPhase.y + firstPhase.radius + 80} 
+                   ${firstPhase.x},${firstPhase.y + firstPhase.radius}`)
+        .attr('fill', 'none')
+        .attr('stroke', 'rgba(255, 126, 95, 0.6)')
+        .attr('stroke-width', 2)
+        .attr('stroke-dasharray', '5,5')
+        .attr('marker-end', 'url(#adaptation-arrow)');
+    
+    // Create adaptation arrow marker
+    defs.append('marker')
+        .attr('id', 'adaptation-arrow')
+        .attr('viewBox', '0 -5 10 10')
+        .attr('refX', 8)
+        .attr('refY', 0)
+        .attr('markerWidth', 6)
+        .attr('markerHeight', 6)
+        .attr('orient', 'auto')
+        .append('path')
+        .attr('d', 'M0,-5L10,0L0,5')
+        .attr('fill', 'rgba(255, 126, 95, 0.6)');
+    
+    // Add adaptation label
+    svg.append('text')
+        .attr('x', width * 0.5)
+        .attr('y', height * 0.85)
+        .attr('text-anchor', 'middle')
+        .attr('font-size', '14px')
+        .attr('font-style', 'italic')
+        .attr('fill', 'var(--accent)')
+        .text('Adaptive Cycle: New challenges may require returning to Phase 1');
+    
+    // Add outer functions that span across all phases
+    const functions = [
+        {
+            name: 'Convening & Facilitation',
+            description: 'Bringing diverse stakeholders together and guiding collaborative processes.',
+            y: height * 0.15
+        },
+        {
+            name: 'Knowledge Management',
+            description: 'Capturing, sharing, and applying learning across the system.',
+            y: height * 0.85
+        }
+    ];
+    
+    functions.forEach(func => {
+        // Create a horizontal line spanning across phases
+        svg.append('line')
+            .attr('x1', phases[0].x - phases[0].radius - 20)
+            .attr('y1', func.y)
+            .attr('x2', phases[phases.length - 1].x + phases[phases.length - 1].radius + 20)
+            .attr('y2', func.y)
+            .attr('stroke', 'var(--primary)')
+            .attr('stroke-width', 2)
+            .attr('stroke-dasharray', '3,3');
+        
+        // Add function label
+        svg.append('text')
+            .attr('x', width * 0.1)
+            .attr('y', func.y - 10)
+            .attr('text-anchor', 'middle')
+            .attr('font-size', '12px')
+            .attr('font-weight', '500')
+            .attr('fill', 'var(--primary)')
+            .text(func.name)
+            .on('mouseover', function(event) {
+                tooltip
+                    .style('opacity', 1)
+                    .html(`<strong>${func.name}</strong><br>${func.description}`)
+                    .style('left', `${event.pageX - container.getBoundingClientRect().left + 10}px`)
+                    .style('top', `${event.pageY - container.getBoundingClientRect().top - 20}px`);
+            })
+            .on('mouseout', function() {
+                tooltip.style('opacity', 0);
+            });
+    });
+    
+    // Add title
+    svg.append('text')
+        .attr('x', width / 2)
+        .attr('y', 30)
+        .attr('text-anchor', 'middle')
+        .attr('font-size', '16px')
+        .attr('font-weight', '700')
+        .attr('fill', 'var(--primary)')
+        .text('Orchestration Development Process');
+}
         // Call all functions when DOM is loaded
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize network visualization
