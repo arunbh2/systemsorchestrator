@@ -833,6 +833,135 @@
             color: var(--gray-500);
         }
 
+        /* New Animation Classes */
+        .animate-fade-in {
+            animation: fadeIn 0.7s ease-in-out forwards;
+        }
+
+        .animate-slide-up {
+            animation: slideUp 0.7s ease-out forwards;
+        }
+
+        .animate-pulse {
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        .animate-delay-1 { animation-delay: 0.1s; }
+        .animate-delay-2 { animation-delay: 0.2s; }
+        .animate-delay-3 { animation-delay: 0.3s; }
+        .animate-delay-4 { animation-delay: 0.4s; }
+        .animate-delay-5 { animation-delay: 0.5s; }
+
+        /* Loading Indicator */
+        .loading-indicator {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            z-index: 5;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--gray-300);
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Pathway diagram specific styles */
+        .phase-circle {
+            cursor: pointer;
+            transition: r 0.3s ease, fill 0.3s ease;
+        }
+
+        .phase-label {
+            pointer-events: none;
+            font-weight: 500;
+        }
+
+        /* Orchestration diagram specific styles */
+        .stakeholder circle {
+            cursor: pointer;
+            transition: r 0.3s ease, fill 0.3s ease;
+        }
+
+        .connection {
+            transition: stroke 0.3s ease, stroke-width 0.3s ease, stroke-dasharray 0.3s ease;
+        }
+
+        .function-text {
+            cursor: pointer;
+            transition: font-size 0.3s ease, fill 0.3s ease, font-weight 0.3s ease;
+        }
+
+        /* Contribution diagram specific styles */
+        .contribution-arrow {
+            transition: stroke-dashoffset 1.5s linear;
+        }
+
+        .contribution-box rect {
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Animation for calculate button */
+        .tool-button.calculating {
+            position: relative;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .tool-button.calculating::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.3),
+                transparent
+            );
+            animation: loadingShimmer 1.5s infinite;
+        }
+
+        .tool-button.ready {
+            box-shadow: 0 0 8px 2px rgba(86, 67, 204, 0.4);
+        }
+
+        @keyframes loadingShimmer {
+            100% {
+                left: 100%;
+            }
+        }
+
         /* Responsive */
         @media (max-width: 992px) {
             .header-container {
@@ -924,7 +1053,7 @@
                 grid-template-columns: 1fr;
             }
             
-            .diagram-container {
+           .diagram-container {
                 height: 250px; /* Further reduced height for smaller devices */
             }
 
@@ -961,6 +1090,42 @@
             .viz-toggle:hover {
                 transform: none;
             }
+        }
+
+        /* SR-only class for screen reader text */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        /* Touch device optimizations */
+        .touch-device .card:hover,
+        .touch-device .feature-card:hover {
+            transform: none;
+        }
+
+        .touch-device .touch-active {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+        }
+
+        /* Button click effect */
+        .clicked {
+            transform: scale(0.97);
+            transition: transform 0.1s ease;
+        }
+
+        /* Table responsiveness */
+        .table-responsive {
+            overflow-x: auto;
+            margin-bottom: 1rem;
         }
     </style>
 </head>
@@ -1011,7 +1176,7 @@
                         </div>
                         <div class="expandable-content" id="expandable-1">
                             <div class="expandable-body">
-                               <p>This role has been described with various terms in literature: the Skoll Foundation calls these actors "system orchestrators," while Bridgespan uses "field catalysts" to emphasize their behind-the-scenes influence.</p>
+                                <p>This role has been described with various terms in literature: the Skoll Foundation calls these actors "system orchestrators," while Bridgespan uses "field catalysts" to emphasize their behind-the-scenes influence.</p>
                                 <p>Regardless of name, orchestrators are distinguished by their focus on enabling population-level change (not just growing one organization) and by influencing others' actions rather than acting alone. They often work subtly or "invisibly," avoiding the spotlight so as not to compete with frontline actors.</p>
                             </div>
                         </div>
@@ -1457,7 +1622,7 @@
                         </div>
                         <div class="feature-card">
                             <div class="feature-icon" aria-hidden="true">📊</div>
-                            <h3 class="feature-title">Data Dashboards</h3>
+                           <h3 class="feature-title">Data Dashboards</h3>
                             <p>Integrating data from different sources provides a "single source of truth" that all stakeholders can use for planning.</p>
                         </div>
                         <div class="feature-card">
@@ -1549,7 +1714,7 @@
                             <h3 class="expandable-title">Collective Impact Evaluation Framework</h3>
                             <div class="expandable-icon" aria-hidden="true">▼</div>
                         </div>
-                      <div class="expandable-content" id="expandable-13">
+                        <div class="expandable-content" id="expandable-13">
                             <div class="expandable-body">
                                 <p>This framework recommends tracking the five conditions of collective impact:</p>
                                 <ol>
@@ -1650,7 +1815,7 @@
                 <p class="section-intro">To ground the concepts in reality, here are brief examples of systems orchestration from different sectors and geographies.</p>
                 
                 <div class="content-block">
-                    <div class="case-study visible" id="case-study-1">
+                    <div class="case-study visible" id="case-study-1" data-index="0">
                         <div class="case-study-header">
                             <h2 class="case-study-title">EYElliance – Vision Care Coalition</h2>
                             <div class="case-study-meta">Global Health/Education Sector</div>
@@ -1670,7 +1835,7 @@
                         </ul>
                     </div>
                     
-                    <div class="case-study" id="case-study-2">
+                    <div class="case-study" id="case-study-2" data-index="1">
                         <div class="case-study-header">
                             <h2 class="case-study-title">Crisis Action – Collective Advocacy to Prevent Conflict</h2>
                             <div class="case-study-meta">Global/Africa Peace and Human Rights</div>
@@ -1689,7 +1854,7 @@
                         </ul>
                     </div>
                     
-                    <div class="case-study" id="case-study-3">
+                    <div class="case-study" id="case-study-3" data-index="2">
                         <div class="case-study-header">
                             <h2 class="case-study-title">Strive Partnership – Education Outcomes in Cincinnati</h2>
                             <div class="case-study-meta">USA Education Sector</div>
@@ -1708,7 +1873,7 @@
                         </ul>
                     </div>
                     
-                    <div class="case-study" id="case-study-4">
+                    <div class="case-study" id="case-study-4" data-index="3">
                         <div class="case-study-header">
                             <h2 class="case-study-title">Freedom to Marry – Marriage Equality Movement</h2>
                             <div class="case-study-meta">USA Social Justice (LGBT rights)</div>
@@ -1727,7 +1892,7 @@
                         </ul>
                     </div>
                     
-                    <div class="case-study" id="case-study-5">
+                    <div class="case-study" id="case-study-5" data-index="4">
                         <div class="case-study-header">
                             <h2 class="case-study-title">Sustainable Energy for All (SEforALL) – UN-Led Global Platform</h2>
                             <div class="case-study-meta">Global Energy Access & Sustainability</div>
@@ -1964,1371 +2129,4 @@
                         <ul class="footer-links">
                             <li><a href="https://practicalaction.org/" target="_blank" rel="noopener">Practical Action</a></li>
                             <li><a href="https://skoll.org/" target="_blank" rel="noopener">Skoll Foundation</a></li>
-                            <li><a href="https://collectiveimpactforum.org/" target="_blank" rel="noopener">Collective Impact Forum</a></li>
-                            <li><a href="https://www.bridgespan.org/" target="_blank" rel="noopener">Bridgespan Group</a></li>
-                            <li><a href="https://www.presencing.org/" target="_blank" rel="noopener">Theory U - Presencing Institute</a></li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="footer-bottom">
-                    <p>&copy; 2025 Systems Orchestration Fundamentals. Created for educational purposes.</p>
-                </div>
-            </div>
-        </footer>
-
-        <script>
-        // Document ready function to initialize everything when the page is loaded
-        document.addEventListener('DOMContentLoaded', function() {
-            // Polyfill for smooth scrolling in browsers that don't support it
-            if (!('scrollBehavior' in document.documentElement.style)) {
-                // Polyfill would be loaded here in a production environment
-                console.log('Smooth scrolling polyfill would be loaded');
-            }
-            
-            // Initialize interactive elements
-            initializeNavigation();
-            initializeExpandables();
-            initializeFrameworkTabs();
-            initializeCaseStudies();
-            initializeDiagnosticTool();
-            
-            // Implement lazy loading for visualizations
-            const diagramObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const diagramId = entry.target.id;
-                        
-                        // Create diagram based on ID
-                        if (diagramId === 'msd-diagram') createMSDDiagram();
-                        else if (diagramId === 'collective-impact-diagram') createCollectiveImpactDiagram();
-                        else if (diagramId === 'theory-u-diagram') createTheoryUDiagram();
-                        else if (diagramId === 'pathway-diagram') createPathwayDiagram();
-                        else if (diagramId === 'orchestration-diagram') createOrchestrationDiagram();
-                        else if (diagramId === 'contribution-diagram') createContributionDiagram();
-                        
-                        // Unobserve after creating
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            // Observe all diagram containers
-            document.querySelectorAll('.diagram-container').forEach(container => {
-                diagramObserver.observe(container);
-            });
-            
-            // Initialize only the network on load
-            createNetworkVisualization();
-            
-            // Add a small delay to ensure everything is properly rendered
-            setTimeout(function() {
-                // Make first case study visible immediately
-                document.getElementById('case-study-1').classList.add('visible');
-            }, 500);
-        });
-
-        // Navigation functionality
-        function initializeNavigation() {
-            const navLinks = document.querySelectorAll('.nav-item');
-            const mobileNavToggle = document.getElementById('mobile-nav-toggle');
-            const navLinksContainer = document.getElementById('nav-links');
-            const vizToggle = document.getElementById('viz-toggle');
-            const networkContainer = document.getElementById('network-container');
-            
-            // Mobile navigation toggle with improved accessibility
-            if (mobileNavToggle && navLinksContainer) {
-                mobileNavToggle.addEventListener('click', function() {
-                    navLinksContainer.classList.toggle('active');
-                    // Add aria-expanded attribute for accessibility
-                    const isExpanded = navLinksContainer.classList.contains('active');
-                    this.setAttribute('aria-expanded', isExpanded);
-                    // Prevent body scrolling when menu is open on mobile
-                    document.body.style.overflow = isExpanded ? 'hidden' : '';
-                });
-            }
-            
-            // Network visualization toggle with improved accessibility
-            if (vizToggle && networkContainer) {
-                vizToggle.addEventListener('click', function() {
-                    networkContainer.classList.toggle('active');
-                    const isActive = networkContainer.classList.contains('active');
-                    this.setAttribute('aria-pressed', isActive);
-                });
-            }
-            
-            // Smooth scrolling for navigation links with improved handling
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    // Remove active class from all links
-                    navLinks.forEach(item => {
-                        item.classList.remove('active');
-                    });
-                    
-                    // Add active class to clicked link
-                    this.classList.add('active');
-                    
-                    // Get target section id
-                    const targetId = this.getAttribute('href');
-                    const targetSection = document.querySelector(targetId);
-                    
-                    if (targetSection) {
-                        // Calculate offset to account for fixed header
-                        const headerHeight = document.querySelector('header').offsetHeight;
-                        const offset = targetSection.offsetTop - headerHeight;
-                        
-                        // Smooth scroll to section
-                        window.scrollTo({
-                            top: offset,
-                            behavior: 'smooth'
-                        });
-// Close mobile nav if open
-                        navLinksContainer.classList.remove('active');
-                        mobileNavToggle.setAttribute('aria-expanded', 'false');
-                        document.body.style.overflow = '';
-                    }
-                });
-            });
-            
-            // Enhanced scroll-based active state detection
-            window.addEventListener('scroll', function() {
-                const scrollPosition = window.scrollY;
-                const windowHeight = window.innerHeight;
-                const documentHeight = document.body.scrollHeight;
-                
-                // Handle case when scrolled to the bottom
-                if (scrollPosition + windowHeight >= documentHeight - 10) {
-                    // Set last nav item as active when at bottom
-                    navLinks.forEach(link => link.classList.remove('active'));
-                    navLinks[navLinks.length - 1].classList.add('active');
-                    return;
-                }
-                
-                // Check which section is currently in view
-                const sections = document.querySelectorAll('section');
-                
-                // Check which section is currently in view
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop - 100;
-                    const sectionHeight = section.offsetHeight;
-                    
-                    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                        const sectionId = section.getAttribute('id');
-                        
-                        // Remove active class from all links
-                        navLinks.forEach(link => {
-                            link.classList.remove('active');
-                        });
-                        
-                        // Add active class to corresponding nav link
-                        const activeLink = document.querySelector(`.nav-item[href="#${sectionId}"]`);
-                        if (activeLink) {
-                            activeLink.classList.add('active');
-                        }
-                    }
-                });
-            }, { passive: true });
-        }
-
-        // Expandable sections functionality with improved accessibility
-        function initializeExpandables() {
-            const expandableHeaders = document.querySelectorAll('.expandable-header');
-            
-            expandableHeaders.forEach(header => {
-                header.addEventListener('click', function() {
-                    const expandable = this.parentElement;
-                    
-                    // Toggle open class on expandable
-                    expandable.classList.toggle('open');
-                    
-                    // For accessibility - set aria-expanded attribute
-                    const isExpanded = expandable.classList.contains('open');
-                    this.setAttribute('aria-expanded', isExpanded);
-                });
-                
-                // Add keyboard support for accessibility
-                header.addEventListener('keydown', function(e) {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        this.click();
-                    }
-                });
-            });
-        }
-
-        // Framework tabs functionality with improved accessibility
-        function initializeFrameworkTabs() {
-            const frameworkTabs = document.querySelectorAll('.framework-tab');
-            
-            frameworkTabs.forEach(tab => {
-                tab.addEventListener('click', function() {
-                    // Remove active class from all tabs
-                    frameworkTabs.forEach(t => {
-                        t.classList.remove('active');
-                        t.setAttribute('aria-selected', 'false');
-                    });
-                    
-                    // Add active class to clicked tab
-                    this.classList.add('active');
-                    this.setAttribute('aria-selected', 'true');
-                    
-                    // Hide all framework content
-                    const frameworkContents = document.querySelectorAll('.framework-content');
-                    frameworkContents.forEach(content => {
-                        content.classList.remove('active');
-                        content.setAttribute('aria-hidden', 'true');
-                    });
-                    
-                    // Show content for active tab
-                    const frameworkId = this.getAttribute('data-framework');
-                    const targetContent = document.getElementById(`${frameworkId}-content`);
-                    if (targetContent) {
-                        targetContent.classList.add('active');
-                        targetContent.setAttribute('aria-hidden', 'false');
-                    }
-                });
-                
-                // Add keyboard support for accessibility
-                tab.addEventListener('keydown', function(e) {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        this.click();
-                    }
-                });
-            });
-        }
-
-        // Case studies visibility animations with Intersection Observer
-        function initializeCaseStudies() {
-            // Use Intersection Observer to reveal case studies when they come into view
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.1
-            };
-            
-            const observer = new IntersectionObserver(function(entries, observer) {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        // Unobserve once visible to improve performance
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, observerOptions);
-            
-            // Observe all case studies except the first one (which is visible by default)
-            const caseStudies = document.querySelectorAll('.case-study:not(#case-study-1)');
-            caseStudies.forEach(study => {
-                observer.observe(study);
-            });
-        }
-
-        // Initialize diagnostic tool with improved validation and accessibility
-        function initializeDiagnosticTool() {
-            const calculateButton = document.getElementById('calculate-results');
-            const resultsContainer = document.getElementById('results-container');
-            
-            if (calculateButton && resultsContainer) {
-                calculateButton.addEventListener('click', function() {
-                    // Get all selected values
-                    const stakeholderCohesion = document.querySelector('input[name="stakeholder-cohesion"]:checked')?.value || 0;
-                    const visionUrgency = document.querySelector('input[name="vision-urgency"]:checked')?.value || 0;
-                    const institutionalSupport = document.querySelector('input[name="institutional-support"]:checked')?.value || 0;
-                    const resourceLandscape = document.querySelector('input[name="resource-landscape"]:checked')?.value || 0;
-                    const barriersRisks = document.querySelector('input[name="barriers-risks"]:checked')?.value || 0;
-                    
-                    // Validate scores
-                    const validateScore = (score) => {
-                        const numScore = parseInt(score);
-                        return !isNaN(numScore) && numScore >= 1 && numScore <= 5 ? numScore : 0;
-                    };
-
-                    const scores = [
-                        validateScore(stakeholderCohesion),
-                        validateScore(visionUrgency),
-                        validateScore(institutionalSupport),
-                        validateScore(resourceLandscape),
-                        validateScore(barriersRisks)
-                    ];
-                    
-                    // Ensure all questions are answered with valid ratings
-                    if (scores.some(score => score === 0)) {
-                        alert('Please answer all questions with valid ratings (1-5) to see your results.');
-                        return;
-                    }
-                    
-                    // Calculate average score
-                    const average = scores.reduce((a, b) => a + b, 0) / scores.length;
-                    
-                    // Generate results summary
-                    let summaryText = '';
-                    let recommendationsText = '';
-                    
-                    if (average < 2) {
-                        summaryText = `<p>Your overall readiness score is <strong>${average.toFixed(1)}</strong> out of 5, indicating <strong>low readiness</strong> for systems orchestration at this time. Significant groundwork is needed before launching a full orchestration effort.</p>`;
-                        recommendationsText = `
-                            <ol>
-                                <li>Focus on building trust and relationships among key stakeholders before attempting coordination.</li>
-                                <li>Conduct awareness-raising activities to build shared understanding of the systemic nature of the challenge.</li>
-                                <li>Identify and nurture potential champions who can help create enabling conditions.</li>
-                                <li>Consider starting with smaller collaborative projects to demonstrate value before attempting system-wide orchestration.</li>
-                                <li>Invest in mapping the system to better understand leverage points and barriers.</li>
-                            </ol>
-                        `;
-                    } else if (average < 3.5) {
-                        summaryText = `<p>Your overall readiness score is <strong>${average.toFixed(1)}</strong> out of 5, indicating <strong>moderate readiness</strong> for systems orchestration. There are some enabling conditions in place, but also important gaps to address.</p>`;
-                        recommendationsText = `
-                            <ol>
-                                <li>Begin with a focused orchestration approach targeting the most promising sub-system or issue area.</li>
-                                <li>Invest in strengthening your lowest-scoring dimensions before expanding orchestration efforts.</li>
-                                <li>Develop a staged approach that builds momentum through early wins while addressing systemic barriers.</li>
-                                <li>Engage influential stakeholders to help create more enabling conditions.</li>
-                                <li>Consider bringing in external expertise or neutral facilitation to help navigate challenging dynamics.</li>
-                            </ol>
-                        `;
-                    } else {
-                        summaryText = `<p>Your overall readiness score is <strong>${average.toFixed(1)}</strong> out of 5, indicating <strong>high readiness</strong> for systems orchestration. Many enabling conditions are in place, providing a strong foundation for orchestration efforts.</p>`;
-                        recommendationsText = `
-                            <ol>
-                                <li>Move forward with designing and launching a comprehensive orchestration initiative.</li>
-                                <li>Build on existing momentum and stakeholder commitment to create a shared vision and roadmap.</li>
-                                <li>Establish governance structures and clear roles for a collective impact approach.</li>
-                                <li>Develop shared measurement systems to track progress and maintain accountability.</li>
-                                <li>Consider how to institutionalize the orchestration function for long-term sustainability.</li>
-                            </ol>
-                        `;
-                    }
-                    
-                    // Generate dimension-specific feedback
-                    const dimensionFeedback = `
-                        <h4>Dimension-Specific Insights:</h4>
-                        <ul>
-                            <li><strong>Stakeholder Cohesion:</strong> ${getDimensionFeedback('stakeholder-cohesion', stakeholderCohesion)}</li>
-                            <li><strong>Shared Vision & Urgency:</strong> ${getDimensionFeedback('vision-urgency', visionUrgency)}</li>
-                            <li><strong>Institutional Support:</strong> ${getDimensionFeedback('institutional-support', institutionalSupport)}</li>
-                            <li><strong>Resource Landscape:</strong> ${getDimensionFeedback('resource-landscape', resourceLandscape)}</li>
-                            <li><strong>Barriers & Risks:</strong> ${getDimensionFeedback('barriers-risks', barriersRisks)}</li>
-                        </ul>
-                    `;
-                    
-                    // Update results summary
-                    document.getElementById('results-summary').innerHTML = summaryText + dimensionFeedback;
-                    
-                    // Update recommendations
-                    document.getElementById('recommendations').innerHTML = recommendationsText;
-                    
-                    // Create radar chart for results
-                    createRadarChart(scores);
-                    
-                    // Show results container
-                    resultsContainer.style.display = 'block';
-                    resultsContainer.setAttribute('aria-hidden', 'false'); // Improved accessibility
-                    
-                    // Scroll to results with better browser support
-                    resultsContainer.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                    
-                    // Announce results for screen readers
-                    const resultsAnnouncement = document.createElement('div');
-                    resultsAnnouncement.setAttribute('role', 'status');
-                    resultsAnnouncement.setAttribute('aria-live', 'polite');
-                    resultsAnnouncement.className = 'sr-only';
-                    resultsAnnouncement.textContent = `Results calculated. Overall readiness score is ${average.toFixed(1)} out of 5.`;
-                    document.body.appendChild(resultsAnnouncement);
-                    
-                    // Remove announcement after it's been read
-                    setTimeout(() => {
-                        document.body.removeChild(resultsAnnouncement);
-                    }, 3000);
-                });
-            }
-            
-            // Function to get feedback for each dimension
-            function getDimensionFeedback(dimension, score) {
-                const feedbackMap = {
-                    'stakeholder-cohesion': [
-                        'Major work needed to build awareness and trust among key stakeholders.',
-                        'Focus on relationship-building and creating opportunities for productive collaboration.',
-                        'Continue strengthening connections while addressing any remaining trust issues.',
-                        'Good foundation exists; consider formalizing collaborative structures.'
-                    ],
-                    'vision-urgency': [
-                        'Work on creating awareness of shared challenges and potential for collective action.',
-                        'Develop a more compelling narrative around the need for systemic change.',
-                        'Build on existing momentum to create greater urgency and shared vision.',
-                        'Strong alignment exists; maintain energy while moving to concrete planning.'
-                    ],
-                    'institutional-support': [
-                        'Identify potential policy windows and institutional champions to begin creating enabling conditions.',
-                        'Engage with sympathetic institutions to develop more supportive policies or mandates.',
-                        'Leverage existing support while working to address remaining policy barriers.',
-                        'Strong institutional backing exists; focus on formalizing commitments.'
-                    ],
-                    'resource-landscape': [
-                        'Explore creative funding approaches and build the case for resource investment.',
-                        'Target initial resources toward proof-of-concept work that can attract additional support.',
-                        'Align existing resources more effectively while developing strategies for gaps.',
-                        'Strong resource foundation exists; focus on long-term sustainability.'
-                    ],
-                    'barriers-risks': [
-                        'Address most critical barriers before attempting full orchestration; consider a staged approach.',
-                        'Develop specific mitigation strategies for key barriers while building on areas of opportunity.',
-                        'Continue monitoring and addressing barriers as orchestration progresses.',
-                        'Minimal barriers exist; maintain vigilance for emerging challenges.'
-                    ]
-                };
-                
-                // Convert score to index (0-3) for feedback array
-                const index = Math.min(Math.floor((parseInt(score) - 1) / 1.25), 3);
-                return feedbackMap[dimension][index];
-            }
-            
-            // Enhanced radar chart for diagnostic results
-            function createRadarChart(scores) {
-                try {
-                    const chartContainer = document.getElementById('results-chart');
-                    chartContainer.innerHTML = ''; // Clear previous chart
-                    
-                    const width = chartContainer.clientWidth;
-                    const height = 300;
-                    const centerX = width / 2;
-                    const centerY = height / 2;
-                    const radius = Math.min(centerX, centerY) * 0.8;
-                    
-                    const svg = d3.select('#results-chart')
-                        .append('svg')
-                        .attr('width', width)
-                        .attr('height', height)
-                        .attr('aria-label', 'Radar chart showing readiness scores across five dimensions')
-                        .attr('role', 'img');
-                    
-                    // Define the dimensions for the radar chart
-                    const dimensions = [
-                        'Stakeholder Cohesion',
-                        'Shared Vision & Urgency',
-                        'Institutional Support',
-                        'Resource Landscape',
-                        'Barriers & Risks'
-                    ];
-                    
-                    // Calculate the angle for each dimension
-                    const angleSlice = (Math.PI * 2) / dimensions.length;
-                    
-                    // Scale for the radius
-                    const rScale = d3.scaleLinear()
-                        .domain([0, 5])
-                        .range([0, radius]);
-                    
-                    // Draw the background circles
-                    const axisGrid = svg.append('g').attr('class', 'axis-grid')
-                        .attr('transform', `translate(${centerX}, ${centerY})`);
-                    
-                    // Draw the circular grid lines
-                    for (let j = 1; j <= 5; j++) {
-                        axisGrid.append('circle')
-                            .attr('r', rScale(j))
-                            .attr('fill', 'none')
-                            .attr('stroke', 'rgba(0,0,0,0.1)')
-                            .attr('stroke-dasharray', '3,3');
-                        
-                        // Add labels for grid circles
-                        axisGrid.append('text')
-                            .attr('x', 2)
-                            .attr('y', -rScale(j) - 2)
-                            .attr('font-size', '8px')
-                            .attr('fill', 'rgba(0,0,0,0.5)')
-                            .text(j);
-                    }
-                    
-                    // Draw the axes
-                    const axes = axisGrid.selectAll('.axis')
-                        .data(dimensions)
-                        .enter()
-                        .append('g')
-                        .attr('class', 'axis');
-                    
-                    // Draw the lines
-                    axes.append('line')
-                        .attr('x1', 0)
-                        .attr('y1', 0)
-                        .attr('x2', (d, i) => rScale(5) * Math.cos(angleSlice * i - Math.PI / 2))
-                        .attr('y2', (d, i) => rScale(5) * Math.sin(angleSlice * i - Math.PI / 2))
-                        .attr('stroke', 'rgba(0,0,0,0.1)')
-                        .attr('stroke-width', 1);
-                    
-                    // Add the labels with improved positioning
-                    axes.append('text')
-                        .attr('x', (d, i) => rScale(5.5) * Math.cos(angleSlice * i - Math.PI / 2))
-                        .attr('y', (d, i) => rScale(5.5) * Math.sin(angleSlice * i - Math.PI / 2))
-                        .attr('dy', (d, i) => {
-                            // Better vertical alignment
-                            if (i === 0) return '-0.7em';
-                            if (i === dimensions.length / 2) return '1.2em';
-                            return (i < dimensions.length / 2) ? '0.4em' : '0.4em';
-                        })
-                        .attr('font-size', width < 500 ? '8px' : '10px')
-                        .attr('font-weight', 'bold')
-                        .attr('text-anchor', (d, i) => {
-                            if (i === 0 || i === dimensions.length / 2) return 'middle';
-                            return (i < dimensions.length / 2) ? 'start' : 'end';
-                        })
-                        .text(d => d)
-                        .call(wrap, 70); // Add text wrapping for long labels
-                    
-                    // Create the radar shape and path
-                    const radarPath = axisGrid.append('path')
-                        .datum(scores)
-                        .attr('fill', 'rgba(86, 67, 204, 0.2)')
-                        .attr('stroke', 'rgba(86, 67, 204, 0.8)')
-                        .attr('stroke-width', 2);
-                    
-                    // Calculate the data points
-                    const pathData = scores.map((score, i) => {
-                        const x = rScale(score) * Math.cos(angleSlice * i - Math.PI / 2);
-                        const y = rScale(score) * Math.sin(angleSlice * i - Math.PI / 2);
-                        return [x, y];
-                    });
-                    
-                    // Create the line generator
-                    const line = d3.line();
-                    
-                    // Set the path data
-                    radarPath.attr('d', line([...pathData, pathData[0]]));
-                    
-                    // Add data points with improved interaction
-                    const dataPoints = axisGrid.selectAll('.data-point')
-                        .data(scores)
-                        .enter()
-                        .append('circle')
-                        .attr('class', 'data-point')
-                        .attr('cx', (d, i) => rScale(d) * Math.cos(angleSlice * i - Math.PI / 2))
-                        .attr('cy', (d, i) => rScale(d) * Math.sin(angleSlice * i - Math.PI / 2))
-                        .attr('r', 5)
-                        .attr('fill', 'rgba(255, 126, 95, 0.8)');
-                    
-                    // Add interaction for data points
-                    dataPoints
-                        .on('mouseover', function(event, d) {
-                            d3.select(this)
-                                .transition()
-                                .duration(200)
-                                .attr('r', 7)
-                                .attr('fill', 'rgba(255, 126, 95, 1)');
-                        })
-                        .on('mouseout', function() {
-                            d3.select(this)
-                                .transition()
-                                .duration(200)
-                                .attr('r', 5)
-                                .attr('fill', 'rgba(255, 126, 95, 0.8)');
-                        });
-                    
-                    // Add value labels
-                    axisGrid.selectAll('.data-value')
-                        .data(scores)
-                        .enter()
-                        .append('text')
-                        .attr('class', 'data-value')
-                        .attr('x', (d, i) => rScale(d) * Math.cos(angleSlice * i - Math.PI / 2))
-                        .attr('y', (d, i) => rScale(d) * Math.sin(angleSlice * i - Math.PI / 2))
-                        .attr('dy', '-1em')
-                        .attr('font-size', '10px')
-                        .attr('font-weight', 'bold')
-                        .attr('text-anchor', 'middle')
-                        .text(d => d);
-                        
-                    // Text wrapping function for dimension labels
-                    function wrap(text, width) {
-                        text.each(function() {
-                            const text = d3.select(this);
-                            const words = text.text().split(/\s+/).reverse();
-                            const lineHeight = 1.1; // ems
-                            const y = text.attr("y");
-                            const dy = parseFloat(text.attr("dy") || 0);
-                            let tspan = text.text(null).append("tspan").attr("x", text.attr("x")).attr("y", y).attr("dy", dy + "em");
-                            
-                            let lineNumber = 0;
-                            let line = [];
-                            let word = words.pop();
-                            
-                            while (word) {
-                                line.push(word);
-                                tspan.text(line.join(" "));
-                                if (tspan.node().getComputedTextLength() > width) {
-                                    line.pop();
-                                    tspan.text(line.join(" "));
-                                    line = [word];
-                                    lineNumber += 1;
-                                    tspan = text.append("tspan")
-                                        .attr("x", text.attr("x"))
-                                        .attr("y", y)
-                                        .attr("dy", lineNumber * lineHeight + dy + "em")
-                                        .text(word);
-                                }
-                                word = words.pop();
-                            }
-                        });
-                    }
-                    
-                } catch (error) {
-                    console.error("Error creating radar chart:", error);
-                    // Create a user-friendly error message
-                    document.getElementById('results-chart').innerHTML = `
-                        <div class="error-message">
-                            <p>There was an error generating the chart. Please try again or check your browser compatibility.</p>
-                            <button class="retry-button" onclick="calculateButton.click()">
-                                Try Again
-                            </button>
-                        </div>
-                    `;
-                }
-            }
-        }
-        
-        // Network visualization using D3.js with enhanced interaction and responsiveness
-        function createNetworkVisualization() {
-            try {
-                const container = document.getElementById('network-container');
-                if (!container) return;
-                
-                const width = window.innerWidth;
-                const height = window.innerHeight;
-                
-                // Create SVG container
-                const svg = d3.select('#network-container')
-                    .append('svg')
-                    .attr('width', width)
-                    .attr('height', height)
-                    .attr('aria-hidden', 'true'); // Hide from screen readers as it's decorative
-                
-                // Define nodes (representing key concepts in systems orchestration)
-                const nodes = [
-                    { id: 'orchestrator', name: 'Orchestrator', group: 1, description: 'Central coordinating entity' },
-                    { id: 'stakeholders', name: 'Stakeholders', group: 2, description: 'Organizations and individuals in the system' },
-                    { id: 'vision', name: 'Shared Vision', group: 3, description: 'Common understanding of goals' },
-                    { id: 'backbone', name: 'Backbone Function', group: 1, description: 'Provides structure and support' },
-                    { id: 'resources', name: 'Resources', group: 2, description: 'Funding, knowledge, technology' },
-                    { id: 'policy', name: 'Policy', group: 3, description: 'Enabling environment and rules' },
-                    { id: 'feedback', name: 'Feedback Loops', group: 3, description: 'System learning mechanisms' },
-                    { id: 'learning', name: 'Learning', group: 3, description: 'Knowledge generation and sharing' },
-                    { id: 'impact', name: 'Systemic Impact', group: 4, description: 'Population-level outcomes' },
-                    { id: 'coordination', name: 'Coordination', group: 1, description: 'Aligning activities' },
-                    { id: 'measurement', name: 'Measurement', group: 2, description: 'Tracking progress' },
-                    { id: 'trust', name: 'Trust', group: 2, description: 'Foundation for collaboration' }
-                ];
-                
-                // Define links between nodes
-                const links = [
-                    { source: 'orchestrator', target: 'stakeholders', value: 4 },
-                    { source: 'orchestrator', target: 'vision', value: 4 },
-                    { source: 'orchestrator', target: 'backbone', value: 5 },
-                    { source: 'orchestrator', target: 'coordination', value: 5 },
-                    { source: 'stakeholders', target: 'vision', value: 3 },
-                    { source: 'stakeholders', target: 'trust', value: 4 },
-                    { source: 'stakeholders', target: 'resources', value: 3 },
-                    { source: 'vision', target: 'impact', value: 3 },
-                    { source: 'backbone', target: 'coordination', value: 4 },
-                    { source: 'backbone', target: 'measurement', value: 3 },
-                    { source: 'resources', target: 'impact', value: 2 },
-                    { source: 'policy', target: 'impact', value: 3 },
-                    { source: 'policy', target: 'resources', value: 2 },
-                    { source: 'feedback', target: 'learning', value: 4 },
-                    { source: 'learning', target: 'impact', value: 3 },
-                    { source: 'coordination', target: 'impact', value: 3 },
-                    { source: 'measurement', target: 'feedback', value: 3 },
-                    { source: 'trust', target: 'coordination', value: 3 }
-                ];
-                
-                // Color scale for node groups
-                const color = d3.scaleOrdinal()
-                    .domain([1, 2, 3, 4])
-                    .range(['#5643cc', '#ff7e5f', '#38b2ac', '#4a5568']);
-                
-                // Create a force simulation with optimized parameters for different screen sizes
-                const simulation = d3.forceSimulation(nodes)
-                    .force('link', d3.forceLink(links).id(d => d.id)
-                        .distance(d => Math.min(150, width * 0.15) / d.value))
-                    .force('charge', d3.forceManyBody()
-                        .strength(d => width < 768 ? -150 : -300)
-                        .distanceMax(width * 0.5))
-                    .force('center', d3.forceCenter(width / 2, height / 2))
-                    .force('collision', d3.forceCollide().radius(d => width < 768 ? 40 : 60))
-                    .alphaDecay(0.028); // Slightly slower decay for smoother settling
-                
-                // Create a container for all visualization elements
-                const container = svg.append('g');
-                
-                // Add zoom behavior
-                svg.call(d3.zoom()
-                    .extent([[0, 0], [width, height]])
-                    .scaleExtent([0.1, 4])
-                    .on('zoom', (event) => {
-                        container.attr('transform', event.transform);
-                    }));
-                
-                // Create enhanced tooltip
-                const tooltip = d3.select('body').append('div')
-                    .attr('class', 'diagram-tooltip')
-                    .style('opacity', 0)
-                    .style('position', 'absolute')
-                    .style('background', 'white')
-                    .style('padding', '8px 12px')
-                    .style('border-radius', '4px')
-                    .style('box-shadow', '0 2px 8px rgba(0,0,0,0.2)')
-                    .style('pointer-events', 'none')
-                    .style('font-size', '12px')
-                    .style('max-width', '200px');
-                
-                // Draw links
-                const link = container.append('g')
-                    .selectAll('line')
-                    .data(links)
-                    .enter()
-                    .append('line')
-                    .attr('stroke', '#999')
-                    .attr('stroke-opacity', 0.6)
-                    .attr('stroke-width', d => Math.sqrt(d.value));
-                
-                // Draw node containers with improved interaction
-                const node = container.append('g')
-                    .selectAll('.node')
-                    .data(nodes)
-                    .enter()
-                    .append('g')
-                    .attr('class', 'node')
-                    .call(d3.drag()
-                        .on('start', dragstarted)
-                        .on('drag', dragged)
-                        .on('end', dragended))
-                    .on('touchstart', function(event) {
-                        // Prevent scrolling when interacting with nodes
-                        event.preventDefault();
-                    })
-                    .on('mouseover', function(event, d) {
-                        // Show tooltip
-                        tooltip.transition().duration(200).style('opacity', 0.9);
-                        tooltip.html(`<strong>${d.name}</strong><br/>${d.description || ''}`)
-                            .style('left', (event.pageX + 10) + 'px')
-                            .style('top', (event.pageY - 28) + 'px');
-                        
-                        // Highlight connected nodes and links
-                        const connectedLinks = links.filter(l => l.source.id === d.id || l.target.id === d.id);
-                        const connectedNodeIds = new Set();
-                        
-                        connectedLinks.forEach(l => {
-                            connectedNodeIds.add(l.source.id);
-                            connectedNodeIds.add(l.target.id);
-                        });
-                        
-                        svg.selectAll('.node')
-                           .attr('opacity', n => connectedNodeIds.has(n.id) || n.id === d.id ? 1 : 0.3);
-                        
-                        svg.selectAll('line')
-                            .attr('stroke-opacity', l => 
-                                l.source.id === d.id || l.target.id === d.id ? 0.9 : 0.1);
-                    })
-                    .on('mouseout', function() {
-                        // Hide tooltip
-                        tooltip.transition().duration(500).style('opacity', 0);
-                        
-                        // Reset opacity
-                        svg.selectAll('.node').attr('opacity', 1);
-                        svg.selectAll('line').attr('stroke-opacity', 0.6);
-                    });
-                
-                // Add circles to nodes
-                node.append('circle')
-                    .attr('r', d => width < 500 ? 15 : 20)
-                    .attr('fill', d => color(d.group))
-                    .attr('stroke', '#fff')
-                    .attr('stroke-width', 1.5);
-                
-                // Add labels to nodes with responsive font size
-                node.append('text')
-                    .attr('dy', d => width < 500 ? 25 : 30)
-                    .attr('text-anchor', 'middle')
-                    .text(d => d.name)
-                    .attr('font-size', d => width < 500 ? '8px' : '10px')
-                    .attr('fill', '#333');
-                
-                // Update positions during simulation
-                simulation.on('tick', () => {
-                    // Keep nodes within bounds
-                    nodes.forEach(d => {
-                        d.x = Math.max(20, Math.min(width - 20, d.x));
-                        d.y = Math.max(20, Math.min(height - 20, d.y));
-                    });
-                    
-                    link
-                        .attr('x1', d => d.source.x)
-                        .attr('y1', d => d.source.y)
-                        .attr('x2', d => d.target.x)
-                        .attr('y2', d => d.target.y);
-                    
-                    node
-                        .attr('transform', d => `translate(${d.x},${d.y})`);
-                });
-                
-                // Drag functions with touch support
-                function dragstarted(event, d) {
-                    if (!event.active) simulation.alphaTarget(0.3).restart();
-                    d.fx = d.x;
-                    d.fy = d.y;
-                }
-                
-                function dragged(event, d) {
-                    d.fx = event.x;
-                    d.fy = event.y;
-                }
-                
-                function dragended(event, d) {
-                    if (!event.active) simulation.alphaTarget(0);
-                    d.fx = null;
-                    d.fy = null;
-                }
-                
-                // Touch events support
-                function touchstarted(event, d) {
-                    if (!event.active) simulation.alphaTarget(0.3).restart();
-                    event.preventDefault(); // Prevent scrolling during interaction
-                    d.fx = d.x;
-                    d.fy = d.y;
-                }
-                
-                function touchmoved(event, d) {
-                    if (event.touches && event.touches.length) {
-                        const touch = event.touches[0];
-                        const boundingRect = event.target.getBoundingClientRect();
-                        const touchX = touch.clientX - boundingRect.left;
-                        const touchY = touch.clientY - boundingRect.top;
-                        
-                        d.fx = touchX;
-                        d.fy = touchY;
-                    }
-                }
-                
-                function touchended(event, d) {
-                    if (!event.active) simulation.alphaTarget(0);
-                    d.fx = null;
-                    d.fy = null;
-                }
-                
-                // Handle window resize
-                window.addEventListener('resize', debounce(function() {
-                    // Update width and height
-                    const newWidth = window.innerWidth;
-                    const newHeight = window.innerHeight;
-                    
-                    // Update SVG dimensions
-                    svg.attr('width', newWidth)
-                       .attr('height', newHeight);
-                    
-                    // Update simulation center force
-                    simulation.force('center')
-                               .x(newWidth / 2)
-                               .y(newHeight / 2);
-                    
-                    // Restart simulation
-                    simulation.alpha(0.3).restart();
-                }, 250));
-                
-                // Utility function for debouncing
-                function debounce(func, wait) {
-                    let timeout;
-                    return function() {
-                        const context = this, args = arguments;
-                        clearTimeout(timeout);
-                        timeout = setTimeout(() => {
-                            func.apply(context, args);
-                        }, wait);
-                    };
-                }
-                
-            } catch (error) {
-                console.error("Error creating network visualization:", error);
-                // Create a user-friendly fallback visualization
-                const container = document.getElementById('network-container');
-                if (container) {
-                    container.innerHTML = `
-                        <div style='opacity: 0.1; height: 100%; display: flex; align-items: center; justify-content: center;'>
-                            <h2>Systems Network Visualization</h2>
-                        </div>
-                    `;
-                }
-            }
-        }
-
-        // Create the Market Systems Development diagram
-        function createMSDDiagram() {
-            try {
-                const container = document.getElementById('msd-diagram');
-                if (!container) return;
-                
-                const width = container.clientWidth;
-                const height = 300;
-                
-                const svg = d3.select('#msd-diagram')
-                    .append('svg')
-                    .attr('width', width)
-                    .attr('height', height)
-                    .attr('role', 'img')
-                    .attr('aria-labelledby', 'msd-diagram-title');
-                
-                // Add title for accessibility
-                svg.append('title')
-                    .attr('id', 'msd-diagram-title')
-                    .text('Market Systems Development Diagram');
-                
-                // Define data
-                const nodes = [
-                    { id: 'market', name: 'Market System', x: width/2, y: height/2, r: width < 500 ? 60 : 80, description: 'Central focus of intervention' },
-                    { id: 'supporting', name: 'Supporting Functions', x: width/4, y: height/4, r: width < 500 ? 45 : 60, description: 'Services, infrastructure, information' },
-                    { id: 'rules', name: 'Rules & Norms', x: 3*width/4, y: height/4, r: width < 500 ? 45 : 60, description: 'Formal and informal regulations' },
-                    { id: 'players', name: 'Market Players', x: width/2, y: 3*height/4, r: width < 500 ? 45 : 60, description: 'Businesses, government, civil society' }
-                ];
-                
-                const links = [
-                    { source: 'market', target: 'supporting' },
-                    { source: 'market', target: 'rules' },
-                    { source: 'market', target: 'players' }
-                ];
-                
-                // Create tooltip for interactive elements
-                const tooltip = d3.select('body').append('div')
-                    .attr('class', 'diagram-tooltip')
-                    .style('opacity', 0)
-                    .style('position', 'absolute')
-                    .style('background', 'white')
-                    .style('padding', '8px 12px')
-                    .style('border-radius', '4px')
-                    .style('box-shadow', '0 2px 8px rgba(0,0,0,0.2)')
-                    .style('pointer-events', 'none')
-                    .style('font-size', '12px')
-                    .style('max-width', '200px');
-                
-                // Create link elements
-                svg.selectAll('.msd-link')
-                    .data(links)
-                    .enter()
-                    .append('line')
-                    .attr('class', 'msd-link')
-                    .attr('x1', d => nodes.find(n => n.id === d.source).x)
-                    .attr('y1', d => nodes.find(n => n.id === d.source).y)
-                    .attr('x2', d => nodes.find(n => n.id === d.target).x)
-                    .attr('y2', d => nodes.find(n => n.id === d.target).y)
-                    .attr('stroke', '#999')
-                    .attr('stroke-width', 2);
-                
-                // Create node elements with improved interaction
-                const nodeElements = svg.selectAll('.msd-node')
-                    .data(nodes)
-                    .enter()
-                    .append('g')
-                    .attr('class', 'msd-node')
-                    .attr('transform', d => `translate(${d.x}, ${d.y})`)
-                    .on('mouseover', function(event, d) {
-                        // Show tooltip
-                        tooltip.transition().duration(200).style('opacity', 0.9);
-                        tooltip.html(`<strong>${d.name}</strong><br/>${d.description}`)
-                            .style('left', (event.pageX + 10) + 'px')
-                            .style('top', (event.pageY - 28) + 'px');
-                        
-                        // Highlight node
-                        d3.select(this).select('circle')
-                            .transition()
-                            .duration(200)
-                            .attr('opacity', 1);
-                    })
-                    .on('mouseout', function() {
-                        // Hide tooltip
-                        tooltip.transition().duration(500).style('opacity', 0);
-                        
-                        // Reset highlight
-                        d3.select(this).select('circle')
-                            .transition()
-                            .duration(200)
-                            .attr('opacity', 0.7);
-                    });
-                
-                nodeElements.append('circle')
-                    .attr('r', d => d.r)
-                    .attr('fill', (d, i) => d3.schemeCategory10[i])
-                    .attr('opacity', 0.7);
-                
-                nodeElements.append('text')
-                    .attr('text-anchor', 'middle')
-                    .attr('dy', '.3em')
-                    .text(d => d.name)
-                    .attr('fill', 'white')
-                    .attr('font-weight', 'bold')
-                    .attr('font-size', d => width < 500 ? '10px' : '14px');
-            } catch (error) {
-                console.error("Error creating MSD diagram:", error);
-                const container = document.getElementById('msd-diagram');
-                if (container) {
-                    container.innerHTML = `
-                        <div class="error-message">
-                            <p>Diagram visualization could not be loaded. Please ensure your browser supports SVG and JavaScript.</p>
-                            <button class="retry-button" onclick="createMSDDiagram()">
-                                Try Again
-                            </button>
-                        </div>
-                    `;
-                }
-            }
-        }
-
-        // Create the Collective Impact diagram with improved accessibility and responsiveness
-        function createCollectiveImpactDiagram() {
-            try {
-                const container = document.getElementById('collective-impact-diagram');
-                if (!container) return;
-                
-                const width = container.clientWidth;
-                const height = 300;
-                
-                const svg = d3.select('#collective-impact-diagram')
-                    .append('svg')
-                    .attr('width', width)
-                    .attr('height', height)
-                    .attr('role', 'img')
-                    .attr('aria-labelledby', 'ci-diagram-title');
-                
-                // Add title for accessibility
-                svg.append('title')
-                    .attr('id', 'ci-diagram-title')
-                    .text('Collective Impact Framework Diagram showing five key elements');
-                
-                const centerX = width/2;
-                const centerY = height/2;
-                const radius = Math.min(width, height) / (width < 500 ? 3.5 : 3);
-                
-                // Create tooltip
-                const tooltip = d3.select('body').append('div')
-                    .attr('class', 'diagram-tooltip')
-                    .style('opacity', 0)
-                    .style('position', 'absolute')
-                    .style('background', 'white')
-                    .style('padding', '8px 12px')
-                    .style('border-radius', '4px')
-                    .style('box-shadow', '0 2px 8px rgba(0,0,0,0.2)')
-                    .style('pointer-events', 'none')
-                    .style('font-size', '12px')
-                    .style('max-width', '200px');
-                
-                // Define the five elements of collective impact with descriptions
-                const elements = [
-                    { name: 'Common Agenda', description: 'Shared vision for change with common understanding of the problem' },
-                    { name: 'Shared Measurement', description: 'Collecting data and measuring results consistently across participants' },
-                    { name: 'Mutually Reinforcing Activities', description: 'Different activities coordinated through a mutual plan of action' },
-                    { name: 'Continuous Communication', description: 'Consistent and open communication to build trust and shared motivation' },
-                    { name: 'Backbone Support', description: 'Dedicated staff and infrastructure for coordination and facilitation' }
-                ];
-                
-                // Calculate positions around a circle
-                elements.forEach((d, i) => {
-                    const angle = (i / elements.length) * 2 * Math.PI;
-                    d.x = centerX + radius * Math.cos(angle);
-                    d.y = centerY + radius * Math.sin(angle);
-                });
-                
-                // Add a central node with animation
-                const centralNode = svg.append('circle')
-                    .attr('cx', centerX)
-                    .attr('cy', centerY)
-                    .attr('r', 40)
-                    .attr('fill', '#5643cc')
-                    .attr('opacity', 0)
-                    .transition()
-                    .duration(800)
-                    .attr('opacity', 1);
-                
-                svg.append('text')
-                    .attr('x', centerX)
-                    .attr('y', centerY)
-                    .attr('text-anchor', 'middle')
-                    .attr('dy', '.3em')
-                    .attr('fill', 'white')
-                    .attr('font-weight', 'bold')
-                    .attr('font-size', width < 500 ? '10px' : '12px')
-                    .text('Collective Impact');
-                
-                // Draw lines from center to each element with animation
-                svg.selectAll('.ci-line')
-                    .data(elements)
-                    .enter()
-                    .append('line')
-                    .attr('class', 'ci-line')
-                    .attr('x1', centerX)
-                    .attr('y1', centerY)
-                    .attr('x2', centerX)
-                    .attr('y2', centerY)
-                    .attr('stroke', '#999')
-                    .attr('stroke-width', 2)
-                    .transition()
-                    .duration(1000)
-                    .delay((d, i) => i * 200)
-                    .attr('x2', d => d.x)
-                    .attr('y2', d => d.y);
-                
-                // Create elements with improved interaction
-                const element = svg.selectAll('.ci-element')
-                    .data(elements)
-                    .enter()
-                    .append('g')
-                    .attr('class', 'ci-element')
-                    .on('mouseover', function(event, d) {
-                        // Show tooltip with description
-                        tooltip.transition().duration(200).style('opacity', 0.9);
-                        tooltip.html(`<strong>${d.name}</strong><br/>${d.description}`)
-                            .style('left', (event.pageX + 10) + 'px')
-                            .style('top', (event.pageY - 28) + 'px');
-                        
-                        // Highlight element
-                        d3.select(this).select('circle')
-                            .transition()
-                            .duration(200)
-                            .attr('r', 33)
-                            .attr('fill', '#ff5f5f');
-                    })
-                    .on('mouseout', function() {
-                        // Hide tooltip
-                        tooltip.transition().duration(500).style('opacity', 0);
-                        
-                        // Reset highlight
-                        d3.select(this).select('circle')
-                            .transition()
-                            .duration(200)
-                            .attr('r', 30)
-                            .attr('fill', '#ff7e5f');
-                    });
-                
-                // Add circles with animation
-                element.append('circle')
-                    .attr('cx', d => d.x)
-                    .attr('cy', d => d.y)
-                    .attr('r', 0)
-                    .attr('fill', '#ff7e5f')
-                    .transition()
-                    .duration(1000)
-                    .delay((d, i) => 500 + i * 200)
-                    .attr('r', 30);
-                
-                // Add text labels
-                element.append('text')
-                    .attr('x', d => d.x)
-                    .attr('y', d => d.y)
-                    .attr('text-anchor', 'middle')
-                    .attr('dy', '.3em')
-                    .attr('fill', 'white')
-                    .attr('font-size', width < 500 ? '8px' : '10px')
-                    .attr('font-weight', 'bold')
-                    .attr('opacity', 0)
-                    .text(d => d.name)
-                    .transition()
-                    .duration(500)
-                    .delay((d, i) => 1000 + i * 200)
-                    .attr('opacity', 1);
-            } catch (error) {
-                console.error("Error creating Collective Impact diagram:", error);
-                const container = document.getElementById('collective-impact-diagram');
-                if (container) {
-                    container.innerHTML = `
-                        <div class="error-message">
-                            <p>Diagram visualization could not be loaded. Please ensure your browser supports SVG and JavaScript.</p>
-                            <button class="retry-button" onclick="createCollectiveImpactDiagram()">
-                                Try Again
-                            </button>
-                        </div>
-                    `;
-                }
-            }
-        }
-
-        // Create the Theory U diagram with improved animation and accessibility
-        function createTheoryUDiagram() {
-            try {
-                const container = document.getElementById('theory-u-diagram');
-                if (!container) return;
-                
-                const width = container.clientWidth;
-                const height = 300;
-                
-                const svg = d3.select('#theory-u-diagram')
-                    .append('svg')
-                    .attr('width', width)
-                    .attr('height', height)
-                    .attr('role', 'img')
-                    .attr('aria-labelledby', 'theory-u-title');
-                
-                // Add title for accessibility
-                svg.append('title')
-                    .attr('id', 'theory-u-title')
-                    .text('Theory U Process Diagram showing five stages of transformation');
-                
-                // Create tooltip
-                const tooltip = d3.select('body').append('div')
-                    .attr('class', 'diagram-tooltip')
-                    .style('opacity', 0)
-                    .style('position', 'absolute')
-                    .style('background', 'white')
-                    .style('padding', '8px 12px')
-                    .style('border-radius', '4px')
-                    .style('box-shadow', '0 2px 8px rgba(0,0,0,0.2)')
-                    .style('pointer-events', 'none')
-                    .style('font-size', '12px')
-                    .style('max-width', '200px');
-                
-                // Define the stages of Theory U with descriptions
-                const stages = [
-                    { name: 'Co-Initiating', description: 'Building common intent, stopping and listening to others and to what life calls you to do' },
-                    { name: 'Co-Sensing', description: 'Observing, observing, observing; going to the places of most potential and listening with your mind and heart wide open' },
-                    { name: 'Presencing', description: 'Connecting to the source of inspiration and will; going to the place of silence and allowing the inner knowing to emerge' },
-                    { name: 'Co-Creating', description: 'Prototyping the new in living examples to explore the future by doing' },
-                    { name: 'Co-Evolving', description: 'Embodying the new in ecosystems that facilitate seeing and acting from the whole' }
-                ];
-                
-                // Create the U-shaped path with smoother curve
-                const lineGenerator = d3.line().curve(d3.curveCardinal.tension(0.8));
-                
-                const pathPoints = [
-                    [width * 0.1, height * 0.2],
-                    [width * 0.25, height * 0.5],
-                    [width * 0.5, height * 0.8],
-                    [width * 0.75, height * 0.5],
-                    [width * 0.9, height * 0.2]
-                ];
-                
-                // Animated path drawing
-                const pathData = lineGenerator(pathPoints);
-                const path = svg.append('path')
-                    .attr('d', pathData)
-                    .attr('fill', 'none')
-                    .attr('stroke', '#5643cc')
-                    .attr('stroke-width', 4)
-                    .attr('stroke-dasharray', function() { return this.getTotalLength(); })
-                    .attr('stroke-dashoffset', function() { return this.getTotalLength(); });
-                
-                // Animate the path drawing
-                path.transition()
-                    .duration(2000)
-                    .attr('stroke-dashoffset', 0);
-                
-                // Add stage circles with animation and interaction
-                svg.selectAll('.stage-circle')
-                    .data(pathPoints)
-                    .enter()
-                    .append('circle')
-                    .attr('class', 'stage-circle')
-                    .attr('cx', d => d[0])
-                    .attr('cy', d => d[1])
-                    .attr('r', 0)
-                    .attr('fill', '#ff7e5f')
-                    .attr('opacity', 0.8)
-                    .transition()
-                    .duration(1000)
-                    .delay((d, i) => 2000 + i * 300)
-                    .attr('r', width < 500 ? 12 : 15);
-                
-                // Add stage labels with animation
-                const stageLabels = svg.selectAll('.stage-label')
-                    .data(stages)
-                    .enter()
-                    .append('text')
-                    .attr('class', 'stage-label')
-                    .attr('x', (d, i) => pathPoints[i][0])
-                    .attr('y', (d, i) => {
-                        const y = pathPoints[i][1];
-                        return i === 2 ? y + 40 : (y < height/2 ? y - 20 : y + 30);
-                    })
-                    .attr('text-anchor', 'middle')
-                    .attr('font-size', width < 500 ? '10px' : '12px')
-                    .attr('font-weight', 'bold')
-                    .attr('opacity', 0)
-                    .text(d => d.name);
-                
-                // Animate the labels appearing
-                stageLabels.transition()
-                    .duration(500)
-                    .delay((d, i) => 2500 + i * 300)
-                    .attr('opacity', 1);
-                
-                // Add interaction to stage circles
-                const stageCircles = svg.selectAll('.stage-circle');
-                stageCircles.each(function(d, i) {
-                    d3.select(this)
-                        .on('mouseover', function(event) {
-                            // Show tooltip with description
-                            tooltip.transition().duration(200).style('opacity', 0.9);
-                            tooltip.html(`<strong>${stages[i].name}</strong><br/>${stages[i].description}`)
-                                .style('left', (event.pageX + 10) + 'px')
-                                .style('top', (event.pageY - 28) + 'px');
-                            
-                            // Highlight circle
-                            d3.select(this)
-                                .transition()
-                                .duration(200)
-                                .attr('r', width < 500 ? 15 : 18)
-                                .attr('fill', '#ff5f5f');
-                        })
-                        .on('mouseout', function() {
-                            // Hide tooltip
-                            tooltip.transition().duration(500).style('opacity', 0);
-                            
-                            // Reset highlight
-                            d3.select(this)
-                                .transition()
-                                .duration(200)
-                                .attr('r', width < 500 ? 12 : 15)
-                                .attr('fill', '#ff7e5f');
-                        });
-                });
-            } catch (error) {
-                console.error("Error creating Theory U diagram:", error);
-                const container = document.getElementById('theory-u-diagram');
-                if (container) {
-                    container.innerHTML = `
-                        <div class="error-message">
-                            <p>Diagram visualization could not be loaded. Please ensure your browser supports SVG and JavaScript.</p>
-                            <button class="retry-button" onclick="createTheoryUDiagram()">
-                                Try Again
-                            </button>
-                        </div>
-                    `;
-                }
-            }
-        }
-
-        // Additional visualization functions (pathway, orchestration, contribution) would follow a similar pattern...
-        // For brevity, I'm not including all of them in this example
-
-        // Helper functions
-        
-        // Function to capitalize strings (used in error handling)
-        function capitalize(string) {
-            return string.charAt(0).toUpperCase() + string.slice(1);
-        }
-        
-        // Function to check browser support for features
-        function checkBrowserSupport() {
-            const features = {
-                svg: !!document.createElementNS && !!document.createElementNS('http://www.w3.org/2000/svg', 'svg').createSVGRect,
-                d3: typeof d3 !== 'undefined',
-                smoothScroll: 'scrollBehavior' in document.documentElement.style
-            };
-            
-            console.log('Browser support check:', features);
-            return features;
-        }
-        
-        // Call browser support check on load
-        document.addEventListener('DOMContentLoaded', checkBrowserSupport);
-        </script>
-    </body>
-</html>
-                      
+                            <li><a href="https
