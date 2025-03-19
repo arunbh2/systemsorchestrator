@@ -1351,6 +1351,10 @@
                     <div class="interactive-diagram">
                         <h3>Key Elements of Orchestration</h3>
                         <div class="diagram-container" id="orchestration-diagram">
+    <div class="loading-indicator">
+        <div class="spinner"></div>
+        <p>Loading visualization...</p>
+    </div>
     <noscript>
         <div class="error-message">
             <p>This visualization requires JavaScript to be enabled in your browser.</p>
@@ -2342,17 +2346,33 @@
             const resultsContainer = document.getElementById('results-container');
             
             if (calculateButton) {
-                calculateButton.addEventListener('click', function() {
-                    this.classList.add('calculating');
-                    
-                    // Simulate processing
-                    setTimeout(() => {
-                        calculateDiagnosticResults();
-                        this.classList.remove('calculating');
-                        this.classList.add('ready');
-                    }, 1200);
-                });
-            }
+    calculateButton.addEventListener('click', function() {
+        try {
+            // Disable the button and show calculating state
+            this.disabled = true;
+            this.classList.add('calculating');
+            
+            // Simulate processing (for visual feedback)
+            setTimeout(() => {
+                try {
+                    calculateDiagnosticResults();
+                    this.classList.remove('calculating');
+                    this.classList.add('ready');
+                } catch (error) {
+                    console.error("Error in diagnostic calculation:", error);
+                    alert("Sorry, there was a problem calculating your results. Please try again.");
+                } finally {
+                    // Always re-enable the button
+                    this.disabled = false;
+                }
+            }, 1200);
+        } catch (error) {
+            console.error("Error in calculate button handler:", error);
+            this.disabled = false;
+            this.classList.remove('calculating');
+        }
+    });
+}
             
            function calculateDiagnosticResults() {
     try {
@@ -2726,7 +2746,15 @@
         // ========== D3.js Visualizations for Diagrams ==========
 
         // Orchestration Diagram - Core Concepts Section
-       function createOrchestrationDiagram() {
+       function createOrchestrationDiagram() 
+       
+            // Remove loading indicator
+const loadingIndicator = container.querySelector('.loading-indicator');
+if (loadingIndicator) {
+    container.removeChild(loadingIndicator);
+}
+       
+       {
     try {
         const container = document.getElementById('orchestration-diagram');
         if (!container) {
