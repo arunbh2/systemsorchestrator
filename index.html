@@ -853,29 +853,70 @@
         .animate-delay-5 { animation-delay: 0.5s; }
 
         /* Loading Indicator */
-        .loading-indicator {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background-color: rgba(255, 255, 255, 0.8);
-            z-index: 5;
-        }
+       /* Improved Loading Indicator */
+.loading-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.9);
+    z-index: 10;
+    border-radius: 8px;
+}
 
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid var(--gray-300);
-            border-top: 4px solid var(--primary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 1rem;
-        }
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--gray-300);
+    border-top: 4px solid var(--primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+}
+
+.loading-indicator p {
+    color: var(--primary);
+    font-weight: 500;
+}
+
+/* Improved Error Message */
+.error-message {
+    padding: 2rem;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    border: 1px solid var(--gray-300);
+    margin: 1rem 0;
+    color: var(--gray-700);
+}
+
+.retry-button {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all var(--transition-speed-medium) var(--transition-timing);
+    font-weight: 500;
+}
+
+.retry-button:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+/* JS Fallback Display - Set by JavaScript when errors occur */
+.js-error .js-fallback {
+    display: block;
+}
 
         @keyframes spin {
             0% { transform: rotate(0deg); }
@@ -1127,6 +1168,7 @@
             overflow-x: auto;
             margin-bottom: 1rem;
         }
+        
     </style>
 </head>
 <body>
@@ -1309,8 +1351,19 @@
                     <div class="interactive-diagram">
                         <h3>Key Elements of Orchestration</h3>
                         <div class="diagram-container" id="orchestration-diagram">
-                            <!-- D3.js visualization will be inserted here -->
-                        </div>
+    <noscript>
+        <div class="error-message">
+            <p>This visualization requires JavaScript to be enabled in your browser.</p>
+        </div>
+    </noscript>
+    <div class="js-fallback" style="display: none;">
+        <div class="error-message">
+            <p>Unable to load this visualization. Please try refreshing the page.</p>
+            <button class="retry-button" onclick="location.reload()">Refresh Page</button>
+        </div>
+    </div>
+    <!-- D3.js visualization will be inserted here -->
+</div>
                     </div>
                     
                     <div class="expandable">
@@ -2137,18 +2190,37 @@
         <!-- JavaScript Implementation -->
         <script>
         // ========== Main Navigation Functionality ==========
-        document.addEventListener('DOMContentLoaded', function() {
-            // Mobile navigation toggle
-            const mobileNavToggle = document.getElementById('mobile-nav-toggle');
-            const navLinks = document.getElementById('nav-links');
-            
-            if (mobileNavToggle) {
-                mobileNavToggle.addEventListener('click', function() {
-                    navLinks.classList.toggle('active');
-                    const expanded = navLinks.classList.contains('active');
-                    mobileNavToggle.setAttribute('aria-expanded', expanded);
-                });
+       document.addEventListener('DOMContentLoaded', function() {
+    // Mobile navigation toggle
+    const mobileNavToggle = document.getElementById('mobile-nav-toggle');
+    const navLinks = document.getElementById('nav-links');
+    
+    if (mobileNavToggle && navLinks) {
+        mobileNavToggle.addEventListener('click', function(e) {
+            e.stopPropagation(); // Prevent the document click event from immediately closing the menu
+            navLinks.classList.toggle('active');
+            const expanded = navLinks.classList.contains('active');
+            mobileNavToggle.setAttribute('aria-expanded', expanded);
+            mobileNavToggle.innerHTML = expanded ? '✕' : '☰'; // Change icon when expanded
+        });
+        
+        // Close mobile nav when clicking outside
+        document.addEventListener('click', function(event) {
+            if (navLinks.classList.contains('active') && 
+                !navLinks.contains(event.target) && 
+                event.target !== mobileNavToggle) {
+                
+                navLinks.classList.remove('active');
+                mobileNavToggle.setAttribute('aria-expanded', 'false');
+                mobileNavToggle.innerHTML = '☰';
             }
+        });
+        
+        // Prevent clicks inside the menu from closing it
+        navLinks.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    }
             
             // Highlight active nav item based on scroll position
             const sections = document.querySelectorAll('section[id]');
@@ -2282,92 +2354,113 @@
                 });
             }
             
-            function calculateDiagnosticResults() {
-                // Get form values
-                const stakeholderCohesion = getSelectedValue('stakeholder-cohesion');
-                const visionUrgency = getSelectedValue('vision-urgency');
-                const institutionalSupport = getSelectedValue('institutional-support');
-                const resourceLandscape = getSelectedValue('resource-landscape');
-                const barriersRisks = getSelectedValue('barriers-risks');
-                
-                if (!stakeholderCohesion || !visionUrgency || !institutionalSupport || 
-                    !resourceLandscape || !barriersRisks) {
-                    alert('Please complete all sections of the diagnostic assessment.');
-                    return;
-                }
-                
-                // Calculate overall score
-                const scores = {
-                    'stakeholderCohesion': parseInt(stakeholderCohesion),
-                    'visionUrgency': parseInt(visionUrgency),
-                    'institutionalSupport': parseInt(institutionalSupport),
-                    'resourceLandscape': parseInt(resourceLandscape),
-                    'barriersRisks': parseInt(barriersRisks)
-                };
-                
-                const overallScore = (scores.stakeholderCohesion + scores.visionUrgency + 
-                                     scores.institutionalSupport + scores.resourceLandscape + 
-                                     scores.barriersRisks) / 5;
-                
-                // Generate result summary
-                let readinessLevel = 'Low';
-                let summaryText = '';
-                
-                if (overallScore >= 4) {
-                    readinessLevel = 'High';
-                    summaryText = 'Your system appears to have the key conditions needed for successful orchestration. There is strong stakeholder cohesion, clear urgency, supportive institutional context, sufficient resources, and manageable barriers.';
-                } else if (overallScore >= 3) {
-                    readinessLevel = 'Medium';
-                    summaryText = 'Your system has moderate readiness for orchestration. Some enabling conditions are in place, but others need strengthening before launching a full orchestration initiative.';
-                } else {
-                    readinessLevel = 'Low';
-                    summaryText = 'Your system currently faces significant challenges for orchestration. Considerable groundwork is needed to build the enabling conditions before a systems orchestration approach can succeed.';
-                }
-                
-                // Generate recommendations
-                let recommendations = '<ul>';
-                
-                if (scores.stakeholderCohesion < 3) {
-                    recommendations += '<li><strong>Build stakeholder cohesion:</strong> Focus on relationship building and trust development among key actors. Consider starting with smaller collaborative initiatives to demonstrate value.</li>';
-                }
-                
-                if (scores.visionUrgency < 3) {
-                    recommendations += '<li><strong>Develop shared vision and urgency:</strong> Conduct stakeholder workshops to align on the problem definition and create a compelling case for change. Use data and stories to highlight the need for action.</li>';
-                }
-                
-                if (scores.institutionalSupport < 3) {
-                    recommendations += '<li><strong>Strengthen institutional support:</strong> Identify and engage potential champions within influential institutions. Look for policy windows or reform opportunities to build enabling policy environment.</li>';
-                }
-                
-                if (scores.resourceLandscape < 3) {
-                    recommendations += '<li><strong>Improve resource landscape:</strong> Map existing resources and identify potential new sources. Consider a resource mobilization strategy that pools existing assets before seeking external funding.</li>';
-                }
-                
-                if (scores.barriersRisks < 3) {
-                    recommendations += '<li><strong>Address barriers and risks:</strong> Develop specific mitigation strategies for the most significant barriers. Consider power-building approaches for less influential stakeholders to balance power dynamics.</li>';
-                }
-                
-                recommendations += '</ul>';
-                
-                // Display results
-                const resultsChart = document.getElementById('results-chart');
-                const resultsSummary = document.getElementById('results-summary');
-                const recommendationsElement = document.getElementById('recommendations');
-                
-                resultsSummary.innerHTML = `
-                    <h4>Readiness Level: ${readinessLevel} (${overallScore.toFixed(1)}/5)</h4>
-                    <p>${summaryText}</p>
-                `;
-                
-                recommendationsElement.innerHTML = recommendations;
-                
-                // Create radar chart
-                createRadarChart(resultsChart, scores);
-                
-                // Show results
-                resultsContainer.style.display = 'block';
-                resultsContainer.scrollIntoView({ behavior: 'smooth' });
-            }
+           function calculateDiagnosticResults() {
+    try {
+        // Get form values
+        const stakeholderCohesion = getSelectedValue('stakeholder-cohesion');
+        const visionUrgency = getSelectedValue('vision-urgency');
+        const institutionalSupport = getSelectedValue('institutional-support');
+        const resourceLandscape = getSelectedValue('resource-landscape');
+        const barriersRisks = getSelectedValue('barriers-risks');
+        
+        // Show which fields are missing
+        const missingFields = [];
+        if (!stakeholderCohesion) missingFields.push('Stakeholder Cohesion');
+        if (!visionUrgency) missingFields.push('Vision & Urgency');
+        if (!institutionalSupport) missingFields.push('Institutional Support');
+        if (!resourceLandscape) missingFields.push('Resource Landscape');
+        if (!barriersRisks) missingFields.push('Barriers & Risks');
+        
+        if (missingFields.length > 0) {
+            alert('Please complete the following sections:\n- ' + missingFields.join('\n- '));
+            return;
+        }
+        
+        // Calculate overall score
+        const scores = {
+            'stakeholderCohesion': parseInt(stakeholderCohesion),
+            'visionUrgency': parseInt(visionUrgency),
+            'institutionalSupport': parseInt(institutionalSupport),
+            'resourceLandscape': parseInt(resourceLandscape),
+            'barriersRisks': parseInt(barriersRisks)
+        };
+        
+        const overallScore = (scores.stakeholderCohesion + scores.visionUrgency + 
+                             scores.institutionalSupport + scores.resourceLandscape + 
+                             scores.barriersRisks) / 5;
+        
+        // Generate result summary
+        let readinessLevel = 'Low';
+        let summaryText = '';
+        
+        if (overallScore >= 4) {
+            readinessLevel = 'High';
+            summaryText = 'Your system appears to have the key conditions needed for successful orchestration. There is strong stakeholder cohesion, clear urgency, supportive institutional context, sufficient resources, and manageable barriers.';
+        } else if (overallScore >= 3) {
+            readinessLevel = 'Medium';
+            summaryText = 'Your system has moderate readiness for orchestration. Some enabling conditions are in place, but others need strengthening before launching a full orchestration initiative.';
+        } else {
+            readinessLevel = 'Low';
+            summaryText = 'Your system currently faces significant challenges for orchestration. Considerable groundwork is needed to build the enabling conditions before a systems orchestration approach can succeed.';
+        }
+        
+        // Generate recommendations
+        let recommendations = '<ul>';
+        
+        if (scores.stakeholderCohesion < 3) {
+            recommendations += '<li><strong>Build stakeholder cohesion:</strong> Focus on relationship building and trust development among key actors. Consider starting with smaller collaborative initiatives to demonstrate value.</li>';
+        }
+        
+        if (scores.visionUrgency < 3) {
+            recommendations += '<li><strong>Develop shared vision and urgency:</strong> Conduct stakeholder workshops to align on the problem definition and create a compelling case for change. Use data and stories to highlight the need for action.</li>';
+        }
+        
+        if (scores.institutionalSupport < 3) {
+            recommendations += '<li><strong>Strengthen institutional support:</strong> Identify and engage potential champions within influential institutions. Look for policy windows or reform opportunities to build enabling policy environment.</li>';
+        }
+        
+        if (scores.resourceLandscape < 3) {
+            recommendations += '<li><strong>Improve resource landscape:</strong> Map existing resources and identify potential new sources. Consider a resource mobilization strategy that pools existing assets before seeking external funding.</li>';
+        }
+        
+        if (scores.barriersRisks < 3) {
+            recommendations += '<li><strong>Address barriers and risks:</strong> Develop specific mitigation strategies for the most significant barriers. Consider power-building approaches for less influential stakeholders to balance power dynamics.</li>';
+        }
+        
+        recommendations += '</ul>';
+        
+        // Display results
+        const resultsChart = document.getElementById('results-chart');
+        const resultsSummary = document.getElementById('results-summary');
+        const recommendationsElement = document.getElementById('recommendations');
+        
+        if (!resultsChart || !resultsSummary || !recommendationsElement) {
+            console.error("Results container elements not found");
+            alert("Sorry, there was a problem displaying your results.");
+            return;
+        }
+        
+        resultsSummary.innerHTML = `
+            <h4>Readiness Level: ${readinessLevel} (${overallScore.toFixed(1)}/5)</h4>
+            <p>${summaryText}</p>
+        `;
+        
+        recommendationsElement.innerHTML = recommendations;
+        
+        // Create radar chart
+        createRadarChart(resultsChart, scores);
+        
+        // Show results
+        const resultsContainer = document.getElementById('results-container');
+        if (resultsContainer) {
+            resultsContainer.style.display = 'block';
+            resultsContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+    } catch (error) {
+        console.error("Error calculating diagnostic results:", error);
+        alert("Sorry, there was a problem calculating your results. Please try again.");
+    }
+}
             
             function getSelectedValue(name) {
                 const radios = document.getElementsByName(name);
@@ -2513,327 +2606,377 @@
 
         // ========== Network Visualization Background ==========
         function createNetworkVisualization() {
-            const container = document.getElementById('network-container');
-            if (!container) return;
-            
-            const width = container.clientWidth;
-            const height = container.clientHeight;
-            
-            // Create SVG
-            const svg = d3.select(container)
-                .append('svg')
-                .attr('width', width)
-                .attr('height', height);
-            
-            // Generate random nodes
-            const nodeCount = 30;
-            const nodes = Array.from({ length: nodeCount }, (_, i) => ({
-                id: i,
-                radius: Math.random() * 3 + 2,
-                x: Math.random() * width,
-                y: Math.random() * height
-            }));
-            
-            // Generate random links
-            const links = [];
-            nodes.forEach(source => {
-                const linkCount = Math.floor(Math.random() * 3) + 1;
-                for (let i = 0; i < linkCount; i++) {
-                    const target = nodes[Math.floor(Math.random() * nodeCount)];
-                    if (source.id !== target.id) {
-                        links.push({ source: source.id, target: target.id });
-                    }
-                }
-            });
-            
-            // Create the elements
-            const link = svg.selectAll('.network-link')
-                .data(links)
-                .enter().append('line')
-                .attr('class', 'network-link')
-                .attr('stroke', 'rgba(42, 57, 144, 0.2)')
-                .attr('stroke-width', 1);
-            
-            const node = svg.selectAll('.network-node')
-                .data(nodes)
-                .enter().append('circle')
-                .attr('class', 'network-node')
-                .attr('r', d => d.radius)
-                .attr('fill', 'rgba(86, 67, 204, 0.5)');
-            
-            // Set up the simulation
-            const simulation = d3.forceSimulation(nodes)
-                .force('link', d3.forceLink(links).id(d => d.id).distance(50))
-                .force('charge', d3.forceManyBody().strength(-10))
-                .force('center', d3.forceCenter(width / 2, height / 2))
-                .force('collision', d3.forceCollide().radius(d => d.radius + 2));
-            
-            // Update positions on each tick
-            simulation.on('tick', () => {
-                link
-                    .attr('x1', d => d.source.x)
-                    .attr('y1', d => d.source.y)
-                    .attr('x2', d => d.target.x)
-                    .attr('y2', d => d.target.y);
-                
-                node
-                    .attr('cx', d => d.x)
-                    .attr('cy', d => d.y);
-            });
-            
-            // Toggle network visibility
-            const vizToggle = document.getElementById('viz-toggle');
-            if (vizToggle) {
-                vizToggle.addEventListener('click', function() {
-                    container.classList.toggle('active');
-                    this.setAttribute('aria-pressed', container.classList.contains('active'));
-                });
-            }
+    try {
+        const container = document.getElementById('network-container');
+        if (!container) {
+            console.error("Network container not found");
+            return;
         }
+        
+        // Add loading indicator
+        const loadingIndicator = document.createElement('div');
+        loadingIndicator.className = 'loading-indicator';
+        loadingIndicator.innerHTML = '<div class="spinner"></div><p>Loading network visualization...</p>';
+        container.appendChild(loadingIndicator);
+        
+        const width = container.clientWidth;
+        const height = container.clientHeight;
+        
+        // Create SVG
+        const svg = d3.select(container)
+            .append('svg')
+            .attr('width', width)
+            .attr('height', height);
+        
+        // Generate random nodes
+        const nodeCount = 30;
+        const nodes = Array.from({ length: nodeCount }, (_, i) => ({
+            id: i,
+            radius: Math.random() * 3 + 2,
+            x: Math.random() * width,
+            y: Math.random() * height
+        }));
+        
+        // Generate random links
+        const links = [];
+        nodes.forEach(source => {
+            const linkCount = Math.floor(Math.random() * 3) + 1;
+            for (let i = 0; i < linkCount; i++) {
+                const target = nodes[Math.floor(Math.random() * nodeCount)];
+                if (source.id !== target.id) {
+                    links.push({ source: source.id, target: target.id });
+                }
+            }
+        });
+        
+        // Create the elements
+        const link = svg.selectAll('.network-link')
+            .data(links)
+            .enter().append('line')
+            .attr('class', 'network-link')
+            .attr('stroke', 'rgba(42, 57, 144, 0.2)')
+            .attr('stroke-width', 1);
+        
+        const node = svg.selectAll('.network-node')
+            .data(nodes)
+            .enter().append('circle')
+            .attr('class', 'network-node')
+            .attr('r', d => d.radius)
+            .attr('fill', 'rgba(86, 67, 204, 0.5)');
+        
+        // Set up the simulation
+        const simulation = d3.forceSimulation(nodes)
+            .force('link', d3.forceLink(links).id(d => d.id).distance(50))
+            .force('charge', d3.forceManyBody().strength(-10))
+            .force('center', d3.forceCenter(width / 2, height / 2))
+            .force('collision', d3.forceCollide().radius(d => d.radius + 2));
+        
+        // Update positions on each tick
+        simulation.on('tick', () => {
+            link
+                .attr('x1', d => d.source.x)
+                .attr('y1', d => d.source.y)
+                .attr('x2', d => d.target.x)
+                .attr('y2', d => d.target.y);
+            
+            node
+                .attr('cx', d => d.x)
+                .attr('cy', d => d.y);
+        });
+        
+        // Remove loading indicator when visualization is ready
+        simulation.on('end', () => {
+            container.removeChild(loadingIndicator);
+        });
+        
+        // Or remove it after a timeout to ensure it doesn't stay forever if simulation never ends
+        setTimeout(() => {
+            if (container.contains(loadingIndicator)) {
+                container.removeChild(loadingIndicator);
+            }
+        }, 3000);
+        
+        // Toggle network visibility
+        const vizToggle = document.getElementById('viz-toggle');
+        if (vizToggle) {
+            vizToggle.addEventListener('click', function() {
+                container.classList.toggle('active');
+                this.setAttribute('aria-pressed', container.classList.contains('active'));
+            });
+        }
+    } catch (error) {
+        console.error("Error creating network visualization:", error);
+        const container = document.getElementById('network-container');
+        if (container) {
+            // Remove loading indicator if it exists
+            const loadingIndicator = container.querySelector('.loading-indicator');
+            if (loadingIndicator) {
+                container.removeChild(loadingIndicator);
+            }
+            
+            // Add error message
+            const errorMessage = document.createElement('div');
+            errorMessage.className = 'error-message';
+            errorMessage.innerHTML = 'Unable to load network visualization. Please try refreshing the page.';
+            container.appendChild(errorMessage);
+        }
+    }
+}
 
         // ========== D3.js Visualizations for Diagrams ==========
 
         // Orchestration Diagram - Core Concepts Section
-        function createOrchestrationDiagram() {
-            const container = document.getElementById('orchestration-diagram');
-            if (!container) return;
-            
-            const width = container.clientWidth;
-            const height = container.clientHeight;
-            
-            // Create SVG
-            const svg = d3.select(container)
-                .append('svg')
-                .attr('width', width)
-                .attr('height', height);
-            
-            // Create the tooltip
-            const tooltip = d3.select(container)
-                .append('div')
-                .attr('class', 'diagram-tooltip');
-            
-            // Define data
-            const centralNode = { 
-                id: 'orchestrator', 
-                label: 'Systems\nOrchestrator', 
-                description: 'Coordinates and enables change across the system without controlling it directly.',
-                x: width / 2, 
-                y: height / 2,
-                radius: 50,
-                color: 'url(#centralGradient)'
-            };
-            
-            const stakeholders = [
-                { 
-                    id: 'government', 
-                    label: 'Government', 
-                    description: 'Policy makers and regulatory bodies that set the rules and incentives.',
-                    x: width * 0.2, 
-                    y: height * 0.3,
-                    radius: 35,
-                    color: '#5643cc'
-                },
-                { 
-                    id: 'private', 
-                    label: 'Private Sector', 
-                    description: 'Businesses that provide products, services, and market solutions.',
-                    x: width * 0.8, 
-                    y: height * 0.3,
-                    radius: 35,
-                    color: '#5643cc'
-                },
-                { 
-                    id: 'community', 
-                    label: 'Community', 
-                    description: 'Local groups, beneficiaries, and those most affected by the issue.',
-                    x: width * 0.2, 
-                    y: height * 0.7,
-                    radius: 35,
-                    color: '#5643cc'
-                },
-                { 
-                    id: 'civil', 
-                    label: 'Civil Society', 
-                    description: 'NGOs, academic institutions, and other non-profit organizations.',
-                    x: width * 0.8, 
-                    y: height * 0.7,
-                    radius: 35,
-                    color: '#5643cc'
-                }
-            ];
-            
-            const functions = [
-                {
-                    id: 'convening',
-                    label: 'Convening',
-                    description: 'Bringing diverse stakeholders together for dialogue and collaboration.',
-                    x: width * 0.5,
-                    y: height * 0.15
-                },
-                {
-                    id: 'knowledge',
-                    label: 'Knowledge Sharing',
-                    description: 'Facilitating the exchange of data, evidence, and learning across stakeholders.',
-                    x: width * 0.9,
-                    y: height * 0.5
-                },
-                {
-                    id: 'alignment',
-                    label: 'Strategic Alignment',
-                    description: 'Helping stakeholders develop shared vision, goals, and coordinated action.',
-                    x: width * 0.5,
-                    y: height * 0.85
-                },
-                {
-                    id: 'innovation',
-                    label: 'Catalyzing Innovation',
-                    description: 'Supporting experimentation and new solution development across the system.',
-                    x: width * 0.1,
-                    y: height * 0.5
-                }
-            ];
-            
-            // Create gradients
-            const defs = svg.append('defs');
-            
-            const centralGradient = defs.append('radialGradient')
-                .attr('id', 'centralGradient')
-                .attr('cx', '50%')
-                .attr('cy', '50%')
-                .attr('r', '50%');
-            
-            centralGradient.append('stop')
-                .attr('offset', '0%')
-                .attr('stop-color', '#ff7e5f');
-                
-            centralGradient.append('stop')
-                .attr('offset', '100%')
-                .attr('stop-color', '#feb47b');
-            
-            // Draw connections between orchestrator and stakeholders
-            stakeholders.forEach(stakeholder => {
-                svg.append('line')
-                    .attr('class', 'connection')
-                    .attr('x1', centralNode.x)
-                    .attr('y1', centralNode.y)
-                    .attr('x2', stakeholder.x)
-                    .attr('y2', stakeholder.y)
-                    .attr('stroke', 'rgba(42, 57, 144, 0.3)')
-                    .attr('stroke-width', 2);
-            });
-            
-            // Draw stakeholders
-            const stakeholderGroups = svg.selectAll('.stakeholder')
-                .data(stakeholders)
-                .enter()
-                .append('g')
-                .attr('class', 'stakeholder');
-            
-            stakeholderGroups.append('circle')
-                .attr('cx', d => d.x)
-                .attr('cy', d => d.y)
-                .attr('r', d => d.radius)
-                .attr('fill', d => d.color)
-                .attr('opacity', 0.8)
-                .on('mouseover', function(event, d) {
-                    d3.select(this)
-                        .attr('r', d.radius + 5)
-                        .attr('opacity', 1);
-                        
-                    tooltip
-                        .style('opacity', 1)
-                        .html(`<strong>${d.label}</strong><br>${d.description}`)
-                        .style('left', `${event.pageX - container.getBoundingClientRect().left + 10}px`)
-                        .style('top', `${event.pageY - container.getBoundingClientRect().top + 10}px`);
-                })
-                .on('mouseout', function(event, d) {
-                    d3.select(this)
-                        .attr('r', d.radius)
-                        .attr('opacity', 0.8);
-                        
-                    tooltip.style('opacity', 0);
-                });
-            
-            stakeholderGroups.append('text')
-                .attr('x', d => d.x)
-                .attr('y', d => d.y)
-                .attr('text-anchor', 'middle')
-                .attr('dominant-baseline', 'middle')
-                .attr('font-size', '12px')
-                .attr('font-weight', '500')
-                .attr('fill', 'white')
-                .text(d => d.label);
-            
-            // Draw central orchestrator node
-            svg.append('circle')
-                .attr('cx', centralNode.x)
-                .attr('cy', centralNode.y)
-                .attr('r', centralNode.radius)
-                .attr('fill', centralNode.color)
-                .attr('opacity', 0.9)
-                .on('mouseover', function(event) {
-                    d3.select(this)
-                        .attr('r', centralNode.radius + 5)
-                        .attr('opacity', 1);
-                        
-                    tooltip
-                        .style('opacity', 1)
-                        .html(`<strong>${centralNode.label}</strong><br>${centralNode.description}`)
-                        .style('left', `${event.pageX - container.getBoundingClientRect().left + 10}px`)
-                        .style('top', `${event.pageY - container.getBoundingClientRect().top + 10}px`);
-                })
-                .on('mouseout', function() {
-                    d3.select(this)
-                        .attr('r', centralNode.radius)
-                        .attr('opacity', 0.9);
-                        
-                    tooltip.style('opacity', 0);
-                });
-            
-            const centralLabel = centralNode.label.split('\n');
-            svg.append('text')
-                .attr('x', centralNode.x)
-                .attr('y', centralNode.y - 10)
-                .attr('text-anchor', 'middle')
-                .attr('font-size', '14px')
-                .attr('font-weight', '700')
-                .attr('fill', 'white')
-                .text(centralLabel[1]);
-            
-            // Draw function labels
-            svg.selectAll('.function-text')
-                .data(functions)
-                .enter()
-                .append('text')
-                .attr('class', 'function-text')
-                .attr('x', d => d.x)
-                .attr('y', d => d.y)
-                .attr('text-anchor', 'middle')
-                .attr('font-size', '14px')
-                .attr('font-weight', '500')
-                .attr('fill', 'var(--primary)')
-                .text(d => d.label)
-                .on('mouseover', function(event, d) {
-                    d3.select(this)
-                        .attr('font-size', '16px')
-                        .attr('font-weight', '700')
-                        .attr('fill', 'var(--accent)');
-                        
-                    tooltip
-                        .style('opacity', 1)
-                        .html(`<strong>${d.label}</strong><br>${d.description}`)
-                        .style('left', `${event.pageX - container.getBoundingClientRect().left + 10}px`)
-                        .style('top', `${event.pageY - container.getBoundingClientRect().top + 10}px`);
-                })
-                .on('mouseout', function() {
-                    d3.select(this)
-                        .attr('font-size', '14px')
-                        .attr('font-weight', '500')
-                        .attr('fill', 'var(--primary)');
-                        
-                    tooltip.style('opacity', 0);
-                });
+       function createOrchestrationDiagram() {
+    try {
+        const container = document.getElementById('orchestration-diagram');
+        if (!container) {
+            console.error("Container not found: orchestration-diagram");
+            return;
         }
+        
+        const width = container.clientWidth;
+        const height = container.clientHeight;
+        
+        // Create SVG
+        const svg = d3.select(container)
+            .append('svg')
+            .attr('width', width)
+            .attr('height', height);
+        
+        // Create the tooltip
+        const tooltip = d3.select(container)
+            .append('div')
+            .attr('class', 'diagram-tooltip');
+        
+        // Define data
+        const centralNode = { 
+            id: 'orchestrator', 
+            label: 'Systems\nOrchestrator', 
+            description: 'Coordinates and enables change across the system without controlling it directly.',
+            x: width / 2, 
+            y: height / 2,
+            radius: 50,
+            color: 'url(#centralGradient)'
+        };
+        
+        const stakeholders = [
+            { 
+                id: 'government', 
+                label: 'Government', 
+                description: 'Policy makers and regulatory bodies that set the rules and incentives.',
+                x: width * 0.2, 
+                y: height * 0.3,
+                radius: 35,
+                color: '#5643cc'
+            },
+            { 
+                id: 'private', 
+                label: 'Private Sector', 
+                description: 'Businesses that provide products, services, and market solutions.',
+                x: width * 0.8, 
+                y: height * 0.3,
+                radius: 35,
+                color: '#5643cc'
+            },
+            { 
+                id: 'community', 
+                label: 'Community', 
+                description: 'Local groups, beneficiaries, and those most affected by the issue.',
+                x: width * 0.2, 
+                y: height * 0.7,
+                radius: 35,
+                color: '#5643cc'
+            },
+            { 
+                id: 'civil', 
+                label: 'Civil Society', 
+                description: 'NGOs, academic institutions, and other non-profit organizations.',
+                x: width * 0.8, 
+                y: height * 0.7,
+                radius: 35,
+                color: '#5643cc'
+            }
+        ];
+        
+        const functions = [
+            {
+                id: 'convening',
+                label: 'Convening',
+                description: 'Bringing diverse stakeholders together for dialogue and collaboration.',
+                x: width * 0.5,
+                y: height * 0.15
+            },
+            {
+                id: 'knowledge',
+                label: 'Knowledge Sharing',
+                description: 'Facilitating the exchange of data, evidence, and learning across stakeholders.',
+                x: width * 0.9,
+                y: height * 0.5
+            },
+            {
+                id: 'alignment',
+                label: 'Strategic Alignment',
+                description: 'Helping stakeholders develop shared vision, goals, and coordinated action.',
+                x: width * 0.5,
+                y: height * 0.85
+            },
+            {
+                id: 'innovation',
+                label: 'Catalyzing Innovation',
+                description: 'Supporting experimentation and new solution development across the system.',
+                x: width * 0.1,
+                y: height * 0.5
+            }
+        ];
+        
+        // Create gradients
+        const defs = svg.append('defs');
+        
+        const centralGradient = defs.append('radialGradient')
+            .attr('id', 'centralGradient')
+            .attr('cx', '50%')
+            .attr('cy', '50%')
+            .attr('r', '50%');
+        
+        centralGradient.append('stop')
+            .attr('offset', '0%')
+            .attr('stop-color', '#ff7e5f');
+            
+        centralGradient.append('stop')
+            .attr('offset', '100%')
+            .attr('stop-color', '#feb47b');
+        
+        // Draw connections between orchestrator and stakeholders
+        stakeholders.forEach(stakeholder => {
+            svg.append('line')
+                .attr('class', 'connection')
+                .attr('x1', centralNode.x)
+                .attr('y1', centralNode.y)
+                .attr('x2', stakeholder.x)
+                .attr('y2', stakeholder.y)
+                .attr('stroke', 'rgba(42, 57, 144, 0.3)')
+                .attr('stroke-width', 2);
+        });
+        
+        // Draw stakeholders
+        const stakeholderGroups = svg.selectAll('.stakeholder')
+            .data(stakeholders)
+            .enter()
+            .append('g')
+            .attr('class', 'stakeholder');
+        
+        stakeholderGroups.append('circle')
+            .attr('cx', d => d.x)
+            .attr('cy', d => d.y)
+            .attr('r', d => d.radius)
+            .attr('fill', d => d.color)
+            .attr('opacity', 0.8)
+            .on('mouseover', function(event, d) {
+                d3.select(this)
+                    .attr('r', d.radius + 5)
+                    .attr('opacity', 1);
+                    
+                tooltip
+                    .style('opacity', 1)
+                    .html(`<strong>${d.label}</strong><br>${d.description}`)
+                    .style('left', `${event.pageX - container.getBoundingClientRect().left + 10}px`)
+                    .style('top', `${event.pageY - container.getBoundingClientRect().top + 10}px`);
+            })
+            .on('mouseout', function(event, d) {
+                d3.select(this)
+                    .attr('r', d.radius)
+                    .attr('opacity', 0.8);
+                    
+                tooltip.style('opacity', 0);
+            });
+        
+        stakeholderGroups.append('text')
+            .attr('x', d => d.x)
+            .attr('y', d => d.y)
+            .attr('text-anchor', 'middle')
+            .attr('dominant-baseline', 'middle')
+            .attr('font-size', '12px')
+            .attr('font-weight', '500')
+            .attr('fill', 'white')
+            .text(d => d.label);
+        
+        // Draw central orchestrator node
+        svg.append('circle')
+            .attr('cx', centralNode.x)
+            .attr('cy', centralNode.y)
+            .attr('r', centralNode.radius)
+            .attr('fill', centralNode.color)
+            .attr('opacity', 0.9)
+            .on('mouseover', function(event) {
+                d3.select(this)
+                    .attr('r', centralNode.radius + 5)
+                    .attr('opacity', 1);
+                    
+                tooltip
+                    .style('opacity', 1)
+                    .html(`<strong>${centralNode.label}</strong><br>${centralNode.description}`)
+                    .style('left', `${event.pageX - container.getBoundingClientRect().left + 10}px`)
+                    .style('top', `${event.pageY - container.getBoundingClientRect().top + 10}px`);
+            })
+            .on('mouseout', function() {
+                d3.select(this)
+                    .attr('r', centralNode.radius)
+                    .attr('opacity', 0.9);
+                    
+                tooltip.style('opacity', 0);
+            });
+        
+        const centralLabel = centralNode.label.split('\n');
+        svg.append('text')
+            .attr('x', centralNode.x)
+            .attr('y', centralNode.y - 10)
+            .attr('text-anchor', 'middle')
+            .attr('font-size', '14px')
+            .attr('font-weight', '700')
+            .attr('fill', 'white')
+            .text(centralLabel[1]);
+        
+        // Draw function labels
+        svg.selectAll('.function-text')
+            .data(functions)
+            .enter()
+            .append('text')
+            .attr('class', 'function-text')
+            .attr('x', d => d.x)
+            .attr('y', d => d.y)
+            .attr('text-anchor', 'middle')
+            .attr('font-size', '14px')
+            .attr('font-weight', '500')
+            .attr('fill', 'var(--primary)')
+            .text(d => d.label)
+            .on('mouseover', function(event, d) {
+                d3.select(this)
+                    .attr('font-size', '16px')
+                    .attr('font-weight', '700')
+                    .attr('fill', 'var(--accent)');
+                    
+                tooltip
+                    .style('opacity', 1)
+                    .html(`<strong>${d.label}</strong><br>${d.description}`)
+                    .style('left', `${event.pageX - container.getBoundingClientRect().left + 10}px`)
+                    .style('top', `${event.pageY - container.getBoundingClientRect().top + 10}px`);
+            })
+            .on('mouseout', function() {
+                d3.select(this)
+                    .attr('font-size', '14px')
+                    .attr('font-weight', '500')
+                    .attr('fill', 'var(--primary)');
+                    
+                tooltip.style('opacity', 0);
+            });
+    } catch (error) {
+        console.error("Error creating orchestration diagram:", error);
+        const container = document.getElementById('orchestration-diagram');
+        if (container) {
+            container.innerHTML = '<div class="error-message">Unable to load this visualization. Please try refreshing the page.</div>';
+        }
+    }
+}
 
         // MSD Framework Diagram
         function createMSDDiagram() {
@@ -4084,8 +4227,19 @@ function createContributionDiagram() {
     
     // Helper function to calculate the line length for stroke-dasharray animation
     function getTotalLength() {
-        return this.getTotalLength();
+    try {
+        // Check if the method exists on this element
+        if (typeof this.getTotalLength === 'function') {
+            return this.getTotalLength();
+        } else {
+            console.warn("getTotalLength is not a function on this element");
+            return 100; // Fallback default value
+        }
+    } catch (error) {
+        console.error("Error in getTotalLength:", error);
+        return 100; // Fallback default value
     }
+}
     
     // Add title and explanation
     svg.append('text')
@@ -4390,6 +4544,24 @@ createPathwayDiagram();
 createContributionDiagram();
             
         });
+
+// Global error handler to help with debugging
+window.addEventListener('error', function(event) {
+    console.error('Global error caught:', event.error);
+    
+    // Mark all visualization containers that might be affected
+    const containers = document.querySelectorAll('.diagram-container');
+    containers.forEach(container => {
+        if (!container.querySelector('.error-message')) {
+            container.classList.add('js-error');
+        }
+    });
+    
+    // Don't prevent default error handling
+    return false;
+});
+
+            
         </script>
     </body>
 </html>               
