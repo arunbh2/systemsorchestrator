@@ -3101,378 +3101,744 @@
                 .text('Orchestrator: Facilitate Market System Change, Don\'t Replace Market Functions');
         }
 
-        // Collective Impact Diagram
-        function createCollectiveImpactDiagram() {
-            const container = document.getElementById('collective-impact-diagram');
-            if (!container) return;
-            
-            const width = container.clientWidth;
-            const height = container.clientHeight;
-            
-            // Create SVG
-            const svg = d3.select(container)
-                .append('svg')
-                .attr('width', width)
-                .attr('height', height);
-            
-            // Add tooltip
-            const tooltip = d3.select(container)
-                .append('div')
-                .attr('class', 'diagram-tooltip');
-            
-            // Data
-            const conditions = [
-                {
-                    name: 'Common Agenda',
-                    description: 'All participants share a vision for change that includes a common understanding of the problem and joint approach to solving it.',
-                    x: width * 0.5,
-                    y: height * 0.15,
-                    color: '#5643cc'
-                },
-                {
-                    name: 'Shared Measurement',
-                    description: 'All participants agree on how to measure and report success, with a short list of common indicators identified and used for learning and improvement.',
-                    x: width * 0.8,
-                    y: height * 0.35,
-                    color: '#5643cc'
-                },
-                {
-                    name: 'Mutually Reinforcing Activities',
-                    description: 'Each participant undertakes specific activities in which it excels in a way that supports and coordinates with the actions of others.',
-                    x: width * 0.8,
-                    y: height * 0.65,
-                    color: '#5643cc'
-                },
-                {
-                    name: 'Continuous Communication',
-                    description: 'All participants engage in frequent, structured communication to build trust, assure mutual objectives, and create common motivation.',
-                    x: width * 0.5,
-                    y: height * 0.85,
-                    color: '#5643cc'
-                },
-                {
-                    name: 'Backbone Support',
-                    description: 'A dedicated staff with specific skills serves the entire initiative and coordinates participating organizations and agencies.',
-                    x: width * 0.2,
-                    y: height * 0.65,
-                    color: '#5643cc'
-                }
-            ];
-            
-            const centerX = width * 0.5;
-            const centerY = height * 0.5;
-            const centerRadius = 70;
-            
-            // Draw the connectors
-            conditions.forEach(condition => {
-                svg.append('line')
-                    .attr('x1', centerX)
-                    .attr('y1', centerY)
-                    .attr('x2', condition.x)
-                    .attr('y2', condition.y)
-                    .attr('stroke', 'rgba(86, 67, 204, 0.3)')
-                    .attr('stroke-width', 2);
-            });
-            
-            // Draw the condition nodes
-            conditions.forEach(condition => {
-                const nodeGroup = svg.append('g')
-                    .attr('transform', `translate(${condition.x}, ${condition.y})`)
-                    .on('mouseover', function(event) {
-                        d3.select(this).select('circle')
-                            .attr('r', 40)
-                            .attr('stroke-width', 3);
-                            
-                        tooltip
-                            .style('opacity', 1)
-                            .html(`<strong>${condition.name}</strong><br>${condition.description}`)
-                            .style('left', `${event.pageX - container.getBoundingClientRect().left + 10}px`)
-                            .style('top', `${event.pageY - container.getBoundingClientRect().top + 10}px`);
-                    })
-                    .on('mouseout', function() {
-                        d3.select(this).select('circle')
-                            .attr('r', 35)
-                            .attr('stroke-width', 2);
-                            
-                        tooltip.style('opacity', 0);
-                    });
-                
-                nodeGroup.append('circle')
-                    .attr('r', 35)
-                    .attr('fill', 'white')
-                    .attr('stroke', condition.color)
-                    .attr('stroke-width', 2);
-                
-                // Break long names into multiple lines
-                const words = condition.name.split(' ');
-                let lines = [];
-                let currentLine = '';
-                
-                words.forEach(word => {
-                    if (currentLine.length + word.length > 15) {
-                        lines.push(currentLine);
-                        currentLine = word;
-                    } else {
-                        currentLine += (currentLine === '' ? '' : ' ') + word;
-                    }
-                });
-                
-                if (currentLine !== '') {
-                    lines.push(currentLine);
-                }
-                
-                lines.forEach((line, i) => {
-                    const yOffset = (i - (lines.length - 1) / 2) * 15;
-                    
-                    nodeGroup.append('text')
-                        .attr('y', yOffset)
-                        .attr('text-anchor', 'middle')
-                        .attr('font-size', '10px')
-                        .attr('font-weight', '500')
-                        .text(line);
-                });
-            });
-            
-            // Draw the center circle for collective impact
-            const centerGroup = svg.append('g')
-                .attr('transform', `translate(${centerX}, ${centerY})`)
-                .on('mouseover', function(event) {
-                    d3.select(this).select('circle')
-                        .attr('r', centerRadius + 5);
-                        
-                    tooltip
-                        .style('opacity', 1)
-                        .html('<strong>Collective Impact</strong><br>A framework for tackling deeply entrenched and complex social problems through a structured, collaborative approach.')
-                        .style('left', `${event.pageX - container.getBoundingClientRect().left + 10}px`)
-                        .style('top', `${event.pageY - container.getBoundingClientRect().top + 10}px`);
-                })
-                .on('mouseout', function() {
-                    d3.select(this).select('circle')
-                        .attr('r', centerRadius);
-                        
-                    tooltip.style('opacity', 0);
-                });
-            
-            // Create gradient for center circle
-            const defs = svg.append('defs');
-            
-            const collectiveGradient = defs.append('radialGradient')
-                .attr('id', 'collectiveGradient')
-                .attr('cx', '50%')
-                .attr('cy', '50%')
-                .attr('r', '50%');
-            
-            collectiveGradient.append('stop')
-                .attr('offset', '0%')
-                .attr('stop-color', '#ff7e5f');
-                
-            collectiveGradient.append('stop')
-                .attr('offset', '100%')
-                .attr('stop-color', '#feb47b');
-            
-            centerGroup.append('circle')
-                .attr('r', centerRadius)
-                .attr('fill', 'url(#collectiveGradient)');
-            
-            centerGroup.append('text')
-                .attr('y', -10)
-                .attr('text-anchor', 'middle')
-                .attr('font-size', '14px')
-                .attr('font-weight', '700')
-                .attr('fill', 'white')
-                .text('Collective');
-                
-            centerGroup.append('text')
-                .attr('y', 15)
-                .attr('text-anchor', 'middle')
-                .attr('font-size', '14px')
-                .attr('font-weight', '700')
-                .attr('fill', 'white')
-                .text('Impact');
+        // Collective Impact Model Visualization
+function createCollectiveImpactDiagram() {
+    const container = document.getElementById('collective-impact-diagram');
+    if (!container) return;
+    
+    const width = container.clientWidth;
+    const height = container.clientHeight;
+    
+    // Create SVG
+    const svg = d3.select(container)
+        .append('svg')
+        .attr('width', width)
+        .attr('height', height);
+    
+    // Add tooltip
+    const tooltip = d3.select(container)
+        .append('div')
+        .attr('class', 'diagram-tooltip');
+    
+    // Define center point and radius
+    const centerX = width / 2;
+    const centerY = height / 2;
+    const innerRadius = 80;
+    const outerRadius = Math.min(width, height) / 2 - 40;
+    
+    // Create defs for gradients and other reusable elements
+    const defs = svg.append('defs');
+    
+    // Create central gradient
+    const centralGradient = defs.append('radialGradient')
+        .attr('id', 'central-gradient')
+        .attr('cx', '50%')
+        .attr('cy', '50%')
+        .attr('r', '50%');
+        
+    centralGradient.append('stop')
+        .attr('offset', '0%')
+        .attr('stop-color', '#ff7e5f');
+        
+    centralGradient.append('stop')
+        .attr('offset', '100%')
+        .attr('stop-color', '#feb47b');
+    
+    // Create condition gradients
+    const conditionGradient = defs.append('linearGradient')
+        .attr('id', 'condition-gradient')
+        .attr('x1', '0%')
+        .attr('y1', '0%')
+        .attr('x2', '100%')
+        .attr('y2', '100%');
+        
+    conditionGradient.append('stop')
+        .attr('offset', '0%')
+        .attr('stop-color', '#5643cc');
+        
+    conditionGradient.append('stop')
+        .attr('offset', '100%')
+        .attr('stop-color', '#2a3990');
+    
+    // Define the five conditions of collective impact
+    const conditions = [
+        {
+            name: 'Common Agenda',
+            description: 'All participants share a vision for change that includes a common understanding of the problem and joint approach to solving it.',
+            icon: '🎯',
+            angle: 0
+        },
+        {
+            name: 'Shared Measurement',
+            description: 'All participants agree on how to measure and report success, with a short list of common indicators identified and used for learning and improvement.',
+            icon: '📊',
+            angle: 72
+        },
+        {
+            name: 'Mutually Reinforcing Activities',
+            description: 'Each participant undertakes specific activities in which it excels in a way that supports and coordinates with the actions of others.',
+            icon: '⚙️',
+            angle: 144
+        },
+        {
+            name: 'Continuous Communication',
+            description: 'All participants engage in frequent, structured communication to build trust, assure mutual objectives, and create common motivation.',
+            icon: '💬',
+            angle: 216
+        },
+        {
+            name: 'Backbone Support',
+            description: 'A dedicated staff with specific skills serves the entire initiative and coordinates participating organizations and agencies.',
+            icon: '🏗️',
+            angle: 288
         }
-
-        // Theory U Diagram
-        function createTheoryUDiagram() {
-            const container = document.getElementById('theory-u-diagram');
-            if (!container) return;
+    ];
+    
+    // Calculate positions for the condition nodes
+    conditions.forEach(condition => {
+        const radians = (condition.angle - 90) * (Math.PI / 180);
+        condition.x = centerX + Math.cos(radians) * outerRadius;
+        condition.y = centerY + Math.sin(radians) * outerRadius;
+    });
+    
+    // Draw connecting lines
+    const lineGroup = svg.append('g')
+        .attr('class', 'connections');
+    
+    conditions.forEach((condition, i) => {
+        // Connect to center
+        lineGroup.append('line')
+            .attr('x1', centerX)
+            .attr('y1', centerY)
+            .attr('x2', condition.x)
+            .attr('y2', condition.y)
+            .attr('stroke', 'rgba(86, 67, 204, 0.4)')
+            .attr('stroke-width', 2)
+            .attr('stroke-dasharray', '4 2');
+        
+        // Connect to adjacent conditions
+        const nextCondition = conditions[(i + 1) % conditions.length];
+        lineGroup.append('line')
+            .attr('x1', condition.x)
+            .attr('y1', condition.y)
+            .attr('x2', nextCondition.x)
+            .attr('y2', nextCondition.y)
+            .attr('stroke', 'rgba(86, 67, 204, 0.3)')
+            .attr('stroke-width', 1.5);
+    });
+    
+    // Draw central node
+    const centerGroup = svg.append('g')
+        .attr('class', 'center-node')
+        .on('mouseover', function(event) {
+            d3.select(this).select('circle')
+                .transition()
+                .duration(300)
+                .attr('r', innerRadius + 5);
+                
+            tooltip
+                .style('opacity', 1)
+                .html(`<strong>Collective Impact</strong><br>A framework for tackling complex social problems through structured, cross-sector collaboration. The five conditions work together to create alignment and lead to powerful results.`)
+                .style('left', `${event.pageX - container.getBoundingClientRect().left + 10}px`)
+                .style('top', `${event.pageY - container.getBoundingClientRect().top - 40}px`);
+        })
+        .on('mouseout', function() {
+            d3.select(this).select('circle')
+                .transition()
+                .duration(300)
+                .attr('r', innerRadius);
+                
+            tooltip.style('opacity', 0);
+        });
+    
+    centerGroup.append('circle')
+        .attr('cx', centerX)
+        .attr('cy', centerY)
+        .attr('r', innerRadius)
+        .attr('fill', 'url(#central-gradient)')
+        .attr('stroke', '#ff7e5f')
+        .attr('stroke-width', 2);
+    
+    centerGroup.append('text')
+        .attr('x', centerX)
+        .attr('y', centerY - 15)
+        .attr('text-anchor', 'middle')
+        .attr('font-size', '16px')
+        .attr('font-weight', '700')
+        .attr('fill', 'white')
+        .text('Collective');
+        
+    centerGroup.append('text')
+        .attr('x', centerX)
+        .attr('y', centerY + 15)
+        .attr('text-anchor', 'middle')
+        .attr('font-size', '16px')
+        .attr('font-weight', '700')
+        .attr('fill', 'white')
+        .text('Impact');
+    
+    // Create pulsing effect for center
+    const pulse = centerGroup.append('circle')
+        .attr('cx', centerX)
+        .attr('cy', centerY)
+        .attr('r', innerRadius)
+        .attr('fill', 'none')
+        .attr('stroke', 'rgba(255, 126, 95, 0.5)')
+        .attr('stroke-width', 4)
+        .attr('opacity', 1);
+        
+    pulse.transition()
+        .duration(2000)
+        .attr('r', innerRadius + 20)
+        .attr('opacity', 0)
+        .ease(d3.easeLinear)
+        .on('end', function repeat() {
+            d3.select(this)
+                .attr('r', innerRadius)
+                .attr('opacity', 1)
+                .transition()
+                .duration(2000)
+                .attr('r', innerRadius + 20)
+                .attr('opacity', 0)
+                .ease(d3.easeLinear)
+                .on('end', repeat);
+        });
+    
+    // Draw condition nodes
+    const conditionGroups = svg.selectAll('.condition')
+        .data(conditions)
+        .enter()
+        .append('g')
+        .attr('class', 'condition')
+        .attr('transform', d => `translate(${d.x}, ${d.y})`)
+        .on('mouseover', function(event, d) {
+            // Highlight this node
+            d3.select(this).select('circle')
+                .transition()
+                .duration(300)
+                .attr('r', 45)
+                .attr('stroke', 'var(--accent)')
+                .attr('stroke-width', 3);
             
-            const width = container.clientWidth;
-            const height = container.clientHeight;
-            
-            // Create SVG
-            const svg = d3.select(container)
-                .append('svg')
-                .attr('width', width)
-                .attr('height', height);
-            
-            // Add tooltip
-            const tooltip = d3.select(container)
-                .append('div')
-                .attr('class', 'diagram-tooltip');
-            
-            // Define the U curve points
-            const uPoints = [
-                { x: width * 0.1, y: height * 0.2 },
-                { x: width * 0.3, y: height * 0.5 },
-                { x: width * 0.5, y: height * 0.8 },
-                { x: width * 0.7, y: height * 0.5 },
-                { x: width * 0.9, y: height * 0.2 }
-            ];
-            
-            // Create path generator
-            const lineGenerator = d3.line()
-                .x(d => d.x)
-                .y(d => d.y)
-                .curve(d3.curveBasis);
-            
-            // Draw the U curve
-            svg.append('path')
-                .attr('d', lineGenerator(uPoints))
-                .attr('stroke', 'var(--primary)')
+            // Highlight connection to center
+            lineGroup.selectAll('line')
+                .filter(line => (line.source === d || line.target === d) || 
+                              (line.x1 === centerX && line.y1 === centerY && line.x2 === d.x && line.y2 === d.y) || 
+                              (line.x2 === centerX && line.y2 === centerY && line.x1 === d.x && line.y1 === d.y))
+                .transition()
+                .duration(300)
+                .attr('stroke', 'var(--accent)')
                 .attr('stroke-width', 3)
-                .attr('fill', 'none');
+                .attr('stroke-dasharray', 'none');
+                
+            tooltip
+                .style('opacity', 1)
+                .html(`<strong>${d.name}</strong><br>${d.description}`)
+                .style('left', `${event.pageX - container.getBoundingClientRect().left + 10}px`)
+                .style('top', `${event.pageY - container.getBoundingClientRect().top - 40}px`);
+        })
+        .on('mouseout', function(event, d) {
+            // Reset this node
+            d3.select(this).select('circle')
+                .transition()
+                .duration(300)
+                .attr('r', 40)
+                .attr('stroke', '#5643cc')
+                .attr('stroke-width', 2);
             
-            // Define the phases
-            const phases = [
-                {
-                    name: 'Co-Initiating',
-                    description: 'Building common intent, stopping and listening to others and to what life calls you to do.',
-                    x: uPoints[0].x,
-                    y: uPoints[0].y - 30
-                },
-                {
-                    name: 'Co-Sensing',
-                    description: 'Observing, observing, observing; going to the places of most potential and listening with your mind and heart wide open.',
-                    x: uPoints[1].x,
-                    y: uPoints[1].y - 30
-                },
-                {
-                    name: 'Presencing',
-                    description: 'Connecting to the source of inspiration and will. Going to the threshold and allowing the inner knowing to emerge.',
-                    x: uPoints[2].x,
-                    y: uPoints[2].y + 30
-                },
-                {
-                    name: 'Co-Creating',
-                    description: 'Prototyping the new in living examples to explore the future by doing. Creating small, rapid experiments.',
-                    x: uPoints[3].x,
-                    y: uPoints[3].y - 30
-                },
-                {
-                    name: 'Co-Evolving',
-                    description: 'Embodying the new in ecosystems that facilitate acting from the whole. Growing innovation ecosystems by linking with institutional bodies.',
-                    x: uPoints[4].x,
-                    y: uPoints[4].y - 30
-                }
-            ];
-            
-            // Add circles for each phase
-            const phaseCircles = svg.selectAll('.phase-circle')
-                .data(uPoints)
-                .enter()
-                .append('circle')
-                .attr('class', 'phase-circle')
-                .attr('cx', d => d.x)
-                .attr('cy', d => d.y)
-                .attr('r', 12)
-                .attr('fill', (d, i) => {
-                    if (i === 2) return 'var(--accent)'; // Presencing (bottom of U)
-                    return 'var(--secondary)';
+            // Reset connections
+            lineGroup.selectAll('line')
+                .transition()
+                .duration(300)
+                .attr('stroke', function() {
+                    // Return to original styling based on line type
+                    if (this.getAttribute('stroke-dasharray') === '4 2') {
+                        return 'rgba(86, 67, 204, 0.4)';
+                    } else {
+                        return 'rgba(86, 67, 204, 0.3)';
+                    }
                 })
-                .on('mouseover', function(event, d, i) {
-                    const index = uPoints.findIndex(p => p.x === d.x && p.y === d.y);
-                    const phase = phases[index];
-                    
-                    d3.select(this)
-                        .attr('r', 15)
-                        .attr('fill', 'var(--accent)');
-                        
-                    tooltip
-                        .style('opacity', 1)
-                        .html(`<strong>${phase.name}</strong><br>${phase.description}`)
-                        .style('left', `${event.pageX - container.getBoundingClientRect().left + 10}px`)
-                        .style('top', `${event.pageY - container.getBoundingClientRect().top + 10}px`);
+                .attr('stroke-width', function() {
+                    return this.getAttribute('stroke-dasharray') === '4 2' ? 2 : 1.5;
                 })
-                .on('mouseout', function(event, d, i) {
-                    const index = uPoints.findIndex(p => p.x === d.x && p.y === d.y);
-                    
-                    d3.select(this)
-                        .attr('r', 12)
-                        .attr('fill', index === 2 ? 'var(--accent)' : 'var(--secondary)');
-                        
-                    tooltip.style('opacity', 0);
+                .attr('stroke-dasharray', function() {
+                    return this.getAttribute('stroke-dasharray');
                 });
-            
-            // Add labels for phases
-            svg.selectAll('.phase-label')
-                .data(phases)
-                .enter()
-                .append('text')
-                .attr('class', 'phase-label')
-                .attr('x', d => d.x)
-                .attr('y', d => d.y)
-                .attr('text-anchor', 'middle')
-                .attr('font-size', '12px')
-                .attr('font-weight', '500')
-                .attr('fill', 'var(--dark)')
-                .text(d => d.name);
-            
-            // Add a gradient line through the center of the U to represent transformation
-            const uCenterGradient = svg.append('defs')
-                .append('linearGradient')
-                .attr('id', 'uCenterGradient')
-                .attr('x1', '0%')
-                .attr('y1', '0%')
-                .attr('x2', '0%')
-                .attr('y2', '100%');
-            
-            uCenterGradient.append('stop')
-                .attr('offset', '0%')
-                .attr('stop-color', 'rgba(42, 57, 144, 0.3)');
                 
-            uCenterGradient.append('stop')
-                .attr('offset', '50%')
-                .attr('stop-color', 'rgba(255, 126, 95, 0.7)');
-                
-            uCenterGradient.append('stop')
-                .attr('offset', '100%')
-                .attr('stop-color', 'rgba(42, 57, 144, 0.3)');
-            
-            svg.append('line')
-                .attr('x1', width * 0.5)
-                .attr('y1', height * 0.1)
-                .attr('x2', width * 0.5)
-                .attr('y2', height * 0.9)
-                .attr('stroke', 'url(#uCenterGradient)')
-                .attr('stroke-width', 2)
-                .attr('stroke-dasharray', '5,5');
-            
-            // Add labels to describe key transitions
-            svg.append('text')
-                .attr('x', width * 0.3)
-                .attr('y', height * 0.1)
-                .attr('text-anchor', 'middle')
-                .attr('font-size', '12px')
-                .attr('font-style', 'italic')
-                .text('Downloading: Old patterns');
-            
-            svg.append('text')
-                .attr('x', width * 0.5)
-                .attr('y', height * 0.9)
-                .attr('text-anchor', 'middle')
-                .attr('font-size', '12px')
-                .attr('font-weight', '500')
-                .attr('fill', 'var(--accent)')
-                .text('Threshold of Emergence');
-            
-            svg.append('text')
-                .attr('x', width * 0.7)
-                .attr('y', height * 0.1)
-                .attr('text-anchor', 'middle')
-                .attr('font-size', '12px')
-                .attr('font-style', 'italic')
-                .text('Uploading: New patterns');
+            tooltip.style('opacity', 0);
+        });
+    
+    conditionGroups.append('circle')
+        .attr('r', 40)
+        .attr('fill', 'white')
+        .attr('stroke', '#5643cc')
+        .attr('stroke-width', 2);
+    
+    conditionGroups.append('text')
+        .attr('y', -5)
+        .attr('text-anchor', 'middle')
+        .attr('font-size', '24px')
+        .text(d => d.icon);
+    
+    conditionGroups.append('text')
+        .attr('y', 20)
+        .attr('text-anchor', 'middle')
+        .attr('font-size', '10px')
+        .attr('font-weight', '700')
+        .attr('fill', 'var(--primary)')
+        .text(d => {
+            // Split the name at spaces and return first two words
+            const words = d.name.split(' ');
+            if (words.length > 1) {
+                return words.slice(0, 2).join(' ');
+            }
+            return d.name;
+        });
+    
+    // Add label to explain how to interact
+    svg.append('text')
+        .attr('x', width / 2)
+        .attr('y', height - 20)
+        .attr('text-anchor', 'middle')
+        .attr('font-size', '12px')
+        .attr('font-style', 'italic')
+        .attr('fill', 'var(--gray-600)')
+        .text('Hover over each element to learn more about the Collective Impact conditions');
+    
+    // Add a subtle background circle to frame the visualization
+    svg.append('circle')
+        .attr('cx', centerX)
+        .attr('cy', centerY)
+        .attr('r', outerRadius + 20)
+        .attr('fill', 'none')
+        .attr('stroke', 'rgba(86, 67, 204, 0.1)')
+        .attr('stroke-width', 2)
+        .lower(); // Send to back
+}
+            // Theory U Process Visualization
+function createTheoryUDiagram() {
+    const container = document.getElementById('theory-u-diagram');
+    if (!container) return;
+    
+    const width = container.clientWidth;
+    const height = container.clientHeight;
+    
+    // Create SVG
+    const svg = d3.select(container)
+        .append('svg')
+        .attr('width', width)
+        .attr('height', height);
+    
+    // Add tooltip
+    const tooltip = d3.select(container)
+        .append('div')
+        .attr('class', 'diagram-tooltip');
+    
+    // Define the defs section for gradients and paths
+    const defs = svg.append('defs');
+    
+    // Create gradient for the U path
+    const uGradient = defs.append('linearGradient')
+        .attr('id', 'u-gradient')
+        .attr('x1', '0%')
+        .attr('y1', '0%')
+        .attr('x2', '100%')
+        .attr('y2', '0%');
+    
+    uGradient.append('stop')
+        .attr('offset', '0%')
+        .attr('stop-color', '#5643cc');
+        
+    uGradient.append('stop')
+        .attr('offset', '50%')
+        .attr('stop-color', '#ff7e5f');
+        
+    uGradient.append('stop')
+        .attr('offset', '100%')
+        .attr('stop-color', '#5643cc');
+    
+    // Create radial gradients for the phases
+    const leftPhaseGradient = defs.append('radialGradient')
+        .attr('id', 'left-phase-gradient')
+        .attr('cx', '50%')
+        .attr('cy', '50%')
+        .attr('r', '50%');
+    
+    leftPhaseGradient.append('stop')
+        .attr('offset', '0%')
+        .attr('stop-color', '#5643cc');
+        
+    leftPhaseGradient.append('stop')
+        .attr('offset', '100%')
+        .attr('stop-color', '#2a3990');
+    
+    const rightPhaseGradient = defs.append('radialGradient')
+        .attr('id', 'right-phase-gradient')
+        .attr('cx', '50%')
+        .attr('cy', '50%')
+        .attr('r', '50%');
+    
+    rightPhaseGradient.append('stop')
+        .attr('offset', '0%')
+        .attr('stop-color', '#5643cc');
+        
+    rightPhaseGradient.append('stop')
+        .attr('offset', '100%')
+        .attr('stop-color', '#2a3990');
+    
+    const bottomPhaseGradient = defs.append('radialGradient')
+        .attr('id', 'bottom-phase-gradient')
+        .attr('cx', '50%')
+        .attr('cy', '50%')
+        .attr('r', '50%');
+    
+    bottomPhaseGradient.append('stop')
+        .attr('offset', '0%')
+        .attr('stop-color', '#ff7e5f');
+        
+    bottomPhaseGradient.append('stop')
+        .attr('offset', '100%')
+        .attr('stop-color', '#feb47b');
+    
+    // Define the U curve control points
+    const uPoints = [
+        { x: width * 0.1, y: height * 0.18 },   // Start point (top left)
+        { x: width * 0.3, y: height * 0.5 },    // Left control point
+        { x: width * 0.5, y: height * 0.82 },   // Bottom point
+        { x: width * 0.7, y: height * 0.5 },    // Right control point
+        { x: width * 0.9, y: height * 0.18 }    // End point (top right)
+    ];
+    
+    // Create the U curve path using a smooth curve through the points
+    const uPath = d3.line()
+        .x(d => d.x)
+        .y(d => d.y)
+        .curve(d3.curveBasis);
+    
+    // Calculate path length for animations
+    const pathNode = svg.append('path')
+        .attr('d', uPath(uPoints))
+        .style('display', 'none');
+    
+    const pathLength = pathNode.node().getTotalLength();
+    pathNode.remove();
+    
+    // Draw the U curve with animated drawing effect
+    svg.append('path')
+        .attr('d', uPath(uPoints))
+        .attr('fill', 'none')
+        .attr('stroke', 'url(#u-gradient)')
+        .attr('stroke-width', 6)
+        .attr('stroke-linecap', 'round')
+        .attr('stroke-dasharray', pathLength)
+        .attr('stroke-dashoffset', pathLength)
+        .transition()
+        .duration(2000)
+        .attr('stroke-dashoffset', 0);
+    
+    // Define the phases and their properties
+    const phases = [
+        {
+            name: 'Co-Initiating',
+            description: 'Building common intent, stopping and listening to others and to what life calls you to do.',
+            point: uPoints[0],
+            gradient: 'left-phase-gradient',
+            textOffset: { x: 0, y: -50 },
+            icon: '🤝'
+        },
+        {
+            name: 'Co-Sensing',
+            description: 'Observing, observing, observing; going to the places of most potential and listening with your mind and heart wide open.',
+            point: uPoints[1],
+            gradient: 'left-phase-gradient',
+            textOffset: { x: -80, y: 0 },
+            icon: '👁️'
+        },
+        {
+            name: 'Presencing',
+            description: 'Connecting to the source of inspiration and will. Going to the threshold and allowing the inner knowing to emerge.',
+            point: uPoints[2],
+            gradient: 'bottom-phase-gradient',
+            textOffset: { x: 0, y: 70 },
+            icon: '💭'
+        },
+        {
+            name: 'Co-Creating',
+            description: 'Prototyping the new in living examples to explore the future by doing. Creating small, rapid experiments.',
+            point: uPoints[3],
+            gradient: 'right-phase-gradient',
+            textOffset: { x: 80, y: 0 },
+            icon: '🛠️'
+        },
+        {
+            name: 'Co-Evolving',
+            description: 'Embodying the new in ecosystems that facilitate acting from the whole. Growing innovation ecosystems by linking with institutional bodies.',
+            point: uPoints[4],
+            gradient: 'right-phase-gradient',
+            textOffset: { x: 0, y: -50 },
+            icon: '🌱'
         }
+    ];
+    
+    // Add phase nodes with delay to match path animation
+    const phaseGroups = svg.selectAll('.phase')
+        .data(phases)
+        .enter()
+        .append('g')
+        .attr('class', 'phase')
+        .attr('transform', d => `translate(${d.point.x}, ${d.point.y})`)
+        .style('opacity', 0)
+        .transition()
+        .delay((d, i) => 400 + i * 300)
+        .duration(500)
+        .style('opacity', 1);
+    
+    // Draw circles for each phase
+    svg.selectAll('.phase-circle')
+        .data(phases)
+        .enter()
+        .append('circle')
+        .attr('class', 'phase-circle')
+        .attr('cx', d => d.point.x)
+        .attr('cy', d => d.point.y)
+        .attr('r', 30)
+        .attr('fill', d => `url(#${d.gradient})`)
+        .attr('stroke', 'white')
+        .attr('stroke-width', 2)
+        .style('opacity', 0)
+        .transition()
+        .delay((d, i) => 400 + i * 300)
+        .duration(500)
+        .style('opacity', 1)
+        .on('end', function(d, i) {
+            // Add the phase labels after circles appear
+            svg.append('text')
+                .attr('x', phases[i].point.x)
+                .attr('y', phases[i].point.y + 5)
+                .attr('text-anchor', 'middle')
+                .attr('dominant-baseline', 'middle')
+                .attr('font-size', '20px')
+                .text(phases[i].icon)
+                .style('opacity', 0)
+                .transition()
+                .duration(300)
+                .style('opacity', 1);
+        });
+    
+    // Add interactive behavior to phase circles
+    svg.selectAll('.phase-circle')
+        .on('mouseover', function(event, d) {
+            d3.select(this)
+                .transition()
+                .duration(300)
+                .attr('r', 35)
+                .attr('stroke', 'var(--accent)')
+                .attr('stroke-width', 3);
+                
+            tooltip
+                .style('opacity', 1)
+                .html(`<strong>${d.name}</strong><br>${d.description}`)
+                .style('left', `${event.pageX - container.getBoundingClientRect().left + 10}px`)
+                .style('top', `${event.pageY - container.getBoundingClientRect().top - 10}px`);
+        })
+        .on('mouseout', function() {
+            d3.select(this)
+                .transition()
+                .duration(300)
+                .attr('r', 30)
+                .attr('stroke', 'white')
+                .attr('stroke-width', 2);
+                
+            tooltip.style('opacity', 0);
+        });
+    
+    // Add phase labels with offsets
+    svg.selectAll('.phase-label')
+        .data(phases)
+        .enter()
+        .append('text')
+        .attr('class', 'phase-label')
+        .attr('x', d => d.point.x + d.textOffset.x)
+        .attr('y', d => d.point.y + d.textOffset.y)
+        .attr('text-anchor', 'middle')
+        .attr('font-size', '14px')
+        .attr('font-weight', '600')
+        .attr('fill', 'var(--primary)')
+        .text(d => d.name)
+        .style('opacity', 0)
+        .transition()
+        .delay((d, i) => 600 + i * 300)
+        .duration(500)
+        .style('opacity', 1);
+    
+    // Add explanatory labels for the U process
+    const leftSideLabel = svg.append('text')
+        .attr('x', width * 0.2)
+        .attr('y', height * 0.15)
+        .attr('text-anchor', 'middle')
+        .attr('font-size', '14px')
+        .attr('font-style', 'italic')
+        .attr('fill', 'var(--primary)')
+        .text('Open Mind')
+        .style('opacity', 0);
+    
+    const rightSideLabel = svg.append('text')
+        .attr('x', width * 0.8)
+        .attr('y', height * 0.15)
+        .attr('text-anchor', 'middle')
+        .attr('font-size', '14px')
+        .attr('font-style', 'italic')
+        .attr('fill', 'var(--primary)')
+        .text('Open Will')
+        .style('opacity', 0);
+    
+    const bottomLabel = svg.append('text')
+        .attr('x', width * 0.5)
+        .attr('y', height * 0.9)
+        .attr('text-anchor', 'middle')
+        .attr('font-size', '14px')
+        .attr('font-weight', '600')
+        .attr('fill', 'var(--accent)')
+        .text('Open Heart')
+        .style('opacity', 0);
+    
+    // Add dividing line for the left side transitions
+    svg.append('line')
+        .attr('x1', width * 0.05)
+        .attr('y1', height * 0.35)
+        .attr('x2', width * 0.35)
+        .attr('y2', height * 0.35)
+        .attr('stroke', 'var(--gray-400)')
+        .attr('stroke-width', 1)
+        .attr('stroke-dasharray', '4 2')
+        .style('opacity', 0)
+        .transition()
+        .delay(2000)
+        .duration(500)
+        .style('opacity', 0.7);
+    
+    // Add dividing line for the right side transitions
+    svg.append('line')
+        .attr('x1', width * 0.65)
+        .attr('y1', height * 0.35)
+        .attr('x2', width * 0.95)
+        .attr('y2', height * 0.35)
+        .attr('stroke', 'var(--gray-400)')
+        .attr('stroke-width', 1)
+        .attr('stroke-dasharray', '4 2')
+        .style('opacity', 0)
+        .transition()
+        .delay(2000)
+        .duration(500)
+        .style('opacity', 0.7);
+    
+    // Label the transition points
+    svg.append('text')
+        .attr('x', width * 0.2)
+        .attr('y', height * 0.33)
+        .attr('text-anchor', 'middle')
+        .attr('font-size', '12px')
+        .attr('fill', 'var(--gray-600)')
+        .text('Downloading → Seeing')
+        .style('opacity', 0)
+        .transition()
+        .delay(2200)
+        .duration(500)
+        .style('opacity', 1);
+    
+    svg.append('text')
+        .attr('x', width * 0.8)
+        .attr('y', height * 0.33)
+        .attr('text-anchor', 'middle')
+        .attr('font-size', '12px')
+        .attr('fill', 'var(--gray-600)')
+        .text('Performing → Embodying')
+        .style('opacity', 0)
+        .transition()
+        .delay(2200)
+        .duration(500)
+        .style('opacity', 1);
+    
+    // Add vertical line from bottom to center
+    svg.append('line')
+        .attr('x1', width * 0.5)
+        .attr('y1', height * 0.18)
+        .attr('x2', width * 0.5)
+        .attr('y2', height * 0.82)
+        .attr('stroke', 'rgba(255, 126, 95, 0.3)')
+        .attr('stroke-width', 2)
+        .attr('stroke-dasharray', '6 3')
+        .style('opacity', 0)
+        .transition()
+        .delay(2400)
+        .duration(800)
+        .style('opacity', 1);
+    
+    // Add threshold label at the bottom of the U
+    svg.append('text')
+        .attr('x', width * 0.5)
+        .attr('y', height * 0.88)
+        .attr('text-anchor', 'middle')
+        .attr('font-size', '14px')
+        .attr('font-weight', '500')
+        .attr('fill', 'var(--accent)')
+        .text('Threshold of Emergence')
+        .style('opacity', 0)
+        .transition()
+        .delay(2600)
+        .duration(500)
+        .style('opacity', 1);
+    
+    // Animate in the side labels
+    leftSideLabel
+        .transition()
+        .delay(2800)
+        .duration(500)
+        .style('opacity', 1);
+    
+    rightSideLabel
+        .transition()
+        .delay(3000)
+        .duration(500)
+        .style('opacity', 1);
+    
+    bottomLabel
+        .transition()
+        .delay(3200)
+        .duration(500)
+        .style('opacity', 1);
+    
+    // Add title
+    svg.append('text')
+        .attr('x', width / 2)
+        .attr('y', 30)
+        .attr('text-anchor', 'middle')
+        .attr('font-size', '16px')
+        .attr('font-weight', '700')
+        .attr('fill', 'var(--primary)')
+        .text('Theory U Process')
+        .style('opacity', 0)
+        .transition()
+        .delay(3400)
+        .duration(500)
+        .style('opacity', 1);
+    
+    // Add instruction text
+    svg.append('text')
+        .attr('x', width / 2)
+        .attr('y', height - 20)
+        .attr('text-anchor', 'middle')
+        .attr('font-size', '12px')
+        .attr('font-style', 'italic')
+        .attr('fill', 'var(--gray-600)')
+        .text('Hover over each phase to learn more')
+        .style('opacity', 0)
+        .transition()
+        .delay(3600)
+        .duration(500)
+        .style('opacity', 1);
+}
+
 // Contribution Analysis Framework Visualization
 function createContributionDiagram() {
     const container = document.getElementById('contribution-diagram');
