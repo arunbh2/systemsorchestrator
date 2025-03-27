@@ -5,31 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Selco Foundation: System Orchestration</title>
     <style>
-        /* A2 Size approx 1587 x 2245 pixels. Using viewport units for responsiveness, approximating ratio */
-        body {
-            font-family: 'Open Sans', Arial, sans-serif;
-            background-color: #f5f5f5; /* Neutral Base */
+        /* A2 Size approx 1587px wide. Height will adjust. */
+        html, body {
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh; /* Ensure it takes at least full viewport height */
+            font-family: 'Open Sans', Arial, sans-serif;
+            background-color: #f5f5f5; /* Neutral Base for area outside the slide */
+        }
+
+        body {
+             display: flex; /* Helps center the container */
+             justify-content: center;
+             align-items: flex-start; /* Align to top */
+             min-height: 100vh;
+             padding: 20px 0; /* Add some padding top/bottom for scroll */
         }
 
         .slide-container {
             width: 90vw; /* Responsive width */
-            max-width: 1587px; /* Max width for A2 aspect */
-            aspect-ratio: 1 / 1.414; /* A2 Aspect Ratio */
+            max-width: 1587px; /* Max width based on A2 */
+            /* Removed fixed aspect-ratio and height to allow content to determine height */
+            min-height: 90vh; /* Encourage vertical space usage */
             background-color: white;
-            padding: 4vmin; /* Responsive padding */
+            padding: 4vmin;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             display: grid;
-            grid-template-columns: repeat(3, 1fr); /* 3 columns */
-            grid-template-rows: auto 1fr 1fr; /* Header row + 2 content rows */
-            gap: 3vmin; /* Responsive gap */
-            overflow: hidden; /* Ensure content fits */
+            grid-template-columns: repeat(3, 1fr);
+            /* Adjust grid rows: auto for header, let content blocks define height */
+            grid-template-rows: auto auto auto;
+            gap: 3vmin;
             box-sizing: border-box;
+            /* Removed overflow: hidden; to allow container to grow */
         }
 
         /* --- 1. Hierarchy --- */
@@ -38,21 +44,21 @@
             text-align: center;
             border-bottom: 2px solid #FFA600; /* Primary Yellow/Orange */
             padding-bottom: 2vmin;
-            margin-bottom: 2vmin;
+            margin-bottom: 1vmin; /* Reduced margin */
         }
         .title {
-            font-size: clamp(2rem, 4vw, 3.5rem); /* Responsive font size */
+            font-size: clamp(2rem, 3.5vw, 3rem); /* Slightly adjusted clamp */
             font-weight: bold;
             color: #1B9CFC; /* Primary Blue */
             margin: 0;
         }
         .subtitle {
-            font-size: clamp(1.2rem, 2vw, 2rem);
+            font-size: clamp(1.2rem, 2vw, 1.8rem); /* Adjusted */
             color: #555;
             margin: 0.5vmin 0 1vmin 0;
         }
         .tagline {
-            font-size: clamp(1rem, 1.8vw, 1.8rem);
+            font-size: clamp(1rem, 1.8vw, 1.6rem); /* Adjusted */
             color: #2ECC71; /* Primary Green */
             font-style: italic;
             margin: 0;
@@ -67,11 +73,10 @@
             display: flex;
             flex-direction: column;
             box-sizing: border-box;
-            overflow-y: auto; /* Allow scroll within block if content overflows */
-            max-height: 100%; /* Ensure blocks don't exceed grid cell height */
+            /* Removed overflow-y and max-height */
         }
         .block h3 {
-            font-size: clamp(1.1rem, 1.9vw, 1.8rem);
+            font-size: clamp(1.1rem, 1.8vw, 1.6rem); /* Adjusted */
             font-weight: bold;
             color: #1B9CFC; /* Primary Blue */
             margin-top: 0;
@@ -84,7 +89,7 @@
         .block h3::before { /* Simple Icon placeholder */
            content: '🔹';
            margin-right: 1vmin;
-           font-size: clamp(1rem, 1.5vw, 1.5rem);
+           font-size: clamp(1rem, 1.4vw, 1.4rem); /* Adjusted */
         }
 
         /* Specific block placements */
@@ -99,21 +104,23 @@
             list-style: none;
             padding-left: 1vmin;
             margin: 0;
-            flex-grow: 1; /* Allow list to take available space */
+             flex-grow: 1; /* Helps block expand if needed */
         }
         li {
-            font-size: clamp(0.8rem, 1.4vw, 1.2rem);
+            font-size: clamp(0.8rem, 1.3vw, 1.1rem); /* Adjusted */
             margin-bottom: 1.2vmin;
             line-height: 1.5;
             color: #333;
-            display: flex;
+            display: flex; /* Needed for alignment with custom bullet */
+            text-align: left; /* Ensure text aligns left */
         }
          li::before { /* Bullet point style */
             content: '▪️';
             color: #FFA600; /* Primary Yellow/Orange */
             margin-right: 1.5vmin;
-            font-size: clamp(0.7rem, 1.2vw, 1rem);
+            font-size: clamp(0.7rem, 1.1vw, 0.9rem); /* Adjusted */
             line-height: 1.5; /* Align with text */
+            flex-shrink: 0; /* Prevent bullet from shrinking */
          }
         strong {
             font-weight: bold;
@@ -130,25 +137,39 @@
             margin-left: 2px;
         }
         .flow-arrow { /* Simple arrow for visual flow indication */
-           font-size: clamp(1.5rem, 2.5vw, 2.5rem);
+           font-size: clamp(1.5rem, 2vw, 2rem); /* Adjusted */
            color: #FFA600;
            text-align: center;
            margin: 1vmin 0;
            align-self: center; /* Center arrow within the block */
         }
-        #block4 .flow-arrow { /* Specific styling for block 4 arrow */
-           margin: 1vmin 0;
+         #block4 ul {
+            display: flex; /* Use flexbox for arrow positioning */
+            flex-direction: column;
         }
+        #block4 .flow-arrow {
+            order: 1; /* Position arrows between items */
+            margin: 0.5vmin 0; /* Reduced margin */
+        }
+        #block4 li:nth-of-type(1) { order: 0; }
+        #block4 li:nth-of-type(2) { order: 2; }
+        #block4 li:nth-of-type(3) { order: 4; }
+        #block4 li:nth-of-type(4) { order: 6; } /* Added for consistency */
+         /* Add specific orders for arrows if needed */
+        #block4 li.flow-arrow:nth-of-type(2) { order: 1; }
+        #block4 li.flow-arrow:nth-of-type(3) { order: 3; }
+        #block4 li.flow-arrow:nth-of-type(5) { order: 5; } /* Added */
 
 
         /* --- 6. Supporting Evidence --- */
         .evidence {
-            font-size: clamp(0.8rem, 1.3vw, 1.1rem);
+            font-size: clamp(0.75rem, 1.2vw, 1rem); /* Adjusted */
             font-style: italic;
             color: #555;
             margin-top: 1vmin;
             border-left: 3px solid #2ECC71; /* Primary Green */
             padding-left: 1.5vmin;
+            margin-left: calc(1.5vmin + clamp(0.7rem, 1.1vw, 0.9rem)); /* Indent evidence */
         }
         .evidence strong {
             color: #2ECC71;
@@ -160,9 +181,9 @@
                 grid-template-columns: 1fr; /* Stack columns */
                 grid-template-rows: auto repeat(5, auto); /* Auto rows for header + 5 blocks */
                 width: 95vw;
-                aspect-ratio: auto; /* Allow height to adjust */
-                height: auto; /* Allow height to adjust */
-                min-height: 100vh;
+                 min-height: 100vh; /* Ensure full height */
+                 height: auto; /* Let content define height */
+                 padding: 3vmin;
             }
             #block1, #block2, #block3, #block4, #block5 {
                 grid-column: 1 / -1; /* Each block spans full width */
@@ -173,13 +194,52 @@
              #block4 { grid-row: 5 / 6; }
              #block5 { grid-row: 6 / 7; }
 
-            .title { font-size: clamp(1.8rem, 5vw, 2.5rem); }
-            .subtitle { font-size: clamp(1rem, 3vw, 1.5rem); }
-            .tagline { font-size: clamp(0.9rem, 2.5vw, 1.3rem); }
-            .block h3 { font-size: clamp(1rem, 3vw, 1.5rem); }
-            li { font-size: clamp(0.8rem, 2.2vw, 1rem); }
-            .evidence { font-size: clamp(0.75rem, 2vw, 0.9rem); }
+            .title { font-size: clamp(1.8rem, 6vw, 2.2rem); }
+            .subtitle { font-size: clamp(1rem, 4vw, 1.3rem); }
+            .tagline { font-size: clamp(0.9rem, 3.5vw, 1.1rem); }
+            .block h3 { font-size: clamp(1rem, 4vw, 1.3rem); }
+            li { font-size: clamp(0.8rem, 3vw, 0.95rem); }
+            .evidence { font-size: clamp(0.75rem, 2.8vw, 0.9rem); }
         }
+
+        /* --- Print Specific Styles --- */
+        @media print {
+            body {
+                background-color: white; /* White background for printing */
+                display: block; /* Override flex for natural flow */
+                padding: 0;
+                 -webkit-print-color-adjust: exact !important; /* Ensure colors print in Chrome/Safari */
+                 color-adjust: exact !important; /* Standard */
+            }
+            .slide-container {
+                width: 100%; /* Use full printable width */
+                max-width: none;
+                min-height: auto; /* Let content define height */
+                box-shadow: none; /* No shadow for print */
+                padding: 1cm; /* Add print margins */
+                display: block; /* Override grid for natural flow */
+                 page-break-inside: avoid; /* Try to keep container on one page */
+            }
+            .header, .block {
+                 page-break-inside: avoid; /* Try to keep sections together */
+                 background-color: #f8f8f8; /* Light gray for blocks in print if desired, helps distinguish */
+                 margin-bottom: 1cm; /* Spacing between blocks in print */
+                 display: block; /* Ensure blocks stack */
+            }
+             .header {
+                  border-bottom: 1px solid #FFA600;
+                  text-align: center;
+             }
+            /* Adjust font sizes for print if needed, maybe slightly smaller */
+             .title { font-size: 24pt; }
+             .subtitle { font-size: 16pt; }
+             .tagline { font-size: 14pt; }
+             .block h3 { font-size: 14pt; }
+             li { font-size: 11pt; }
+             .evidence { font-size: 10pt; }
+             .flow-arrow { display: none; } /* Hide arrows in print */
+        }
+
 
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -199,8 +259,8 @@
             <ul>
                 <li>Mission: Create solutions using <strong>sustainable energy</strong> to bridge environmental sustainability and poverty alleviation <span class="citation">[cite: 23]</span>.</li>
                 <li>Goal: Foster sustainable development via decentralized renewable energy (DRE) <span class="citation">[cite: 24, 25]</span>.</li>
-                <li>Values: Rooted in <strong>equity</strong>, <strong>inclusivity</strong>, <strong>transparency</strong>, and <strong>sustainability</strong> <span class="citation">[cite: 28, 29, 30]</span>.</li>
-                 <li>Approach: Respects local contexts, uses participatory methods, focuses on economic empowerment and need-based innovation <span class="citation">[cite: 7, 31, 32]</span>.</li>
+                <li>Values: Rooted in <strong>equity</strong>, <strong>inclusivity</strong>, <strong>transparency</strong>, and <strong>sustainability</strong> <span class="citation">[cite: 28, 29, 30, 7]</span>.</li>
+                 <li>Approach: Respects local contexts, uses participatory methods, focuses on economic empowerment and need-based innovation <span class="citation">[cite: 7, 31, 32, 15]</span>.</li>
             </ul>
         </div>
 
@@ -208,44 +268,44 @@
             <h3>What is System Orchestration?</h3>
             <ul>
                 <li>Definition: Uniting diverse stakeholders, aligning efforts, and sustaining progress towards shared goals <span class="citation">[cite: 1, 6, 101]</span>.</li>
-                <li>SELCO's Role: Acts as a <strong class="highlight">central coordinating entity</strong> <span class="citation">[cite: 4]</span>; a 'conductor' guiding stakeholders (govt., finance, tech providers, NGOs, communities) <span class="citation">[cite: 7, 103]</span>.</li>
+                <li>SELCO's Role: Acts as a <strong class="highlight">central coordinating entity</strong> <span class="citation">[cite: 4]</span>; a 'conductor' guiding stakeholders (govt., finance, tech providers, NGOs, communities) <span class="citation">[cite: 1, 7, 103]</span>.</li>
                  <li>Focus: Propelling collective action, building bridges, empowering local leaders, and maximizing impact <span class="citation">[cite: 11, 12, 105]</span>.</li>
-                 <li>Key Function: Fosters transformational change by weaving together actors and galvanizing collective action across ecosystems <span class="citation">[cite: 7, 17]</span>.</li>
+                 <li>Key Function: Fosters transformational change by weaving together actors and galvanizing collective action across ecosystems <span class="citation">[cite: 7]</span>.</li>
             </ul>
         </div>
 
         <div class="block" id="block3">
             <h3>The Ecosystem Approach</h3>
             <ul>
-                <li>Core Idea: Sustainable impact requires a supportive environment, not just technology deployment <span class="citation">[cite: 34, 35, 77, 78]</span>.</li>
-                <li>Pillars: Integrates <strong>Technology</strong> (appropriate & efficient), <strong>Finance</strong> (inclusion & affordability), <strong>Entrepreneurship</strong> (local capacity & enterprises), and <strong>Policy</strong> (influencing for conducive environment) <span class="citation">[cite: 36, 37, 38, 79, 80, 756, 765, 785]</span>.</li>
-                <li>User-Centricity: Grounded in understanding end-user needs; solutions tailored to local contexts <span class="citation">[cite: 12, 84, 85, 439]</span>.</li>
-                <li>Goal: Create self-sustaining systems that flourish beyond direct involvement <span class="citation">[cite: 40, 41, 81, 224]</span>.</li>
+                <li>Core Idea: Sustainable impact requires a supportive environment (technology, finance, skills, markets), not just technology deployment <span class="citation">[cite: 34, 35, 39, 170, 224]</span>.</li>
+                <li>Pillars: Integrates <strong>Technology</strong> (appropriate & efficient), <strong>Finance</strong> (inclusion & affordability), <strong>Entrepreneurship</strong> (local capacity & enterprises), and <strong>Policy</strong> (influencing for conducive environment) <span class="citation">[cite: 36, 37, 38, 8, 12, 79, 756, 765, 785]</span>.</li>
+                <li>User-Centricity: Grounded in understanding end-user needs; solutions tailored to local contexts <span class="citation">[cite: 8, 84, 85, 439]</span>.</li>
+                <li>Goal: Create self-sustaining systems that flourish beyond direct involvement <span class="citation">[cite: 40, 41, 81]</span>.</li>
             </ul>
         </div>
 
         <div class="block" id="block4">
              <h3>How It Works: Maturation Phases</h3>
              <ul>
-                 <li><strong>1. Innovation:</strong> Identifying needs, prototyping solutions, finding 'champion users'. SELCO often fills gaps directly <span class="citation">[cite: 187, 188, 229, 330]</span>.</li>
+                 <li><strong>1. Innovation:</strong> Identifying needs, prototyping solutions, finding 'champion users'. SELCO often fills gaps directly <span class="citation">[cite: 187, 188, 229, 231]</span>.</li>
                  <li class="flow-arrow">⬇</li>
-                 <li><strong>2. Incubation:</strong> Nurturing conditions for enterprises, strengthening actors (finance, suppliers) & relationships. SELCO supports & catalyzes <span class="citation">[cite: 189, 229, 312, 314, 355, 357]</span>.</li>
+                 <li><strong>2. Incubation:</strong> Nurturing conditions for enterprises, strengthening actors (finance, suppliers) & relationships. SELCO supports & catalyzes <span class="citation">[cite: 189, 190, 229, 231, 314, 339]</span>.</li>
                   <li class="flow-arrow">⬇</li>
-                 <li><strong>3. Replication & Scaling:</strong> Mature phase where actors have viable models. Local enterprises may anchor interventions. SELCO 'exits' direct role, moves to advisory/policy influence <span class="citation">[cite: 191, 230, 232, 234, 235, 402, 406, 407, 517]</span>.</li>
+                 <li><strong>3. Replication & Scaling:</strong> Mature phase where actors have viable models. Local enterprises anchor interventions. SELCO 'exits' direct role, moves to advisory/policy influence <span class="citation">[cite: 191, 198, 230, 232, 234, 316, 402, 403, 406, 407, 411]</span>.</li>
              </ul>
         </div>
 
         <div class="block" id="block5">
             <h3>Where It Works: Nexus Areas</h3>
             <ul>
-                <li>Focus: Critical intersections like <strong>Health-Energy</strong> and <strong>Energy-Agriculture</strong> <span class="citation">[cite: 2, 102]</span>.</li>
-                <li>Health-Energy: Providing reliable solar power & efficient equipment to health facilities (e.g., 25,000 facilities goal) <span class="citation">[cite: 43, 55, 727]</span>.
-                    <div class="evidence">Impact Example: Reduced vaccine wastage (>80%), improved service quality, cost savings <span class="citation">[cite: 57, 56, 54]</span>. Solarizing boat clinics <span class="citation">[cite: 58, 575]</span>.</div>
+                <li>Focus: Critical intersections like <strong>Health-Energy</strong> and <strong>Energy-Agriculture</strong> <span class="citation">[cite: 2, 42, 59, 102, 161, 759, 753]</span>.</li>
+                <li>Health-Energy: Providing reliable solar power & efficient equipment to health facilities (e.g., 25,000 target) <span class="citation">[cite: 43, 17, 727, 793]</span>.
+                    <div class="evidence">Impact Example: Reduced vaccine wastage (>80%), improved service quality, cost savings <span class="citation">[cite: 57, 55, 56]</span>. Solarizing boat clinics <span class="citation">[cite: 58, 574, 580]</span>.</div>
                 </li>
-                 <li>Energy-Agriculture: DRE solutions across the value chain for small farmers (irrigation, processing, cold storage) <span class="citation">[cite: 59, 60, 61, 753]</span>.
-                     <div class="evidence">Impact Example: Empowering millet farmers, solar cold storage reducing post-harvest loss, hydroponic fodder stations <span class="citation">[cite: 68, 70, 34]</span>.</div>
+                 <li>Energy-Agriculture: DRE solutions across the value chain for small farmers (irrigation, processing, cold storage) <span class="citation">[cite: 27, 59, 60, 61, 754, 755]</span>.
+                     <div class="evidence">Impact Example: Empowering millet farmers <span class="citation">[cite: 68, 27]</span>, solar cold storage reducing post-harvest loss <span class="citation">[cite: 69, 70]</span>, hydroponic fodder stations <span class="citation">[cite: 70]</span>.</div>
                  </li>
-                 <li>Cross-Cutting: Includes livelihoods, education, and basic infrastructure <span class="citation">[cite: 747, 755]</span>.</li>
+                 <li>Impact Goal: Drive systemic change for sustainable livelihoods and wellbeing in underserved communities <span class="citation">[cite: 5, 108, 220, 750]</span>.</li>
             </ul>
         </div>
 
