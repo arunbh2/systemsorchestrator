@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selco Foundation: System Orchestration</title>
+    <style>
+        /* A2 Size approx 1587 x 2245 pixels. Using viewport units for responsiveness, approximating ratio */
+        body {
+            font-family: 'Open Sans', Arial, sans-serif;
+            background-color: #f5f5f5; /* Neutral Base */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Ensure it takes at least full viewport height */
+        }
+
+        .slide-container {
+            width: 90vw; /* Responsive width */
+            max-width: 1587px; /* Max width for A2 aspect */
+            aspect-ratio: 1 / 1.414; /* A2 Aspect Ratio */
+            background-color: white;
+            padding: 4vmin; /* Responsive padding */
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 columns */
+            grid-template-rows: auto 1fr 1fr; /* Header row + 2 content rows */
+            gap: 3vmin; /* Responsive gap */
+            overflow: hidden; /* Ensure content fits */
+            box-sizing: border-box;
+        }
+
+        /* --- 1. Hierarchy --- */
+        .header {
+            grid-column: 1 / -1; /* Span all columns */
+            text-align: center;
+            border-bottom: 2px solid #FFA600; /* Primary Yellow/Orange */
+            padding-bottom: 2vmin;
+            margin-bottom: 2vmin;
+        }
+        .title {
+            font-size: clamp(2rem, 4vw, 3.5rem); /* Responsive font size */
+            font-weight: bold;
+            color: #1B9CFC; /* Primary Blue */
+            margin: 0;
+        }
+        .subtitle {
+            font-size: clamp(1.2rem, 2vw, 2rem);
+            color: #555;
+            margin: 0.5vmin 0 1vmin 0;
+        }
+        .tagline {
+            font-size: clamp(1rem, 1.8vw, 1.8rem);
+            color: #2ECC71; /* Primary Green */
+            font-style: italic;
+            margin: 0;
+        }
+
+        /* --- 2. Structure Content --- */
+        .block {
+            background-color: #f5f5f5; /* Neutral Base for blocks */
+            padding: 2vmin;
+            border-radius: 8px;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+            overflow-y: auto; /* Allow scroll within block if content overflows */
+            max-height: 100%; /* Ensure blocks don't exceed grid cell height */
+        }
+        .block h3 {
+            font-size: clamp(1.1rem, 1.9vw, 1.8rem);
+            font-weight: bold;
+            color: #1B9CFC; /* Primary Blue */
+            margin-top: 0;
+            margin-bottom: 1.5vmin;
+            border-bottom: 1px solid #FFA600; /* Primary Yellow/Orange */
+            padding-bottom: 1vmin;
+            display: flex;
+            align-items: center;
+        }
+        .block h3::before { /* Simple Icon placeholder */
+           content: '🔹';
+           margin-right: 1vmin;
+           font-size: clamp(1rem, 1.5vw, 1.5rem);
+        }
+
+        /* Specific block placements */
+        #block1 { grid-column: 1 / 2; grid-row: 2 / 3; }
+        #block2 { grid-column: 2 / 3; grid-row: 2 / 3; }
+        #block3 { grid-column: 3 / 4; grid-row: 2 / 3; }
+        #block4 { grid-column: 1 / 3; grid-row: 3 / 4; } /* Span 2 columns */
+        #block5 { grid-column: 3 / 4; grid-row: 3 / 4; }
+
+        /* --- 4. Visual Flow & 5. Text Density --- */
+        ul {
+            list-style: none;
+            padding-left: 1vmin;
+            margin: 0;
+            flex-grow: 1; /* Allow list to take available space */
+        }
+        li {
+            font-size: clamp(0.8rem, 1.4vw, 1.2rem);
+            margin-bottom: 1.2vmin;
+            line-height: 1.5;
+            color: #333;
+            display: flex;
+        }
+         li::before { /* Bullet point style */
+            content: '▪️';
+            color: #FFA600; /* Primary Yellow/Orange */
+            margin-right: 1.5vmin;
+            font-size: clamp(0.7rem, 1.2vw, 1rem);
+            line-height: 1.5; /* Align with text */
+         }
+        strong {
+            font-weight: bold;
+            color: #1B9CFC; /* Primary Blue for emphasis */
+        }
+        .highlight {
+            color: #2ECC71; /* Primary Green */
+            font-weight: bold;
+        }
+        .citation {
+            font-size: 0.8em;
+            color: #ED6A82; /* Pink accent */
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .flow-arrow { /* Simple arrow for visual flow indication */
+           font-size: clamp(1.5rem, 2.5vw, 2.5rem);
+           color: #FFA600;
+           text-align: center;
+           margin: 1vmin 0;
+           align-self: center; /* Center arrow within the block */
+        }
+        #block4 .flow-arrow { /* Specific styling for block 4 arrow */
+           margin: 1vmin 0;
+        }
+
+
+        /* --- 6. Supporting Evidence --- */
+        .evidence {
+            font-size: clamp(0.8rem, 1.3vw, 1.1rem);
+            font-style: italic;
+            color: #555;
+            margin-top: 1vmin;
+            border-left: 3px solid #2ECC71; /* Primary Green */
+            padding-left: 1.5vmin;
+        }
+        .evidence strong {
+            color: #2ECC71;
+        }
+
+        /* --- Responsive Adjustments --- */
+        @media (max-width: 768px) {
+            .slide-container {
+                grid-template-columns: 1fr; /* Stack columns */
+                grid-template-rows: auto repeat(5, auto); /* Auto rows for header + 5 blocks */
+                width: 95vw;
+                aspect-ratio: auto; /* Allow height to adjust */
+                height: auto; /* Allow height to adjust */
+                min-height: 100vh;
+            }
+            #block1, #block2, #block3, #block4, #block5 {
+                grid-column: 1 / -1; /* Each block spans full width */
+            }
+             #block1 { grid-row: 2 / 3; }
+             #block2 { grid-row: 3 / 4; }
+             #block3 { grid-row: 4 / 5; }
+             #block4 { grid-row: 5 / 6; }
+             #block5 { grid-row: 6 / 7; }
+
+            .title { font-size: clamp(1.8rem, 5vw, 2.5rem); }
+            .subtitle { font-size: clamp(1rem, 3vw, 1.5rem); }
+            .tagline { font-size: clamp(0.9rem, 2.5vw, 1.3rem); }
+            .block h3 { font-size: clamp(1rem, 3vw, 1.5rem); }
+            li { font-size: clamp(0.8rem, 2.2vw, 1rem); }
+            .evidence { font-size: clamp(0.75rem, 2vw, 0.9rem); }
+        }
+
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1 class="title">SELCO Foundation: System Orchestration</h1>
+            <h2 class="subtitle">Building Sustainable Ecosystems for Underserved Communities</h2>
+            <p class="tagline">Leveraging Energy as a Catalyst for Development</p>
+        </div>
+
+        <div class="block" id="block1">
+            <h3>Who is SELCO Foundation?</h3>
+            <ul>
+                <li>Mission: Create solutions using <strong>sustainable energy</strong> to bridge environmental sustainability and poverty alleviation <span class="citation">[cite: 23]</span>.</li>
+                <li>Goal: Foster sustainable development via decentralized renewable energy (DRE) <span class="citation">[cite: 24, 25]</span>.</li>
+                <li>Values: Rooted in <strong>equity</strong>, <strong>inclusivity</strong>, <strong>transparency</strong>, and <strong>sustainability</strong> <span class="citation">[cite: 28, 29, 30]</span>.</li>
+                 <li>Approach: Respects local contexts, uses participatory methods, focuses on economic empowerment and need-based innovation <span class="citation">[cite: 7, 31, 32]</span>.</li>
+            </ul>
+        </div>
+
+        <div class="block" id="block2">
+            <h3>What is System Orchestration?</h3>
+            <ul>
+                <li>Definition: Uniting diverse stakeholders, aligning efforts, and sustaining progress towards shared goals <span class="citation">[cite: 1, 6, 101]</span>.</li>
+                <li>SELCO's Role: Acts as a <strong class="highlight">central coordinating entity</strong> <span class="citation">[cite: 4]</span>; a 'conductor' guiding stakeholders (govt., finance, tech providers, NGOs, communities) <span class="citation">[cite: 7, 103]</span>.</li>
+                 <li>Focus: Propelling collective action, building bridges, empowering local leaders, and maximizing impact <span class="citation">[cite: 11, 12, 105]</span>.</li>
+                 <li>Key Function: Fosters transformational change by weaving together actors and galvanizing collective action across ecosystems <span class="citation">[cite: 7, 17]</span>.</li>
+            </ul>
+        </div>
+
+        <div class="block" id="block3">
+            <h3>The Ecosystem Approach</h3>
+            <ul>
+                <li>Core Idea: Sustainable impact requires a supportive environment, not just technology deployment <span class="citation">[cite: 34, 35, 77, 78]</span>.</li>
+                <li>Pillars: Integrates <strong>Technology</strong> (appropriate & efficient), <strong>Finance</strong> (inclusion & affordability), <strong>Entrepreneurship</strong> (local capacity & enterprises), and <strong>Policy</strong> (influencing for conducive environment) <span class="citation">[cite: 36, 37, 38, 79, 80, 756, 765, 785]</span>.</li>
+                <li>User-Centricity: Grounded in understanding end-user needs; solutions tailored to local contexts <span class="citation">[cite: 12, 84, 85, 439]</span>.</li>
+                <li>Goal: Create self-sustaining systems that flourish beyond direct involvement <span class="citation">[cite: 40, 41, 81, 224]</span>.</li>
+            </ul>
+        </div>
+
+        <div class="block" id="block4">
+             <h3>How It Works: Maturation Phases</h3>
+             <ul>
+                 <li><strong>1. Innovation:</strong> Identifying needs, prototyping solutions, finding 'champion users'. SELCO often fills gaps directly <span class="citation">[cite: 187, 188, 229, 330]</span>.</li>
+                 <li class="flow-arrow">⬇</li>
+                 <li><strong>2. Incubation:</strong> Nurturing conditions for enterprises, strengthening actors (finance, suppliers) & relationships. SELCO supports & catalyzes <span class="citation">[cite: 189, 229, 312, 314, 355, 357]</span>.</li>
+                  <li class="flow-arrow">⬇</li>
+                 <li><strong>3. Replication & Scaling:</strong> Mature phase where actors have viable models. Local enterprises may anchor interventions. SELCO 'exits' direct role, moves to advisory/policy influence <span class="citation">[cite: 191, 230, 232, 234, 235, 402, 406, 407, 517]</span>.</li>
+             </ul>
+        </div>
+
+        <div class="block" id="block5">
+            <h3>Where It Works: Nexus Areas</h3>
+            <ul>
+                <li>Focus: Critical intersections like <strong>Health-Energy</strong> and <strong>Energy-Agriculture</strong> <span class="citation">[cite: 2, 102]</span>.</li>
+                <li>Health-Energy: Providing reliable solar power & efficient equipment to health facilities (e.g., 25,000 facilities goal) <span class="citation">[cite: 43, 55, 727]</span>.
+                    <div class="evidence">Impact Example: Reduced vaccine wastage (>80%), improved service quality, cost savings <span class="citation">[cite: 57, 56, 54]</span>. Solarizing boat clinics <span class="citation">[cite: 58, 575]</span>.</div>
+                </li>
+                 <li>Energy-Agriculture: DRE solutions across the value chain for small farmers (irrigation, processing, cold storage) <span class="citation">[cite: 59, 60, 61, 753]</span>.
+                     <div class="evidence">Impact Example: Empowering millet farmers, solar cold storage reducing post-harvest loss, hydroponic fodder stations <span class="citation">[cite: 68, 70, 34]</span>.</div>
+                 </li>
+                 <li>Cross-Cutting: Includes livelihoods, education, and basic infrastructure <span class="citation">[cite: 747, 755]</span>.</li>
+            </ul>
+        </div>
+
+    </div>
+</body>
+</html>
