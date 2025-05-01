@@ -3514,6 +3514,618 @@
                 .text('Uploading: New patterns');
         }
 
+            // Pathway Diagram - Developmental Pathway for Orchestration
+function createPathwayDiagram() {
+    const container = document.getElementById('pathway-diagram');
+    if (!container) return;
+    
+    const width = container.clientWidth;
+    const height = container.clientHeight;
+    
+    // Create SVG
+    const svg = d3.select(container)
+        .append('svg')
+        .attr('width', width)
+        .attr('height', height);
+    
+    // Create tooltip
+    const tooltip = d3.select(container)
+        .append('div')
+        .attr('class', 'diagram-tooltip');
+    
+    // Define the phases
+    const phases = [
+        {
+            id: 'phase1',
+            name: 'Phase 1',
+            title: 'Initiation & Coalition Building',
+            description: 'Engage stakeholders, build trust, create governance structures, and articulate the systemic change vision.',
+            activities: [
+                'Stakeholder mapping & outreach',
+                'Trust building & relationship development',
+                'Creation of governance structures',
+                'Articulation of shared vision'
+            ],
+            indicators: [
+                'Diverse stakeholder buy-in',
+                'Clear value proposition',
+                'Initial quick win projects identified'
+            ],
+            color: '#5643cc'
+        },
+        {
+            id: 'phase2',
+            name: 'Phase 2',
+            title: 'Orchestration in Action',
+            description: 'Coordinate initiatives as per the shared plan. Establish information-sharing systems and maintain momentum.',
+            activities: [
+                'Launch of coordinated initiatives',
+                'Information sharing mechanisms',
+                'Regular check-ins & progress tracking',
+                'Conflict management'
+            ],
+            indicators: [
+                'Joint implementation of activities',
+                'Efficient information flow',
+                'Emerging success stories'
+            ],
+            color: '#7155d9'
+        },
+        {
+            id: 'phase3',
+            name: 'Phase 3',
+            title: 'Expansion & Institutionalization',
+            description: 'Scale up the approach based on early successes. Bring in new partners and ensure the system can sustain the collaboration.',
+            activities: [
+                'Onboarding new partners',
+                'Mainstreaming changes in organizations',
+                'Knowledge sharing beyond initial geography',
+                'Resource mobilization for scale'
+            ],
+            indicators: [
+                'Expanded stakeholder participation',
+                'System changes becoming normalized',
+                'External recognition of the initiative'
+            ],
+            color: '#8c66e5'
+        },
+        {
+            id: 'phase4',
+            name: 'Phase 4',
+            title: 'Graduation or Evolution',
+            description: 'Step back to a lighter-touch role if the system is self-organizing, or evolve to tackle new challenges.',
+            activities: [
+                'Formalization of ongoing governance',
+                'Evaluation of systemic impact',
+                'Reduced orchestrator intervention',
+                'Identification of new systemic challenges'
+            ],
+            indicators: [
+                'Self-sustaining collaboration',
+                'Measurable system-level outcomes',
+                'Persistent cultural or policy changes'
+            ],
+            color: '#ff7e5f'
+        }
+    ];
+    
+    // Set up layout parameters
+    const circleRadius = 40;
+    const circleSpacing = width / (phases.length + 1);
+    const yPosition = height * 0.25;
+    
+    // Draw connecting path between phases
+    const pathPoints = phases.map((_, i) => ({
+        x: (i + 1) * circleSpacing,
+        y: yPosition
+    }));
+    
+    // Create path generator with curve
+    const lineGenerator = d3.line()
+        .x(d => d.x)
+        .y(d => d.y)
+        .curve(d3.curveNatural);
+    
+    // Draw connecting path
+    svg.append('path')
+        .attr('d', lineGenerator(pathPoints))
+        .attr('stroke', 'var(--gray-400)')
+        .attr('stroke-width', 4)
+        .attr('fill', 'none');
+    
+    // Create gradient for the circles
+    const defs = svg.append('defs');
+    
+    phases.forEach((phase, i) => {
+        const gradientId = `phase${i+1}Gradient`;
+        
+        const gradient = defs.append('radialGradient')
+            .attr('id', gradientId)
+            .attr('cx', '50%')
+            .attr('cy', '50%')
+            .attr('r', '50%');
+        
+        gradient.append('stop')
+            .attr('offset', '0%')
+            .attr('stop-color', phase.color);
+            
+        gradient.append('stop')
+            .attr('offset', '100%')
+            .attr('stop-color', d3.color(phase.color).darker(0.5));
+    });
+    
+    // Create phase circles and labels
+    phases.forEach((phase, i) => {
+        const phaseGroup = svg.append('g')
+            .attr('id', phase.id);
+        
+        // Draw the phase circle
+        const circle = phaseGroup.append('circle')
+            .attr('class', 'phase-circle')
+            .attr('cx', pathPoints[i].x)
+            .attr('cy', pathPoints[i].y)
+            .attr('r', circleRadius)
+            .attr('fill', `url(#phase${i+1}Gradient)`)
+            .attr('stroke', 'white')
+            .attr('stroke-width', 2)
+            .on('mouseover', function(event) {
+                // Highlight the circle
+                d3.select(this)
+                    .attr('r', circleRadius + 5)
+                    .attr('stroke-width', 3);
+                
+                // Display tooltip
+                tooltip
+                    .style('opacity', 1)
+                    .html(`
+                        <div style="text-align: center;"><strong>${phase.name}: ${phase.title}</strong></div>
+                        <p>${phase.description}</p>
+                        <strong>Key Activities:</strong>
+                        <ul style="margin: 5px 0; padding-left: 15px;">
+                            ${phase.activities.map(activity => `<li>${activity}</li>`).join('')}
+                        </ul>
+                        <strong>Success Indicators:</strong>
+                        <ul style="margin: 5px 0; padding-left: 15px;">
+                            ${phase.indicators.map(indicator => `<li>${indicator}</li>`).join('')}
+                        </ul>
+                    `)
+                    .style('left', `${event.pageX - container.getBoundingClientRect().left + 10}px`)
+                    .style('top', `${event.pageY - container.getBoundingClientRect().top + 10}px`);
+                
+                // Highlight other elements
+                phaseGroup.select('.phase-title')
+                    .attr('font-weight', '700')
+                    .attr('fill', phase.color);
+                
+                // Show and animate the box
+                phaseGroup.select('.phase-box')
+                    .transition()
+                    .duration(300)
+                    .attr('opacity', 1)
+                    .attr('y', yPosition + circleRadius + 20);
+            })
+            .on('mouseout', function() {
+                // Reset circle
+                d3.select(this)
+                    .attr('r', circleRadius)
+                    .attr('stroke-width', 2);
+                
+                // Hide tooltip
+                tooltip.style('opacity', 0);
+                
+                // Reset other elements
+                phaseGroup.select('.phase-title')
+                    .attr('font-weight', '500')
+                    .attr('fill', 'var(--dark)');
+                
+                // Hide the box
+                phaseGroup.select('.phase-box')
+                    .transition()
+                    .duration(300)
+                    .attr('opacity', 0)
+                    .attr('y', yPosition + circleRadius + 30);
+            });
+        
+        // Add phase number to circle
+        phaseGroup.append('text')
+            .attr('class', 'phase-label')
+            .attr('x', pathPoints[i].x)
+            .attr('y', pathPoints[i].y + 5)
+            .attr('text-anchor', 'middle')
+            .attr('dominant-baseline', 'middle')
+            .attr('font-size', '16px')
+            .attr('font-weight', '700')
+            .attr('fill', 'white')
+            .text(i + 1);
+        
+        // Add phase title below circle
+        phaseGroup.append('text')
+            .attr('class', 'phase-title')
+            .attr('x', pathPoints[i].x)
+            .attr('y', pathPoints[i].y + circleRadius + 20)
+            .attr('text-anchor', 'middle')
+            .attr('font-size', '14px')
+            .attr('font-weight', '500')
+            .text(phase.title);
+        
+        // Create detailed info box (hidden by default)
+        const boxWidth = circleSpacing * 0.9;
+        const boxHeight = 100;
+        
+        phaseGroup.append('rect')
+            .attr('class', 'phase-box')
+            .attr('x', pathPoints[i].x - boxWidth / 2)
+            .attr('y', yPosition + circleRadius + 30) // Start slightly lower for animation
+            .attr('width', boxWidth)
+            .attr('height', boxHeight)
+            .attr('rx', 5)
+            .attr('ry', 5)
+            .attr('fill', 'white')
+            .attr('stroke', phase.color)
+            .attr('stroke-width', 2)
+            .attr('opacity', 0); // Hidden by default
+    });
+    
+    // Add direction arrow
+    svg.append('text')
+        .attr('x', width - 20)
+        .attr('y', yPosition - 20)
+        .attr('text-anchor', 'end')
+        .attr('font-size', '18px')
+        .attr('font-weight', '500')
+        .text('→ Time & System Maturity');
+    
+    // Add feedback loops
+    const feedbackPathPoints = [
+        { x: pathPoints[phases.length - 1].x, y: yPosition + 80 },
+        { x: (width + pathPoints[0].x) / 2, y: yPosition + 100 },
+        { x: pathPoints[0].x, y: yPosition + 80 }
+    ];
+    
+    // Create feedback path
+    const feedbackPath = svg.append('path')
+        .attr('d', lineGenerator(feedbackPathPoints))
+        .attr('stroke', 'var(--accent-light)')
+        .attr('stroke-width', 2)
+        .attr('stroke-dasharray', '5,5')
+        .attr('fill', 'none')
+        .attr('marker-end', 'url(#arrowhead)');
+    
+    // Create arrowhead marker for the feedback loop
+    svg.append('defs')
+        .append('marker')
+        .attr('id', 'arrowhead')
+        .attr('viewBox', '0 0 10 10')
+        .attr('refX', 8)
+        .attr('refY', 5)
+        .attr('markerWidth', 6)
+        .attr('markerHeight', 6)
+        .attr('orient', 'auto')
+        .append('path')
+        .attr('d', 'M 0 0 L 10 5 L 0 10 z')
+        .attr('fill', 'var(--accent-light)');
+    
+    // Add legend for feedback loops
+    svg.append('text')
+        .attr('x', width / 2)
+        .attr('y', yPosition + 120)
+        .attr('text-anchor', 'middle')
+        .attr('font-size', '12px')
+        .attr('font-style', 'italic')
+        .attr('fill', 'var(--accent)')
+        .text('Learning cycles can prompt revisiting earlier phases as the system evolves');
+    
+    // Add title
+    svg.append('text')
+        .attr('x', width / 2)
+        .attr('y', 30)
+        .attr('text-anchor', 'middle')
+        .attr('font-size', '16px')
+        .attr('font-weight', '700')
+        .text('Developmental Pathway for Systems Orchestration');
+}
+
+            // Contribution Diagram - For the Evaluation Section
+function createContributionDiagram() {
+    const container = document.getElementById('contribution-diagram');
+    if (!container) return;
+    
+    const width = container.clientWidth;
+    const height = container.clientHeight;
+    
+    // Create SVG
+    const svg = d3.select(container)
+        .append('svg')
+        .attr('width', width)
+        .attr('height', height);
+    
+    // Create tooltip
+    const tooltip = d3.select(container)
+        .append('div')
+        .attr('class', 'diagram-tooltip');
+    
+    // Define the contribution elements
+    const contributionElements = [
+        {
+            id: 'orchestrator',
+            name: 'Orchestrator Activities',
+            description: 'The convening, coordinating, and catalyzing functions performed by the orchestrator.',
+            examples: [
+                'Stakeholder convening',
+                'Knowledge sharing facilitation',
+                'Platform development',
+                'Resource mobilization'
+            ],
+            color: '#ff7e5f',
+            x: width * 0.2,
+            y: height * 0.2,
+            width: width * 0.25,
+            height: height * 0.2
+        },
+        {
+            id: 'partner',
+            name: 'Partner Activities',
+            description: 'Actions undertaken by stakeholders within the orchestrated system.',
+            examples: [
+                'Service delivery',
+                'Policy implementation',
+                'Market participation',
+                'Community engagement'
+            ],
+            color: '#7155d9',
+            x: width * 0.2,
+            y: height * 0.5,
+            width: width * 0.25,
+            height: height * 0.2
+        },
+        {
+            id: 'external',
+            name: 'External Factors',
+            description: 'Contextual elements outside the direct influence of the initiative.',
+            examples: [
+                'Policy environment',
+                'Market conditions',
+                'Social trends',
+                'Technological changes'
+            ],
+            color: '#2a3990',
+            x: width * 0.2,
+            y: height * 0.8,
+            width: width * 0.25,
+            height: height * 0.15
+        },
+        {
+            id: 'outcomes',
+            name: 'System Outcomes',
+            description: 'The changes observed at the system level that multiple factors contribute to.',
+            examples: [
+                'Policy changes',
+                'Institutional behavior shifts',
+                'Market transformation',
+                'Social norm changes'
+            ],
+            color: '#5643cc',
+            x: width * 0.7,
+            y: height * 0.5,
+            width: width * 0.25,
+            height: height * 0.25
+        }
+    ];
+    
+    // Create gradients
+    const defs = svg.append('defs');
+    
+    contributionElements.forEach((element) => {
+        const gradient = defs.append('linearGradient')
+            .attr('id', `${element.id}Gradient`)
+            .attr('x1', '0%')
+            .attr('y1', '0%')
+            .attr('x2', '100%')
+            .attr('y2', '100%');
+        
+        gradient.append('stop')
+            .attr('offset', '0%')
+            .attr('stop-color', d3.color(element.color).brighter(0.5));
+            
+        gradient.append('stop')
+            .attr('offset', '100%')
+            .attr('stop-color', element.color);
+    });
+    
+    // Draw connection arrows
+    const connections = [
+        {
+            from: 'orchestrator',
+            to: 'outcomes',
+            strength: 'partial',
+            label: 'Contribution'
+        },
+        {
+            from: 'partner',
+            to: 'outcomes',
+            strength: 'strong',
+            label: 'Significant\nContribution'
+        },
+        {
+            from: 'external',
+            to: 'outcomes',
+            strength: 'partial',
+            label: 'External\nInfluence'
+        }
+    ];
+    
+    // Calculate connection points
+    connections.forEach(connection => {
+        const fromElement = contributionElements.find(e => e.id === connection.from);
+        const toElement = contributionElements.find(e => e.id === connection.to);
+        
+        connection.x1 = fromElement.x + fromElement.width;
+        connection.y1 = fromElement.y + fromElement.height / 2;
+        connection.x2 = toElement.x;
+        connection.y2 = toElement.y + toElement.height / 2;
+        
+        // Add a curve control point
+        connection.cpx = (connection.x1 + connection.x2) / 2;
+        connection.cpy = connection.y1;
+    });
+    
+    // Draw the arrows
+    connections.forEach((connection, i) => {
+        // Create path for arrow
+        const arrowPath = svg.append('path')
+            .attr('class', 'contribution-arrow')
+            .attr('d', `M${connection.x1},${connection.y1} Q${connection.cpx},${connection.cpy} ${connection.x2},${connection.y2}`)
+            .attr('stroke', connection.strength === 'strong' ? 'var(--primary)' : 'var(--gray-600)')
+            .attr('stroke-width', connection.strength === 'strong' ? 3 : 2)
+            .attr('fill', 'none')
+            .attr('marker-end', `url(#arrow${i})`)
+            .attr('stroke-dasharray', connection.strength === 'partial' ? '5,5' : '0');
+        
+        // Animated dash offset for the strong connection
+        if (connection.strength === 'strong') {
+            const totalLength = arrowPath.node().getTotalLength();
+            arrowPath
+                .attr('stroke-dasharray', totalLength)
+                .attr('stroke-dashoffset', totalLength)
+                .transition()
+                .duration(3000)
+                .attr('stroke-dashoffset', 0)
+                .on('end', function() {
+                    // Start a subtle pulse animation after the initial animation
+                    d3.select(this)
+                        .attr('stroke-dasharray', '0')
+                        .transition()
+                        .duration(2000)
+                        .attr('stroke-width', 4)
+                        .transition()
+                        .duration(2000)
+                        .attr('stroke-width', 3)
+                        .on('end', function repeat() {
+                            d3.select(this)
+                                .transition()
+                                .duration(2000)
+                                .attr('stroke-width', 4)
+                                .transition()
+                                .duration(2000)
+                                .attr('stroke-width', 3)
+                                .on('end', repeat);
+                        });
+                });
+        }
+        
+        // Create arrowhead markers
+        defs.append('marker')
+            .attr('id', `arrow${i}`)
+            .attr('viewBox', '0 0 10 10')
+            .attr('refX', 8)
+            .attr('refY', 5)
+            .attr('markerWidth', 6)
+            .attr('markerHeight', 6)
+            .attr('orient', 'auto')
+            .append('path')
+            .attr('d', 'M 0 0 L 10 5 L 0 10 z')
+            .attr('fill', connection.strength === 'strong' ? 'var(--primary)' : 'var(--gray-600)');
+        
+        // Add label to connection
+        const labelX = (connection.x1 + connection.x2) / 2;
+        const labelY = connection.y1 - 10;
+        
+        const connectionLabel = svg.append('text')
+            .attr('x', labelX)
+            .attr('y', labelY)
+            .attr('text-anchor', 'middle')
+            .attr('font-size', '10px')
+            .attr('font-weight', '500')
+            .attr('fill', connection.strength === 'strong' ? 'var(--primary)' : 'var(--gray-600)');
+        
+        // Handle multi-line labels
+        const lines = connection.label.split('\n');
+        lines.forEach((line, j) => {
+            connectionLabel.append('tspan')
+                .attr('x', labelX)
+                .attr('dy', j === 0 ? 0 : 12)
+                .text(line);
+        });
+    });
+    
+    // Draw the contribution boxes
+    contributionElements.forEach(element => {
+        const boxGroup = svg.append('g')
+            .attr('id', element.id);
+        
+        // Draw box
+        boxGroup.append('rect')
+            .attr('class', 'contribution-box')
+            .attr('x', element.x)
+            .attr('y', element.y)
+            .attr('width', element.width)
+            .attr('height', element.height)
+            .attr('rx', 10)
+            .attr('ry', 10)
+            .attr('fill', `url(#${element.id}Gradient)`)
+            .attr('opacity', 0.9)
+            .attr('stroke', element.color)
+            .attr('stroke-width', 2)
+            .on('mouseover', function(event) {
+                // Highlight the box
+                d3.select(this)
+                    .attr('opacity', 1)
+                    .attr('stroke-width', 3);
+                
+                // Show tooltip
+                tooltip
+                    .style('opacity', 1)
+                    .html(`
+                        <div style="text-align: center;"><strong>${element.name}</strong></div>
+                        <p>${element.description}</p>
+                        <strong>Examples:</strong>
+                        <ul style="margin: 5px 0; padding-left: 15px;">
+                            ${element.examples.map(example => `<li>${example}</li>`).join('')}
+                        </ul>
+                    `)
+                    .style('left', `${event.pageX - container.getBoundingClientRect().left + 10}px`)
+                    .style('top', `${event.pageY - container.getBoundingClientRect().top + 10}px`);
+            })
+            .on('mouseout', function() {
+                // Reset box
+                d3.select(this)
+                    .attr('opacity', 0.9)
+                    .attr('stroke-width', 2);
+                
+                // Hide tooltip
+                tooltip.style('opacity', 0);
+            });
+        
+        // Add title to box
+        boxGroup.append('text')
+            .attr('x', element.x + element.width / 2)
+            .attr('y', element.y + 20)
+            .attr('text-anchor', 'middle')
+            .attr('font-size', '14px')
+            .attr('font-weight', '600')
+            .attr('fill', element.id === 'orchestrator' ? 'white' : 'white')
+            .text(element.name);
+    });
+    
+    // Add title to the diagram
+    svg.append('text')
+        .attr('x', width / 2)
+        .attr('y', 30)
+        .attr('text-anchor', 'middle')
+        .attr('font-size', '16px')
+        .attr('font-weight', '700')
+        .text('Contribution Analysis Framework');
+    
+    // Add subtitle explaining the diagram
+    svg.append('text')
+        .attr('x', width / 2)
+        .attr('y', height - 20)
+        .attr('text-anchor', 'middle')
+        .attr('font-size', '12px')
+        .attr('font-style', 'italic')
+        .text('Attribution is difficult in complex systems - focus on contribution pathways instead');
+}
+
         // Call all functions when DOM is loaded
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize network visualization
