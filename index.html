@@ -48,16 +48,21 @@
         h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 500; margin-bottom: 1.5rem; background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 40%, var(--secondary) 70%, var(--primary) 100%); -webkit-background-clip: text; background-clip: text; color: transparent; background-size: 300% 300%; animation: shimmer 10s ease-in-out infinite; }
         @keyframes shimmer { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
         h2 {
-            font-size: clamp(1.75rem, 3vw, 2.25rem);
-            margin-top: 0; margin-bottom: 1.5rem;
+            font-size: clamp(1.625rem, 2.75vw, 2.125rem);
+            margin-top: 0; margin-bottom: 1.375rem;
             position: relative;
-            padding-bottom: 0.75rem;
+            padding-bottom: 0;
         }
-        h2::after {
+        h2::after { display: none; }
+        h2.with-rule {
+            padding-bottom: 0.875rem;
+        }
+        h2.with-rule::after {
             content: '';
+            display: block;
             position: absolute;
             bottom: 0; left: 0;
-            width: 36px; height: 2px;
+            width: 28px; height: 2px;
             background: linear-gradient(90deg, var(--accent), var(--accent-warm));
             border-radius: 2px;
         }
@@ -154,25 +159,26 @@
         .skip-link:focus { top: 0; }
 
         main { padding-top: 110px; }
-        section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: clamp(4rem, 8vw, 8rem) 0; position: relative; overflow: hidden; }
+        section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: clamp(3rem, 5vw, 4.5rem) 0; position: relative; overflow: hidden; }
         section:nth-child(even) { background: var(--white); }
         section:nth-child(odd) { background: var(--cream); }
         /* New sections explicit backgrounds to override nth-child */
         section#voices { background: var(--cream); }
         section#organisations { background: var(--white); }
+        section#depths { background: var(--white); }
         section::before { content: ''; position: absolute; top: 0; right: 0; width: 40%; height: 100%; background: radial-gradient(ellipse at top right, rgba(201, 169, 98, 0.03) 0%, transparent 60%); pointer-events: none; }
         section::after { content: ''; position: absolute; bottom: 0; left: 0; width: 30%; height: 60%; background: radial-gradient(ellipse at bottom left, rgba(74, 88, 153, 0.02) 0%, transparent 50%); pointer-events: none; }
 
         .section-title { text-align: center; margin-bottom: 2rem; position: relative; padding-bottom: 0 !important; }
         .section-title::after { content: '' !important; position: absolute; bottom: -14px; left: 50%; transform: translateX(-50%); width: 48px; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent-warm)); border-radius: 2px; display: block !important; }
-        .section-intro { font-size: clamp(1.125rem, 2vw, 1.3125rem); color: var(--text-secondary); max-width: 780px; margin: 0 auto 4rem auto; text-align: center; line-height: 1.8; }
+        .section-intro { font-size: clamp(1.0625rem, 1.75vw, 1.25rem); color: var(--text-secondary); max-width: 700px; margin: 0 auto 3rem auto; text-align: center; line-height: 1.85; font-weight: 300; }
 
         .definition-box { background: linear-gradient(135deg, var(--white) 0%, rgba(201,169,98,0.04) 100%); border: 1px solid rgba(201,169,98,0.2); border-left: 5px solid var(--accent); border-radius: 0 16px 16px 0; padding: clamp(1.75rem, 4vw, 2.5rem); margin: 2.5rem 0; position: relative; box-shadow: 0 2px 12px rgba(201,169,98,0.08), var(--shadow-sm); }
         .definition-box::before { content: '"'; position: absolute; top: 1rem; left: 1.5rem; font-family: 'Fraunces', serif; font-size: 4rem; color: var(--accent); opacity: 0.15; line-height: 1; }
         .definition-box p { position: relative; z-index: 1; }
         .definition-box p:last-child { margin-bottom: 0; }
 
-        .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: clamp(1.5rem, 3vw, 2rem); margin: 2.5rem 0; }
+        .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: clamp(1.25rem, 2.5vw, 1.75rem); margin: 2rem 0; }
         .card { background: linear-gradient(145deg, var(--white) 0%, var(--cream) 100%); border-radius: 16px; border: 1px solid var(--border-light); padding: clamp(1.75rem, 3vw, 2.25rem); position: relative; overflow: hidden; transition: all var(--duration-normal) var(--ease-out-quart); box-shadow: 0 1px 3px rgba(26,31,60,0.05); }
         .card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent)); opacity: 0; transition: opacity var(--duration-normal) var(--ease-out-quart); }
         .card:hover { transform: translateY(-5px); box-shadow: 0 12px 32px rgba(26,31,60,0.12), 0 2px 8px rgba(26,31,60,0.06); border-color: transparent; }
@@ -183,11 +189,11 @@
         .card ul { margin: 0.75rem 0; padding-left: 1.25rem; }
         .card li { font-size: 0.9375rem; margin-bottom: 0.375rem; }
 
-        .content-block { margin-bottom: 4rem; position: relative; }
-        .content-block h2 { margin-bottom: 1.25rem; }
+        .content-block { margin-bottom: 3rem; position: relative; }
+        .content-block h2 { margin-bottom: 1.25rem; } .content-block h2.with-rule { margin-bottom: 1.5rem; }
         .content-block > p { max-width: 780px; }
 
-        .feature-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+        .feature-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.25rem; margin: 1.75rem 0; }
         .feature-card { background: linear-gradient(160deg, var(--white) 0%, var(--cream) 100%); border: 1px solid var(--border-light); border-radius: 16px; padding: 2rem; text-align: center; transition: all var(--duration-normal) var(--ease-out-quart); position: relative; box-shadow: 0 1px 3px rgba(26,31,60,0.04); }
         .feature-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: transparent; }
         .feature-icon { width: 56px; height: 56px; background: linear-gradient(135deg, var(--white) 0%, var(--cream-dark) 100%); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; font-size: 1.5rem; border: 1px solid rgba(201,169,98,0.2); box-shadow: 0 2px 8px rgba(26,31,60,0.06); }
@@ -1031,6 +1037,35 @@
             .laws-grid { grid-template-columns: 1fr; }
             .laws-callout { grid-template-columns: 1fr; }
         }
+
+        /* ===== SECTION EYEBROW LABELS ===== */
+        .section-eyebrow {
+            display: block;
+            font-size: 0.625rem;
+            font-weight: 600;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 0.875rem;
+            text-align: center;
+        }
+        .section-title-wrap {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .section-title-wrap .section-title {
+            margin-bottom: 0;
+        }
+        /* Richer section intro p */
+        .section-intro-sub {
+            font-size: 0.9375rem;
+            color: var(--text-muted);
+            max-width: 620px;
+            margin: 0.875rem auto 0;
+            text-align: center;
+            line-height: 1.75;
+            font-weight: 300;
+        }
     </style>
 </head>
 <body>
@@ -1050,16 +1085,14 @@
             </div>
             <nav>
                 <ul class="nav-links" id="nav-links">
-                    <li><a href="#intro" class="nav-item active">Introduction</a></li>
-                    <li><a href="#core-concepts" class="nav-item">Core Concepts</a></li>
-                    <li><a href="#frameworks" class="nav-item">Frameworks</a></li>
-                    <li><a href="#implementation" class="nav-item">Implementation</a></li>
-                    <li><a href="#evaluation" class="nav-item">Evaluation</a></li>
-                    <li><a href="#case-studies" class="nav-item">Case Studies</a></li>
-                    <li><a href="#diagnostic" class="nav-item">Diagnostic Tool</a></li>
-                    <li><a href="#voices" class="nav-item">Voices</a></li>
-                    <li><a href="#organisations" class="nav-item">Organisations</a></li>
-                    <li><a href="#resources" class="nav-item">Resources</a></li>
+                    <li><a href="#intro" class="nav-item active">The Idea</a></li>
+                    <li><a href="#core-concepts" class="nav-item">The Concept</a></li>
+                    <li><a href="#frameworks" class="nav-item">The Practice</a></li>
+                    <li><a href="#depths" class="nav-item">The Interior</a></li>
+                    <li><a href="#implementation" class="nav-item">In Action</a></li>
+                    <li><a href="#case-studies" class="nav-item">Evidence</a></li>
+                    <li><a href="#voices" class="nav-item">The Field</a></li>
+                    <li><a href="#resources" class="nav-item">Library</a></li>
                 </ul>
                 <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
             </nav>
@@ -1069,8 +1102,9 @@
   <main id="main-content">
         <section id="intro">
             <div class="container">
+                <span class="section-eyebrow">01 / The Idea</span>
                 <h1 class="section-title">Understanding Systems Orchestration</h1>
-                <p class="section-intro">Systems orchestration describes the work of coordinating many independent actors toward collective outcomes-without formal authority over any of them. It emerged because complex social problems needed a name for a real job: <em>holding the system-level glue</em> while building the conditions for durable, repeatable change.</p>
+                <p class="section-intro">There is a job that has always existed but rarely had a name. Coordinating many independent actors toward collective outcomes — without formal authority over any of them. <em>Holding the system-level glue.</em> This is systems orchestration.</p>
                 <div class="definition-box">
                     <p><strong>System Orchestration</strong> is the intentional design and continual stewardship of the relationships, flows, rules, and learning loops in a complex socio-technical system so that diverse, semi-autonomous actors can self-organise toward a shared, regenerative purpose.</p>
                     <p style="margin-top: 1rem; font-size: 0.95rem; color: var(--gray-600);">This maps closely to why "collaboration fails without supporting infrastructure" in collective impact-the famous backbone argument. The orchestrator doesn't implement solutions directly; they make it possible for others to implement solutions together.</p>
@@ -1130,6 +1164,7 @@
 
 
 <div class="content-block">
+    <p style="font-size:0.875rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--accent); font-weight:600; margin-bottom:0.5rem;">Where it came from</p>
     <h2>Intellectual Genealogy: Three Upstream Lineages</h2>
     <p>"Systems orchestration" didn't emerge from a single founding paper-it's a <strong>borrowed concept that converged</strong> from three distinct intellectual streams. The term gained traction because complex social problems needed a name for a real job: <em>aligning many independent actors without formal authority, while building the conditions for durable, repeatable outcomes</em>.</p>
     
@@ -1202,7 +1237,7 @@
 </div>
 
 <div class="content-block">
-    <h2>Six Interlocking Dimensions</h2>
+    <h2 class="with-rule">Six Interlocking Dimensions</h2>
     <div class="table-responsive">
         <table class="comparison-table">
             <thead><tr><th>Dimension</th><th>Guiding Question</th><th>Typical Practices</th></tr></thead>
@@ -1213,65 +1248,6 @@
                 <tr><td><strong>4. Incentive Alignment &amp; Value Flows</strong></td><td>How are contributions rewarded and benefits distributed?</td><td>Funding mechanisms, revenue-share models, recognition systems</td></tr>
                 <tr><td><strong>5. Enabling Infrastructure</strong></td><td>What shared "commons" make collaboration easy?</td><td>Digital platforms, knowledge repositories, capability-building labs</td></tr>
                 <tr><td><strong>6. Adaptive Stewardship</strong></td><td>How does the system learn and evolve?</td><td>Continuous sensing, feedback loops, experimental cycles</td></tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-
-<div class="content-block">
-    <h2>Core Characteristics of Orchestrators</h2>
-    <p>Effective systems orchestrators exhibit a humbly collaborative leadership style. They "park their egos" and facilitate cooperation among stakeholders to tackle massive problems collectively.</p>
-    <div class="feature-cards">
-        <div class="feature-card"><div class="feature-icon" aria-hidden="true">★</div><h3 class="feature-title">Collective Impact Focus</h3><p>They help coalitions achieve more together than any single entity could accomplish alone.</p></div>
-        <div class="feature-card"><div class="feature-icon" aria-hidden="true">🔗</div><h3 class="feature-title">Bridge-Building</h3><p>They empower and enable other leaders by sharing power, fostering trust, and elevating marginalized voices.</p></div>
-        <div class="feature-card"><div class="feature-icon" aria-hidden="true">🧰</div><h3 class="feature-title">Multiple Tools</h3><p>They deploy various approaches from convening dialogues to influencing policy and funding flows.</p></div>
-        <div class="feature-card"><div class="feature-icon" aria-hidden="true">✓</div><h3 class="feature-title">High Credibility</h3><p>They develop trust with stakeholders to coordinate effectively across public, private, and civil society boundaries.</p></div>
-    </div>
-</div>
-
-
-<div class="content-block">
-    <h2>The Orchestrator's Interior: Five Depths of Practice</h2>
-    <p>Most orchestration frameworks describe what orchestrators do. This goes deeper — to how they must be. These five dimensions emerge from a systems insight that most frameworks quietly avoid: the orchestrator is not outside the system they are orchestrating. They are a node within it, and their interior landscape shapes what the system can become.</p>
-    <div class="depth-cards">
-        <div class="depth-card">
-            <div class="depth-number">01</div>
-            <div class="depth-title">Conscious Presence</div>
-            <p>You cannot step outside the system to get a clean view. You can only become more or less conscious of how you are participating in it. The orchestrator who knows their biases, attachments, and blind spots is more trustworthy — not less — because the system already senses what the orchestrator has not named. <em>The move is to name it first.</em></p>
-        </div>
-        <div class="depth-card">
-            <div class="depth-number">02</div>
-            <div class="depth-title">Attention as Instrument</div>
-            <p>The quality of listening in a multi-stakeholder meeting determines whether actors bring their real constraints and genuine knowledge, or their polished institutional positions. An orchestrator who listens to understand — rather than to manage — creates a different quality of room, and a different quality of system. <em>Attention is not a precursor to action. It is action.</em></p>
-        </div>
-        <div class="depth-card">
-            <div class="depth-number">03</div>
-            <div class="depth-title">Whose Knowledge is Legible</div>
-            <p>Every data system, every reporting framework, every convening agenda encodes a theory of what counts as signal and what counts as noise. The orchestrator who routinely asks "whose knowledge is legible in this room?" is doing something more fundamental than inclusion work — they are shaping what the system can know about itself. <em>What you routinely notice, and routinely miss, is a political act.</em></p>
-        </div>
-        <div class="depth-card">
-            <div class="depth-number">04</div>
-            <div class="depth-title">The Discipline of Not-Yet-Knowing</div>
-            <p>Complex systems have a strong tendency toward premature closure — funders want a theory of change, governments want a recommendation, teams want a workplan. But premature resolution forecloses possibilities that hadn't yet had time to emerge. Holding a question open long enough for the system to reveal its own structure is the most technically demanding act in orchestration — and the most frequently surrendered under institutional pressure. <em>Not-yet-knowing is a competency, not a gap.</em></p>
-        </div>
-        <div class="depth-card">
-            <div class="depth-number">05</div>
-            <div class="depth-title">Self-Awareness as Technical Skill</div>
-            <p>The tensions an orchestrator carries — between fidelity to funders and fidelity to communities; between theory of change and the evidence that contradicts it; between pace the system needs and pace the budget allows — shape every interaction. They leak through tone, through which discomfort is made space for and which is normalised. This is what makes orchestration fundamentally different from project management. <em>The project manager can bracket unresolved tensions and execute. The orchestrator cannot.</em></p>
-        </div>
-    </div>
-</div>
-
-<div class="content-block">
-    <h2>Orchestration vs. Other Change Approaches</h2>
-    <div class="table-responsive">
-        <table class="comparison-table">
-            <thead><tr><th>Approach</th><th>Focus</th><th>Role</th><th>Timeframe</th></tr></thead>
-            <tbody>
-                <tr class="highlight"><td><strong>Systems Orchestration</strong></td><td>Shaping the entire ecosystem beyond any one initiative</td><td>"Knitting together" existing efforts and filling gaps</td><td>Long-term systemic change</td></tr>
-                <tr><td>Collective Impact</td><td>Multi-sector partnership toward common agenda</td><td>Backbone organization providing structure</td><td>Initiative-specific timeline</td></tr>
-                <tr><td>Program Implementation</td><td>Delivering specific services or solutions</td><td>Direct intervention provider</td><td>Program lifecycle</td></tr>
-                <tr><td>Consensus Building</td><td>Creating shared understanding</td><td>Forum facilitator or mediator</td><td>Often time-limited forums</td></tr>
             </tbody>
         </table>
     </div>
@@ -1300,114 +1276,6 @@
         <div class="card"><h3 class="card-title">Field-Building &amp; Institutional Entrepreneurship</h3><p><strong>Key insight:</strong> Systems change requires building entire "fields"-shared identity, knowledge base, standards, and supportive policies.</p><p>Battilana's work on institutional entrepreneurship explains how actors drive institutional change without formal authority.</p></div>
     </div>
 
-<div class="content-block">
-    <h2>The Grammar of Systems: Laws Every Orchestrator Needs</h2>
-    <p>Patrick Hoverstadt's synthesis of 33 systems laws gives orchestrators a precise vocabulary for what they observe in practice but often struggle to name. These are not metaphors — they are structural properties of how complex systems behave. Twelve laws are most directly applicable to orchestration work.</p>
-
-    <div class="laws-callout">
-        <div class="laws-callout-item">
-            <span class="laws-callout-label">Viability Principle</span>
-            <div class="laws-callout-law">Autonomy must balance cohesion; stability must balance change</div>
-            <p>This is the orchestrator's core tension, stated as structural law. Too much central control and sub-systems lose viability. Too little and the system fragments. The orchestrator holds this balance — they do not resolve it.</p>
-        </div>
-        <div class="laws-callout-item">
-            <span class="laws-callout-label">Law of Requisite Variety</span>
-            <div class="laws-callout-law">How well any system manages depends on how well it matches the variety it faces</div>
-            <p>An orchestrator with too narrow a repertoire will fail against a system with more variety than they can absorb. Diversity of tools is not optional — it is structurally necessary for any system manager facing genuine complexity.</p>
-        </div>
-        <div class="laws-callout-item">
-            <span class="laws-callout-label">Feedback Dominance Theorem</span>
-            <div class="laws-callout-law">Loops with strong feedback will take you where they take you, irrespective of the size of the input</div>
-            <p>This is why pushing harder rarely works. The dominant feedback loops in a system determine its trajectory more than any single intervention. The orchestrator's first question: which loops are dominant, and which should be strengthened or interrupted?</p>
-        </div>
-        <div class="laws-callout-item">
-            <span class="laws-callout-label">Relaxation Time Principle</span>
-            <div class="laws-callout-law">A system repeatedly shocked at shorter intervals than its recovery time may never stabilise</div>
-            <p>Most change efforts fail not because the intervention was wrong but because the pace exceeded the system's recovery capacity. Sequential pressures — new funders, new policy, new leadership — applied faster than the system can absorb produce chronic instability rather than transformation.</p>
-        </div>
-        <div class="laws-callout-item">
-            <span class="laws-callout-label">Darkness Principle</span>
-            <div class="laws-callout-law">There is always something about a system you cannot know</div>
-            <p>Epistemic humility is not a disposition — it is a structural necessity. Any model of a system is necessarily incomplete, and over-confidence in one's model is itself a systemic risk. Improving the model is always worthwhile; knowing its limits is essential.</p>
-        </div>
-        <div class="laws-callout-item">
-            <span class="laws-callout-label">Power Structuration Theorem</span>
-            <div class="laws-callout-law">A system has optimal agency when its needs for agency are balanced with those of its sub-systems</div>
-            <p>This provides a formal basis for distributed leadership. If the orchestrator's agency crowds out the agency of actors in the system, the system loses optimal performance. The orchestrator who accumulates authority is, structurally, making the system worse — even with good intentions.</p>
-        </div>
-    </div>
-
-    <div class="laws-grid">
-        <div class="law-card">
-            <div class="law-name">Self-Organising Principle</div>
-            <div class="law-statement">"Parts generate wholes."</div>
-            <p class="law-implication">The orchestrator does not build the whole — they create conditions for parts to generate it. This reframes the entire function: from architect to gardener. <strong>The whole cannot be designed top-down; it can only be enabled bottom-up.</strong></p>
-        </div>
-        <div class="law-card">
-            <div class="law-name">Principle of Emergence</div>
-            <div class="law-statement">"The whole is more than the sum of its parts."</div>
-            <p class="law-implication">Optimising individual actors does not optimise the system. The orchestrator attends to properties that only exist at system level — trust, narrative, shared infrastructure — which no single actor can produce alone.</p>
-        </div>
-        <div class="law-card">
-            <div class="law-name">1st &amp; 2nd Circular Causality</div>
-            <div class="law-statement">"Positive feedback drives state change. Negative feedback drives stability."</div>
-            <p class="law-implication">The orchestrator needs to know which loops to amplify (spreading a new norm, growing a coalition) and which to dampen (containing a conflict). Most facilitation mistakes are <strong>the wrong type of feedback applied at the wrong moment.</strong></p>
-        </div>
-        <div class="law-card">
-            <div class="law-name">Fractal Principle</div>
-            <div class="law-statement">"Systems replicate their own form."</div>
-            <p class="law-implication">The culture the orchestrator enacts in their own organisation replicates into the wider system they hold. An orchestrating entity that is itself hierarchical or non-transparent is modelling the opposite of what it is trying to catalyse. <strong>How you run yourself is what you propagate.</strong></p>
-        </div>
-        <div class="law-card">
-            <div class="law-name">System Survival Theorem</div>
-            <div class="law-statement">"Systems fail if their environment changes more than the system."</div>
-            <p class="law-implication">Directly relevant to climate and disaster risk work. A governance system or community institution that cannot adapt at the pace of environmental change will fail — regardless of how well it currently functions. Adaptation capacity is structural necessity, not a programme feature.</p>
-        </div>
-        <div class="law-card">
-            <div class="law-name">Redundancy of Potential Command</div>
-            <div class="law-statement">"Effectiveness depends on bringing together the right mix of information."</div>
-            <p class="law-implication">This is the formal basis for inclusive multi-stakeholder processes — not a values argument for diversity, but a <strong>performance argument:</strong> without the right variety of information in the room, the system cannot make good decisions, regardless of the orchestrator's skill.</p>
-        </div>
-        <div class="law-card">
-            <div class="law-name">Complexity Instability Principle</div>
-            <div class="law-statement">"Systems with too many changing parts tend to become unstable."</div>
-            <p class="law-implication">Adding more actors, workstreams, and initiatives to a coalition is not always better. Beyond a threshold, additional complexity generates instability faster than capability. The orchestrator must sometimes say no to growth — and this law gives structural justification.</p>
-        </div>
-        <div class="law-card">
-            <div class="law-name">Steady State Principle</div>
-            <div class="law-statement">"Stability of the system depends on the level of stability of its sub-systems, and vice versa."</div>
-            <p class="law-implication">The orchestrator cannot hold a stable system if its constituent organisations are chronically under-resourced or in leadership crisis. Organisational health of partners is a structural condition for system stability — not a secondary concern. <strong>Backbone support for partners is backbone support for the system.</strong></p>
-        </div>
-        <div class="law-card">
-            <div class="law-name">Conant-Ashby Theorem</div>
-            <div class="law-statement">"The ability to deal with any situation depends on how good your model of it is."</div>
-            <p class="law-implication">Shared measurement, system mapping, and learning loops are not monitoring requirements — they are model-improvement mechanisms. The better the collective model, the better every actor's ability to act within it. This is why shared data infrastructure is a leverage point, not overhead.</p>
-        </div>
-        <div class="law-card">
-            <div class="law-name">Adams 3rd Law</div>
-            <div class="law-statement">"A system's overall risk depends on balancing risk across levels of the system."</div>
-            <p class="law-implication">In development and humanitarian systems, risk is often concentrated at the implementer and community level while hedged at the funder and orchestrator level. This structural imbalance is itself a systemic failure. The orchestrator who does not actively redistribute risk downward is perpetuating a condition that undermines the system's overall resilience.</p>
-        </div>
-        <div class="law-card">
-            <div class="law-name">Conservation of Adaptation</div>
-            <div class="law-statement">"Change is the only constant in the relationship between a system and its environment."</div>
-            <p class="law-implication">A system that has stopped adapting is a system that is already failing — it just hasn't encountered the shock yet. The orchestrator's role includes maintaining adaptive capacity between shocks, not only responding to shocks when they arrive.</p>
-        </div>
-        <div class="law-card">
-            <div class="law-name">Law of Crossing</div>
-            <div class="law-statement">"Crossing a boundary is a change of state."</div>
-            <p class="law-implication">Boundaries between sectors, between funders and implementers, between technical experts and communities are not simply communication gaps. Crossing them involves a qualitative change of state — different norms, language, power relations. The orchestrator who treats these as simple coordination problems underestimates the structural work involved in bridging.</p>
-        </div>
-    </div>
-
-    <div class="laws-attribution">
-        <div class="laws-attribution-text">
-            <h4>Patrick Hoverstadt — <em>The Grammar of Systems: From Order to Chaos &amp; Back</em></h4>
-            <p>Director of Fractal systems consultancy for over 25 years. Developer of "Patterns of Strategy" (with Lucy Loh). Author of <em>Fractal Organization</em> and five other systems books. Chair of SCiO — the professional body for systems and complexity practitioners. Research Fellow, Cranfield. &nbsp;<a href="https://www.amazon.com/Grammar-Systems-Order-Chaos-Back/dp/0954618912" target="_blank" rel="noopener">The Grammar of Systems &rarr;</a></p>
-        </div>
-    </div>
-</div>
-
     <div class="expandable" style="margin-top: 2rem;">
         <div class="expandable-header" aria-expanded="false">
             <h3 class="expandable-title">Load-Bearing Reads: The Essential Bibliography</h3>
@@ -1434,10 +1302,40 @@
 
         <section id="core-concepts">
             <div class="container">
-                <h1 class="section-title">Core Systems Thinking &amp; Orchestration Concepts</h1>
-                <p class="section-intro">The shift from "project management" to "systems orchestration" reflects a fundamental recognition: <strong>coordination - not command - is the real constraint</strong> in complex social change. And beneath the frameworks lies a harder truth: there is no observer position. The orchestrator is entangled with the system they are holding.</p>
+                <span class="section-eyebrow">02 / The Concept</span>
+                <h1 class="section-title">How Orchestration Actually Works</h1>
+                <p class="section-intro">Coordination without authority is harder than it sounds. These are the conceptual foundations — how orchestrators think, what distinguishes them from other change-makers, and the structural laws that explain why they are needed.</p>
                 <div class="content-block">
-                    <h2>Systems Thinking Foundations</h2>
+    <h2>Core Characteristics of Orchestrators</h2>
+    <p>Effective systems orchestrators exhibit a humbly collaborative leadership style. They "park their egos" and facilitate cooperation among stakeholders to tackle massive problems collectively.</p>
+    <div class="feature-cards">
+        <div class="feature-card"><div class="feature-icon" aria-hidden="true">★</div><h3 class="feature-title">Collective Impact Focus</h3><p>They help coalitions achieve more together than any single entity could accomplish alone.</p></div>
+        <div class="feature-card"><div class="feature-icon" aria-hidden="true">🔗</div><h3 class="feature-title">Bridge-Building</h3><p>They empower and enable other leaders by sharing power, fostering trust, and elevating marginalized voices.</p></div>
+        <div class="feature-card"><div class="feature-icon" aria-hidden="true">🧰</div><h3 class="feature-title">Multiple Tools</h3><p>They deploy various approaches from convening dialogues to influencing policy and funding flows.</p></div>
+        <div class="feature-card"><div class="feature-icon" aria-hidden="true">✓</div><h3 class="feature-title">High Credibility</h3><p>They develop trust with stakeholders to coordinate effectively across public, private, and civil society boundaries.</p></div>
+    </div>
+</div>
+
+
+
+                <div class="content-block">
+    <h2>Orchestration vs. Other Change Approaches</h2>
+    <div class="table-responsive">
+        <table class="comparison-table">
+            <thead><tr><th>Approach</th><th>Focus</th><th>Role</th><th>Timeframe</th></tr></thead>
+            <tbody>
+                <tr class="highlight"><td><strong>Systems Orchestration</strong></td><td>Shaping the entire ecosystem beyond any one initiative</td><td>"Knitting together" existing efforts and filling gaps</td><td>Long-term systemic change</td></tr>
+                <tr><td>Collective Impact</td><td>Multi-sector partnership toward common agenda</td><td>Backbone organization providing structure</td><td>Initiative-specific timeline</td></tr>
+                <tr><td>Program Implementation</td><td>Delivering specific services or solutions</td><td>Direct intervention provider</td><td>Program lifecycle</td></tr>
+                <tr><td>Consensus Building</td><td>Creating shared understanding</td><td>Forum facilitator or mediator</td><td>Often time-limited forums</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+                <div class="content-block">
+                    <h2 class="with-rule">Systems Thinking Foundations</h2>
                     <div class="cards-grid">
                         <div class="card"><h3 class="card-title">Complex Adaptive Systems (CAS)</h3><p>Systems are dynamic and unpredictable; change happens in non-linear ways. Actors respond to each other's actions, creating emergent patterns that can't be designed from the top down. <em>Implication:</em> Orchestrators shape conditions for emergence rather than controlling outcomes.</p></div>
                         <div class="card"><h3 class="card-title">Leverage Points</h3><p>Change is most effective when targeting key intervention points within a system-what Donella Meadows called "places to intervene." <em>Implication:</em> Orchestrators invest in understanding where small inputs can create large shifts.</p></div>
@@ -1523,7 +1421,8 @@
 
         <section id="frameworks">
             <div class="container">
-                <h1 class="section-title">Practical Approaches &amp; Frameworks</h1>
+                <span class="section-eyebrow">03 / The Practice</span>
+                <h1 class="section-title">Frameworks Practitioners Use</h1>
                 <p class="section-intro">To operate effectively as a systems orchestrator, you must be familiar with proven frameworks that have been used in systems orchestration.</p>
                 <div class="framework-explorer">
                     <div class="framework-tabs" role="tablist">
@@ -1715,9 +1614,164 @@
             </div>
         </section>
 
+
+        <!-- ===== THE DEPTHS ===== -->
+        <section id="depths">
+            <div class="container">
+                <span class="section-eyebrow">04 / The Interior</span>
+                <h1 class="section-title" style="margin-bottom:0.75rem;">What Orchestration Demands of the Orchestrator</h1>
+                <p class="section-intro">Most frameworks describe what orchestrators do. These go deeper — to how they must be. Two bodies of knowledge that the field rarely holds together: the practitioner's interior and the structural laws of the systems they hold.</p>
+
+                <div class="content-block">
+    <h2>The Orchestrator's Interior: Five Depths of Practice</h2>
+    <p>Most orchestration frameworks describe what orchestrators do. This goes deeper — to how they must be. These five dimensions emerge from a systems insight that most frameworks quietly avoid: the orchestrator is not outside the system they are orchestrating. They are a node within it, and their interior landscape shapes what the system can become.</p>
+    <div class="depth-cards">
+        <div class="depth-card">
+            <div class="depth-number">01</div>
+            <div class="depth-title">Conscious Presence</div>
+            <p>You cannot step outside the system to get a clean view. You can only become more or less conscious of how you are participating in it. The orchestrator who knows their biases, attachments, and blind spots is more trustworthy — not less — because the system already senses what the orchestrator has not named. <em>The move is to name it first.</em></p>
+        </div>
+        <div class="depth-card">
+            <div class="depth-number">02</div>
+            <div class="depth-title">Attention as Instrument</div>
+            <p>The quality of listening in a multi-stakeholder meeting determines whether actors bring their real constraints and genuine knowledge, or their polished institutional positions. An orchestrator who listens to understand — rather than to manage — creates a different quality of room, and a different quality of system. <em>Attention is not a precursor to action. It is action.</em></p>
+        </div>
+        <div class="depth-card">
+            <div class="depth-number">03</div>
+            <div class="depth-title">Whose Knowledge is Legible</div>
+            <p>Every data system, every reporting framework, every convening agenda encodes a theory of what counts as signal and what counts as noise. The orchestrator who routinely asks "whose knowledge is legible in this room?" is doing something more fundamental than inclusion work — they are shaping what the system can know about itself. <em>What you routinely notice, and routinely miss, is a political act.</em></p>
+        </div>
+        <div class="depth-card">
+            <div class="depth-number">04</div>
+            <div class="depth-title">The Discipline of Not-Yet-Knowing</div>
+            <p>Complex systems have a strong tendency toward premature closure — funders want a theory of change, governments want a recommendation, teams want a workplan. But premature resolution forecloses possibilities that hadn't yet had time to emerge. Holding a question open long enough for the system to reveal its own structure is the most technically demanding act in orchestration — and the most frequently surrendered under institutional pressure. <em>Not-yet-knowing is a competency, not a gap.</em></p>
+        </div>
+        <div class="depth-card">
+            <div class="depth-number">05</div>
+            <div class="depth-title">Self-Awareness as Technical Skill</div>
+            <p>The tensions an orchestrator carries — between fidelity to funders and fidelity to communities; between theory of change and the evidence that contradicts it; between pace the system needs and pace the budget allows — shape every interaction. They leak through tone, through which discomfort is made space for and which is normalised. This is what makes orchestration fundamentally different from project management. <em>The project manager can bracket unresolved tensions and execute. The orchestrator cannot.</em></p>
+        </div>
+    </div>
+</div>
+
+
+
+                <div style="margin-top: 1rem;"><div class="content-block">
+    <h2>The Grammar of Systems: Laws Every Orchestrator Needs</h2>
+    <p>Patrick Hoverstadt's synthesis of 33 systems laws gives orchestrators a precise vocabulary for what they observe in practice but often struggle to name. These are not metaphors — they are structural properties of how complex systems behave. Twelve laws are most directly applicable to orchestration work.</p>
+
+    <div class="laws-callout">
+        <div class="laws-callout-item">
+            <span class="laws-callout-label">Viability Principle</span>
+            <div class="laws-callout-law">Autonomy must balance cohesion; stability must balance change</div>
+            <p>This is the orchestrator's core tension, stated as structural law. Too much central control and sub-systems lose viability. Too little and the system fragments. The orchestrator holds this balance — they do not resolve it.</p>
+        </div>
+        <div class="laws-callout-item">
+            <span class="laws-callout-label">Law of Requisite Variety</span>
+            <div class="laws-callout-law">How well any system manages depends on how well it matches the variety it faces</div>
+            <p>An orchestrator with too narrow a repertoire will fail against a system with more variety than they can absorb. Diversity of tools is not optional — it is structurally necessary for any system manager facing genuine complexity.</p>
+        </div>
+        <div class="laws-callout-item">
+            <span class="laws-callout-label">Feedback Dominance Theorem</span>
+            <div class="laws-callout-law">Loops with strong feedback will take you where they take you, irrespective of the size of the input</div>
+            <p>This is why pushing harder rarely works. The dominant feedback loops in a system determine its trajectory more than any single intervention. The orchestrator's first question: which loops are dominant, and which should be strengthened or interrupted?</p>
+        </div>
+        <div class="laws-callout-item">
+            <span class="laws-callout-label">Relaxation Time Principle</span>
+            <div class="laws-callout-law">A system repeatedly shocked at shorter intervals than its recovery time may never stabilise</div>
+            <p>Most change efforts fail not because the intervention was wrong but because the pace exceeded the system's recovery capacity. Sequential pressures — new funders, new policy, new leadership — applied faster than the system can absorb produce chronic instability rather than transformation.</p>
+        </div>
+        <div class="laws-callout-item">
+            <span class="laws-callout-label">Darkness Principle</span>
+            <div class="laws-callout-law">There is always something about a system you cannot know</div>
+            <p>Epistemic humility is not a disposition — it is a structural necessity. Any model of a system is necessarily incomplete, and over-confidence in one's model is itself a systemic risk. Improving the model is always worthwhile; knowing its limits is essential.</p>
+        </div>
+        <div class="laws-callout-item">
+            <span class="laws-callout-label">Power Structuration Theorem</span>
+            <div class="laws-callout-law">A system has optimal agency when its needs for agency are balanced with those of its sub-systems</div>
+            <p>This provides a formal basis for distributed leadership. If the orchestrator's agency crowds out the agency of actors in the system, the system loses optimal performance. The orchestrator who accumulates authority is, structurally, making the system worse — even with good intentions.</p>
+        </div>
+    </div>
+
+    <div class="laws-grid">
+        <div class="law-card">
+            <div class="law-name">Self-Organising Principle</div>
+            <div class="law-statement">"Parts generate wholes."</div>
+            <p class="law-implication">The orchestrator does not build the whole — they create conditions for parts to generate it. This reframes the entire function: from architect to gardener. <strong>The whole cannot be designed top-down; it can only be enabled bottom-up.</strong></p>
+        </div>
+        <div class="law-card">
+            <div class="law-name">Principle of Emergence</div>
+            <div class="law-statement">"The whole is more than the sum of its parts."</div>
+            <p class="law-implication">Optimising individual actors does not optimise the system. The orchestrator attends to properties that only exist at system level — trust, narrative, shared infrastructure — which no single actor can produce alone.</p>
+        </div>
+        <div class="law-card">
+            <div class="law-name">1st &amp; 2nd Circular Causality</div>
+            <div class="law-statement">"Positive feedback drives state change. Negative feedback drives stability."</div>
+            <p class="law-implication">The orchestrator needs to know which loops to amplify (spreading a new norm, growing a coalition) and which to dampen (containing a conflict). Most facilitation mistakes are <strong>the wrong type of feedback applied at the wrong moment.</strong></p>
+        </div>
+        <div class="law-card">
+            <div class="law-name">Fractal Principle</div>
+            <div class="law-statement">"Systems replicate their own form."</div>
+            <p class="law-implication">The culture the orchestrator enacts in their own organisation replicates into the wider system they hold. An orchestrating entity that is itself hierarchical or non-transparent is modelling the opposite of what it is trying to catalyse. <strong>How you run yourself is what you propagate.</strong></p>
+        </div>
+        <div class="law-card">
+            <div class="law-name">System Survival Theorem</div>
+            <div class="law-statement">"Systems fail if their environment changes more than the system."</div>
+            <p class="law-implication">Directly relevant to climate and disaster risk work. A governance system or community institution that cannot adapt at the pace of environmental change will fail — regardless of how well it currently functions. Adaptation capacity is structural necessity, not a programme feature.</p>
+        </div>
+        <div class="law-card">
+            <div class="law-name">Redundancy of Potential Command</div>
+            <div class="law-statement">"Effectiveness depends on bringing together the right mix of information."</div>
+            <p class="law-implication">This is the formal basis for inclusive multi-stakeholder processes — not a values argument for diversity, but a <strong>performance argument:</strong> without the right variety of information in the room, the system cannot make good decisions, regardless of the orchestrator's skill.</p>
+        </div>
+        <div class="law-card">
+            <div class="law-name">Complexity Instability Principle</div>
+            <div class="law-statement">"Systems with too many changing parts tend to become unstable."</div>
+            <p class="law-implication">Adding more actors, workstreams, and initiatives to a coalition is not always better. Beyond a threshold, additional complexity generates instability faster than capability. The orchestrator must sometimes say no to growth — and this law gives structural justification.</p>
+        </div>
+        <div class="law-card">
+            <div class="law-name">Steady State Principle</div>
+            <div class="law-statement">"Stability of the system depends on the level of stability of its sub-systems, and vice versa."</div>
+            <p class="law-implication">The orchestrator cannot hold a stable system if its constituent organisations are chronically under-resourced or in leadership crisis. Organisational health of partners is a structural condition for system stability — not a secondary concern. <strong>Backbone support for partners is backbone support for the system.</strong></p>
+        </div>
+        <div class="law-card">
+            <div class="law-name">Conant-Ashby Theorem</div>
+            <div class="law-statement">"The ability to deal with any situation depends on how good your model of it is."</div>
+            <p class="law-implication">Shared measurement, system mapping, and learning loops are not monitoring requirements — they are model-improvement mechanisms. The better the collective model, the better every actor's ability to act within it. This is why shared data infrastructure is a leverage point, not overhead.</p>
+        </div>
+        <div class="law-card">
+            <div class="law-name">Adams 3rd Law</div>
+            <div class="law-statement">"A system's overall risk depends on balancing risk across levels of the system."</div>
+            <p class="law-implication">In development and humanitarian systems, risk is often concentrated at the implementer and community level while hedged at the funder and orchestrator level. This structural imbalance is itself a systemic failure. The orchestrator who does not actively redistribute risk downward is perpetuating a condition that undermines the system's overall resilience.</p>
+        </div>
+        <div class="law-card">
+            <div class="law-name">Conservation of Adaptation</div>
+            <div class="law-statement">"Change is the only constant in the relationship between a system and its environment."</div>
+            <p class="law-implication">A system that has stopped adapting is a system that is already failing — it just hasn't encountered the shock yet. The orchestrator's role includes maintaining adaptive capacity between shocks, not only responding to shocks when they arrive.</p>
+        </div>
+        <div class="law-card">
+            <div class="law-name">Law of Crossing</div>
+            <div class="law-statement">"Crossing a boundary is a change of state."</div>
+            <p class="law-implication">Boundaries between sectors, between funders and implementers, between technical experts and communities are not simply communication gaps. Crossing them involves a qualitative change of state — different norms, language, power relations. The orchestrator who treats these as simple coordination problems underestimates the structural work involved in bridging.</p>
+        </div>
+    </div>
+
+    <div class="laws-attribution">
+        <div class="laws-attribution-text">
+            <h4>Patrick Hoverstadt — <em>The Grammar of Systems: From Order to Chaos &amp; Back</em></h4>
+            <p>Director of Fractal systems consultancy for over 25 years. Developer of "Patterns of Strategy" (with Lucy Loh). Author of <em>Fractal Organization</em> and five other systems books. Chair of SCiO — the professional body for systems and complexity practitioners. Research Fellow, Cranfield. &nbsp;<a href="https://www.amazon.com/Grammar-Systems-Order-Chaos-Back/dp/0954618912" target="_blank" rel="noopener">The Grammar of Systems &rarr;</a></p>
+        </div>
+    </div>
+</div>
+
+</div>
+            </div>
+        </section>
+
         <section id="implementation">
             <div class="container">
-                <h1 class="section-title">Practical Implementation Dynamics</h1>
+                <span class="section-eyebrow">05 / In Action</span>
+                <h1 class="section-title">How Orchestration Unfolds</h1>
                 <p class="section-intro">Implementing systems orchestration involves a deliberate sequence of actions and continuous adaptation to changing contexts.</p>
                 <div class="content-block">
                     <h2>Developing a Systems Orchestration Role</h2>
@@ -1755,7 +1809,8 @@
 
         <section id="evaluation">
             <div class="container">
-                <h1 class="section-title">Measurement and Evaluation of Orchestration Efforts</h1>
+                <span class="section-eyebrow">06 / Accountability</span>
+                <h1 class="section-title">Measuring What Cannot Be Directly Attributed</h1>
                 <p class="section-intro">Evaluating systems orchestration is complex – traditional linear metrics don't fully capture the systemic changes orchestrators seek.</p>
                 <div class="content-block">
                     <h2>Metrics and Frameworks for Evaluation</h2>
@@ -1785,7 +1840,8 @@
 
         <section id="case-studies">
             <div class="container">
-                <h1 class="section-title">Case Study Snapshots of Systems Orchestration</h1>
+                <span class="section-eyebrow">07 / Evidence</span>
+                <h1 class="section-title">Five Cases: Orchestration in the World</h1>
                 <p class="section-intro">To ground the concepts in reality, here are brief examples of systems orchestration from different sectors and geographies.</p>
                 <div class="content-block">
                     <div class="case-study visible">
@@ -1824,7 +1880,8 @@
 
         <section id="spectrum">
             <div class="container">
-                <h1 class="section-title">System-Orchestration Spectrum</h1>
+                <span class="section-eyebrow">08 / Maturity</span>
+                <h1 class="section-title">From Solo Actor to Intentional Orchestrator</h1>
                 <p class="section-intro">Different approaches to system change exist along a maturity spectrum. Understanding where your initiative falls can help identify growth opportunities.</p>
                 <div class="content-block">
                     <h2>Maturity Levels - with Generic Examples</h2>
@@ -1853,7 +1910,8 @@
 
         <section id="diagnostic">
             <div class="container">
-                <h1 class="section-title">System Readiness Diagnostic Tool</h1>
+                <span class="section-eyebrow">09 / Self-Assessment</span>
+                <h1 class="section-title">Is Your System Ready for Orchestration?</h1>
                 <p class="section-intro">Before launching orchestration, it's important to assess if a system is "ready" – or what needs to be strengthened.</p>
                 <div class="diagnostic-tool" id="diagnostic-tool">
                     <h2>System Readiness Assessment</h2>
@@ -1938,7 +1996,8 @@
         <!-- ===== VOICES FROM THE FIELD ===== -->
         <section id="voices">
             <div class="container">
-                <h1 class="section-title">Voices from the Field</h1>
+                <span class="section-eyebrow">10 / The Field</span>
+                <h1 class="section-title">Who Is Doing This Work</h1>
                 <p class="section-intro">The concept of systems orchestration has been built not in seminar rooms but by practitioners working at the frontier of complex change. These are the thinkers and builders whose work shapes how the field understands - and does - orchestration.</p>
 
                 <div class="section-label"><span>Thought Leaders</span></div>
@@ -2008,7 +2067,8 @@
         <!-- ===== ORGANISATIONAL FRAMEWORKS ===== -->
         <section id="organisations">
             <div class="container">
-                <h1 class="section-title">How Leading Organisations Practice Orchestration</h1>
+                <span class="section-eyebrow">11 / Organisations</span>
+                <h1 class="section-title">Five Approaches to the Same Idea</h1>
                 <p class="section-intro">These organisations are not merely funding systems change - they are practicing orchestration in distinct ways, each offering a different answer to the question: what does it look like to hold the system-level glue?</p>
 
                 <div class="org-card">
@@ -2342,11 +2402,11 @@
         <div class="site-footer-bar">
             <span class="site-footer-bar-copy">© Systems Orchestration Fundamentals</span>
             <ul class="site-footer-bar-links">
-                <li><a href="#intro">Introduction</a></li>
-                <li><a href="#frameworks">Frameworks</a></li>
-                <li><a href="#voices">Voices</a></li>
-                <li><a href="#organisations">Organisations</a></li>
-                <li><a href="#resources">Resources</a></li>
+                <li><a href="#intro">The Idea</a></li>
+                <li><a href="#core-concepts">The Concept</a></li>
+                <li><a href="#depths">The Interior</a></li>
+                <li><a href="#voices">The Field</a></li>
+                <li><a href="#resources">Library</a></li>
                 <li><a href="https://practicalaction.org/" target="_blank" rel="noopener">Practical Action</a></li>
             </ul>
         </div>
