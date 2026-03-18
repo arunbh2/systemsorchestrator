@@ -248,7 +248,10 @@
             background: linear-gradient(90deg, transparent 0%, rgba(201,169,98,0.6) 30%, rgba(201,169,98,0.9) 50%, rgba(201,169,98,0.6) 70%, transparent 100%);
         }
         .header-container { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; max-width: 1400px; margin: 0 auto; }
-        .logo { display: flex; align-items: center; gap: 0.75rem; font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.25rem; color: rgba(255,255,255,0.95); letter-spacing: -0.02em; }
+        .logo { display: flex; align-items: center; gap: 0.875rem; font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.25rem; color: rgba(255,255,255,0.95); letter-spacing: -0.02em; text-decoration: none; }
+        .logo-text { display: flex; flex-direction: column; gap: 0.2rem; }
+        .logo-name { font-size: 1.375rem; font-weight: 600; color: #ffffff; letter-spacing: -0.02em; line-height: 1.2; }
+        .logo-sub { font-size: 0.75rem; font-weight: 400; font-style: italic; letter-spacing: 0.14em; color: rgba(201,169,98,1); line-height: 1; font-family: 'Fraunces', serif; }
         .logo-icon {
             width: 34px; height: 34px;
             background: linear-gradient(135deg, var(--accent) 0%, var(--accent-warm) 100%);
@@ -259,9 +262,9 @@
         }
         .nav-links { display: flex; list-style: none; gap: 0.125rem; }
         .nav-links a {
-            color: rgba(255,255,255,0.6);
-            font-weight: 400; font-size: 0.875rem;
-            padding: 0.5rem 0.875rem; border-radius: 6px;
+            color: rgba(255,255,255,0.82);
+            font-weight: 450; font-size: 0.9375rem;
+            padding: 0.5rem 0.9rem; border-radius: 6px;
             transition: all var(--duration-fast) var(--ease-out-quart);
             letter-spacing: 0.01em;
         }
@@ -1188,6 +1191,87 @@
             line-height: 1.75;
             font-weight: 300;
         }
+
+        /* ===== LANDSCAPE SECTION ADDITIONS ===== */
+        .landscape-divider {
+            display: flex; align-items: center; gap: 1.25rem;
+            margin: 3rem 0 2rem;
+        }
+        .landscape-divider-label {
+            font-size: 0.6rem; font-weight: 700; letter-spacing: 0.28em;
+            text-transform: uppercase; color: var(--accent);
+            white-space: nowrap; flex-shrink: 0;
+        }
+        .landscape-divider-rule {
+            flex: 1; height: 1px;
+            background: linear-gradient(90deg, rgba(201,169,98,0.4), transparent);
+        }
+        /* Taxonomy grid */
+        .taxonomy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 1rem; margin: 1.75rem 0 2.5rem;
+        }
+        .taxonomy-card {
+            background: var(--white);
+            border: 1px solid var(--border-light);
+            border-left: 3px solid var(--accent);
+            border-radius: 0 10px 10px 0;
+            padding: 1rem 1.25rem;
+            transition: all var(--duration-normal) var(--ease-out-quart);
+        }
+        .taxonomy-card:hover { transform: translateX(3px); border-left-color: var(--accent-warm); box-shadow: var(--shadow-sm); }
+        .taxonomy-type {
+            font-family: 'Fraunces', serif;
+            font-size: 0.9375rem; font-weight: 500;
+            color: var(--primary); margin-bottom: 0.3rem;
+            line-height: 1.3;
+        }
+        .taxonomy-type::before { display: none !important; }
+        .taxonomy-eg {
+            font-size: 0.8rem; color: var(--text-muted);
+            line-height: 1.5; margin: 0;
+        }
+        /* Pattern blocks */
+        .pattern-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.25rem; margin: 1.75rem 0;
+        }
+        .pattern-block {
+            background: linear-gradient(145deg, var(--white), var(--cream));
+            border: 1px solid var(--border-light);
+            border-radius: 14px; padding: 1.5rem 1.625rem;
+            transition: all var(--duration-normal) var(--ease-out-quart);
+        }
+        .pattern-block:hover { box-shadow: 0 8px 24px rgba(26,31,60,0.08); transform: translateY(-2px); }
+        .pattern-number {
+            font-size: 0.625rem; font-weight: 700; letter-spacing: 0.2em;
+            text-transform: uppercase; color: var(--accent);
+            margin-bottom: 0.5rem; display: block;
+        }
+        .pattern-title {
+            font-family: 'Fraunces', serif;
+            font-size: 1rem; font-weight: 500;
+            color: var(--primary); margin-bottom: 0.625rem;
+            line-height: 1.35;
+        }
+        .pattern-title::before { display: none !important; }
+        .pattern-block p {
+            font-size: 0.8375rem; color: var(--text-secondary);
+            line-height: 1.65; margin: 0;
+        }
+        .pattern-block strong { color: var(--text-primary); font-weight: 500; }
+        /* Org sub-meta */
+        .org-note {
+            font-size: 0.8rem; color: var(--text-muted);
+            font-style: italic; margin-top: 0.5rem; margin-bottom: 0;
+        }
+        @media (max-width: 768px) {
+            .taxonomy-grid { grid-template-columns: 1fr; }
+            .pattern-grid { grid-template-columns: 1fr; }
+        }
+
     </style>
 </head>
 <body>
@@ -1203,7 +1287,10 @@
         <div class="header-container container">
             <div class="logo">
                 <div class="logo-icon" aria-hidden="true">⟁</div>
-                <span>Systems Orchestration</span>
+                <div class="logo-text">
+                    <span class="logo-name">Systems Orchestration</span>
+                    <span class="logo-sub">coordination without authority</span>
+                </div>
             </div>
             <nav aria-label="Main navigation">
                 <ul class="nav-links" id="nav-links">
@@ -1428,13 +1515,34 @@
                 <h1 class="section-title">How Orchestration Actually Works</h1>
                 <p class="section-intro">Coordination without authority is harder than it sounds. These are the conceptual foundations — how orchestrators think, what distinguishes them from other change-makers, and the structural laws that explain why they are needed.</p>
                 <div class="content-block">
-    <h2>Core Characteristics of Orchestrators</h2>
-    <p>Effective systems orchestrators exhibit a humbly collaborative leadership style. They "park their egos" and facilitate cooperation among stakeholders to tackle massive problems collectively.</p>
+    <h2>What Distinguishes Effective Orchestrators</h2>
+    <p>Across India and global cases — from Saamuhika Shakti's backbone in Bengaluru to GRP's resilience partnership spanning 80+ organisations — five characteristics consistently separate effective orchestrators from well-intentioned convenors.</p>
     <div class="feature-cards">
-        <div class="feature-card"><div class="feature-icon" aria-hidden="true">★</div><h3 class="feature-title">Collective Impact Focus</h3><p>They help coalitions achieve more together than any single entity could accomplish alone.</p></div>
-        <div class="feature-card"><div class="feature-icon" aria-hidden="true">🔗</div><h3 class="feature-title">Bridge-Building</h3><p>They empower and enable other leaders by sharing power, fostering trust, and elevating marginalized voices.</p></div>
-        <div class="feature-card"><div class="feature-icon" aria-hidden="true">🧰</div><h3 class="feature-title">Multiple Tools</h3><p>They deploy various approaches from convening dialogues to influencing policy and funding flows.</p></div>
-        <div class="feature-card"><div class="feature-icon" aria-hidden="true">✓</div><h3 class="feature-title">High Credibility</h3><p>They develop trust with stakeholders to coordinate effectively across public, private, and civil society boundaries.</p></div>
+        <div class="feature-card">
+            <div class="feature-icon" aria-hidden="true">⟁</div>
+            <h3 class="feature-title">They hold the whole, not a part</h3>
+            <p>Orchestrators maintain a view of the system that no single actor within it can hold. Sanjay Purohit describes this as designing for the "elephant" — an entirely different task from making many mice work harder. The orchestrator's job is to see across silos that every other actor is rationally embedded within.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon" aria-hidden="true">◎</div>
+            <h3 class="feature-title">They distribute credit and accumulate trust</h3>
+            <p>Co-Impact's formulation is precise: "stand behind, not in for, leaders." Rainmatter calls it responding rather than intervening. Dasra describes it as amplifying grassroots voices rather than speaking for them. Orchestrators who accumulate credit — Hoverstadt's Power Structuration Theorem — structurally weaken the systems they hold.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon" aria-hidden="true">⇄</div>
+            <h3 class="feature-title">They translate across worlds</h3>
+            <p>Government ministries, community cooperatives, insurance actuaries, and philanthropic foundations do not share a language. Practical Action's early warning work in Nepal requires continuous translation between meteorologists, telecoms engineers, local governments, and farming households. The orchestrator is the translator — and Bateson's Law of Crossing reminds us that each boundary crossed is a genuine change of state.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon" aria-hidden="true">◈</div>
+            <h3 class="feature-title">They make the system visible to itself</h3>
+            <p>Systems Change Lab's open dashboards, GRP's resilience mapping platform, ICC's ecosystem studies, Saamuhika Shakti's shared measurement — in each case, the orchestrator's distinctive contribution is creating a mirror. When actors can see what the system is doing collectively, they can coordinate without being commanded. Shared data is shared power.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon" aria-hidden="true">△</div>
+            <h3 class="feature-title">They resource the connective tissue, not just the nodes</h3>
+            <p>StriveTogether's network of 70 local backbones is funded not just for programme delivery but for the coordination infrastructure itself. CLEAN's sector backbone is sustained through membership fees that explicitly buy convening power. The orchestrator who cannot fund the function of holding the system together — who absorbs coordination costs into programme budgets — will eventually have to choose between programme and system.</p>
+        </div>
     </div>
 </div>
 
@@ -1442,19 +1550,79 @@
 
                 <div class="content-block">
     <h2>Orchestration vs. Other Change Approaches</h2>
+    <p>Most organisations are doing valuable work — implementation, advocacy, research, service delivery. The question is not whether those things matter but what holds them in relation to each other. That is the orchestration question.</p>
     <div class="table-responsive">
         <table class="comparison-table">
-            <thead><tr><th>Approach</th><th>Focus</th><th>Role</th><th>Timeframe</th></tr></thead>
+            <thead><tr><th>Approach</th><th>Primary focus</th><th>Role in the system</th><th>Success measured by</th><th>Timeframe</th></tr></thead>
             <tbody>
-                <tr class="highlight"><td><strong>Systems Orchestration</strong></td><td>Shaping the entire ecosystem beyond any one initiative</td><td>"Knitting together" existing efforts and filling gaps</td><td>Long-term systemic change</td></tr>
-                <tr><td>Collective Impact</td><td>Multi-sector partnership toward common agenda</td><td>Backbone organization providing structure</td><td>Initiative-specific timeline</td></tr>
-                <tr><td>Program Implementation</td><td>Delivering specific services or solutions</td><td>Direct intervention provider</td><td>Program lifecycle</td></tr>
-                <tr><td>Consensus Building</td><td>Creating shared understanding</td><td>Forum facilitator or mediator</td><td>Often time-limited forums</td></tr>
+                <tr class="highlight"><td><strong>Systems Orchestration</strong></td><td>Shaping the entire ecosystem — the conditions, flows, norms, and relationships</td><td>Holds the system-level view; knits together existing efforts; fills structural gaps</td><td>System-level shifts: norms changed, flows redirected, new actors enabled</td><td>Decade-scale; no natural endpoint</td></tr>
+                <tr><td>Collective Impact</td><td>Multi-sector partnership toward a bounded common agenda</td><td>Backbone organisation providing shared infrastructure for a defined coalition</td><td>Progress on shared indicators agreed by coalition members</td><td>Initiative-specific, typically 5–10 years</td></tr>
+                <tr><td>Field Building</td><td>Developing the shared infrastructure of an entire issue field — identity, knowledge, norms, policy</td><td>Invests in the conditions that allow many organisations to work better together</td><td>Field-level capacity: new organisations, shared standards, knowledge commons</td><td>Generational; 10–20+ years</td></tr>
+                <tr><td>Ecosystem Weaving</td><td>Densifying and strengthening connections between actors in a defined ecosystem</td><td>Makes strategic introductions, surfaces complementarities, brokers relationships and resources</td><td>Density and quality of ecosystem relationships; emergence of self-sustaining collaboration</td><td>Sustained; typically 5–15 years</td></tr>
+                <tr><td>Programme Implementation</td><td>Delivering specific services or solutions to defined beneficiaries</td><td>Direct intervention provider; accountable for outputs</td><td>Programme targets: beneficiaries reached, services delivered</td><td>Programme lifecycle, typically 3–5 years</td></tr>
+                <tr><td>Policy Advocacy</td><td>Shifting government policy or regulation on a specific issue</td><td>Advocates, campaigners, policy advisers; applies pressure or builds evidence</td><td>Policy wins: laws passed, regulations changed, budgets allocated</td><td>Campaign-specific, though sustained advocacy can be generational</td></tr>
+                <tr><td>Dialogue Facilitation</td><td>Creating shared understanding across actors who do not normally communicate</td><td>Neutral process facilitator; holds space for difficult conversations</td><td>Quality of shared understanding achieved; relationships built</td><td>Time-bounded; forums and convenings</td></tr>
             </tbody>
         </table>
     </div>
 </div>
 
+
+                <div class="content-block">
+                    <h2>Six Levers: How Orchestrators Actually Influence Without Authority</h2>
+                    <p>The question "how do you move a system you don't control?" has a practical answer. Orchestrators across the field consistently use six instruments — not as a sequence, but as a repertoire drawn on according to what the system needs at a given moment.</p>
+                    <div class="cards-grid">
+                        <div class="card">
+                            <h3 class="card-title">01 · Convening</h3>
+                            <p>Bringing the right people into the same room — or ensuring that rooms currently missing critical voices are opened. ClimateRISE's thematic working groups, NPDRR's multi-stakeholder sessions, EW4All's multi-hazard forums: in each case the act of convening is itself a move in the system. Who is invited, who chairs, who sets the agenda — these are all power choices. Convening without attending to power produces coalitions that entrench the status quo.</p>
+                        </div>
+                        <div class="card">
+                            <h3 class="card-title">02 · Shared Measurement</h3>
+                            <p>Creating a common picture of what the system is doing. Systems Change Lab's 70-indicator dashboards, Saamuhika Shakti's 3ie-evaluated outcomes framework, GRP's resilience mapping platform — in each case, shared data shifts the power dynamics of coordination. When all actors see the same picture simultaneously, they can adjust without being told to. This is the Conant-Ashby Theorem made operational: the quality of collective action depends on the quality of the collective model.</p>
+                        </div>
+                        <div class="card">
+                            <h3 class="card-title">03 · Narrative Infrastructure</h3>
+                            <p>Building the shared story that makes collective identity possible. ICC's "India-only climate narrative," ClimateRISE's vocabulary work, Rohini Nilekani's Samaaj-Bazaar-Sarkaar framework — each is narrative infrastructure. When actors in a system share language, they can coordinate across institutions and geographies without a central coordinator. The orchestrator who invests in naming — in coining the term, articulating the framework, publishing the field-defining article — is doing something the operations budget never covers and the system cannot function without.</p>
+                        </div>
+                        <div class="card">
+                            <h3 class="card-title">04 · Capital Alignment</h3>
+                            <p>Redirecting funding flows so they reinforce rather than undermine the system's direction. Co-Impact's pooled philanthropy model, InsuResilience's V20 partnership, CREWS's donor trust fund — all demonstrate that the orchestrator who can align capital without controlling it holds enormous leverage. Rockefeller's "learn first, join second, build last" principle captures the sequencing: understanding the system before committing capital to shape it. Capital deployed without system understanding is as likely to distort as to align.</p>
+                        </div>
+                        <div class="card">
+                            <h3 class="card-title">05 · Policy Positioning</h3>
+                            <p>Creating the enabling conditions in policy and regulation that allow system actors to perform their functions. CLEAN's advocacy with India's MNRE, ILC's facilitated national MSPs navigating land tenure reform, the ClimateSmart Cities Alliance's work with MoHUA — the orchestrator who shapes the policy environment shapes what becomes possible for everyone. Policy influence without implementation is often invisible; it is also often the highest-leverage act available.</p>
+                        </div>
+                        <div class="card">
+                            <h3 class="card-title">06 · Presence and Relationship</h3>
+                            <p>The quality of being in genuine relationship with the complexity of what is being held. This is what Bateson meant by "the observer is entangled with the system." The trust that GRP has built with 80+ partners over a decade, the relationships that underpin Practical Action's early warning network in Nepal's Karnali basin, the long-term accompaniment model of Rainmatter — these cannot be programmed or budgeted, but they are the substrate on which every other lever depends. The orchestrator who has not built this cannot convene honestly, cannot shape measurement without manipulation, cannot hold narrative without it becoming propaganda.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-block">
+                    <h2>Three Governance Models in the Wild</h2>
+                    <p>How orchestrators are governed determines what kind of influence they can exercise and who they are ultimately accountable to. Three models recur across the global landscape — each with distinct strengths and structural vulnerabilities.</p>
+                    <div class="cards-grid">
+                        <div class="card">
+                            <h3 class="card-title">Government-Anchored</h3>
+                            <p><strong>Model:</strong> A formal government body or mandate provides convening authority, with structured multi-stakeholder participation built around it. Examples: NPDRR (Union Home Minister as chair), ClimateSmart Cities Alliance (MoHUA mandate, NIUA secretariat), CREWS (World Bank trust fund, intergovernmental governance).</p>
+                            <p><strong>Strength:</strong> Legitimacy is not contested. When the state calls, people come. Policy change is directly accessible.</p>
+                            <p><strong>Vulnerability:</strong> Political cycles disrupt continuity. Civil society actors may self-censor. The orchestrator's neutrality is structurally compromised by proximity to power.</p>
+                        </div>
+                        <div class="card">
+                            <h3 class="card-title">Philanthropy-Anchored</h3>
+                            <p><strong>Model:</strong> A funder or foundation provides the backbone secretariat and agenda-setting capacity, convening NGOs, government, and community actors around a shared issue. Examples: ClimateRISE Alliance (Dasra + Rainmatter), ICC (Tata, Nilekani, Mahindra), Co-Impact (pooled philanthropy), InsuResilience (GIZ/BMZ secretariat).</p>
+                            <p><strong>Strength:</strong> Relative independence from political cycles. Can hold difficult conversations government cannot. Can take longer-term positions.</p>
+                            <p><strong>Vulnerability:</strong> Funder power dynamics shape agenda even when not intended. Sustainability depends on philanthropic patience. Can lack the legitimacy to convene state actors at full weight.</p>
+                        </div>
+                        <div class="card">
+                            <h3 class="card-title">Community-Anchored</h3>
+                            <p><strong>Model:</strong> Grassroots networks or community organisations hold the convening power, with international agencies and governments in supporting rather than leading roles. Examples: Community Practitioners Platform for Resilience (Huairou Commission, UNDRR-endorsed), Saamuhika Shakti (waste-picker community leadership as the centre of gravity, not just a target group), ILC national MSPs on land governance.</p>
+                            <p><strong>Strength:</strong> Legitimacy with the communities most affected. Knowledge that no external assessment captures. Accountability is direct rather than mediated through institutions.</p>
+                            <p><strong>Vulnerability:</strong> Least resourced of the three models. Hardest to sustain without philanthropic or state support. Easily tokenised when powerful actors participate performatively.</p>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="content-block">
                     <h2 class="with-rule">Systems Thinking Foundations</h2>
@@ -1527,10 +1695,30 @@
   <text x="350" y="196" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.7)">holds the whole</text>
 </svg>
 </div></div>
-                    <div class="expandable"><div class="expandable-header" role="button" aria-expanded="false"><h3 class="expandable-title">Backbone Organization</h3><div class="expandable-icon" aria-hidden="true">▼</div></div><div class="expandable-content"><div class="expandable-body"><p>A coordinating entity that provides structure, resources, and neutral facilitation without controlling the system. The backbone supports the collaborative process by guiding vision and strategy, supporting aligned activities, establishing shared measurement, building public will, advancing policy, and mobilizing resources.</p></div></div></div>
-                    <div class="expandable"><div class="expandable-header" role="button" aria-expanded="false"><h3 class="expandable-title">Field Catalyst Approach</h3><div class="expandable-icon" aria-hidden="true">▼</div></div><div class="expandable-content"><div class="expandable-body"><p>Orchestrators act as catalysts, accelerating progress by creating alignment between actors, rather than imposing solutions. They bring together different organizations to tackle complex problems with systems-level strategies, focusing on field-level outcomes rather than organizational growth.</p></div></div></div>
-                    <div class="expandable"><div class="expandable-header" role="button" aria-expanded="false"><h3 class="expandable-title">Distributed Leadership</h3><div class="expandable-icon" aria-hidden="true">▼</div></div><div class="expandable-content"><div class="expandable-body"><p>No single actor owns the change; orchestrators help coordinate collective action across multiple stakeholders. This approach recognizes that complex challenges require many leaders contributing different skills, resources, and perspectives.</p></div></div></div>
-                    <div class="expandable"><div class="expandable-header" role="button" aria-expanded="false"><h3 class="expandable-title">System Mapping &amp; Network Analysis</h3><div class="expandable-icon" aria-hidden="true">▼</div></div><div class="expandable-content"><div class="expandable-body"><p>Techniques like stakeholder network mapping, causal loop diagrams, and power mapping help visualize how different system actors interact. These tools reveal relationships, power dynamics, and resource flows that might otherwise remain hidden, enabling more strategic orchestration.</p></div></div></div>
+                    <div class="expandable"><div class="expandable-header" role="button" aria-expanded="false"><h3 class="expandable-title">Backbone Organisation</h3><div class="expandable-icon" aria-hidden="true">▼</div></div><div class="expandable-content"><div class="expandable-body">
+    <p>FSG identified six backbone functions: guiding vision and strategy, supporting aligned activities, establishing shared measurement, building public will, advancing policy, and mobilising funding. What FSG's research and Saamuhika Shakti's experience together reveal is that these six functions are necessary but not sufficient. The backbone's deeper work is holding a particular kind of authority — not the authority of position, but the authority of trust and care for the whole.</p>
+    <p>Sattva Consulting's experience as the backbone for Saamuhika Shakti in Bengaluru produced ten hard-won lessons: that backbone neutrality is a myth (the backbone always has a perspective), that power must be actively redistributed toward communities rather than managed on their behalf, and that the backbone's credibility depends on its willingness to name what other actors in the room cannot.</p>
+    <p>StriveTogether has demonstrated the backbone-of-backbones architecture at national scale — ~70 local community backbones, each coordinating schools, agencies and funders in their geography, supported by a national backbone that sets standards and hosts learning networks. The most rigorous evidence we have for backbone effectiveness comes from their Equal Measure evaluation, which found that the framework strengthens civic infrastructure and improves child outcomes.</p>
+    <p><strong>The hardest truth about backbone organisations:</strong> they are structurally underfunded because funders pay for programmes, not for the infrastructure that holds programmes together. The Greater Cincinnati Foundation documented that the absence of backbone support is the number one reason collective impact initiatives fail.</p>
+</div></div></div>
+                    <div class="expandable"><div class="expandable-header" role="button" aria-expanded="false"><h3 class="expandable-title">Field Catalyst</h3><div class="expandable-icon" aria-hidden="true">▼</div></div><div class="expandable-content"><div class="expandable-body">
+    <p>Bridgespan's research on "field catalysts" — entities that focus on influencing the direct actions of others rather than acting directly — provides the clearest operational definition of this role. Field catalysts differ from backbone organisations in that they are not attached to a specific coalition or initiative. They work at the level of the field itself: building shared identity, knowledge infrastructure, leadership pipelines, and the policy conditions that allow many actors to work better together.</p>
+    <p>Roll Back Malaria is the canonical example: it never treated a single patient or delivered a bed net. Between 2005 and 2015, global malaria deaths fell by 75%. The catalytic work — aligning pharmaceutical companies, governments, researchers, and NGOs around shared targets and measurement — was the intervention. Power to Decide contributed to a 72% decline in US teen birth rates over 27 years not by running a single programme but by building a field of aligned actors.</p>
+    <p>In India, the India Climate Collaborative functions as a field catalyst — landscaping the climate ecosystem, making funding flows visible, and creating matching infrastructure between funders and implementers. Dasra occupies a similar position across multiple issue fields simultaneously. The Centre for Exponential Change, launched in 2024, is explicitly designed to catalyse a global field of system orchestrators — making it a catalyst of catalysts.</p>
+    <p><strong>The key distinction from programme scaling:</strong> scaling one programme grows one organisation. Field catalysis transforms the conditions in which all organisations working on a problem operate. These require different skills, different funding models, and different timeframes.</p>
+</div></div></div>
+                    <div class="expandable"><div class="expandable-header" role="button" aria-expanded="false"><h3 class="expandable-title">Distributed Leadership</h3><div class="expandable-icon" aria-hidden="true">▼</div></div><div class="expandable-content"><div class="expandable-body">
+    <p>Hoverstadt's Power Structuration Theorem provides the structural basis: a system has optimal agency when its needs for agency are balanced with those of its sub-systems. When the orchestrator accumulates authority — even with good intentions — it crowds out the agency of the system's actors and the system underperforms. Distributed leadership is not an ethical preference. It is a structural requirement for system-level performance.</p>
+    <p>What this looks like in practice varies significantly by governance model. In Co-Impact's "stand behind, not in for, leaders" model, the orchestrator explicitly refuses to substitute for local leadership even when it could move faster by doing so. In the Community Practitioners Platform for Resilience, grassroots community organisations hold convening power, with international agencies in supporting roles. In GRP's multi-stakeholder partnership, the secretariat is accountable to a partnership council rather than its funders alone.</p>
+    <p>The failure mode is equally consistent across cases: when the orchestrator becomes the story — when its brand overshadows the coalition, when its methodology becomes mandatory rather than offered, when its staff speak for communities rather than helping communities speak — the distributed leadership becomes concentrated leadership with a distributed aesthetic. The system senses this. Trust erodes. Partners begin to manage the orchestrator rather than work with it.</p>
+    <p><strong>The hardest discipline:</strong> holding direction without controlling destination. Rainmatter's formulation — "responding to where the demand is" rather than "intervening where we think we should" — describes the daily practice of distributed leadership in a funding relationship.</p>
+</div></div></div>
+                    <div class="expandable"><div class="expandable-header" role="button" aria-expanded="false"><h3 class="expandable-title">System Mapping — and Its Limits</h3><div class="expandable-icon" aria-hidden="true">▼</div></div><div class="expandable-content"><div class="expandable-body">
+    <p>System mapping tools — stakeholder network mapping, causal loop diagrams, power mapping, actor influence matrices — provide the orchestrator with a shared representation of the system that enables coordinated action. Systems Change Lab's open-source indicator platform tracks 70+ transformational shifts across power, industry, transport, cities, food, and governance. GRP's Resilience Mapping platform makes the ecosystem of resilience initiatives visible. The Meridian Institute's Global Food Systems Network Map and FAO's FAST initiative mapping function as meta-orchestration tools — making it possible to see the orchestrators themselves.</p>
+    <p>But mapping has a structural limit that most practitioners underestimate. Hoverstadt's Darkness Principle states it precisely: there is always something about a system that cannot be known. And Bateson's deeper point: the map is not the territory, and the mapmaker is inside the territory they are mapping. Every system map embeds a theory of what counts as signal and what counts as noise. Every stakeholder diagram is also a diagram of who the mapper believes matters.</p>
+    <p>Peter Checkland's Soft Systems Methodology was built on this recognition: in human systems, the problem itself is problematic. Different actors see different problems in the same situation. Useful system mapping in orchestration work therefore does three things conventional mapping does not: it makes the mapmaker's own position explicit; it creates multiple maps from multiple perspectives rather than one authoritative map; and it treats the mapping process itself as a site of negotiation rather than a technical exercise.</p>
+    <p><strong>Practically:</strong> John Gaventa's Power Cube — mapping visible, hidden, and invisible forms of power across closed, invited, and claimed spaces — should accompany every causal loop diagram. A map of information flows without a map of who controls them is a map that flatters the powerful.</p>
+</div></div></div>
                     <div class="expandable"><div class="expandable-header" role="button" aria-expanded="false"><h3 class="expandable-title">The Observer-Participant Problem</h3><div class="expandable-icon" aria-hidden="true">▼</div></div><div class="expandable-content"><div class="expandable-body">
                         <p>Every orchestration framework — Collective Impact, the backbone model, Co-Impact's "stand behind, not in for, leaders" — relies on some version of the neutral convenor: an entity that holds space without distorting it. Systems science dissolves this comfort.</p>
                         <p>The orchestrator is not outside the system they are orchestrating. They are a node within it. Gregory Bateson called this "the pattern that connects" — in living systems, observer and observed are parts of the same pattern. You cannot step outside it for a clean view. You can only become more or less conscious of how you are participating in it.</p>
@@ -2190,10 +2378,182 @@
         <section id="organisations">
             <div class="container">
                 <span class="section-eyebrow">11 / Organisations</span>
-                <h1 class="section-title">Five Approaches to the Same Idea</h1>
-                <p class="section-intro">These organisations are not merely funding systems change - they are practicing orchestration in distinct ways, each offering a different answer to the question: what does it look like to hold the system-level glue?</p>
+                <h1 class="section-title">Who Holds the System</h1>
+                <p class="section-intro">A curated landscape of organisations that practice systems orchestration — as backbone, alliance secretariat, ecosystem weaver, or convening platform. Drawn from India and globally, each is a different answer to the same question: what does it look like to hold the system-level glue?</p>
+
+                <!-- TAXONOMY -->
+                <div class="content-block">
+                    <h2>Seven Types of Orchestrator</h2>
+                    <p>Not all orchestrators look the same. The field uses a dozen different names for what is effectively the same function. This taxonomy maps the range — from explicit backbone organisations to de-facto orchestrators who have never used the word.</p>
+                    <div class="taxonomy-grid">
+                        <div class="taxonomy-card">
+                            <div class="taxonomy-type">Backbone Organisation</div>
+                            <p class="taxonomy-eg">Dedicated entity coordinating a multi-stakeholder initiative without implementing directly. Eg. Sattva in Saamuhika Shakti, FSG's Collective Impact model.</p>
+                        </div>
+                        <div class="taxonomy-card">
+                            <div class="taxonomy-type">Alliance Secretariat</div>
+                            <p class="taxonomy-eg">A small hosted team that curates agendas, runs learning, and holds shared measurement for a member-led alliance. Eg. ClimateSmart Cities Alliance / C-Cube, GACSA.</p>
+                        </div>
+                        <div class="taxonomy-card">
+                            <div class="taxonomy-type">Ecosystem Weaver</div>
+                            <p class="taxonomy-eg">A funder or foundation that bets on portfolio density and connective tissue rather than individual organisations. Eg. Rainmatter Foundation, Rohini Nilekani Philanthropies.</p>
+                        </div>
+                        <div class="taxonomy-card">
+                            <div class="taxonomy-type">Multi-Stakeholder Platform</div>
+                            <p class="taxonomy-eg">An open, voluntary platform aligning government, private sector, civil society, and communities around a shared theme. Eg. ClimateRISE Alliance, India Agrivoltaics Alliance, NPDRR.</p>
+                        </div>
+                        <div class="taxonomy-card">
+                            <div class="taxonomy-type">Think-and-Do Tank</div>
+                            <p class="taxonomy-eg">An analytical and knowledge infrastructure entity that uses data and research as its primary lever of influence. Eg. Systems Change Lab, India Climate Collaborative, WRI India.</p>
+                        </div>
+                        <div class="taxonomy-card">
+                            <div class="taxonomy-type">Sector Association / Industry Body</div>
+                            <p class="taxonomy-eg">A membership organisation coordinating enterprises, finance, and policy within a specific sector. Eg. CLEAN (decentralised renewable energy), India Agrivoltaics Alliance.</p>
+                        </div>
+                        <div class="taxonomy-card">
+                            <div class="taxonomy-type">Embedded Government Backbone</div>
+                            <p class="taxonomy-eg">A unit embedded within or co-located with government that convenes non-state actors while benefiting from state authority and mandate. Eg. NIUA / C-Cube, NIDM / IUINDRR, Piramal Foundation with state governments.</p>
+                        </div>
+                        <div class="taxonomy-card">
+                            <div class="taxonomy-type">Philanthropic Collaborative</div>
+                            <p class="taxonomy-eg">A pool of philanthropies jointly funding a systems function, providing both capital and legitimacy. Eg. Co-Impact, India Climate Collaborative, India Philanthropy Alliance.</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="landscape-divider">
+                    <span class="landscape-divider-label">India · Orchestration in practice</span>
+                    <div class="landscape-divider-rule"></div>
+                </div>
 
                 <div class="org-card">
+                    <div class="org-card-header">
+                        <div><div class="org-name">Saamuhika Shakti</div><div style="margin-top:0.3rem;color:var(--text-muted);font-size:0.875rem;">Bengaluru, India · H&M Foundation · Backbone: Sattva Consulting</div></div>
+                        <span class="org-tag">Collective Impact Backbone</span>
+                    </div>
+                    <div class="org-body">
+                        <p>India's first formally structured Collective Impact initiative — coordinating 8–10 NGO partners around a shared agenda for Bengaluru's informal waste-picker communities since 2019. Sattva Consulting serves as the backbone: guiding vision and strategy, managing shared measurement, coordinating partners, and running learning systems. After six years, the initiative published ten hard-won lessons on holding collective action — including that backbone neutrality is a myth, that power must be actively redistributed toward communities, and that patience is not a virtue but a structural requirement. An independent evaluation by 3ie provides a rare rigorous evidence base for a collective impact backbone in India.</p>
+                        <h4>Signature vocabulary</h4>
+                        <p>Collective impact · backbone organisation · shared outcomes · community leadership · structured collaboration · "shifting power to the local community"</p>
+                        <h4>Key resources</h4>
+                        <p><a href="https://www.saamuhikashakti.org" target="_blank" rel="noopener">Saamuhika Shakti →</a> &nbsp;|&nbsp; <a href="https://www.bridgespan.org/insights/community-driven-change-africa-and-india/saamuhika-shakti-case-study" target="_blank" rel="noopener">Bridgespan Case Study →</a> &nbsp;|&nbsp; <a href="https://www.3ieimpact.org/research/improving-lives-waste-pickers-india" target="_blank" rel="noopener">3ie Evaluation →</a></p>
+                    </div>
+                    <div class="org-keywords"><span class="org-keyword">Collective impact</span><span class="org-keyword">Waste pickers</span><span class="org-keyword">Urban livelihoods</span><span class="org-keyword">Backbone</span><span class="org-keyword">Bengaluru</span></div>
+                </div>
+
+                <div class="org-card">
+                    <div class="org-card-header">
+                        <div><div class="org-name">ClimateRISE Alliance</div><div style="margin-top:0.3rem;color:var(--text-muted);font-size:0.875rem;">India-wide · Convened by Dasra &amp; Rainmatter · 80–100+ CSOs, think-tanks, funders</div></div>
+                        <span class="org-tag">National Climate Alliance</span>
+                    </div>
+                    <div class="org-body">
+                        <p>Launched in 2023 as India's broadest intersectional climate resilience platform. ClimateRISE builds working groups — Conservation &amp; Restoration, Health Systems, Gender, Rural Communities, Sustainable Cities — to co-create ecosystem goals, joint outcomes and policy shifts. Their emphasis on "narrative change" alongside policy and practice is distinctive: they aim to shape a common vocabulary for climate resilience that is community-centred and equity-focused. The alliance's national convenings on waste systems, water resilience, and city climate governance demonstrate what ecosystem-level agenda-setting looks like in practice.</p>
+                        <h4>Signature vocabulary</h4>
+                        <p>Multi-stakeholder platform · intersectional climate resilience · "India view and common vocabulary" · working groups · community-centred · narrative change</p>
+                        <h4>Key resources</h4>
+                        <p><a href="https://www.climaterise.in" target="_blank" rel="noopener">ClimateRISE Alliance →</a> &nbsp;|&nbsp; <a href="https://www.climaterise.in/about" target="_blank" rel="noopener">About the Alliance →</a></p>
+                    </div>
+                    <div class="org-keywords"><span class="org-keyword">Climate resilience</span><span class="org-keyword">Multi-stakeholder</span><span class="org-keyword">India-wide</span><span class="org-keyword">Gender</span><span class="org-keyword">Urban resilience</span></div>
+                </div>
+
+                <div class="org-card">
+                    <div class="org-card-header">
+                        <div><div class="org-name">India Climate Collaborative (ICC)</div><div style="margin-top:0.3rem;color:var(--text-muted);font-size:0.875rem;">India-wide · Founded by Ratan Tata, Rohini Nilekani, Anand Mahindra &amp; others · Launched 2020</div></div>
+                        <span class="org-tag">Philanthropy Backbone</span>
+                    </div>
+                    <div class="org-body">
+                        <p>A first-of-its-kind collaborative platform functioning as connective infrastructure for India's climate philanthropy ecosystem. ICC landscapes climate sub-sectors, runs Earth Exponential (a platform matching funders with home-grown climate projects), and produces ecosystem analysis that makes India's climate funding landscape legible for the first time. Its primary orchestration lever is capital flow — unlocking philanthropic funding by reducing information asymmetry between funders and implementers. A philanthropist-systems backbone that orchestrates agenda-setting and finance rather than implementation.</p>
+                        <h4>Signature vocabulary</h4>
+                        <p>Collaborative platform · "India-only climate narrative" · focal point for collaboration · ecosystem studies · capital flow orchestration</p>
+                        <h4>Key resources</h4>
+                        <p><a href="https://indiaclimatecollaborative.org" target="_blank" rel="noopener">India Climate Collaborative →</a> &nbsp;|&nbsp; <a href="https://www.tatatrusts.org/our-work/environment-and-energy/climate-change/india-climate-collaborative" target="_blank" rel="noopener">Tata Trusts on ICC →</a></p>
+                    </div>
+                    <div class="org-keywords"><span class="org-keyword">Climate finance</span><span class="org-keyword">Philanthropic backbone</span><span class="org-keyword">India narrative</span><span class="org-keyword">Ecosystem mapping</span><span class="org-keyword">Earth Exponential</span></div>
+                </div>
+
+                <div class="org-card">
+                    <div class="org-card-header">
+                        <div><div class="org-name">CLEAN — Clean Energy Access Network</div><div style="margin-top:0.3rem;color:var(--text-muted);font-size:0.875rem;">Delhi, India-wide · Est. 2014 · 100–200+ member enterprises · Anchored by TERI, SELCO, GIZ, WWF India</div></div>
+                        <span class="org-tag">Sector Backbone</span>
+                    </div>
+                    <div class="org-body">
+                        <p>An all-India industry body that functions as a sector backbone for decentralised renewable energy (DRE) — solar, bio-energy, wind, hydro, clean cooking, mini-grids. CLEAN unifies DRE enterprises, advocates with government, convenes the India Energy Access Summit (400+ leaders annually), and provides policy, market intelligence, and capacity-building support for members. A membership-based orchestration model that aligns market actors, government, and international partners around a shared clean energy access agenda. Initially set up by a consortium spanning TERI, SELCO Foundation, GIZ, UN Foundation, WWF India, CEEW, and The Climate Group.</p>
+                        <h4>Signature vocabulary</h4>
+                        <p>All-India industry body · "dedicated to transforming lives through decentralised renewable energy" · voice and convenor for DRE actors · energy access summit</p>
+                        <h4>Key resources</h4>
+                        <p><a href="https://cleanindia.org" target="_blank" rel="noopener">CLEAN India →</a> &nbsp;|&nbsp; <a href="https://www.theclimategroup.org/our-work/india-energy-access-summit" target="_blank" rel="noopener">India Energy Access Summit →</a></p>
+                    </div>
+                    <div class="org-keywords"><span class="org-keyword">Decentralised renewables</span><span class="org-keyword">Sector association</span><span class="org-keyword">Energy access</span><span class="org-keyword">Mini-grids</span><span class="org-keyword">Policy advocacy</span></div>
+                </div>
+
+                <div class="org-card">
+                    <div class="org-card-header">
+                        <div><div class="org-name">ClimateSmart Cities Alliance / C-Cube (NIUA)</div><div style="margin-top:0.3rem;color:var(--text-muted);font-size:0.875rem;">New Delhi · Secretariat: National Institute of Urban Affairs · MoHUA mandate · 45+ alliance members</div></div>
+                        <span class="org-tag">Embedded Government Backbone</span>
+                    </div>
+                    <div class="org-body">
+                        <p>A national-level multi-stakeholder partnership supporting the ClimateSmart Cities Assessment Framework (CSCAF) across Indian cities, with NIUA's Climate Centre for Cities (C-Cube) serving as Alliance Secretariat. C-Cube functions as a "one-stop shop for climate-informed actions" — mentoring cities, convening 45+ alliance members, and scaling climate-smart pilots. This is a distinctive model: an embedded backbone sitting close to policy through a quasi-governmental host (NIUA) with a formal mandate from the Ministry of Housing and Urban Affairs, while simultaneously convening non-state actors. Demonstrates how orchestrators can use state authority as a resource without losing multi-stakeholder legitimacy.</p>
+                        <h4>Signature vocabulary</h4>
+                        <p>National multi-stakeholder partnership · Alliance Secretariat · CSCAF · "one-stop shop for climate-informed actions" · city mentoring · embedded backbone</p>
+                        <h4>Key resources</h4>
+                        <p><a href="https://niua.in/c-cube/" target="_blank" rel="noopener">Climate Centre for Cities (C-Cube) →</a> &nbsp;|&nbsp; <a href="https://smartcities.gov.in/ClimateSmart" target="_blank" rel="noopener">ClimateSmart Cities →</a></p>
+                    </div>
+                    <div class="org-keywords"><span class="org-keyword">Urban climate</span><span class="org-keyword">CSCAF</span><span class="org-keyword">Government embedded</span><span class="org-keyword">Indian cities</span><span class="org-keyword">MoHUA</span></div>
+                </div>
+
+                <div class="org-card">
+                    <div class="org-card-header">
+                        <div><div class="org-name">National Platform for Disaster Risk Reduction (NPDRR)</div><div style="margin-top:0.3rem;color:var(--text-muted);font-size:0.875rem;">India · Government of India · Constituted 2013 · Chaired by Union Home Minister</div></div>
+                        <span class="org-tag">State-Led Platform</span>
+                    </div>
+                    <div class="org-body">
+                        <p>India's formal multi-stakeholder DRR platform, constituted in 2013 and aligned with the Sendai Framework for Disaster Risk Reduction 2015–2030. Brings together cabinet ministers, state disaster ministers, local government leaders, industry, media, civil society, and international agencies to facilitate dialogue and explore cooperation on DRR. Three national sessions (2013, 2017, 2023) have produced outcome documents shaping national DRR policy. A template for state-led orchestration where formal authority sits with government but structured multi-stakeholder deliberation is central to the design — a different model from philanthropy-anchored platforms but equally relevant for understanding how orchestration works near the centre of state power.</p>
+                        <h4>Signature vocabulary</h4>
+                        <p>Multi-stakeholders and multi-sectoral platform · "evolving participatory decision-making" · Sendai Framework implementation · government-led convening</p>
+                        <h4>Key resources</h4>
+                        <p><a href="https://ndma.gov.in/Capacity_Building/Policy_Plan/National-Platform-Disaster-Risk-Reduction" target="_blank" rel="noopener">NPDRR / NDMA →</a></p>
+                    </div>
+                    <div class="org-keywords"><span class="org-keyword">DRR</span><span class="org-keyword">Sendai Framework</span><span class="org-keyword">Government platform</span><span class="org-keyword">Multi-sectoral</span><span class="org-keyword">India</span></div>
+                </div>
+
+                <div class="org-card">
+                    <div class="org-card-header">
+                        <div><div class="org-name">Piramal Foundation</div><div style="margin-top:0.3rem;color:var(--text-muted);font-size:0.875rem;">India · Multiple states · Aspirational Districts · Est. 2006 · Embedded with state &amp; district governments</div></div>
+                        <span class="org-tag">Philanthropic Government Orchestrator</span>
+                    </div>
+                    <div class="org-body">
+                        <p>One of the clearest examples in India of a philanthropic foundation operating as an embedded government backbone. Piramal works with district and state governments as an orchestrator — knitting together wraparound services across education, health, water, and governance and embedding teams within public systems rather than running parallel services. Explicitly described in Bridgespan case studies as an "orchestrator" using Collective Impact principles within government structures. Their model — co-financing with government budgets, gradually institutionalising orchestration inside public systems — demonstrates how the backbone function can migrate from external to embedded over time.</p>
+                        <h4>Signature vocabulary</h4>
+                        <p>Wraparound services · embedded with government · orchestrator · collective impact in public systems · Aspirational Districts · systems strengthening</p>
+                        <h4>Key resources</h4>
+                        <p><a href="https://piramalfoundation.org" target="_blank" rel="noopener">Piramal Foundation →</a></p>
+                    </div>
+                    <div class="org-keywords"><span class="org-keyword">Government embedded</span><span class="org-keyword">Aspirational Districts</span><span class="org-keyword">Public systems</span><span class="org-keyword">Education &amp; health</span><span class="org-keyword">Philanthropic backbone</span></div>
+                </div>
+
+                <div class="org-card">
+                    <div class="org-card-header">
+                        <div><div class="org-name">India Backbone Implementation Network (IbIn)</div><div style="margin-top:0.3rem;color:var(--text-muted);font-size:0.875rem;">India · Conceptualised in 12th Five-Year Plan · Nodes across states including Maharashtra</div></div>
+                        <span class="org-tag">Implementation Backbone</span>
+                    </div>
+                    <div class="org-body">
+                        <p>A conceptual and operational precursor that emerged directly from India's 12th Five-Year Planning Commission — when policymakers explicitly identified coordination failure as a first-order problem and called for a "backbone organisation" to address it. IbIn was designed as a network that builds capabilities for coordination, stakeholder alignment, and project implementation — with nodes bringing together "enablers," "sponsors," and "channels" to unblock stuck policies and programmes. Its Maharashtra application ("Deliver Maharashtra") offers rare insight into what an implementation backbone looks like inside a state government context. Valuable as an intellectual precedent: when India's planning apparatus acknowledged the backbone function, it was naming a real gap.</p>
+                        <h4>Signature vocabulary</h4>
+                        <p>Backbone organisation · implementation capabilities · enablers / sponsors / channels · planning labs · coordination failure · delivery units</p>
+                        <h4>Key resources</h4>
+                        <p><a href="https://planning.gov.in" target="_blank" rel="noopener">Planning Commission legacy →</a></p>
+                        <p class="org-note">Note: IbIn's public documentation is limited; the design concept is referenced in 12th Plan documents and Maharashtra delivery unit records.</p>
+                    </div>
+                    <div class="org-keywords"><span class="org-keyword">Implementation backbone</span><span class="org-keyword">Planning Commission</span><span class="org-keyword">Coordination failure</span><span class="org-keyword">State government</span><span class="org-keyword">Maharashtra</span></div>
+                </div>
+
+                <div class="landscape-divider">
+                    <span class="landscape-divider-label">Global · Reference models</span>
+                    <div class="landscape-divider-rule"></div>
+                </div>
+
+                                <div class="org-card">
                     <div class="org-card-header">
                         <div><div class="org-name">Rohini Nilekani Philanthropies &amp; Centre for Exponential Change</div><div style="margin-top:0.3rem;color:var(--text-muted);font-size:0.875rem;">India / Global · Trust-based philanthropy · Systems orchestration</div></div>
                         <span class="org-tag">Field Originator</span>
@@ -2269,6 +2629,171 @@
                 <div class="definition-box" style="margin-top:2.5rem;">
                     <p><strong>A note on vocabulary:</strong> No two organisations use identical language for what is effectively the same work. Rockefeller says "convening and catalysing"; Rainmatter says "ecosystem weaving"; RNP says "needle and thread"; Co-Impact says "building winning coalitions"; Dasra says "systems orchestrator." The multiplicity reflects genuine differences in emphasis - and a field still building shared language. The emergence of "system orchestrator" as a unifying term through the SSIR 2025 article and Centre for Exponential Change is itself an act of orchestration: naming the role to make it fundable, legible, and sustainable.</p>
                 </div>
+
+                <!-- GLOBAL EXEMPLARS -->
+                <div class="landscape-divider">
+                    <span class="landscape-divider-label">Global · Mature orchestration architectures</span>
+                    <div class="landscape-divider-rule"></div>
+                </div>
+
+                <div class="org-card">
+                    <div class="org-card-header">
+                        <div><div class="org-name">Systems Change Lab</div><div style="margin-top:0.3rem;color:var(--text-muted);font-size:0.875rem;">Global · Convened by WRI &amp; Bezos Earth Fund · Launched 2022 · 70+ tracked transformational shifts</div></div>
+                        <span class="org-tag">Data-Driven Orchestration</span>
+                    </div>
+                    <div class="org-body">
+                        <p>A global collaborative initiative that tracks progress on 70+ transformational shifts across power, industry, transport, cities, food, forests, water, finance, and governance using an open-source data platform. Systems Change Lab combines monitoring, learning, and mobilisation — identifying where change is accelerating and where it is stalled, then supporting coalitions around leverage points. Their annual State of Climate Action reports and open dashboards function as shared measurement infrastructure for the global climate systems change community. Demonstrates data-driven orchestration: using analytics and indicators as the primary lever rather than convening or capital.</p>
+                        <h4>Signature vocabulary</h4>
+                        <p>"Collaborative initiative" · transformational shifts · open data platform · "mobilize action" · State of Climate Action · systems monitoring</p>
+                        <h4>Key resources</h4>
+                        <p><a href="https://systemschangelab.org" target="_blank" rel="noopener">Systems Change Lab →</a> &nbsp;|&nbsp; <a href="https://www.wri.org/initiatives/systems-change-lab" target="_blank" rel="noopener">WRI: Systems Change Lab →</a></p>
+                    </div>
+                    <div class="org-keywords"><span class="org-keyword">Data platform</span><span class="org-keyword">70+ shifts</span><span class="org-keyword">WRI</span><span class="org-keyword">Climate action</span><span class="org-keyword">Open dashboards</span></div>
+                </div>
+
+                <div class="org-card">
+                    <div class="org-card-header">
+                        <div><div class="org-name">Community Practitioners Platform for Resilience (CPPR)</div><div style="margin-top:0.3rem;color:var(--text-muted);font-size:0.875rem;">Global · Huairou Commission · Est. 2009 · UNDRR-endorsed · Global South grassroots networks</div></div>
+                        <span class="org-tag">Bottom-Up Orchestration</span>
+                    </div>
+                    <div class="org-body">
+                        <p>A multi-stakeholder platform connecting organised grassroots community groups — with strong centering of women — facing natural hazards and climate change. CPPR enables community organisations to co-develop resilience strategies, influence policy, and lead collaborative DRR initiatives. Endorsed by UNDRR as a formal mechanism for implementing the Sendai Framework, it holds a seat at the global table for communities usually positioned as recipients of orchestrated programmes rather than orchestrators themselves. A powerful counter-model: bottom-up orchestration where grassroots networks hold convening power rather than technocratic bodies. Particularly relevant for DRR, climate adaptation, and WASH work in South Asia.</p>
+                        <h4>Signature vocabulary</h4>
+                        <p>"Multi-stakeholder platform" · community-led resilience · "body of community practice and innovation" · women-centred · Sendai Framework · grassroots convening power</p>
+                        <h4>Key resources</h4>
+                        <p><a href="https://huairou.org/community-practitioners-platform-for-resilience/" target="_blank" rel="noopener">Community Practitioners Platform for Resilience →</a></p>
+                    </div>
+                    <div class="org-keywords"><span class="org-keyword">Grassroots</span><span class="org-keyword">DRR</span><span class="org-keyword">Women-centred</span><span class="org-keyword">Sendai Framework</span><span class="org-keyword">Bottom-up</span></div>
+                </div>
+
+                <div class="org-card">
+                    <div class="org-card-header">
+                        <div><div class="org-name">Global Alliance for Climate-Smart Agriculture (GACSA)</div><div style="margin-top:0.3rem;color:var(--text-muted);font-size:0.875rem;">Global · FAO ecosystem · Launched 2014 · 400+ member entities</div></div>
+                        <span class="org-tag">Voluntary Alliance Secretariat</span>
+                    </div>
+                    <div class="org-body">
+                        <p>An inclusive, voluntary, action-oriented multi-stakeholder alliance catalysing collaborative action to scale climate-smart agriculture through members' own programmes, knowledge exchange, and advocacy. With 400+ member entities spanning governments, NGOs, research institutions, and private sector, GACSA demonstrates the governance challenges and design choices of large voluntary alliances — how a small secretariat (hosted in the FAO ecosystem) can facilitate many semi-autonomous member initiatives under a shared banner without commanding any of them. A useful comparator for Indian agriculture and climate resilience initiatives seeking to organise at national scale.</p>
+                        <h4>Signature vocabulary</h4>
+                        <p>"Inclusive, voluntary and action-oriented multi-stakeholder platform" · climate-smart agriculture · member-driven · knowledge exchange · catalysing action</p>
+                        <h4>Key resources</h4>
+                        <p><a href="https://www.fao.org/climate-smart-agriculture/gacsa/en/" target="_blank" rel="noopener">GACSA / FAO →</a></p>
+                    </div>
+                    <div class="org-keywords"><span class="org-keyword">Climate-smart agriculture</span><span class="org-keyword">FAO</span><span class="org-keyword">Voluntary alliance</span><span class="org-keyword">400+ members</span><span class="org-keyword">Food systems</span></div>
+                </div>
+
+                <div class="org-card">
+                    <div class="org-card-header">
+                        <div><div class="org-name">Global Resilience Partnership (GRP)</div><div style="margin-top:0.3rem;color:var(--text-muted);font-size:0.875rem;">South Africa / Stockholm · ~80–91 partner organisations · Sahel, Horn of Africa, South &amp; Southeast Asia</div></div>
+                        <span class="org-tag">Issue-Focused Global Backbone</span>
+                    </div>
+                    <div class="org-body">
+                        <p>A global multi-stakeholder partnership that aligns donors, implementers, and researchers to identify and scale resilience innovations across climate-vulnerable regions. GRP operates through a light central secretariat co-hosted by Stockholm Resilience Centre, with portfolio-based partnership across innovation challenges, knowledge workstreams, and policy engagement. Their Resilience Mapping platform makes the ecosystem of resilience initiatives visible — a meta-orchestration tool in its own right. Funded by a mix of USAID, Sida, Munich Re Foundation, GEF, and UNDP; GRP has supported 1,300+ organisations and mobilised tens of millions in resilience programming. A model of issue-focused global partnership that adds value via innovation, shared knowledge, and policy leverage — without controlling any of its partners.</p>
+                        <h4>Signature vocabulary</h4>
+                        <p>Resilience partnership · innovation challenges · resilience mapping · light secretariat · portfolio learning · "identify where change is stalled"</p>
+                        <h4>Key resources</h4>
+                        <p><a href="https://www.globalresiliencepartnership.org" target="_blank" rel="noopener">Global Resilience Partnership →</a></p>
+                    </div>
+                    <div class="org-keywords"><span class="org-keyword">Resilience</span><span class="org-keyword">Climate</span><span class="org-keyword">DRR</span><span class="org-keyword">South Asia</span><span class="org-keyword">Innovation</span></div>
+                </div>
+
+                <div class="org-card">
+                    <div class="org-card-header">
+                        <div><div class="org-name">InsuResilience Global Partnership</div><div style="margin-top:0.3rem;color:var(--text-muted);font-size:0.875rem;">Global · GIZ/BMZ Secretariat · 61+ members · Launched COP23, 2017</div></div>
+                        <span class="org-tag">Finance-Oriented Alliance Secretariat</span>
+                    </div>
+                    <div class="org-body">
+                        <p>A global multi-stakeholder initiative aligning donors, development finance institutions, private insurers, and vulnerable-country partners around expanding financial protection for poor and vulnerable people against climate and disaster risk. InsuResilience brings together V20 and G20 countries, international organisations, and private sector around shared principles, tracking progress on protection targets such as the number of people covered by climate risk finance solutions. Secretariat hosted by GIZ on behalf of BMZ. A clear template for a finance-oriented alliance secretariat working at the global policy-to-implementation interface — relevant to Practical Action's work on parametric insurance in South Asia.</p>
+                        <h4>Signature vocabulary</h4>
+                        <p>Climate and disaster risk finance · financial protection · insurance gap · V20 · shared principles · protection targets</p>
+                        <h4>Key resources</h4>
+                        <p><a href="https://www.insuresilience.org" target="_blank" rel="noopener">InsuResilience Global Partnership →</a></p>
+                    </div>
+                    <div class="org-keywords"><span class="org-keyword">Parametric insurance</span><span class="org-keyword">Climate risk finance</span><span class="org-keyword">V20</span><span class="org-keyword">DRR finance</span><span class="org-keyword">GIZ</span></div>
+                </div>
+
+                <div class="org-card">
+                    <div class="org-card-header">
+                        <div><div class="org-name">CREWS — Climate Risk and Early Warning Systems</div><div style="margin-top:0.3rem;color:var(--text-muted);font-size:0.875rem;">Global · World Bank Trust Fund · WMO &amp; UNDRR implementing · LDCs and SIDS focus · Est. 2016</div></div>
+                        <span class="org-tag">Finance + Technical Partnership</span>
+                    </div>
+                    <div class="org-body">
+                        <p>A joint investment platform and technical partnership delivering early-warning capacity, risk information, and climate services aligned with the UN's Early Warnings for All (EW4All) initiative. CREWS closes the early warning protection gap specifically in Least Developed Countries and Small Island Developing States — by pooling donor funding in a World Bank-managed trust fund and delivering through WMO, UNDRR, and the World Bank/GFDRR. A prototype of a finance-plus-technical partnership for a single, sharply defined systems challenge, with clear Sendai Framework and SDG anchors. Directly relevant to Practical Action's early warning systems work in South Asia.</p>
+                        <h4>Signature vocabulary</h4>
+                        <p>Multi-hazard early warning systems · EW4All · climate services · protection gap · trust fund architecture · Sendai Target G</p>
+                        <h4>Key resources</h4>
+                        <p><a href="https://www.crews-initiative.org" target="_blank" rel="noopener">CREWS Initiative →</a> &nbsp;|&nbsp; <a href="https://earlywarningsforall.org" target="_blank" rel="noopener">Early Warnings for All →</a></p>
+                    </div>
+                    <div class="org-keywords"><span class="org-keyword">Early warning systems</span><span class="org-keyword">LDCs</span><span class="org-keyword">WMO</span><span class="org-keyword">Climate services</span><span class="org-keyword">EW4All</span></div>
+                </div>
+
+                <div class="org-card">
+                    <div class="org-card-header">
+                        <div><div class="org-name">StriveTogether Cradle-to-Career Network</div><div style="margin-top:0.3rem;color:var(--text-muted);font-size:0.875rem;">USA-wide · ~70 community partnerships · Originated Cincinnati 2010 · Backbone-of-backbones architecture</div></div>
+                        <span class="org-tag">Multi-Level Backbone Architecture</span>
+                    </div>
+                    <div class="org-body">
+                        <p>The most rigorously evaluated collective impact network in the world. StriveTogether acts as a national meta-backbone — setting standards, offering communities of practice, and managing learning — while ~70 local partnerships each have their own backbone organisation coordinating schools, nonprofits, city agencies, and funders around shared cradle-to-career outcomes. An independent three-year evaluation by Equal Measure validated that the framework helps communities build civic infrastructure and improve child outcomes, with documented reductions in chronic absenteeism and gains in reading. The multi-level architecture (national backbone + local backbones) is the most fully developed answer the field has to the meta-coordination question: who orchestrates the orchestrators?</p>
+                        <h4>Signature vocabulary</h4>
+                        <p>Collective impact · cradle-to-career · backbone-of-backbones · networked improvement communities · civic infrastructure · Theory of Action · shared measurement</p>
+                        <h4>Key resources</h4>
+                        <p><a href="https://www.strivetogether.org" target="_blank" rel="noopener">StriveTogether →</a> &nbsp;|&nbsp; <a href="https://collectiveimpactforum.org" target="_blank" rel="noopener">Collective Impact Forum →</a></p>
+                    </div>
+                    <div class="org-keywords"><span class="org-keyword">Collective impact</span><span class="org-keyword">Backbone network</span><span class="org-keyword">Education</span><span class="org-keyword">Civic infrastructure</span><span class="org-keyword">Evaluated</span></div>
+                </div>
+
+                <div class="org-card">
+                    <div class="org-card-header">
+                        <div><div class="org-name">International Land Coalition (ILC) — National MSPs</div><div style="margin-top:0.3rem;color:var(--text-muted);font-size:0.875rem;">Global · Founded 1995 · 300+ members · 22–35 national multi-stakeholder platforms</div></div>
+                        <span class="org-tag">Country-Level MSP Facilitation</span>
+                    </div>
+                    <div class="org-body">
+                        <p>A global alliance of civil society and intergovernmental organisations working on people-centred land governance. ILC's most distinctive orchestration contribution is its investment in national multi-stakeholder platforms (MSPs) — facilitated spaces where government, private sector, and civil society negotiate contentious land governance reforms. With 22–35 countries investing in national MSPs and a systematic monitoring and evaluation approach, ILC has built one of the deepest global evidence bases on what MSP facilitation actually requires: managing power dynamics, building trust across entrenched interests, and sustaining engagement over years. Directly relevant for climate resilience and DRR contexts where land rights intersect with disaster risk.</p>
+                        <h4>Signature vocabulary</h4>
+                        <p>People-centred land governance · multi-stakeholder platforms · facilitation capacity-building · "Collaborating for Resilience" · community of practice · MSP design</p>
+                        <h4>Key resources</h4>
+                        <p><a href="https://www.landcoalition.org" target="_blank" rel="noopener">International Land Coalition →</a></p>
+                    </div>
+                    <div class="org-keywords"><span class="org-keyword">Land governance</span><span class="org-keyword">MSP facilitation</span><span class="org-keyword">Civil society</span><span class="org-keyword">Global South</span><span class="org-keyword">300+ members</span></div>
+                </div>
+
+                <!-- CROSS-CUTTING PATTERNS -->
+                <div class="content-block" style="margin-top:3.5rem;">
+                    <h2 class="with-rule">What the Field Is Learning: Six Cross-Cutting Patterns</h2>
+                    <p>Across India and global initiatives — from Saamuhika Shakti in Bengaluru to CREWS in Geneva — six structural patterns recur regardless of sector, geography, or funder. These are the design choices that distinguish effective orchestrators from well-intentioned ones.</p>
+                    <div class="pattern-grid">
+                        <div class="pattern-block">
+                            <span class="pattern-number">Pattern 01</span>
+                            <div class="pattern-title">Most orchestrators don't call themselves orchestrators</div>
+                            <p>The landscape uses a dozen names for the same function: backbone, platform, alliance, coalition, association, network weaver, secretariat. GACSA calls itself a voluntary alliance. GRP calls itself a partnership. CREWS calls itself a trust fund. Mapping only those who use the term "orchestrator" misses the vast majority of de-facto orchestrators. <strong>The function matters more than the label.</strong></p>
+                        </div>
+                        <div class="pattern-block">
+                            <span class="pattern-number">Pattern 02</span>
+                            <div class="pattern-title">Governance is a spectrum, not a binary</div>
+                            <p>Between "government-led" and "civil-society-led" lies a rich continuum. NPDRR uses formal state authority with structured deliberation. C-Cube sits inside a quasi-governmental host. InsuResilience relies on a partner board with donors as key actors. StriveTogether's local backbones hold their own authority while a national backbone sets standards. <strong>The most durable models find creative positions on this spectrum — and are explicit about where they sit.</strong></p>
+                        </div>
+                        <div class="pattern-block">
+                            <span class="pattern-number">Pattern 03</span>
+                            <div class="pattern-title">Shared measurement is the undervalued lever</div>
+                            <p>Systems Change Lab's open dashboards, Saamuhika Shakti's 3ie evaluation, GRP's resilience mapping, CSCAF's city metrics, StriveTogether's network-wide assessment — the initiatives with the most influence make the system's state visible to all actors simultaneously. <strong>Shared data is shared power.</strong> Most initiatives severely underfund this function relative to its strategic value.</p>
+                        </div>
+                        <div class="pattern-block">
+                            <span class="pattern-number">Pattern 04</span>
+                            <div class="pattern-title">Sustainability models determine orchestration depth</div>
+                            <p>Grant-funded secretariats dominate but are fragile. Membership associations like CLEAN have more durable revenue but require compelling member value. Government-embedded units survive political cycles but risk losing civil-society legitimacy. Multi-donor basket funds like CREWS provide flexibility but add governance overhead. <strong>The revenue model shapes what kind of orchestration is possible</strong> — and constrains how honest the orchestrator can be.</p>
+                        </div>
+                        <div class="pattern-block">
+                            <span class="pattern-number">Pattern 05</span>
+                            <div class="pattern-title">Dialogue as orchestration — the underused form</div>
+                            <p>Time-bound, structured dialogue processes can achieve field-level agenda shifts that permanent institutions cannot. The UN Food Systems Summit Dialogues mobilised over 100,000 people across 550+ national dialogues. EW4All multi-stakeholder forums are reshaping how governments approach early warning at pace. <strong>Orchestration does not require a permanent institution.</strong> Convening power, held well and for long enough, can move a field.</p>
+                        </div>
+                        <div class="pattern-block">
+                            <span class="pattern-number">Pattern 06</span>
+                            <div class="pattern-title">Meta-mapping is itself an orchestration act</div>
+                            <p>GRP's Resilience Mapping platform, the Meridian Institute's Global Food Systems Network Map, and FAO's FAST initiative mapping all perform a function that is easy to undervalue: they make the ecosystem visible. When actors can see who else is working on the problem, duplication reduces, collaboration increases, and the system becomes more self-aware. <strong>Mapping the field is changing the field.</strong> systemsorchestration.org belongs in this lineage.</p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
 
