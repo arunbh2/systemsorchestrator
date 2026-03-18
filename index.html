@@ -1272,6 +1272,293 @@
             .pattern-grid { grid-template-columns: 1fr; }
         }
 
+
+        /* ===== DIAGNOSTIC TOOL v2 ===== */
+        #diag-wrap { margin: 2rem 0; }
+
+        .diag-persona-selector { margin-bottom: 2rem; }
+        .diag-persona-prompt {
+            font-size: 0.9375rem; color: var(--text-secondary);
+            margin-bottom: 1.25rem; font-weight: 400;
+        }
+        .diag-persona-tabs { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .diag-persona-tab {
+            flex: 1; min-width: 240px;
+            display: flex; flex-direction: column; align-items: flex-start;
+            gap: 0.25rem;
+            padding: 1.375rem 1.625rem;
+            background: var(--white); border: 2px solid var(--border-light);
+            border-radius: 16px; cursor: pointer;
+            transition: all var(--duration-normal) var(--ease-out-quart);
+            text-align: left;
+        }
+        .diag-persona-tab:hover { border-color: var(--accent); box-shadow: 0 4px 16px rgba(201,169,98,0.12); }
+        .diag-persona-tab.active {
+            border-color: var(--accent);
+            background: linear-gradient(145deg, #fffdf7 0%, rgba(201,169,98,0.06) 100%);
+            box-shadow: 0 4px 20px rgba(201,169,98,0.15);
+        }
+        .diag-persona-icon { font-size: 1.375rem; color: var(--accent); margin-bottom: 0.25rem; }
+        .diag-persona-label {
+            font-family: 'Fraunces', serif; font-size: 1.0625rem; font-weight: 500;
+            color: var(--primary); line-height: 1.2;
+        }
+        .diag-persona-sub { font-size: 0.8rem; color: var(--text-muted); font-weight: 300; }
+
+        .diag-framing {
+            background: linear-gradient(135deg, rgba(201,169,98,0.06) 0%, transparent 100%);
+            border: 1px solid rgba(201,169,98,0.2);
+            border-left: 3px solid var(--accent);
+            border-radius: 0 10px 10px 0;
+            padding: 1rem 1.25rem;
+            margin-bottom: 2rem;
+        }
+        .diag-framing-note { font-size: 0.875rem; color: var(--text-secondary); margin: 0; line-height: 1.65; }
+        .diag-framing-note strong { color: var(--primary); font-weight: 500; }
+
+        .diag-progress-wrap {
+            display: flex; align-items: center; gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .diag-progress-bar {
+            flex: 1; height: 4px;
+            background: var(--border-light); border-radius: 2px; overflow: hidden;
+        }
+        .diag-progress-fill {
+            height: 100%; width: 12.5%;
+            background: linear-gradient(90deg, var(--accent), var(--accent-warm));
+            border-radius: 2px;
+            transition: width 0.4s var(--ease-out-quart);
+        }
+        .diag-progress-label { font-size: 0.8125rem; color: var(--text-muted); white-space: nowrap; }
+
+        /* Question card */
+        .diag-q-card {
+            background: var(--white);
+            border: 1px solid var(--border-light);
+            border-radius: 20px;
+            padding: clamp(1.75rem, 3.5vw, 2.5rem);
+            animation: diagFadeIn 0.35s var(--ease-out-quart);
+        }
+        @keyframes diagFadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .diag-q-eyebrow {
+            font-size: 0.625rem; font-weight: 700; letter-spacing: 0.22em;
+            text-transform: uppercase; color: var(--accent);
+            display: block; margin-bottom: 0.625rem;
+        }
+        .diag-q-title {
+            font-family: 'Fraunces', serif;
+            font-size: clamp(1.125rem, 2vw, 1.375rem);
+            font-weight: 500; color: var(--primary);
+            margin-bottom: 0.5rem; line-height: 1.3;
+        }
+        .diag-q-title::before { display: none; }
+        .diag-q-context {
+            font-size: 0.875rem; color: var(--text-muted);
+            margin-bottom: 1.75rem; line-height: 1.6;
+            font-style: italic;
+            padding-bottom: 1.25rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .diag-q-stem {
+            font-size: 1rem; font-weight: 500; color: var(--text-primary);
+            margin-bottom: 1.25rem; line-height: 1.5;
+        }
+        .diag-options { display: flex; flex-direction: column; gap: 0.625rem; }
+        .diag-option {
+            display: flex; align-items: flex-start; gap: 1rem;
+            padding: 1rem 1.25rem;
+            background: var(--cream); border: 1.5px solid var(--border-light);
+            border-radius: 12px; cursor: pointer;
+            transition: all 0.2s var(--ease-out-quart);
+        }
+        .diag-option:hover { border-color: rgba(201,169,98,0.5); background: rgba(201,169,98,0.04); }
+        .diag-option.selected {
+            border-color: var(--accent);
+            background: linear-gradient(145deg, rgba(201,169,98,0.08), rgba(201,169,98,0.04));
+            box-shadow: 0 2px 12px rgba(201,169,98,0.12);
+        }
+        .diag-option-score {
+            flex-shrink: 0; width: 28px; height: 28px;
+            border-radius: 50%; background: var(--border-light);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.8125rem; font-weight: 600; color: var(--text-muted);
+            transition: all 0.2s; margin-top: 1px;
+        }
+        .diag-option.selected .diag-option-score {
+            background: var(--accent); color: var(--primary);
+        }
+        .diag-option-text { flex: 1; }
+        .diag-option-label {
+            font-size: 0.9375rem; font-weight: 500; color: var(--text-primary);
+            margin-bottom: 0.2rem; line-height: 1.4;
+        }
+        .diag-option-desc {
+            font-size: 0.8125rem; color: var(--text-muted); line-height: 1.55;
+        }
+
+        /* Navigation */
+        .diag-nav {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-top: 1.5rem;
+        }
+        .diag-btn {
+            padding: 0.875rem 1.75rem; border: none; border-radius: 10px;
+            font-size: 0.9375rem; font-weight: 500; cursor: pointer;
+            transition: all 0.2s var(--ease-out-quart);
+        }
+        .diag-btn-back {
+            background: var(--cream); color: var(--text-secondary);
+            border: 1px solid var(--border-light);
+        }
+        .diag-btn-back:hover { background: var(--border-light); color: var(--primary); }
+        .diag-btn-next {
+            background: linear-gradient(135deg, var(--primary), #3a2d99);
+            color: white; box-shadow: 0 4px 16px rgba(26,31,60,0.2);
+        }
+        .diag-btn-next:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(26,31,60,0.3); }
+        .diag-btn-next:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+        .diag-btn-next.complete {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-warm) 100%);
+            color: var(--primary);
+        }
+
+        /* Results */
+        .diag-results-wrap { animation: diagFadeIn 0.5s var(--ease-out-quart); }
+        .diag-results-header {
+            text-align: center; margin-bottom: 2.5rem;
+            padding-bottom: 2rem; border-bottom: 1px solid var(--border-light);
+        }
+        .diag-results-eyebrow {
+            font-size: 0.625rem; font-weight: 700; letter-spacing: 0.24em;
+            text-transform: uppercase; color: var(--accent); margin-bottom: 0.625rem;
+            display: block;
+        }
+        .diag-results-title {
+            font-family: 'Fraunces', serif;
+            font-size: clamp(1.5rem, 2.5vw, 2rem);
+            font-weight: 500; color: var(--primary); margin-bottom: 0.5rem;
+        }
+        .diag-results-subtitle { font-size: 0.9375rem; color: var(--text-muted); }
+
+        /* Radar chart */
+        .diag-radar-wrap {
+            display: flex; flex-direction: column; align-items: center;
+            margin: 2rem 0 2.5rem;
+        }
+        .diag-radar-svg { max-width: 520px; width: 100%; }
+
+        /* Verdict band */
+        .diag-verdict {
+            border-radius: 16px; padding: 1.75rem 2rem;
+            margin-bottom: 2rem; border: 1px solid;
+        }
+        .diag-verdict.green { background: rgba(46,204,113,0.06); border-color: rgba(46,204,113,0.3); }
+        .diag-verdict.amber { background: rgba(201,169,98,0.08); border-color: rgba(201,169,98,0.35); }
+        .diag-verdict.red   { background: rgba(231,76,60,0.06);  border-color: rgba(231,76,60,0.25); }
+        .diag-verdict-label {
+            font-size: 0.625rem; font-weight: 700; letter-spacing: 0.22em;
+            text-transform: uppercase; margin-bottom: 0.5rem; display: block;
+        }
+        .diag-verdict.green .diag-verdict-label { color: #27ae60; }
+        .diag-verdict.amber .diag-verdict-label { color: #c9a962; }
+        .diag-verdict.red   .diag-verdict-label { color: #e74c3c; }
+        .diag-verdict-title {
+            font-family: 'Fraunces', serif;
+            font-size: 1.1875rem; font-weight: 500; color: var(--primary);
+            margin-bottom: 0.5rem; line-height: 1.3;
+        }
+        .diag-verdict p { font-size: 0.9375rem; color: var(--text-secondary); margin: 0; line-height: 1.65; }
+
+        /* Dimension results */
+        .diag-dims-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem; margin-bottom: 2rem;
+        }
+        .diag-dim-card {
+            background: var(--white);
+            border: 1px solid var(--border-light);
+            border-radius: 14px; padding: 1.25rem 1.375rem;
+        }
+        .diag-dim-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .diag-dim-name {
+            font-family: 'Fraunces', serif;
+            font-size: 0.9375rem; font-weight: 500; color: var(--primary);
+        }
+        .diag-dim-name::before { display: none !important; }
+        .diag-dim-score-badge {
+            font-size: 0.8125rem; font-weight: 600;
+            padding: 0.25rem 0.625rem; border-radius: 20px;
+        }
+        .score-high  { background: rgba(46,204,113,0.12); color: #27ae60; }
+        .score-mid   { background: rgba(201,169,98,0.15); color: #9a7a2a; }
+        .score-low   { background: rgba(231,76,60,0.10);  color: #c0392b; }
+        .diag-dim-bar {
+            height: 4px; background: var(--border-light); border-radius: 2px;
+            margin-bottom: 0.75rem; overflow: hidden;
+        }
+        .diag-dim-bar-fill { height: 100%; border-radius: 2px; }
+        .diag-dim-feedback { font-size: 0.8375rem; color: var(--text-secondary); line-height: 1.6; margin: 0; }
+
+        /* Flags */
+        .diag-flags { margin-bottom: 2rem; }
+        .diag-flag {
+            background: rgba(231,76,60,0.05);
+            border: 1px solid rgba(231,76,60,0.2);
+            border-left: 3px solid #e74c3c;
+            border-radius: 0 12px 12px 0;
+            padding: 1rem 1.25rem; margin-bottom: 0.75rem;
+        }
+        .diag-flag-label {
+            font-size: 0.625rem; font-weight: 700; letter-spacing: 0.2em;
+            text-transform: uppercase; color: #e74c3c; margin-bottom: 0.3rem; display: block;
+        }
+        .diag-flag-title { font-weight: 600; color: var(--primary); font-size: 0.9375rem; margin-bottom: 0.25rem; }
+        .diag-flag p { font-size: 0.8375rem; color: var(--text-secondary); margin: 0; line-height: 1.6; }
+
+        /* Next moves */
+        .diag-next {
+            background: linear-gradient(135deg, #1a1f3c 0%, #1e2448 100%);
+            border-radius: 16px; padding: 2rem;
+            position: relative; overflow: hidden;
+        }
+        .diag-next::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(201,169,98,0.7), transparent);
+        }
+        .diag-next-label {
+            font-size: 0.6rem; font-weight: 700; letter-spacing: 0.24em;
+            text-transform: uppercase; color: var(--accent); margin-bottom: 0.625rem; display: block;
+        }
+        .diag-next-title {
+            font-family: 'Fraunces', serif; font-size: 1.0625rem; font-weight: 500;
+            color: rgba(255,255,255,0.95); margin-bottom: 0.875rem;
+        }
+        .diag-next ul { margin: 0; padding-left: 1.25rem; }
+        .diag-next li { font-size: 0.875rem; color: rgba(255,255,255,0.72); line-height: 1.7; margin-bottom: 0.375rem; }
+        .diag-next li strong { color: rgba(255,255,255,0.92); font-weight: 500; }
+
+        .diag-restart-btn {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            margin-top: 2rem; padding: 0.875rem 1.75rem;
+            background: transparent; border: 1px solid var(--border-medium);
+            border-radius: 10px; color: var(--text-secondary);
+            font-size: 0.9rem; cursor: pointer;
+            transition: all 0.2s var(--ease-out-quart);
+        }
+        .diag-restart-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+        @media (max-width: 768px) {
+            .diag-persona-tabs { flex-direction: column; }
+            .diag-dims-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
@@ -2222,87 +2509,53 @@
             <div class="container">
                 <span class="section-eyebrow">09 / Self-Assessment</span>
                 <h1 class="section-title">Is Your System Ready for Orchestration?</h1>
-                <p class="section-intro">Before launching orchestration, it's important to assess if a system is "ready" – or what needs to be strengthened.</p>
-                <div class="diagnostic-tool" id="diagnostic-tool">
-                    <h2>System Readiness Assessment</h2>
-                    <p>Rate each area on a scale of 1-5 to understand your system's readiness for orchestration.</p>
-                    <form id="diagnostic-form">
-                        <div class="tool-section">
-                            <h3>1. Stakeholder Cohesion</h3>
-                            <div class="question-block">
-                                <p class="question-text">Are key stakeholders aware of the systemic problem and generally willing to collaborate?</p>
-                                <div class="options">
-                                    <div class="option"><input type="radio" name="stakeholder-cohesion" id="sc1" value="1"><label for="sc1">1 - Very low (High mistrust, no history of collaboration)</label></div>
-                                    <div class="option"><input type="radio" name="stakeholder-cohesion" id="sc2" value="2"><label for="sc2">2 - Low (Some awareness, but reluctance to collaborate)</label></div>
-                                    <div class="option"><input type="radio" name="stakeholder-cohesion" id="sc3" value="3"><label for="sc3">3 - Medium (Basic awareness, occasional collaboration)</label></div>
-                                    <div class="option"><input type="radio" name="stakeholder-cohesion" id="sc4" value="4"><label for="sc4">4 - High (Good awareness, willingness to collaborate)</label></div>
-                                    <div class="option"><input type="radio" name="stakeholder-cohesion" id="sc5" value="5"><label for="sc5">5 - Very high (Strong awareness, active collaboration)</label></div>
-                                </div>
-                            </div>
+                <p class="section-intro">Not every problem needs an orchestrator. And not every situation that needs one is ready for one. This assessment helps funders and practitioners think rigorously about what is actually present — and what needs to be built first.</p>
+
+                <div id="diag-wrap">
+
+                    <!-- PERSONA SELECTOR -->
+                    <div class="diag-persona-selector">
+                        <p class="diag-persona-prompt">Start by selecting your perspective — the questions that matter most differ significantly.</p>
+                        <div class="diag-persona-tabs">
+                            <button class="diag-persona-tab active" data-persona="funder" onclick="diagSetPersona('funder')">
+                                <span class="diag-persona-icon">◈</span>
+                                <span class="diag-persona-label">I am a funder</span>
+                                <span class="diag-persona-sub">Foundation, bilateral, CSR, impact investor</span>
+                            </button>
+                            <button class="diag-persona-tab" data-persona="doer" onclick="diagSetPersona('doer')">
+                                <span class="diag-persona-icon">⟁</span>
+                                <span class="diag-persona-label">I am a practitioner</span>
+                                <span class="diag-persona-sub">NGO, government, intermediary, backbone</span>
+                            </button>
                         </div>
-                        <div class="tool-section">
-                            <h3>2. Shared Vision and Urgency</h3>
-                            <div class="question-block">
-                                <p class="question-text">Is there a sense of urgency or a window of opportunity that can galvanize action?</p>
-                                <div class="options">
-                                    <div class="option"><input type="radio" name="vision-urgency" id="vu1" value="1"><label for="vu1">1 - Very low (No urgency, disparate visions)</label></div>
-                                    <div class="option"><input type="radio" name="vision-urgency" id="vu2" value="2"><label for="vu2">2 - Low (Limited urgency, conflicting visions)</label></div>
-                                    <div class="option"><input type="radio" name="vision-urgency" id="vu3" value="3"><label for="vu3">3 - Medium (Some urgency, partial alignment of visions)</label></div>
-                                    <div class="option"><input type="radio" name="vision-urgency" id="vu4" value="4"><label for="vu4">4 - High (Clear urgency, mostly aligned visions)</label></div>
-                                    <div class="option"><input type="radio" name="vision-urgency" id="vu5" value="5"><label for="vu5">5 - Very high (Strong urgency, fully aligned visions)</label></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tool-section">
-                            <h3>3. Institutional Support</h3>
-                            <div class="question-block">
-                                <p class="question-text">Are there enabling policies or influential institutions who could be allies?</p>
-                                <div class="options">
-                                    <div class="option"><input type="radio" name="institutional-support" id="is1" value="1"><label for="is1">1 - Very low (Prohibitive policies, no institutional allies)</label></div>
-                                    <div class="option"><input type="radio" name="institutional-support" id="is2" value="2"><label for="is2">2 - Low (Few enabling policies, limited institutional interest)</label></div>
-                                    <div class="option"><input type="radio" name="institutional-support" id="is3" value="3"><label for="is3">3 - Medium (Some enabling policies, potential institutional allies)</label></div>
-                                    <div class="option"><input type="radio" name="institutional-support" id="is4" value="4"><label for="is4">4 - High (Supportive policies, committed institutional allies)</label></div>
-                                    <div class="option"><input type="radio" name="institutional-support" id="is5" value="5"><label for="is5">5 - Very high (Strong policy mandates, influential institutional champions)</label></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tool-section">
-                            <h3>4. Resource Landscape</h3>
-                            <div class="question-block">
-                                <p class="question-text">Are resources (funding, knowledge, technology) available or potentially available for this issue?</p>
-                                <div class="options">
-                                    <div class="option"><input type="radio" name="resource-landscape" id="rl1" value="1"><label for="rl1">1 - Very low (Severe resource scarcity)</label></div>
-                                    <div class="option"><input type="radio" name="resource-landscape" id="rl2" value="2"><label for="rl2">2 - Low (Limited resources available)</label></div>
-                                    <div class="option"><input type="radio" name="resource-landscape" id="rl3" value="3"><label for="rl3">3 - Medium (Some resources available or accessible)</label></div>
-                                    <div class="option"><input type="radio" name="resource-landscape" id="rl4" value="4"><label for="rl4">4 - High (Good resource availability)</label></div>
-                                    <div class="option"><input type="radio" name="resource-landscape" id="rl5" value="5"><label for="rl5">5 - Very high (Abundant resources available)</label></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tool-section">
-                            <h3>5. Barriers and Risks</h3>
-                            <div class="question-block">
-                                <p class="question-text">How manageable are the anticipated barriers (power dynamics, conflict, past collaboration failures)?</p>
-                                <div class="options">
-                                    <div class="option"><input type="radio" name="barriers-risks" id="br3" value="3"><label for="br3">3 - Moderate (Meaningful barriers but some mitigation possibilities)</label></div>
-                                    <div class="option"><input type="radio" name="barriers-risks" id="br4" value="4"><label for="br4">4 - Manageable (Barriers exist but clear mitigation strategies available)</label></div>
-                                    <div class="option"><input type="radio" name="barriers-risks" id="br5" value="5"><label for="br5">5 - Highly manageable (Minimal barriers or strong mitigation approaches)</label></div>
-                                </div>
-                            </div>
-                        </div>
-                        <button type="button" id="calculate-results" class="tool-button">Calculate Results</button>
-                    </form>
-                    <div class="results-container" id="results-container">
-                        <h3>Your System Readiness Results</h3>
-                        <div class="results-chart" id="results-chart"></div>
-                        <div class="results-summary" id="results-summary"></div>
-                        <h3>Recommendations</h3>
-                        <div class="recommendations" id="recommendations"></div>
                     </div>
+
+                    <!-- INTRO FRAMING -->
+                    <div class="diag-framing">
+                        <p class="diag-framing-note"><strong>How to use this:</strong> Answer honestly, not aspirationally. A low score on any dimension is not a reason to stop — it is information about what needs to be built first. High scores everywhere but low community voice is a warning sign, not a green light. The output is a profile, not a verdict.</p>
+                    </div>
+
+                    <!-- PROGRESS -->
+                    <div class="diag-progress-wrap">
+                        <div class="diag-progress-bar"><div class="diag-progress-fill" id="diag-progress-fill"></div></div>
+                        <span class="diag-progress-label" id="diag-progress-label">Question 1 of 8</span>
+                    </div>
+
+                    <!-- QUESTIONS CONTAINER -->
+                    <div id="diag-questions"></div>
+
+                    <!-- NAVIGATION -->
+                    <div class="diag-nav" id="diag-nav">
+                        <button class="diag-btn diag-btn-back" id="diag-btn-back" onclick="diagNav(-1)" style="display:none">← Back</button>
+                        <button class="diag-btn diag-btn-next" id="diag-btn-next" onclick="diagNav(1)" disabled>Next →</button>
+                    </div>
+
+                    <!-- RESULTS -->
+                    <div id="diag-results" style="display:none"></div>
+
                 </div>
             </div>
         </section>
-
         <!-- ===== VOICES FROM THE FIELD ===== -->
         <section id="voices">
             <div class="container">
@@ -3449,6 +3702,588 @@
             createPathwayDiagram();
             createContributionDiagram();
             createSpectrumDiagram();
+
+
+        // ===== SYSTEM READINESS DIAGNOSTIC v2 =====
+        (function() {
+
+        // ── Question data ─────────────────────────────────────────────────────
+        const COMMON_Qs = [
+          {
+            id: 'problem',
+            dim: 'Problem Structure',
+            eyebrow: 'Dimension 01',
+            title: 'What kind of problem are you facing?',
+            context: 'Orchestration is not the right tool for every challenge. Some problems are complicated — they need expertise and good project management. Systems orchestration is needed only when the problem is genuinely complex: when causes are distributed, when solutions require many actors to change their behaviour together, and when no single organisation has the mandate or capacity to solve it alone.',
+            stem: 'Which best describes the nature of the problem?',
+            options: [
+              { score: 1, label: 'A complicated but solvable problem', desc: 'One organisation with the right expertise and resources could realistically solve this. The challenge is execution, not coordination.' },
+              { score: 2, label: 'Needs better coordination among a few actors', desc: 'Two or three organisations need to align their separate workstreams. The problem is manageable with good communication and clear accountability.' },
+              { score: 3, label: 'Requires genuine behaviour change across multiple sectors', desc: 'Government, private sector, civil society, and communities all need to act differently — and differently in relation to each other. No one actor has the mandate to make this happen.' },
+              { score: 4, label: 'Deeply systemic with distributed causes and feedback loops', desc: 'Interventions in one area consistently create new problems elsewhere. The system actively resists change. Understanding what "solved" looks like requires collective inquiry, not just good analysis.' },
+              { score: 5, label: 'The problem definition itself is contested and distributed', desc: 'Different actors see different problems in the same situation. Solutions imposed without collective sense-making will fail or backfire. The work must begin with building shared understanding, not shared agenda.' }
+            ]
+          },
+          {
+            id: 'power',
+            dim: 'Power Landscape',
+            eyebrow: 'Dimension 02',
+            title: 'How is power distributed in this system?',
+            context: 'Gaventa\'s Power Cube reminds us that power operates visibly (who has formal authority), invisibly (whose knowledge counts), and in the spaces between (who gets to even be at the table). Orchestration in a highly unequal power landscape risks reinforcing the status quo unless power dynamics are named and addressed explicitly.',
+            stem: 'Which best describes how power is currently distributed among the actors who matter for this problem?',
+            options: [
+              { score: 1, label: 'One actor dominates; others have little real agency', desc: 'A single institution — government ministry, large funder, dominant NGO — effectively controls the agenda. Others participate but cannot meaningfully shape outcomes.' },
+              { score: 2, label: 'Power is concentrated in 2–3 institutions', desc: 'Most actors are structurally dependent on a small number of powerful institutions. These "veto players" can block or redirect any collective effort.' },
+              { score: 3, label: 'Power is unequally distributed but contested', desc: 'Some actors have significantly more leverage than others, but the less powerful are organised and able to push back. The power map is visible and actively negotiated.' },
+              { score: 4, label: 'Power is distributed across many actors, with no single veto player', desc: 'Different actors hold different forms of power — formal authority, community trust, knowledge, capital, narrative. No single actor can unilaterally determine outcomes.' },
+              { score: 5, label: 'I honestly don\'t understand the power dynamics here', desc: 'The power map is opaque to me. This is not a low-readiness signal — it is important information. Building a shared power map may be the first act of orchestration needed.' }
+            ]
+          },
+          {
+            id: 'trust',
+            dim: 'Trust Architecture',
+            eyebrow: 'Dimension 03',
+            title: 'What is the quality of relationships between key actors?',
+            context: 'Trust is not the same as willingness to collaborate. Actors can be willing to sit at the same table and still be fundamentally unable to be honest with each other. The question is not "are people willing?" but "what is the actual quality of the relationships, and what history underlies them?"',
+            stem: 'Which best describes the current state of relationships between the actors who need to move together?',
+            options: [
+              { score: 1, label: 'Active mistrust or unresolved conflict', desc: 'Some key actors refuse to be in the same room, or the history of past collaboration failures is so present that it undermines any new attempt.' },
+              { score: 2, label: 'Formal relationships exist but real openness is rare', desc: 'People show up to meetings but don\'t bring their real constraints, doubts, or interests. The collaboration is performative. Nothing difficult can be said.' },
+              { score: 3, label: 'Genuine bilateral trust exists, but group trust is fragile', desc: 'Some pairs of actors have real working relationships and can be honest with each other. But these haven\'t yet translated into genuine group trust. Multi-stakeholder processes feel risky.' },
+              { score: 4, label: 'A track record of real collaboration, imperfect but genuine', desc: 'Multiple actors have worked together through difficulty and come out with stronger relationships. There is a foundation to build on, even if it is not universal.' },
+              { score: 5, label: 'Long-term relationships with real mutual accountability', desc: 'Actors have been through hard things together — funding crises, political disruption, failed experiments. The relationships have been tested and have held. There is something to lose and something to protect.' }
+            ]
+          },
+          {
+            id: 'community',
+            dim: 'Community Voice',
+            eyebrow: 'Dimension 04',
+            title: 'How present and powerful are the voices of the communities most affected?',
+            context: 'This is the question the field most consistently answers aspirationally rather than honestly. The distinction is not between "communities are present" and "communities are absent" — it is about whether communities are subjects of the work (things are done for them) or agents (they shape the work). Saamuhika Shakti\'s Bengaluru experience showed that shifting power toward waste-picker communities was not an add-on — it was what made the whole initiative work.',
+            stem: 'How present and influential are the communities most affected by this problem in the work you are describing?',
+            options: [
+              { score: 1, label: 'Communities are subjects, not participants', desc: 'The work is defined by institutions on behalf of communities. Community knowledge and priorities have not substantively shaped the problem definition or the approach.' },
+              { score: 2, label: 'Consultation happens but doesn\'t change decisions', desc: 'Communities are asked for input, but the findings are used to validate decisions already made. There is no mechanism for community voice to redirect the work.' },
+              { score: 3, label: 'Community representatives participate with limited but real influence', desc: 'Some community members or organisations have seats at the table. Their input shapes some decisions, though not the most fundamental ones.' },
+              { score: 4, label: 'Community-led organisations are active and influential', desc: 'Organisations with genuine roots in the affected communities are significant actors. They can and do shape the agenda. Their veto matters.' },
+              { score: 5, label: 'Community leadership is the centre of gravity', desc: 'The orchestration exists to amplify and resource community leadership, not to substitute for it. The question being asked is: what does the community need from us to lead this?' }
+            ]
+          },
+          {
+            id: 'mandate',
+            dim: 'Mandate & Legitimacy',
+            eyebrow: 'Dimension 05',
+            title: 'Does anyone have a credible mandate to convene?',
+            context: 'Orchestration requires someone to hold the table. But the question is not just "can someone call a meeting?" — it is whether that entity has the legitimacy to hold the space in a way that others will genuinely engage. Legitimacy can come from formal authority (government mandate), relational trust (earned over years), or representational accountability (to the communities most affected). Each type opens different doors and closes others.',
+            stem: 'What is the current state of the mandate to convene actors around this problem?',
+            options: [
+              { score: 1, label: 'No actor has a credible mandate to convene', desc: 'Every potential convenor is seen by some key actors as partisan, self-interested, or lacking the standing to hold the space. Calling a meeting would itself be a contested act.' },
+              { score: 2, label: 'Potential convenors exist but their neutrality is contested', desc: 'There are organisations with relevant credibility, but they are also perceived to have interests in the outcome. Others will participate guardedly.' },
+              { score: 3, label: 'Government has formal authority but limited civil society legitimacy', desc: 'A state body can mandate participation, but civil society actors will manage the interaction rather than genuinely open up. The room fills, but trust doesn\'t.' },
+              { score: 4, label: 'A trusted intermediary has relational legitimacy without formal authority', desc: 'An organisation — foundation, neutral body, long-standing intermediary — has earned trust across sectors and could convene without being seen as controlling the agenda.' },
+              { score: 5, label: 'Multiple actors have overlapping, complementary forms of legitimacy', desc: 'A government actor can convene formally; a civil society body can hold the trust of communities; a knowledge institution can hold shared data. Together they provide the legitimacy architecture that no single actor has alone.' }
+            ]
+          },
+          {
+            id: 'timing',
+            dim: 'Timing & Pace',
+            eyebrow: 'Dimension 06',
+            title: 'Is the moment right — and is the system stable enough?',
+            context: 'Hoverstadt\'s Relaxation Time Principle: a system repeatedly shocked at shorter intervals than its recovery time may never stabilise. Most change efforts fail not because the intervention was wrong but because the pace exceeded the system\'s capacity to absorb it. Urgency is real — climate change is urgent, poverty is urgent — but urgency imposed on a system that cannot absorb it produces collapse, not transformation.',
+            stem: 'How would you describe the current timing and stability of this system?',
+            options: [
+              { score: 1, label: 'The system is in acute crisis or ongoing disruption', desc: 'Institutions are destabilised, relationships are fractured, or a recent shock has not been absorbed. There is no stable foundation to build on. Orchestration here risks adding to the chaos.' },
+              { score: 2, label: 'The system has been repeatedly disrupted and hasn\'t recovered', desc: 'Multiple shocks in quick succession — new leadership, funding cuts, political shifts, a failed initiative — have left the system unable to engage in anything new with full capacity.' },
+              { score: 3, label: 'The system is stable but stagnant', desc: 'Things are not in crisis, but there is no energy or appetite for change. The status quo is comfortable enough that disrupting it will require a clear and compelling case.' },
+              { score: 4, label: 'A real window of opportunity exists — but it will close', desc: 'A policy moment, resolved crisis, new leadership, or emerging consensus has opened a window. The window is real but time-limited. This argues for beginning now, but carefully.' },
+              { score: 5, label: 'Enough stability and enough energy for sustained effort', desc: 'The system is stable enough to absorb change at the pace change actually happens. There is energy and willingness. The preconditions for a sustained decade-long effort are present.' }
+            ]
+          }
+        ];
+
+        const FUNDER_Qs = [
+          {
+            id: 'attribution',
+            dim: 'Attribution Tolerance',
+            eyebrow: 'Dimension 07 · Funder-specific',
+            title: 'How comfortable is your organisation with contribution over attribution?',
+            context: 'The Skoll Foundation concluded that traditional monitoring and evaluation methods — focused on narrowly targeted strategies and direct service programmes over short time horizons — are unsuitable for systems change work. Co-Impact adopted contribution over attribution as a core principle. Most funders say they understand this. Almost none have restructured their reporting systems to reflect it.',
+            stem: 'Which best describes your organisation\'s actual practice (not stated intent) on attribution?',
+            options: [
+              { score: 1, label: 'Our reporting requires we attribute specific outcomes to our funding', desc: 'Our board, trustees, or accountability systems demand we can say: our money caused this outcome. Shared impact does not satisfy our reporting requirements.' },
+              { score: 2, label: 'We say contribution is fine, but we struggle when we can\'t show our specific impact', desc: 'In practice, staff, trustees, or donors get uncomfortable when our visible footprint is small. We have not resolved this tension.' },
+              { score: 3, label: 'We are genuinely comfortable funding work where our contribution is part of a larger picture', desc: 'Our reporting frameworks have evolved to capture contribution. We can explain this to trustees without anxiety.' },
+              { score: 4, label: 'We actively prefer co-funding and understand our impact is amplified by shared investment', desc: 'We have moved toward pooled funding models. We see our role as one node in a capital network, not the sole architect of change.' },
+              { score: 5, label: 'We have restructured our systems specifically for systems change contribution', desc: 'Our strategy, monitoring, and trustee reporting are all designed for long-term contribution to systems shift. We have done the hard internal work.' }
+            ]
+          },
+          {
+            id: 'flexibility',
+            dim: 'Funding Flexibility',
+            eyebrow: 'Dimension 08 · Funder-specific',
+            title: 'What is the realistic horizon and flexibility of your funding?',
+            context: 'The single most common way funders undermine orchestration is through grant design. One-to-three year restricted grants are structurally incompatible with systems change. The Relaxation Time Principle means the system needs longer than the grant cycle to absorb each change. Rainmatter offers three-to-five year unrestricted grants as a structural commitment, not a preference. The Ford Foundation\'s BUILD programme gave five-year general operating support to 574 organisations. Without time and flexibility, coordination collapses under delivery pressure.',
+            stem: 'Which best describes the realistic funding commitment you could make for this work?',
+            options: [
+              { score: 1, label: '1–2 years, restricted to specific activities and deliverables', desc: 'Tight logframe, annual reporting, activity-based budget categories. The system will be asked to change faster than it can absorb.' },
+              { score: 2, label: '3 years, with restricted budget categories but some flexibility', desc: 'Project grant with moderate flexibility. Enough for a programme, not enough for a system.' },
+              { score: 3, label: '3–5 years with general operating support possible', desc: 'The organisation can fund its own coordination capacity. Strategic adaptation is possible. This is the minimum viable funding design for orchestration work.' },
+              { score: 4, label: '5+ years with trust-based, unrestricted funding', desc: 'The organisation has the time and resources to build the relationships and infrastructure that orchestration requires. This is what Rainmatter and Ford BUILD demonstrated works.' },
+              { score: 5, label: 'Endowment-scale or multi-decade commitment to this system', desc: 'The funding commitment matches the actual timescale of systems change. The orchestrator can make long-term relationship investments without existential funding anxiety.' }
+            ]
+          }
+        ];
+
+        const DOER_Qs = [
+          {
+            id: 'knowledge',
+            dim: 'Shared Knowledge Infrastructure',
+            eyebrow: 'Dimension 07 · Practitioner-specific',
+            title: 'Can the system currently see itself?',
+            context: 'Systems Change Lab\'s open dashboards, GRP\'s resilience mapping platform, Saamuhika Shakti\'s 3ie evaluation, ICC\'s ecosystem studies — in each case the orchestrator\'s distinctive contribution was creating a mirror. When actors can see what the system is doing collectively, they can coordinate without being commanded. Conant-Ashby Theorem: the quality of collective action depends on the quality of the collective model.',
+            stem: 'Which best describes the shared knowledge infrastructure currently available in this system?',
+            options: [
+              { score: 1, label: 'No shared data, mapping, or measurement across actors', desc: 'Every organisation holds its own data. There is no shared picture of the system — what is working, what is missing, where the gaps are.' },
+              { score: 2, label: 'Some data sharing, but it is incomplete and not widely used', desc: 'Periodic sector reports or landscape studies exist, but they are not dynamic or owned collectively. Decisions are still made from organisational silos.' },
+              { score: 3, label: 'A shared measurement framework exists but lacks uptake or trust', desc: 'Someone has built a common agenda or shared indicators, but actors have not genuinely bought in. The framework is available; it is not yet the shared reality.' },
+              { score: 4, label: 'Multiple actors use shared data and it informs their decisions', desc: 'The system map is updated, visible, and used. Actors adjust their actions based on what they see collectively. The shared picture is producing actual coordination.' },
+              { score: 5, label: 'The system has infrastructure to see and update its own picture dynamically', desc: 'Real-time or near-real-time shared data infrastructure. Actors can see the ecosystem of initiatives. Meta-mapping exists. The system is genuinely self-aware.' }
+            ]
+          },
+          {
+            id: 'selfreadiness',
+            dim: 'Your Own Readiness',
+            eyebrow: 'Dimension 08 · Practitioner-specific',
+            title: 'Honestly: are you ready to do this?',
+            context: 'This is the question most orchestration readiness tools omit entirely. Bateson\'s "no observer position" means the orchestrator is always inside the system — their presence, their entanglement, their unresolved tensions are all moves in the system. The five questions note on this site asks: "What will I have to stop doing to do this well?" The hardest requirement is not competence. It is willingness to give up something — credit, control, a cherished theory of change, an organisation\'s competitive position.',
+            stem: 'Which best describes your actual position in relation to this system — honestly?',
+            options: [
+              { score: 1, label: 'I am largely outside this system with few genuine relationships', desc: 'I have expertise and good intentions, but I have not yet built the relational foundation that orchestration requires. I would be entering, not holding.' },
+              { score: 2, label: 'I have relationships, but I am primarily seen as a resource or expert', desc: 'Key actors see me as a funder, technical advisor, or capacity-builder — not as a trusted insider. My motives may be questioned by some.' },
+              { score: 3, label: 'I have real trust with some actors, but my position means others won\'t fully trust me', desc: 'I am genuinely embedded in parts of the system, but my organisational interests, funding relationships, or historical positioning means some actors will always manage me rather than work with me.' },
+              { score: 4, label: 'I have earned trust across most relevant actors, including those I have disappointed', desc: 'I have navigated difficult moments honestly. Some actors have seen me act against my own organisational interest for the system\'s sake. That history matters.' },
+              { score: 5, label: 'I am deeply embedded — which is both my greatest asset and my greatest risk', desc: 'My entanglement in the system gives me genuine access and relationships. It also means I carry history, commitments, and blind spots. I understand both the asset and the liability.' }
+            ]
+          }
+        ];
+
+        // ── State ─────────────────────────────────────────────────────────────
+        let persona = 'funder';
+        let questions = [];
+        let current = 0;
+        let answers = {};
+
+        function buildQuestions() {
+          const personaQs = persona === 'funder' ? FUNDER_Qs : DOER_Qs;
+          questions = [...COMMON_Qs, ...personaQs];
+        }
+
+        // ── Public functions ──────────────────────────────────────────────────
+        window.diagSetPersona = function(p) {
+          persona = p;
+          document.querySelectorAll('.diag-persona-tab').forEach(t => {
+            t.classList.toggle('active', t.dataset.persona === p);
+          });
+          // reset if already started
+          current = 0;
+          answers = {};
+          buildQuestions();
+          renderQuestion();
+          document.getElementById('diag-results').style.display = 'none';
+          document.getElementById('diag-nav').style.display = 'flex';
+        };
+
+        window.diagNav = function(dir) {
+          if (dir > 0 && current < questions.length - 1) {
+            current++;
+            renderQuestion();
+          } else if (dir > 0 && current === questions.length - 1) {
+            showResults();
+          } else if (dir < 0 && current > 0) {
+            current--;
+            renderQuestion();
+          }
+        };
+
+        // ── Render question ───────────────────────────────────────────────────
+        function renderQuestion() {
+          const q = questions[current];
+          const container = document.getElementById('diag-questions');
+          const pct = ((current + 1) / questions.length * 100).toFixed(0);
+
+          document.getElementById('diag-progress-fill').style.width = pct + '%';
+          document.getElementById('diag-progress-label').textContent =
+            'Question ' + (current + 1) + ' of ' + questions.length;
+
+          const savedScore = answers[q.id];
+
+          container.innerHTML = `
+            <div class="diag-q-card">
+              <span class="diag-q-eyebrow">${q.eyebrow}</span>
+              <div class="diag-q-title">${q.title}</div>
+              <p class="diag-q-context">${q.context}</p>
+              <p class="diag-q-stem">${q.stem}</p>
+              <div class="diag-options">
+                ${q.options.map(o => `
+                  <div class="diag-option${savedScore === o.score ? ' selected' : ''}"
+                       onclick="diagSelect('${q.id}', ${o.score}, this.closest('.diag-options'))">
+                    <div class="diag-option-score">${o.score}</div>
+                    <div class="diag-option-text">
+                      <div class="diag-option-label">${o.label}</div>
+                      <div class="diag-option-desc">${o.desc}</div>
+                    </div>
+                  </div>`).join('')}
+              </div>
+            </div>`;
+
+          // back/next buttons
+          const back = document.getElementById('diag-btn-back');
+          const next = document.getElementById('diag-btn-next');
+          back.style.display = current > 0 ? 'inline-flex' : 'none';
+          next.disabled = !savedScore;
+          if (current === questions.length - 1) {
+            next.textContent = 'See My Results →';
+            next.classList.add('complete');
+          } else {
+            next.textContent = 'Next →';
+            next.classList.remove('complete');
+          }
+        }
+
+        window.diagSelect = function(id, score, optionsEl) {
+          answers[id] = score;
+          optionsEl.querySelectorAll('.diag-option').forEach(o => o.classList.remove('selected'));
+          event.currentTarget.classList.add('selected');
+          document.getElementById('diag-btn-next').disabled = false;
+        };
+
+        // ── Results ───────────────────────────────────────────────────────────
+        function showResults() {
+          document.getElementById('diag-questions').innerHTML = '';
+          document.getElementById('diag-nav').style.display = 'none';
+          document.getElementById('diag-progress-fill').style.width = '100%';
+          document.getElementById('diag-progress-label').textContent = 'Complete';
+
+          const scores = questions.map(q => ({ ...q, score: answers[q.id] || 3 }));
+          const total = scores.reduce((s, q) => s + q.score, 0);
+          const avg = total / scores.length;
+          const flags = detectFlags(answers, persona);
+
+          const resultsEl = document.getElementById('diag-results');
+          resultsEl.style.display = 'block';
+          resultsEl.innerHTML = `
+            <div class="diag-results-wrap">
+              <div class="diag-results-header">
+                <span class="diag-results-eyebrow">Your Readiness Profile</span>
+                <div class="diag-results-title">${getVerdictTitle(avg, answers)}</div>
+                <p class="diag-results-subtitle">Based on ${questions.length} dimensions · ${persona === 'funder' ? 'Funder perspective' : 'Practitioner perspective'}</p>
+              </div>
+
+              <div class="diag-radar-wrap">
+                ${buildRadarSVG(scores)}
+              </div>
+
+              ${buildVerdictBand(avg, answers, flags)}
+              ${flags.length ? buildFlags(flags) : ''}
+              ${buildDimensions(scores)}
+              ${buildNextMoves(avg, answers, flags, persona)}
+
+              <button class="diag-restart-btn" onclick="diagRestart()">↺ Start again with different answers</button>
+            </div>`;
+        }
+
+        // ── Radar SVG ─────────────────────────────────────────────────────────
+        function buildRadarSVG(scores) {
+          const cx = 260, cy = 220, R = 160;
+          const n = scores.length;
+          const levels = [1,2,3,4,5];
+          let svg = `<svg class="diag-radar-svg" viewBox="0 0 520 440" xmlns="http://www.w3.org/2000/svg" style="font-family:'Inter',sans-serif;">`;
+
+          // background rings
+          levels.forEach(l => {
+            const r = R * l / 5;
+            const pts = scores.map((_, i) => {
+              const a = (i / n) * 2 * Math.PI - Math.PI / 2;
+              return [cx + r * Math.cos(a), cy + r * Math.sin(a)];
+            }).map(p => p.join(',')).join(' ');
+            svg += `<polygon points="${pts}" fill="none" stroke="rgba(26,31,60,0.08)" stroke-width="${l===5?1.5:0.75}"/>`;
+          });
+
+          // axis lines
+          scores.forEach((_, i) => {
+            const a = (i / n) * 2 * Math.PI - Math.PI / 2;
+            svg += `<line x1="${cx}" y1="${cy}" x2="${cx + R * Math.cos(a)}" y2="${cy + R * Math.sin(a)}" stroke="rgba(26,31,60,0.1)" stroke-width="1"/>`;
+          });
+
+          // score polygon
+          const scorePts = scores.map((q, i) => {
+            const a = (i / n) * 2 * Math.PI - Math.PI / 2;
+            const r = R * q.score / 5;
+            return [cx + r * Math.cos(a), cy + r * Math.sin(a)];
+          });
+          const scoreStr = scorePts.map(p => p.join(',')).join(' ');
+          svg += `<polygon points="${scoreStr}" fill="rgba(201,169,98,0.18)" stroke="#c9a962" stroke-width="2"/>`;
+
+          // dots
+          scorePts.forEach((p, i) => {
+            const col = scores[i].score >= 4 ? '#27ae60' : scores[i].score >= 3 ? '#c9a962' : '#e74c3c';
+            svg += `<circle cx="${p[0]}" cy="${p[1]}" r="5" fill="${col}" stroke="white" stroke-width="1.5"/>`;
+          });
+
+          // labels
+          scores.forEach((q, i) => {
+            const a = (i / n) * 2 * Math.PI - Math.PI / 2;
+            const lr = R + 28;
+            const lx = cx + lr * Math.cos(a);
+            const ly = cy + lr * Math.sin(a);
+            const anchor = Math.cos(a) > 0.1 ? 'start' : Math.cos(a) < -0.1 ? 'end' : 'middle';
+            const words = q.dim.split(' ');
+            words.forEach((w, wi) => {
+              const offset = (wi - (words.length - 1) / 2) * 13;
+              svg += `<text x="${lx}" y="${ly + offset}" text-anchor="${anchor}" font-size="10.5" font-weight="${words.length===1||wi===0?'600':'400'}" fill="#1a1f3c">${w}</text>`;
+            });
+          });
+
+          // centre score
+          svg += `<text x="${cx}" y="${cy - 10}" text-anchor="middle" font-size="24" font-weight="700" fill="#1a1f3c" font-family="'Fraunces',serif">${(scores.reduce((s,q)=>s+q.score,0)/scores.length).toFixed(1)}</text>`;
+          svg += `<text x="${cx}" y="${cy + 10}" text-anchor="middle" font-size="10" fill="#7a7f96">avg score</text>`;
+          svg += `</svg>`;
+          return svg;
+        }
+
+        // ── Verdict ───────────────────────────────────────────────────────────
+        function getVerdictTitle(avg, ans) {
+          if (avg >= 3.8) return 'Strong conditions — proceed with eyes open';
+          if (avg >= 2.8) return 'Mixed conditions — address preconditions before scaling';
+          return 'Significant gaps — build foundations first';
+        }
+
+        function buildVerdictBand(avg, ans, flags) {
+          const cls = avg >= 3.8 ? 'green' : avg >= 2.8 ? 'amber' : 'red';
+          const label = avg >= 3.8 ? 'Conditions Present' : avg >= 2.8 ? 'Proceed With Caution' : 'Build Foundations First';
+          const texts = {
+            green: `The conditions for systems orchestration are largely present. This does not mean it will be easy — it means the preconditions exist to try. Pay attention to any caution flags below; a single critical gap (especially in community voice or mandate) can undermine even strong overall conditions.`,
+            amber: `You are working in real conditions with real constraints. Some dimensions are strong enough to begin, but others need deliberate investment before you launch at full scale. Read the dimension feedback carefully. Some gaps can be addressed in parallel with early orchestration; others need to come first.`,
+            red: `The foundational conditions for orchestration are not yet present. This is valuable information. It means the most important work right now is not orchestration — it is building the preconditions: trust, legitimate mandate, community voice, a power landscape that can hold collective work. Starting orchestration now without these foundations risks wasting resources and burning relationships that will be needed later.`
+          };
+          return `<div class="diag-verdict ${cls}">
+            <span class="diag-verdict-label">${label}</span>
+            <div class="diag-verdict-title">${getVerdictTitle(avg, ans)}</div>
+            <p>${texts[cls]}</p>
+          </div>`;
+        }
+
+        // ── Pattern flags ─────────────────────────────────────────────────────
+        function detectFlags(ans, persona) {
+          const flags = [];
+          // Funder trap: strong resources + low community voice
+          if (persona === 'funder' && (ans.flexibility || 0) >= 4 && (ans.community || 0) <= 2) {
+            flags.push({
+              name: 'The Funder Trap',
+              title: 'Strong funding capacity without community voice',
+              text: 'Well-resourced funders entering systems with weak community agency risk building infrastructure that serves institutional interests rather than affected populations. Rainmatter\'s formulation is precise: respond to where the demand is, not intervene where you think you should. Before deploying significant capital, invest in understanding and strengthening community agency.'
+            });
+          }
+          // False consensus: high vision + low community + low power diversity
+          if ((ans.problem || 0) >= 4 && (ans.community || 0) <= 2 && (ans.power || 0) <= 2) {
+            flags.push({
+              name: 'False Consensus Risk',
+              title: 'Elite alignment without genuine pluralism',
+              text: 'When powerful institutions agree on a problem definition and approach, it can feel like strong readiness. But consensus among the powerful is not the same as collective readiness. The communities most affected and the actors with less power may see a fundamentally different problem. Saamuhika Shakti\'s experience: the backbone had to keep asking "whose agenda is this really?"'
+            });
+          }
+          // Expert trap (doers): high mandate + low willingness to cede control
+          if (persona === 'doer' && (ans.mandate || 0) >= 4 && (ans.selfreadiness || 0) <= 2) {
+            flags.push({
+              name: 'The Expert Trap',
+              title: 'Strong mandate, limited self-awareness of entanglement',
+              text: 'Having the mandate to convene is not the same as being ready to convene well. If you are seen primarily as a resource or expert rather than a trusted inside actor, you may find that people come to your meetings without opening up, and align publicly without changing privately. This is orchestration in name, management in practice.'
+            });
+          }
+          // Window trap: high timing + low trust + low backbone funding
+          if ((ans.timing || 0) >= 4 && (ans.trust || 0) <= 2) {
+            flags.push({
+              name: 'Window vs. Foundation Tension',
+              title: 'A real opportunity window without the relational foundation',
+              text: 'A policy moment or new leadership creates pressure to move fast. But Hoverstadt\'s Relaxation Time Principle applies here: if trust is low, launching quickly into a visible opportunity will surface the fractures before the relationships can hold them. The window may need to be used carefully — beginning the trust-building work, not completing the orchestration work.'
+            });
+          }
+          // Opaque power + high confidence (gap)
+          if ((ans.power || 0) === 5 && (ans.mandate || 0) <= 2) {
+            flags.push({
+              name: 'Power Opacity',
+              title: 'The power map is unclear — and nobody has the mandate to map it',
+              text: 'If you are honest that you don\'t understand the power dynamics and no actor has the legitimate standing to facilitate the mapping process, this is the work that needs to happen before anything else. Building a shared power map may be the first act of orchestration — and it requires a level of trust and legitimacy to do honestly.'
+            });
+          }
+          return flags;
+        }
+
+        function buildFlags(flags) {
+          return `<div class="diag-flags">
+            ${flags.map(f => `<div class="diag-flag">
+              <span class="diag-flag-label">⚠ Caution Flag: ${f.name}</span>
+              <div class="diag-flag-title">${f.title}</div>
+              <p>${f.text}</p>
+            </div>`).join('')}
+          </div>`;
+        }
+
+        // ── Dimension cards ───────────────────────────────────────────────────
+        const DIM_FEEDBACK = {
+          problem: {
+            1: 'This problem may not need orchestration. A focused, well-resourced organisation with the right expertise could likely solve it. Orchestration would add coordination costs without adding value. Consider whether you are reaching for the right tool.',
+            2: 'Better coordination between a few actors could make a significant difference. Formal Collective Impact structures may be more appropriate than broad systems orchestration at this stage. Identify the coordination bottlenecks specifically.',
+            3: 'This is genuinely a systems problem. The cross-sector behaviour change required is exactly what orchestration is designed for. Proceed — but be clear with all actors about why individual action is insufficient.',
+            4: 'You are working with deep complexity. Design for learning and emergence, not for delivery of a predetermined solution. The orchestrator\'s role here includes building the system\'s capacity to understand itself.',
+            5: 'Starting with collective sense-making, not collective action, is essential. Before building a common agenda, invest in processes that surface how different actors — especially communities — see the problem. Rich Pictures (Checkland) or participatory systems mapping may be more valuable than stakeholder convenings at this stage.'
+          },
+          power: {
+            1: 'Orchestration in a highly unequal power landscape risks reinforcing that inequality. The dominant actor must either be brought into a genuine shared governance structure (difficult) or the orchestration must begin by building the power of weaker actors. Piramal Foundation\'s embedded government model shows one approach; ILC\'s country MSPs show another.',
+            2: 'With two or three veto players, orchestration effectiveness depends heavily on securing their genuine buy-in — not just their presence. Have direct, frank conversations with them about the limits of their authority in a shared governance structure before convening others.',
+            3: 'The contested power landscape is actually workable for orchestration, but it requires explicit power-mapping and a shared commitment to the process being fair. John Gaventa\'s Power Cube should be a tool the coalition uses together, not something the orchestrator holds privately.',
+            4: 'A distributed power landscape is the most fertile ground for orchestration. Multiple actors hold different forms of power — no single veto player. Design governance structures that actively maintain this distribution rather than allowing power to concentrate in the backbone over time.',
+            5: 'Building the shared power map before designing the orchestration is the right move. The mapping process itself — done well — can begin building the trust and legitimacy that orchestration will need.'
+          },
+          trust: {
+            1: 'Convening before rebuilding trust is likely to fail or backfire. Consider starting with small, bilateral relationship-building processes. The community of practice model (where actors work together on something practical and low-stakes) often builds trust more effectively than formal multi-stakeholder tables.',
+            2: 'The gap between formal participation and genuine openness is one of the hardest problems in orchestration. Saamuhika Shakti found that investing in facilitator quality, psychological safety, and explicit conversation about the collaboration\'s norms made a significant difference. The format of the table matters as much as who is at it.',
+            3: 'Bilateral trust can be the starting point. Consider beginning with a smaller, higher-trust coalition and building outward. The risk is creating an inner circle that others perceive as exclusive.',
+            4: 'A track record of genuine collaboration is one of the most valuable assets a system can have. Be explicit about this history — name it, honour it, use it as evidence to new actors that this work is real.',
+            5: 'Long-term relational trust is the substrate on which all other orchestration levers depend. This is your most significant asset. Protect it carefully — don\'t let the infrastructure of orchestration (the measurements, the formal structures, the external accountability) undermine the relational foundation that makes it work.'
+          },
+          community: {
+            1: 'This is a significant gap that cannot be addressed through consultation. What is needed is a structural shift in who defines the problem and who holds the agenda. Practical starting points: hire people from affected communities into the backbone itself; use participatory system mapping to surface community knowledge; build community organisation capacity before convening multi-stakeholder tables.',
+            2: 'Consultation without consequence is worse than not consulting — it creates cynicism and erodes trust. If community input is systematically not changing decisions, either the consultation design is wrong or the governance structures don\'t allow for it. Address the structural barrier before running more consultation processes.',
+            3: 'Community representatives with limited influence can be a starting point, but it is important to be honest with community actors about the limits of their current influence and the path to expanding it. Saamuhika Shakti\'s lesson: transparency about power is more trust-building than pretending the table is equal when it isn\'t.',
+            4: 'Community-led organisations as significant actors is strong ground. The next question is: are they being treated as partners with real co-ownership, or are they being managed as important stakeholders? The difference is visible in who controls the agenda, who holds the data, and who is the first call when something goes wrong.',
+            5: 'Community leadership as the centre of gravity is the strongest possible foundation for legitimate orchestration. The orchestrator\'s discipline here is the hardest: to resist the temptation to lead when community leadership is present, even when you could move faster by leading.'
+          },
+          mandate: {
+            1: 'Before convening, the legitimacy question needs to be addressed head-on. One approach: bring together a small number of respected actors to co-design the process for building broader legitimacy. Another: identify an entity that would be broadly accepted if it stepped into the convenor role, and ask whether they would — and what they would need.',
+            2: 'Contested legitimacy can be managed if it is made explicit. Rather than positioning the convenor as neutral (which no actor fully believes), position them as one actor among many who is accountable to the group. Governance structures that give the coalition genuine authority over the backbone — rather than just advisory input — can partially compensate for legitimacy gaps.',
+            3: 'Government authority creates compliance without commitment. If civil society actors feel they are managing their relationship with the state rather than building a genuine collaborative, the orchestration will produce outputs without systems change. Consider whether a civil society co-convenor could share the facilitation to change the dynamic.',
+            4: 'Relational legitimacy earned over time is harder to obtain and more durable than formal authority. The trusted intermediary role — held by Dasra in India, GRP globally — is one of the most valuable assets in a system. Make this legitimacy explicit and protect it actively; it can be damaged by single events.',
+            5: 'Multiple overlapping forms of legitimacy create the most robust foundation for orchestration. The key challenge is ensuring the governance architecture allows each form of legitimacy to play its role rather than one form crowding out the others.'
+          },
+          timing: {
+            1: 'Investing in orchestration infrastructure during acute system crisis is unlikely to be absorbed. Focus on immediate stabilisation, and design a re-entry point for collective work once the acute phase has passed. Hoverstadt\'s Relaxation Time Principle: you cannot build on a system that has not yet settled.',
+            2: 'The repeated-shock problem is one of the most underdiagnosed failures in development systems. Identify whether the source of repeated disruption can be addressed (e.g., uncertain funding, political instability in a key institution) before launching new coordination structures that will be disrupted in turn.',
+            3: 'Stagnant systems need a spark, but the spark must come from within the system\'s actors rather than from an external orchestrator. The key question: which actors currently feel the costs of the status quo most acutely? They are your entry point for building the energy for change.',
+            4: 'A real window of opportunity is one of the most valuable conditions for orchestration — and one of the most demanding on the orchestrator\'s discipline. The temptation is to move faster than the system can absorb. Prioritise: what is the minimum viable coalition and infrastructure needed to use this window wisely?',
+            5: 'Stable conditions with genuine appetite for change is the most favourable environment for sustained orchestration. Use this moment to build the infrastructure — shared measurement, governance structures, funding relationships — that will hold through future disruptions.'
+          },
+          attribution: {
+            1: 'Your current accountability structures are incompatible with funding systems orchestration effectively. This is not a moral failure — it is a structural mismatch. The work needed is internal: having honest conversations with trustees, redesigning reporting frameworks, and potentially looking at examples like Co-Impact\'s contribution approach or the Ford Foundation\'s BUILD programme as models for what changed systems look like.',
+            2: 'The gap between stated comfort with contribution and actual discomfort in practice is common and important to acknowledge. The next step is identifying where the tension lives — is it with trustees, individual programme staff, donors, or internal culture? Different sources of tension need different responses.',
+            3: 'Genuine comfort with contribution is a significant asset. Make this explicit in your grant conversations with partners — tell them you understand their role is part of a larger picture and that you won\'t penalise them for that. This changes the incentive structure partners experience.',
+            4: 'A preference for co-funding signals mature orchestration practice. The key next step is designing pooled funding structures that work at the scale and speed the system needs. Co-Impact\'s governance model for pooled grants offers one approach.',
+            5: 'Having restructured internal systems for systems change contribution is rare and genuinely valuable. Share your approach with other funders — the field\'s biggest constraint is not insight but institutional practice, and your experience is evidence that change is possible.'
+          },
+          flexibility: {
+            1: 'A 1-2 year restricted grant to a systems orchestration effort will likely produce a compelling report and no lasting change. The grant cycle is shorter than the trust-building cycle. Before making this grant, consider whether you can extend the timeframe or whether a different funding mechanism is more appropriate.',
+            2: 'Three years with restricted categories is enough to demonstrate progress and build relationships, but not enough to lock in systems change. Design the grant specifically to use these three years to build toward longer-term, more flexible funding — either from you or from other funders who can commit differently.',
+            3: 'Three to five years of general operating support is the minimum viable design for orchestration work. Use this design consistently and encourage other funders in the coalition to match it. The backbone\'s planning horizon must exceed its anxiety horizon.',
+            4: 'Five-plus year trust-based funding is one of the most valuable things a funder can offer to systems change work. Name this explicitly in your partnership — help the organisation understand that the long-term horizon is a design choice and that they should use it to build accordingly.',
+            5: 'Endowment-scale or multi-decade commitment is the gold standard. The most important thing you can do with it is share the model — advocate for other funders to extend their timeframes, share your evidence of what becomes possible at this timescale, and build the field\'s understanding of what patient capital actually looks like.'
+          },
+          knowledge: {
+            1: 'Building shared knowledge infrastructure may be the first act of orchestration rather than a prerequisite for it. The process of building a shared measurement framework — who measures what, what counts as progress, whose knowledge is legible — is itself a collective alignment process. Start with the question: what would all actors need to see to coordinate without being told to?',
+            2: 'Dynamic, collectively-owned data is qualitatively different from periodic landscape studies. The key design question: who owns the data, who can update it, and who uses it to make decisions? Systems Change Lab\'s open-source model and GRP\'s Resilience Mapping platform show what dynamic shared infrastructure can look like.',
+            3: 'A shared measurement framework that lacks uptake is a trust and ownership problem, not a technical one. Revisit how the framework was developed — was it built with actors or for them? Co-designing the measurement approach (even with iteration and mess) creates more ownership than producing a polished framework and asking for buy-in.',
+            4: 'Shared data that actually changes decisions is the most powerful form of coordination infrastructure. Identify what makes this work — is it the data design, the governance of who updates it, the regular rhythm of collective review? Protect and strengthen those elements.',
+            5: 'Dynamic shared knowledge infrastructure is a significant competitive advantage for systems change. Consider whether you can open-source the design, share the approach with others building similar systems, and contribute to the field\'s understanding of what knowledge infrastructure makes orchestration possible.'
+          },
+          selfreadiness: {
+            1: 'The honest recognition that you are primarily an outsider is itself valuable self-knowledge. The question is not whether to start from this position — many effective orchestrators started as outsiders — but to design an entry strategy that builds relationships before attempting to convene. Co-Impact\'s Design Phase is one model: a grant specifically to do the relational groundwork.',
+            2: 'Being seen as a resource or expert is a real constraint on orchestration effectiveness. You can be seen and managed rather than trusted and included. The transition from "trusted expert" to "trusted partner" requires demonstrable acts of subordination: moments where your expertise was in service of the group\'s direction rather than driving it.',
+            3: 'Acknowledging that your position means some actors won\'t fully trust you is important self-knowledge. The practical response: name this openly with the actors in question, rather than trying to manage around it. Unexpected honesty about your own interests and constraints is often more trust-building than careful positioning.',
+            4: 'Earned trust across a range of actors, including those you have disappointed, is the most valuable form of relational capital in systems work. It means actors know who you actually are, not just who you present yourself to be. This is hard to build and easy to damage. Protect it.',
+            5: 'Deep embeddedness is both your greatest asset and your most significant risk. Your entanglement means you carry history, commitments, and blind spots that others in the system are aware of even when you are not. Build in structured processes for your own reflection and for receiving feedback about your impact on the system — not just for monitoring the system\'s progress.'
+          }
+        };
+
+        function buildDimensions(scores) {
+          const html = scores.map(q => {
+            const s = q.score;
+            const barColor = s >= 4 ? '#27ae60' : s >= 3 ? '#c9a962' : '#e74c3c';
+            const badgeCls = s >= 4 ? 'score-high' : s >= 3 ? 'score-mid' : 'score-low';
+            const label = s >= 4 ? 'Strong' : s >= 3 ? 'Developing' : 'Needs attention';
+            const feedback = (DIM_FEEDBACK[q.id] || {})[s] || '';
+            return `<div class="diag-dim-card">
+              <div class="diag-dim-header">
+                <div class="diag-dim-name">${q.dim}</div>
+                <span class="diag-dim-score-badge ${badgeCls}">${s}/5 · ${label}</span>
+              </div>
+              <div class="diag-dim-bar">
+                <div class="diag-dim-bar-fill" style="width:${s*20}%;background:${barColor}"></div>
+              </div>
+              <p class="diag-dim-feedback">${feedback}</p>
+            </div>`;
+          }).join('');
+          return `<div class="diag-dims-grid">${html}</div>`;
+        }
+
+        // ── Next moves ────────────────────────────────────────────────────────
+        function buildNextMoves(avg, ans, flags, persona) {
+          const lowDims = questions.filter(q => (ans[q.id] || 3) <= 2).map(q => q.dim);
+          const gaps = lowDims.length ? lowDims : ['none identified'];
+          const moves = [];
+
+          if (avg < 2.8) {
+            if (persona === 'funder') {
+              moves.push('<strong>Fund the preconditions:</strong> Invest in trust-building, community organisation, and shared mapping before funding the orchestration function itself.');
+              moves.push('<strong>Commission a power analysis:</strong> Before any convening, understand who holds what forms of power in this system — visible, hidden, and invisible.');
+              moves.push('<strong>Talk to the communities first:</strong> Before designing an orchestration approach, spend time with the communities most affected. Ask them who they trust and what they see as the real problem.');
+            } else {
+              moves.push('<strong>Build relationships before convening:</strong> Spend six months in bilateral relationship-building with key actors before attempting multi-stakeholder processes.');
+              moves.push('<strong>Conduct a participatory power analysis:</strong> Use tools like Gaventa\'s Power Cube to build a shared understanding of how power operates in this system — with actors, not for them.');
+              moves.push('<strong>Address your own entanglement first:</strong> Get clear on your own position, interests, and blind spots before asking others to be transparent about theirs.');
+            }
+          } else if (avg < 3.8) {
+            if (persona === 'funder') {
+              moves.push('<strong>Start with a design phase:</strong> Co-Impact\'s Design Phase grant model — time and funding specifically for deep relational groundwork before the full orchestration effort — is relevant here.');
+              moves.push('<strong>Address your attribution gap:</strong> If attribution tolerance is low, the internal work on your own accountability frameworks may be as important as the external systems work.');
+              moves.push(`<strong>Strengthen the weakest dimensions first:</strong> Focus initial investment on ${gaps.slice(0,2).join(' and ')}.`);
+            } else {
+              moves.push('<strong>Build a smaller, higher-trust coalition first:</strong> Start with the actors who already have genuine working relationships. Let the coalition grow outward as trust is established.');
+              moves.push('<strong>Make the shared knowledge infrastructure visible:</strong> Even a simple ecosystem map of who is doing what — built collaboratively — creates the shared visibility that coordination requires.');
+              moves.push(`<strong>Address the critical gaps in parallel:</strong> ${gaps.slice(0,2).join(' and ')} need deliberate investment alongside (not before) the orchestration work.`);
+            }
+          } else {
+            if (persona === 'funder') {
+              moves.push('<strong>Commit to the timeframe this work actually needs:</strong> Use your strong conditions to make the funding commitment (5+ years, unrestricted) that most orchestration efforts never get. This is the most valuable thing you can offer.');
+              moves.push('<strong>Build the governance that prevents capture:</strong> Strong conditions can quickly deteriorate if the backbone becomes captured by funder interests or accumulates authority. Design governance structures from the start that prevent this.');
+              moves.push('<strong>Invest in shared measurement infrastructure:</strong> Use the strong trust and mandate to build measurement systems that the coalition collectively owns. This is the highest-leverage use of your strong position.');
+            } else {
+              moves.push('<strong>Lock in the governance architecture now:</strong> Strong conditions are temporary. Use this moment to build the formal structures — governance, shared measurement, accountability — that will hold through future disruptions.');
+              moves.push('<strong>Document and share the design:</strong> The field needs more examples of what readiness conditions look like in practice. Your experience is evidence. Consider publishing your approach for others to learn from.');
+              moves.push('<strong>Plan for succession:</strong> Systems that are overly dependent on individual orchestrators are fragile. Design distributed leadership into the architecture from the beginning.');
+            }
+          }
+
+          return `<div class="diag-next">
+            <span class="diag-next-label">Your Next Move</span>
+            <div class="diag-next-title">Based on your profile, the highest-leverage actions are:</div>
+            <ul>${moves.map(m => `<li>${m}</li>`).join('')}</ul>
+          </div>`;
+        }
+
+        window.diagRestart = function() {
+          current = 0;
+          answers = {};
+          document.getElementById('diag-results').style.display = 'none';
+          document.getElementById('diag-nav').style.display = 'flex';
+          buildQuestions();
+          renderQuestion();
+        };
+
+        // ── Init ──────────────────────────────────────────────────────────────
+        buildQuestions();
+        renderQuestion();
+
+        })();
+
         });
         </script>
     </main>
