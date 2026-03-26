@@ -1272,7 +1272,6 @@
             .pattern-grid { grid-template-columns: 1fr; }
         }
 
-
         /* ===== DIAGNOSTIC TOOL v2 ===== */
         #diag-wrap { margin: 2rem 0; }
 
@@ -1559,6 +1558,572 @@
             .diag-persona-tabs { flex-direction: column; }
             .diag-dims-grid { grid-template-columns: 1fr; }
         }
+
+        /* ===================================================
+           MAGAZINE UPGRADE  -  Premium editorial layer
+           Three voices: Authoritative · Readable · Precise
+           =================================================== */
+
+        /* --- Base reading quality -------------------------------- */
+        body {
+            font-size: 17px;
+            line-height: 1.78;
+        }
+        p {
+            font-size: 1rem;
+            line-height: 1.82;
+            margin-bottom: 1.375rem;
+            color: var(--text-secondary);
+        }
+        .content-block > p,
+        .org-body > p,
+        .expandable-body > p {
+            max-width: 74ch;
+        }
+
+        /* --- Section title: stop shimmer on page body ------- */
+        .section-title {
+            background: none !important;
+            -webkit-background-clip: unset !important;
+            background-clip: unset !important;
+            color: var(--primary) !important;
+            -webkit-text-fill-color: var(--primary) !important;
+            animation: none !important;
+            font-weight: 500;
+        }
+
+        /* --- Section eyebrow: editorial rule + label --------- */
+        .section-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.875rem;
+            font-size: 0.5625rem;
+            font-weight: 700;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1.375rem;
+            text-align: left;
+        }
+        .section-eyebrow::before {
+            content: '';
+            display: inline-block;
+            width: 32px;
+            height: 1px;
+            background: linear-gradient(90deg, var(--accent), rgba(201,169,98,0.3));
+            flex-shrink: 0;
+        }
+        /* Keep centre alignment on section titles */
+        section > .container > .section-eyebrow {
+            display: block;
+            text-align: center;
+        }
+        section > .container > .section-eyebrow::before { display: none; }
+
+        /* --- Section intro: more editorial weight ------------ */
+        .section-intro {
+            font-family: 'Fraunces', serif;
+            font-size: clamp(1.0625rem, 1.6vw, 1.25rem);
+            font-style: italic;
+            font-weight: 400;
+            color: var(--text-secondary);
+            max-width: 680px;
+            margin: 0 auto 3.5rem auto;
+            line-height: 1.75;
+        }
+
+        /* --- Opening paragraph voice: authoritative sections --- */
+        .opener {
+            font-size: 1.125rem;
+            line-height: 1.88;
+            font-weight: 300;
+            color: var(--text-secondary);
+            letter-spacing: 0.004em;
+        }
+
+        /* --- Three Voice System --------------------------------- */
+        /* Voice: Authoritative (The Idea, The Concept, The Interior) */
+        #intro p, #core-concepts p, #depths p {
+            font-size: 1.0125rem;
+            line-height: 1.85;
+        }
+        /* Voice: Readable (In Action, Evidence, Thought Leaders) */
+        #implementation p, #case-studies p, #voices p {
+            font-size: 0.9875rem;
+            line-height: 1.78;
+        }
+        /* Voice: Precise (Accountability, Maturity, Self-Assessment) */
+        #evaluation p, #spectrum p, #diagnostic p {
+            font-size: 0.9375rem;
+            line-height: 1.72;
+        }
+
+        /* --- Cards: cleaner, less gradients -------------------- */
+        .card {
+            background: var(--white);
+            border: 1px solid rgba(26,31,60,0.08);
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(26,31,60,0.04);
+        }
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(26,31,60,0.09);
+            border-color: rgba(201,169,98,0.2);
+        }
+        .card:hover::before { opacity: 0.7; }
+        .card-title {
+            font-size: 1.0625rem;
+            line-height: 1.35;
+            margin-bottom: 0.875rem;
+        }
+
+        /* --- Feature cards: left-aligned, no emoji ------------- */
+        .feature-card {
+            background: var(--white);
+            border: 1px solid rgba(26,31,60,0.08);
+            border-radius: 12px;
+            text-align: left;
+            padding: 1.875rem 2rem;
+            box-shadow: none;
+        }
+        .feature-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(26,31,60,0.07);
+            border-color: rgba(201,169,98,0.2);
+        }
+        .feature-icon {
+            display: none;
+        }
+        .feature-cards { counter-reset: feat; }
+        .feature-card::before {
+            counter-increment: feat;
+            content: '0' counter(feat);
+            display: block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.625rem;
+            font-weight: 500;
+            color: var(--accent);
+            letter-spacing: 0.12em;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        .feature-title {
+            font-size: 1.0625rem;
+            text-align: left;
+            margin-bottom: 0.625rem;
+        }
+        .feature-card p {
+            font-size: 0.9375rem;
+            line-height: 1.72;
+            text-align: left;
+        }
+
+        /* --- Insight blocks: editorial annotation -------------- */
+        .insights-container {
+            counter-reset: insight;
+            border-bottom: 1px solid rgba(26,31,60,0.08);
+        }
+        .insight-block {
+            background: transparent;
+            border: none;
+            border-top: 1px solid rgba(26,31,60,0.08);
+            border-radius: 0;
+            padding: 2rem 0 2rem 3.5rem;
+            margin-bottom: 0;
+            position: relative;
+        }
+        .insight-block::before {
+            content: counter(insight, decimal-leading-zero);
+            counter-increment: insight;
+            position: absolute;
+            left: 0;
+            top: 2rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6875rem;
+            font-weight: 500;
+            color: var(--accent);
+            letter-spacing: 0.08em;
+            opacity: 0.7;
+            line-height: 1;
+        }
+        .insight-block h4 {
+            font-size: 1.0625rem;
+            font-weight: 500;
+            line-height: 1.35;
+            margin-bottom: 0.75rem;
+        }
+        .insight-block p {
+            font-size: 0.9375rem;
+            line-height: 1.75;
+            max-width: 72ch;
+        }
+
+        /* --- Person cards: editorial profile cards ------------- */
+        .person-card {
+            background: var(--white);
+            border: 1px solid rgba(26,31,60,0.08);
+            border-radius: 4px;
+            border-top: 2px solid var(--accent);
+            box-shadow: none;
+            padding: clamp(1.5rem, 2.5vw, 2rem);
+            transition: border-color var(--duration-normal), box-shadow var(--duration-normal);
+        }
+        .person-card::before { display: none; }
+        .person-card:hover {
+            transform: none;
+            box-shadow: 0 6px 24px rgba(26,31,60,0.08);
+            border-top-color: var(--accent-warm);
+        }
+        .person-monogram {
+            width: 42px; height: 42px;
+            border-radius: 4px;
+            background: var(--primary);
+            font-size: 0.8125rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+        }
+        .person-name {
+            font-size: 1.1875rem;
+            margin-bottom: 0.3rem;
+            font-weight: 500;
+        }
+        .person-role {
+            font-size: 0.625rem;
+            letter-spacing: 0.16em;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+        .person-bio {
+            font-size: 0.9375rem;
+            line-height: 1.75;
+        }
+        .person-link {
+            font-size: 0.75rem;
+            letter-spacing: 0.04em;
+            border-bottom: 1px solid rgba(74,88,153,0.2);
+        }
+
+        /* --- Org cards: more clinical, professional ------------ */
+        .org-card {
+            background: var(--white);
+            border: 1px solid rgba(26,31,60,0.08);
+            border-left: 3px solid var(--accent);
+            border-radius: 0;
+        }
+        .org-card:hover {
+            border-left-color: var(--accent-warm);
+            box-shadow: 0 4px 20px rgba(26,31,60,0.07);
+        }
+        .org-name { font-size: 1.25rem; }
+        .org-tag {
+            font-size: 0.5625rem;
+            letter-spacing: 0.18em;
+            border-radius: 2px;
+        }
+        .org-keyword {
+            font-size: 0.6875rem;
+            border-radius: 2px;
+            background: var(--cream);
+            border-color: rgba(26,31,60,0.08);
+        }
+
+        /* --- Expandables: clean, flat --------------------------  */
+        .expandable {
+            border-radius: 0;
+            border: none;
+            border-top: 1px solid rgba(26,31,60,0.08);
+            background: transparent;
+            margin-bottom: 0;
+        }
+        .expandable:last-of-type { border-bottom: 1px solid rgba(26,31,60,0.08); }
+        .expandable.open {
+            background: rgba(250,249,247,0.5);
+            border-color: rgba(201,169,98,0.2);
+            box-shadow: none;
+        }
+        .expandable-header {
+            padding: 1.25rem 0.25rem;
+        }
+        .expandable-header:hover { background: transparent; }
+        .expandable.open .expandable-header { background: transparent; }
+        .expandable-title {
+            font-size: 0.9875rem;
+            font-weight: 500;
+            letter-spacing: -0.01em;
+        }
+        .expandable-icon {
+            font-size: 0.625rem;
+            color: var(--accent);
+            opacity: 0.8;
+        }
+        .expandable-body {
+            border-top: none;
+            padding: 0 0.25rem 1.75rem;
+        }
+        .expandable-body p { font-size: 0.9375rem; line-height: 1.78; }
+        .expandable-body > p:last-child { margin-bottom: 0; }
+
+        /* --- Depth cards: more structural ---------------------- */
+        .depth-card {
+            background: var(--white);
+            border: 1px solid rgba(26,31,60,0.08);
+            border-radius: 8px;
+        }
+        .depth-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6875rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            opacity: 0.8;
+            margin-bottom: 0.875rem;
+        }
+        .depth-title {
+            font-size: 1.0625rem;
+            line-height: 1.3;
+            margin-bottom: 0.875rem;
+        }
+        .depth-card p {
+            font-size: 0.9375rem;
+            line-height: 1.75;
+        }
+
+        /* --- Laws callout: tighter, more precise --------------- */
+        .laws-callout {
+            background: linear-gradient(160deg, #12152a 0%, #1a1f3c 100%);
+            border-radius: 8px;
+        }
+        .laws-callout-law {
+            font-size: 1rem;
+            font-weight: 400;
+            font-style: italic;
+            line-height: 1.4;
+        }
+        .laws-callout-item p {
+            font-size: 0.8125rem;
+            line-height: 1.68;
+            color: rgba(255,255,255,0.58);
+        }
+        .laws-callout-label {
+            font-size: 0.5625rem;
+            letter-spacing: 0.24em;
+        }
+
+        /* --- Entanglement passage: more typographic weight ----- */
+        .entanglement-passage {
+            font-size: clamp(1.0625rem, 1.75vw, 1.3125rem);
+            line-height: 1.78;
+            border-left: 2px solid rgba(201,169,98,0.5);
+            font-style: italic;
+        }
+        .entanglement-insight {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(201,169,98,0.15);
+            border-radius: 6px;
+        }
+        .entanglement-insight p {
+            font-size: 0.875rem;
+            line-height: 1.68;
+            color: rgba(255,255,255,0.68);
+        }
+
+        /* --- Table refinement ---------------------------------- */
+        .comparison-table th {
+            font-size: 0.625rem;
+            letter-spacing: 0.12em;
+            padding: 1rem 1.375rem;
+        }
+        .comparison-table td {
+            font-size: 0.9375rem;
+            padding: 1rem 1.375rem;
+            line-height: 1.68;
+        }
+
+        /* --- Taxonomy cards: cleaner --------------------------- */
+        .taxonomy-card {
+            background: var(--white);
+            border: 1px solid rgba(26,31,60,0.08);
+            border-radius: 8px;
+        }
+        .taxonomy-type {
+            font-size: 0.875rem;
+            letter-spacing: -0.01em;
+        }
+        .taxonomy-eg {
+            font-size: 0.8125rem;
+            line-height: 1.68;
+        }
+
+        /* --- Case studies: editorial -------------------------  */
+        .case-study {
+            background: var(--white);
+            border: 1px solid rgba(26,31,60,0.08);
+            border-radius: 8px;
+            border-left: 3px solid rgba(201,169,98,0.3);
+        }
+        .case-study.visible {
+            border-left-color: var(--accent);
+        }
+        .case-study-title {
+            font-size: 1.3125rem;
+        }
+        .case-study-tag {
+            font-size: 0.6875rem;
+            border-radius: 2px;
+            background: rgba(250,249,247,0.8);
+            letter-spacing: 0.02em;
+        }
+
+        /* --- Landscape divider: refined ----------------------- */
+        .landscape-divider {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            margin: 3.5rem 0 2.5rem;
+        }
+        .landscape-divider-label {
+            font-size: 0.5625rem;
+            letter-spacing: 0.24em;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+        .landscape-divider-rule {
+            flex: 1;
+            height: 1px;
+            background: rgba(26,31,60,0.08);
+        }
+
+        /* --- Section label divider ----------------------------- */
+        .section-label span {
+            font-size: 0.5625rem;
+            letter-spacing: 0.22em;
+        }
+        .section-label::before,
+        .section-label::after {
+            background: rgba(26,31,60,0.08);
+        }
+
+        /* --- Definition box: less heavy ----------------------- */
+        .definition-box {
+            border-left: 3px solid var(--accent);
+            border-radius: 0;
+            background: rgba(201,169,98,0.03);
+            border-top: none;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        /* --- Content block spacing ---------------------------- */
+        .content-block {
+            margin-bottom: 4rem;
+        }
+        .content-block h2 {
+            font-size: clamp(1.4375rem, 2.25vw, 1.875rem);
+            letter-spacing: -0.025em;
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- H2 with-rule: thinner rule ----------------------- */
+        h2.with-rule::after {
+            width: 24px;
+            height: 1px;
+        }
+
+        /* --- Nav: slightly more refined ----------------------- */
+        .nav-links a {
+            font-size: 0.8125rem;
+            font-weight: 400;
+            letter-spacing: 0.01em;
+            padding: 0.4375rem 0.8125rem;
+        }
+        .nav-links a.active {
+            font-weight: 500;
+        }
+
+        /* --- Logo refinement ---------------------------------- */
+        .logo-name {
+            font-size: 1.25rem;
+            letter-spacing: -0.025em;
+        }
+        .logo-sub {
+            font-size: 0.6875rem;
+            letter-spacing: 0.18em;
+        }
+
+        /* --- Pattern blocks ----------------------------------- */
+        .pattern-block {
+            padding: 1.5rem 1.625rem;
+            border-radius: 8px;
+        }
+        .pattern-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.5625rem;
+            letter-spacing: 0.2em;
+            opacity: 0.7;
+        }
+        .pattern-title {
+            font-size: 1rem;
+            line-height: 1.35;
+        }
+        .pattern-block p {
+            font-size: 0.875rem;
+            line-height: 1.72;
+        }
+
+        /* --- Persons grid: tighter rhythm --------------------- */
+        .persons-grid {
+            gap: 1.25rem;
+        }
+
+        /* --- Diagnostic: voice-precise refinements ------------ */
+        .diag-q-title { font-size: clamp(1.0625rem, 1.75vw, 1.25rem); }
+        .diag-q-context { font-size: 0.875rem; font-style: italic; }
+        .diag-option-label { font-size: 0.9375rem; }
+        .diag-option-desc { font-size: 0.8125rem; }
+        .diag-dim-feedback { font-size: 0.8375rem; line-height: 1.68; }
+
+        /* --- Footnote-style small text ------------------------ */
+        .text-footnote {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* --- Section opener (first p after section title) ----- */
+        .section-opener {
+            font-family: 'Fraunces', serif;
+            font-size: clamp(1.0625rem, 1.6vw, 1.25rem);
+            font-weight: 400;
+            font-style: italic;
+            line-height: 1.78;
+            color: var(--text-secondary);
+            max-width: 72ch;
+        }
+
+        /* --- Better topbar ------------------------------------ */
+        .site-topbar-byline {
+            font-size: 0.625rem;
+            letter-spacing: 0.08em;
+        }
+
+        /* --- Colophon / site-ending --------------------------- */
+        .site-ending-note {
+            font-size: 0.875rem;
+            line-height: 1.75;
+        }
+        .site-ending-label {
+            font-size: 0.5rem;
+            letter-spacing: 0.3em;
+        }
+
+        /* --- Taxonomy grid uses consistent card style --------- */
+        .taxonomy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+
+        /* ===== END MAGAZINE UPGRADE ===== */
     </style>
 </head>
 <body>
@@ -1607,7 +2172,6 @@
                     <p style="margin-top: 1rem; font-size: 0.95rem; color: var(--gray-600);">This maps closely to why "collaboration fails without supporting infrastructure" in collective impact-the famous backbone argument. The orchestrator doesn't implement solutions directly; they make it possible for others to implement solutions together.</p>
                 </div>
 
-
 <div class="entanglement-block">
     <p class="entanglement-passage">"In systems change, in any work that involves groups of people thinking together about complex problems: there is no observer position. You are not watching the system. You are entangled with it. The quality of your presence, what you notice, what you hold open, what you allow to remain unresolved, is itself a move in the system."</p>
     <div class="entanglement-insights">
@@ -1644,7 +2208,6 @@
     <p>In systems work, the orchestrator performs a similar meta-function: <strong>holding purpose, setting protocols, aligning incentives, and enabling feedback</strong> so that the system itself produces the desired outcomes. Research on digital and business ecosystems echoes this role, describing orchestrators as entities that <em>"connect companies in a value chain by setting up strategic partnerships and alliances"</em> (McKinsey &amp; Company) and <em>"coordinate and optimise the entire network of partners"</em> (impartner.com).</p>
 </div>
 
-
 <div class="content-block">
     <p style="font-size:0.875rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--accent); font-weight:600; margin-bottom:0.5rem;">Where it came from</p>
     <h2>Intellectual Genealogy: Three Upstream Lineages</h2>
@@ -1680,6 +2243,29 @@
                 <li>Practitioners started using <strong>"system orchestrator"</strong> for messier, more adaptive, more political system-change settings</li>
             </ul>
             <p><em>Why it matters:</em> The concept extended beyond bounded initiatives to encompass shifting landscapes where the orchestrator's work survives any single project or donor cycle.</p>
+        </div>
+    </div>
+</div>
+
+<div class="content-block">
+    <h2>The Deeper Roots: What the Full Genealogy Reveals</h2>
+    <p>The three upstream lineages traced above are all Western and institutional. But systems change thinking has much older and deeper roots - in Eastern philosophy, Indigenous knowledge systems, and contemplative traditions. Systemiq's Blue Whale Inquiry Literature Review (December 2025), which synthesises over 20 theorists from Confucian and Buddhist traditions to contemporary complexity theory, makes a finding that is directly relevant to the orchestration field: these diverse traditions converge on a set of enduring insights, separated by centuries and continents, that no single Western framework has yet fully integrated.</p>
+    <div class="cards-grid">
+        <div class="card">
+            <h3 class="card-title">Eastern traditions: change requires inner alignment, not only structural intervention</h3>
+            <p>Daoism's <em>wu-wei</em> - effortless action, aligning with natural flows rather than imposing force - is one of the oldest articulations of what orchestration practitioners discover when they are most effective: that the hardest interventions are often the lightest. The I-Ching's foundational insight - leadership is not control but sensing and responding - predates Western complexity theory by 3,000 years. Buddhism's insistence that systems are ongoing processes, not fixed states, and that all phenomena arise in dependence on other phenomena, is the ontological foundation for everything complexity theorists discovered about emergence and feedback. Otto Scharmer's Theory U is, in large part, a Western operationalisation of these insights - which is why it resonates with practitioners who have also encountered them through other paths.</p>
+        </div>
+        <div class="card">
+            <h3 class="card-title">Indigenous knowledge: the world is a living network bound by reciprocity</h3>
+            <p>Robin Wall Kimmerer understands systems not as structures to be managed but as "bundles of relationships" - kinship webs requiring ecological reciprocity and gratitude. Tyson Yunkaporta's Aboriginal systems thinking approaches complexity through responsibility and humility rather than control: "Change comes from listening, humility, and pattern recognition over time." Deganawida's Seventh Generation Principle - systems must be sustainable for those yet unborn - is the most rigorous long-term orientation in any systems change tradition. What all Indigenous perspectives share: they do not separate the inner life of the actor from the life of the system. The practitioner's way of being is inseparable from their way of acting.</p>
+        </div>
+        <div class="card">
+            <h3 class="card-title">The convergence: what every tradition rediscovers</h3>
+            <p>The Blue Whale review identifies six insights where traditions converge across vast differences in time, geography, and context. Systems are composed of interconnected, interdependent elements. Feedback enables learning and adaptation. Change unfolds through both gradual shifts and disruptive shocks. We are always inside the system, never outside it. Lasting change combines structural work, participatory action, and inner transformation - simultaneously, not sequentially. And adaptive leadership dances with complexity rather than trying to dance around it. The third insight in Donella Meadows' leverage point hierarchy - changing the mindset from which the system arises - is where all these traditions agree, even as they diverge on everything else.</p>
+        </div>
+        <div class="card">
+            <h3 class="card-title">Samaaj as relational field, not sector</h3>
+            <p>The standard framing of the Samaaj-Bazaar-Sarkaar framework treats Samaaj as a sector - civil society, alongside market and state. But a richer reading, suggested by Gautam John and deepened by the Blue Whale genealogy, understands Samaaj as something more fundamental: the generative relational field between people and institutions where emergence actually happens. On this reading, Samaaj is not a third sector but the medium - the substrate from which markets and states crystallise and to which they remain accountable. If this is what Samaaj is, then contemplative and relational practices - Buddhist inner awareness, Indigenous ceremony and land-based feedback, Scharmer's presencing, Yunkaporta's pattern recognition - are not additions to systems thinking. They are systems thinking practiced at the level at which systems actually change. They have always lived in Samaaj. The Western complexity tradition is rediscovering them.</p>
         </div>
     </div>
 </div>
@@ -1792,34 +2378,32 @@
     <p>Across India and global cases  -  from Saamuhika Shakti's backbone in Bengaluru to GRP's resilience partnership spanning 80+ organisations  -  five characteristics consistently separate effective orchestrators from well-intentioned convenors.</p>
     <div class="feature-cards">
         <div class="feature-card">
-            <div class="feature-icon" aria-hidden="true">⟁</div>
+            
             <h3 class="feature-title">They hold the whole, not a part</h3>
             <p>Orchestrators maintain a view of the system that no single actor within it can hold. Sanjay Purohit describes this as designing for the "elephant"  -  an entirely different task from making many mice work harder. The orchestrator's job is to see across silos that every other actor is rationally embedded within.</p>
         </div>
         <div class="feature-card">
-            <div class="feature-icon" aria-hidden="true">◎</div>
+            
             <h3 class="feature-title">They distribute credit and accumulate trust</h3>
             <p>Co-Impact's formulation is precise: "stand behind, not in for, leaders." Rainmatter calls it responding rather than intervening. Dasra describes it as amplifying grassroots voices rather than speaking for them. Orchestrators who accumulate credit  -  Hoverstadt's Power Structuration Theorem  -  structurally weaken the systems they hold.</p>
         </div>
         <div class="feature-card">
-            <div class="feature-icon" aria-hidden="true">⇄</div>
+            
             <h3 class="feature-title">They translate across worlds</h3>
             <p>Government ministries, community cooperatives, insurance actuaries, and philanthropic foundations do not share a language. Practical Action's early warning work in Nepal requires continuous translation between meteorologists, telecoms engineers, local governments, and farming households. The orchestrator is the translator  -  and Bateson's Law of Crossing reminds us that each boundary crossed is a genuine change of state.</p>
         </div>
         <div class="feature-card">
-            <div class="feature-icon" aria-hidden="true">◈</div>
+            
             <h3 class="feature-title">They make the system visible to itself</h3>
             <p>Systems Change Lab's open dashboards, GRP's resilience mapping platform, ICC's ecosystem studies, Saamuhika Shakti's shared measurement  -  in each case, the orchestrator's distinctive contribution is creating a mirror. When actors can see what the system is doing collectively, they can coordinate without being commanded. Shared data is shared power.</p>
         </div>
         <div class="feature-card">
-            <div class="feature-icon" aria-hidden="true">△</div>
+            
             <h3 class="feature-title">They resource the connective tissue, not just the nodes</h3>
             <p>StriveTogether's network of 70 local backbones is funded not just for programme delivery but for the coordination infrastructure itself. CLEAN's sector backbone is sustained through membership fees that explicitly buy convening power. The orchestrator who cannot fund the function of holding the system together  -  who absorbs coordination costs into programme budgets  -  will eventually have to choose between programme and system.</p>
         </div>
     </div>
 </div>
-
-
 
                 <div class="content-block">
     <h2>Orchestration vs. Other Change Approaches</h2>
@@ -1839,7 +2423,6 @@
         </table>
     </div>
 </div>
-
 
                 <div class="content-block">
                     <h2>Six Levers: How Orchestrators Actually Influence Without Authority</h2>
@@ -2035,6 +2618,7 @@
                         <div class="framework-tab active" data-framework="msd" role="tab" aria-selected="true">Market Systems Development</div>
                         <div class="framework-tab" data-framework="collective-impact" role="tab" aria-selected="false">Collective Impact</div>
                         <div class="framework-tab" data-framework="theory-u" role="tab" aria-selected="false">Theory U</div>
+                        <div class="framework-tab" data-framework="inspire-overtake-lead" role="tab" aria-selected="false">Inspire · Overtake · Lead</div>
                     </div>
                     <div class="framework-content active" id="msd-content" role="tabpanel">
                         <h2>Participatory Market Systems Development (PMSD)</h2>
@@ -2266,6 +2850,60 @@
 </svg>
 </div></div>
                     </div>
+                    <div class="framework-content" id="inspire-overtake-lead-content" role="tabpanel" aria-hidden="true">
+                        <h2>Inspire, Overtake, Lead  -  Systemiq's Three Arts of System Change</h2>
+                        <p>Developed through Systemiq's Blue Whale Inquiry  -  a synthesis of 20+ theorists from Confucian, Buddhist, Indigenous, and Western complexity traditions  -  this framework is designed for practitioners driving economic transitions. It bridges from theory to action in a way that most orchestration frameworks do not: by naming the political, cultural, and leadership dimensions alongside the structural ones.</p>
+                        <p>The framework builds on but extends existing models: the Three Horizons Framework (International Futures Forum), the Two Loops Model (Berkana Institute), and the System Change Compass. Together these models show the full territory  -  from mapping the transition (Three Horizons), to understanding the dynamics of old and new systems coexisting (Two Loops), to guiding practical action (Inspire, Overtake, Lead).</p>
+
+                        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.25rem; margin:1.75rem 0;">
+                            <div style="background:linear-gradient(145deg,var(--white),var(--cream)); border:1px solid var(--border-light); border-top:3px solid var(--accent); border-radius:12px; padding:1.375rem 1.5rem;">
+                                <div style="font-size:0.625rem; font-weight:700; letter-spacing:0.22em; text-transform:uppercase; color:var(--accent); margin-bottom:0.5rem;">Art 1</div>
+                                <strong style="font-family:'Fraunces',serif; font-size:1.0625rem; color:var(--primary); display:block; margin-bottom:0.5rem;">Inspire</strong>
+                                <p style="font-size:0.8125rem; color:var(--text-muted); margin-bottom:0.75rem; font-style:italic;">Make the change plausible and desirable</p>
+                                <ul style="font-size:0.8375rem; color:var(--text-secondary); padding-left:1.25rem; margin:0;">
+                                    <li style="margin-bottom:0.375rem;">Tell a compelling story: mobilise the most important audiences with a credible and motivating vision</li>
+                                    <li style="margin-bottom:0.375rem;">Intersect with political priorities: listen to and align with the issues at the top of the agenda</li>
+                                    <li>Improve lives: build support by delivering real, tangible benefits to people and places</li>
+                                </ul>
+                            </div>
+                            <div style="background:linear-gradient(145deg,var(--white),var(--cream)); border:1px solid var(--border-light); border-top:3px solid #5643cc; border-radius:12px; padding:1.375rem 1.5rem;">
+                                <div style="font-size:0.625rem; font-weight:700; letter-spacing:0.22em; text-transform:uppercase; color:#5643cc; margin-bottom:0.5rem;">Art 2</div>
+                                <strong style="font-family:'Fraunces',serif; font-size:1.0625rem; color:var(--primary); display:block; margin-bottom:0.5rem;">Overtake</strong>
+                                <p style="font-size:0.8125rem; color:var(--text-muted); margin-bottom:0.75rem; font-style:italic;">Scale the new system so it can outcompete the old</p>
+                                <ul style="font-size:0.8375rem; color:var(--text-secondary); padding-left:1.25rem; margin:0;">
+                                    <li style="margin-bottom:0.375rem;">Back the right breakthroughs: scale innovations to tipping points</li>
+                                    <li style="margin-bottom:0.375rem;">Move enough money: shift capital away from legacy systems toward emerging ones</li>
+                                    <li>Enable exit: create conditions for incumbent actors to abandon the shrinking system</li>
+                                </ul>
+                            </div>
+                            <div style="background:linear-gradient(145deg,var(--white),var(--cream)); border:1px solid var(--border-light); border-top:3px solid #27ae60; border-radius:12px; padding:1.375rem 1.5rem;">
+                                <div style="font-size:0.625rem; font-weight:700; letter-spacing:0.22em; text-transform:uppercase; color:#27ae60; margin-bottom:0.5rem;">Art 3</div>
+                                <strong style="font-family:'Fraunces',serif; font-size:1.0625rem; color:var(--primary); display:block; margin-bottom:0.5rem;">Lead</strong>
+                                <p style="font-size:0.8125rem; color:var(--text-muted); margin-bottom:0.75rem; font-style:italic;">Empower the leaders who can work together and get the job done</p>
+                                <ul style="font-size:0.8375rem; color:var(--text-secondary); padding-left:1.25rem; margin:0;">
+                                    <li style="margin-bottom:0.375rem;">Move together: find ways for state, business and civil society actors to co-create living examples of the new system</li>
+                                    <li>Persevere: stay the course, understanding that system change is almost always decades-long</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <h3 style="margin-top:1.75rem;">Three practical frameworks that bridge theory to action</h3>
+                        <div class="expandable"><div class="expandable-header" role="button" aria-expanded="false"><h3 class="expandable-title">Three Horizons Framework (International Futures Forum)</h3><div class="expandable-icon" aria-hidden="true">▼</div></div><div class="expandable-content"><div class="expandable-body">
+                            <p>Developed by the International Futures Forum, the Three Horizons Framework maps the transition from current systems to future possibilities. Horizon 1 is the dominant system - functional but declining in fit with emerging conditions. Horizon 3 is the future possibility - not yet viable but already present in pioneer experiments and peripheral actors. Horizon 2 is the dangerous middle: the transition space where the old system is still powerful but losing legitimacy, and the new is gaining strength but not yet dominant.</p>
+                            <p>For orchestrators, the Three Horizons framework does three things. It locates their work - most orchestrators are building Horizon 2 infrastructure, connecting Horizon 3 pioneers to Horizon 1 incumbents. It explains the resistance they encounter - Horizon 1 actors will rationally resist the transition even when they can see it coming. And it identifies the leadership question: who can hold the tension of H1 and H3 simultaneously, without either defending the old or prematurely collapsing into the new? The framework has been used in strategic planning by NHS Scotland and the UK Government Office for Science.</p>
+                        </div></div></div>
+
+                        <div class="expandable"><div class="expandable-header" role="button" aria-expanded="false"><h3 class="expandable-title">Two Loops Model (Berkana Institute)</h3><div class="expandable-icon" aria-hidden="true">▼</div></div><div class="expandable-content"><div class="expandable-body">
+                            <p>The Berkana Institute's Two Loops Model illustrates a dynamic that practitioners often sense but struggle to name: old systems decline as new ones emerge, and both processes happen simultaneously. The dominant system loop is contracting - its once-reinforcing feedbacks are becoming balancing; its pioneers are leaving or being expelled. The emerging system loop is still small but self-reinforcing - pioneer experiments are connecting, learning from each other, naming what they share.</p>
+                            <p>The orchestrator's role in this model is specific: they are the connector between isolated pioneer experiments that do not yet know they are part of the same emerging system. The model names the "hospice work" of helping the old system decline gracefully, which is as important as the "midwife work" of nurturing the new. And it identifies the most dangerous moment: when the old system has declined far enough to lose legitimacy but the new has not yet stabilised enough to replace it. This is the window of maximum turbulence - and the window of maximum orchestration leverage. The model has been applied across education, rural sustainability, and healthcare.</p>
+                        </div></div></div>
+
+                        <div style="background:linear-gradient(135deg,#1a1f3c,#1e2448); border-radius:14px; padding:1.375rem 1.625rem; margin-top:1.5rem; position:relative; overflow:hidden;">
+                            <div style="position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(201,169,98,0.7),transparent);"></div>
+                            <div style="font-size:0.6rem; font-weight:700; letter-spacing:0.22em; text-transform:uppercase; color:var(--accent); margin-bottom:0.5rem;">From the Blue Whale Inquiry</div>
+                            <p style="font-size:0.875rem; color:rgba(255,255,255,0.82); line-height:1.65; margin:0;">Jeremy Oppenheim, Systemiq founder: "In the hardest phase of the transition, we find strength in how others have tackled similar challenges. Their wisdom reminds us that lasting change is human-centred: technology is critical, but it is people that ultimately shift the system." The Blue Whale Literature Review  -  synthesising Confucian, Buddhist, Indigenous, and Western complexity traditions  -  found that across all of them, the same insight recurs: lasting change combines top-down structural redesign, bottom-up participatory action, and inner transformation at every level. Not sequentially. Simultaneously. <a href="https://www.systemiq.earth" target="_blank" rel="noopener" style="color:var(--accent); border-bottom:1px solid rgba(201,169,98,0.4);">Systemiq →</a></p>
+                        </div>
+                    </div>
                 </div>
                 <div class="content-block">
                     <h2>Language &amp; Technical Phrasing</h2>
@@ -2283,13 +2921,35 @@
             </div>
         </section>
 
-
         <!-- ===== THE DEPTHS ===== -->
         <section id="depths">
             <div class="container">
                 <span class="section-eyebrow">04 / The Interior</span>
                 <h1 class="section-title" style="margin-bottom:0.75rem;">What Orchestration Demands of the Orchestrator</h1>
                 <p class="section-intro">Most frameworks describe what orchestrators do. These go deeper  -  to how they must be. Two bodies of knowledge that the field rarely holds together: the practitioner's interior and the structural laws of the systems they hold.</p>
+
+                <div class="content-block">
+    <h2>What Every Tradition Agrees On: The Inner Work Is Not Optional</h2>
+    <p>Gautam John's question  -  what does orchestration take of people as people, not just as practitioners?  -  has been asked in different vocabularies by every major tradition of systems change thinking. The Systemiq Blue Whale Inquiry's synthesis of 20+ traditions, from the I-Ching to complexity theory, finds that they converge on a single insight: inner transformation is not a preparation for system change. It is a dimension of it  -  present in every moment of the work, not cleared once and moved on from.</p>
+    <div class="cards-grid">
+        <div class="card">
+            <h3 class="card-title">Scharmer: Presencing  -  sensing from the emerging future</h3>
+            <p>Otto Scharmer's Theory U proposes that real system change begins with changing the inner condition of leaders and participants. "Presencing"  -  connecting to one's highest future potential  -  is not a warm-up exercise. It is the state from which fundamentally different collective intelligence becomes accessible. The shift from ego to eco: from acting from what was, to sensing and acting in alignment with what is trying to emerge. Scharmer argues that inaction is also a choice  -  it reinforces existing structures. There is no neutral position.</p>
+        </div>
+        <div class="card">
+            <h3 class="card-title">Daoism: wu-wei  -  the art of effortless action</h3>
+            <p>Wu-wei is not passivity. It is the art of acting in alignment with natural flows rather than imposing force. The Daoist leader reads patterns, relationships, and flows, then moves with them rather than against them. "Avoiding battle altogether is the highest form of victory." For orchestrators, this translates precisely: the interventions that last are often the lightest  -  the question that surfaces what was already present, the connection that was one introduction away from existing, the convening that gave permission for what actors already wanted to do. The discipline is knowing when not to act.</p>
+        </div>
+        <div class="card">
+            <h3 class="card-title">Indigenous knowing: responsibility, humility, and pattern recognition over time</h3>
+            <p>Tyson Yunkaporta's framing is the starkest: "He highlights the absurdity of trying to fix complex crises with the same worldview that caused them." Robin Wall Kimmerer understands system change as a relational, reciprocal, and sacred process of restoring kinship  -  rather than technical innovation or institutional redesign. The practitioner's way of being with the system  -  their humility, their attention to pattern over time, their willingness to be changed by what they encounter  -  is inseparable from their effectiveness. These are not soft skills. They are the methodology.</p>
+        </div>
+        <div class="card">
+            <h3 class="card-title">Goleman: emotional intelligence as structural requirement</h3>
+            <p>Daniel Goleman's Triple Focus  -  individual, interpersonal, systemic  -  demonstrates how leaders deliver system change through the interaction of these three levels simultaneously. Emotional intelligence is not a prerequisite for system change. It is part of how it happens: the leader whose own regulation creates the conditions for others' genuine engagement, whose relational attunement detects fractures before they become crises, whose systemic awareness keeps the coalition oriented to the whole rather than to institutional interests. Gautam John's observation about leaders who held change most durably  -  that they stopped being the source of coherence and started trusting the relational field  -  is Goleman's systemic dimension in practice.</p>
+        </div>
+    </div>
+</div>
 
                 <div class="content-block">
     <h2>The Orchestrator's Interior: Five Depths of Practice</h2>
@@ -2320,10 +2980,15 @@
             <div class="depth-title">Self-Awareness as Technical Skill</div>
             <p>The tensions an orchestrator carries  -  between fidelity to funders and fidelity to communities; between theory of change and the evidence that contradicts it; between pace the system needs and pace the budget allows  -  shape every interaction. They leak through tone, through which discomfort is made space for and which is normalised. This is what makes orchestration fundamentally different from project management. <em>The project manager can bracket unresolved tensions and execute. The orchestrator cannot.</em></p>
         </div>
+        <div class="depth-card">
+            <div class="depth-number">06</div>
+            <div class="depth-title">The Personal Cost  -  and What Happens When the Holder Leaves</div>
+            <p>This is the question the field least wants to name directly. Holding the relational field of a complex coalition over years is not just demanding work. It has a specific personal cost that has no equivalent in programme delivery: the cost of being the person in whose presence difficult things can be said, conflicts can surface, and the system can be honest with itself. That function requires a quality of presence that cannot be delegated and cannot be maintained indefinitely without cost to the person holding it.</p>
+            <p>The orchestrators who hold change most durably are not, as Gautam John has observed, necessarily the most personally regulated people. They are the ones who learn to stop being the source of coherence and start trusting the relational field they have built around them. That transition  -  from holding the system to trusting the system to hold itself  -  is the most important and least documented development in an orchestrator's practice. It is also the hardest, because the moment the system most needs the orchestrator to let go is usually the moment the orchestrator feels most indispensable.</p>
+            <p>The structural risk is equally important to name: when orchestration is person-dependent, the architecture looks solid until the person leaves or burns out, and then nothing flows through it. The governance structures stand. The measurement frameworks exist. The relationships are documented. And yet the system does not move, because what was holding it was not the structures but the relational quality of one person's presence inside them. Designing for this fragility  -  distributing the relational function, building the system's capacity to hold itself  -  is the most neglected form of resilience planning in the field. <em>The question is not whether the orchestrator will eventually leave. It is whether the field will hold when they do.</em></p>
+        </div>
     </div>
 </div>
-
-
 
                 <div style="margin-top: 1rem;"><div class="content-block">
     <h2>The Grammar of Systems: Laws Every Orchestrator Needs</h2>
@@ -2544,27 +3209,27 @@
                     <p>The most important thing an orchestrator builds is not a programme. It is infrastructure  -  the shared, durable assets that make coordination possible and outlast any individual initiative. Four types recur across every effective orchestration effort.</p>
                     <div class="feature-cards">
                         <div class="feature-card">
-                            <div class="feature-icon" aria-hidden="true">◈</div>
+                            
                             <h3 class="feature-title">Shared Measurement & Knowledge Systems</h3>
                             <p>Data owned collectively rather than by any single actor. Systems Change Lab's open-source indicator platform for 70+ transformational shifts. GRP's Resilience Mapping platform. ICC's ecosystem studies. Saamuhika Shakti's 3ie-evaluated outcomes framework. CSCAF's city metrics for the ClimateSmart Cities Alliance. Without shared measurement, actors cannot coordinate without being commanded  -  and the orchestrator becomes a command-and-control function by default. The Conant-Ashby Theorem: the quality of collective action depends on the quality of the collective model.</p>
                         </div>
                         <div class="feature-card">
-                            <div class="feature-icon" aria-hidden="true">⟁</div>
+                            
                             <h3 class="feature-title">Governance Architecture</h3>
                             <p>Explicit structures for who makes decisions, how conflicts are resolved, and how power is distributed across the coalition. The absence of explicit governance is not neutral  -  it means whoever holds the most resources or social capital makes decisions implicitly. InsuResilience's member-governed model, ClimateRISE's working groups, Co-Impact's coalition governance. Saamuhika Shakti's governance evolution  -  from backbone-led to community co-governed over six years  -  shows that governance is not a design decision made once but a living structure that must be actively maintained and revised as the system matures.</p>
                         </div>
                         <div class="feature-card">
-                            <div class="feature-icon" aria-hidden="true">◎</div>
+                            
                             <h3 class="feature-title">Narrative Infrastructure</h3>
                             <p>The shared language, frames, and story that create collective identity and make the field visible to itself and to funders. The India Climate Collaborative's "India-only climate narrative." ClimateRISE's intersectional vocabulary for climate resilience. The SSIR 2025 article that coined "system orchestrators"  -  an act of narrative infrastructure that made a function fundable. Rohini Nilekani's Samaaj-Bazaar-Sarkaar framework, which gives practitioners a non-Western vocabulary for what they are doing. Narrative infrastructure is the most undervalued form of orchestration investment because it produces no immediate deliverable and is very hard to attribute  -  but it is often what makes everything else possible.</p>
                         </div>
                         <div class="feature-card">
-                            <div class="feature-icon" aria-hidden="true">≋</div>
+                            
                             <h3 class="feature-title">The Information Layer</h3>
                             <p>Pramod Varma's most generative insight for orchestrators: every complex physical system - an energy grid, a food supply chain, a healthcare network - needs a dynamic information layer on top of it. The physical layer carries the actual flows (electrons, goods, patients). The information layer makes those flows programmable: visible, coordinated, responsive to real-time signals, accessible to small actors who would otherwise be locked out. The orchestrator's job is to build this layer - not to direct the physical flows themselves. India Stack did this for financial transactions: the banks and payment rails were the physical layer; Aadhaar, UPI, and DigiLocker were the information layer that made the whole network programmable, reducing the cost of trust to near zero. The same architecture applies to climate resilience: satellite early warning data, shared parametric triggers, open insurance APIs, community-level sensor networks are all components of an information layer on top of the physical infrastructure of communities, catchments, and supply chains. The orchestrator who builds this layer enables coordination without commanding it.</p>
                         </div>
                         <div class="feature-card">
-                            <div class="feature-icon" aria-hidden="true">△</div>
+                            
                             <h3 class="feature-title">Enabling Policy Environment</h3>
                             <p>The regulatory, legal, and policy conditions that allow system actors to perform their functions. CLEAN's advocacy with MNRE for decentralised energy policy. ILC's country MSPs creating the legal frameworks for community land rights. ClimateSmart Cities Alliance's work with MoHUA translating alliance learning into CSCAF policy frameworks. CREWS creating the international finance architecture for early warning systems in the most vulnerable countries. Policy infrastructure is often the highest-leverage investment an orchestrator can make  -  it changes what is possible for everyone in the system simultaneously. But it is also the most contested, because it directly engages state power.</p>
                         </div>
@@ -2841,6 +3506,13 @@
                         <div class="card"><h3 class="card-title">New Capabilities</h3><p>Skills in facilitation, coalition-building, and governance design different from direct implementation.</p></div>
                         <div class="card"><h3 class="card-title">Flexible Resources</h3><p>Funding that supports process, relationships, and adaptation rather than just fixed deliverables.</p></div>
                     </div>
+
+                    <div class="definition-box" style="margin-top:2.5rem;">
+                        <h3 style="margin-bottom:0.875rem; font-size:1.0625rem;">A necessary caveat: the stage model may be the wrong model</h3>
+                        <p>The spectrum above is a useful orientating map. It is not an accurate description of how systems change actually happens. Gautam John has raised a more precise observation: change may be fractal rather than sequential. The same quality of coherence  -  the same texture of genuine alignment, honest relationship, and adaptive capacity  -  has to be present at the individual level, the relational level, and the institutional level simultaneously, not in sequence. You do not graduate from Stage 1 to Stage 2 and leave Stage 1 behind. You carry all the stages at once, practicing each of them continuously at different scales.</p>
+                        <p>On this reading, the leaders who hold change most durably are not the ones who have reached Stage 4 of the institutional maturity model. They are the ones who have integrated all five stages simultaneously  -  clear-sighted about the problem, trustworthy in relationship, coherent in their own inner life  -  and who have built the same integration into the systems they hold. The fractal model implies something the stage model cannot accommodate: that institutional transformation without relational transformation is fragile, and relational transformation without individual transformation is performative.</p>
+                        <p style="margin-bottom:0;">This site holds both models in tension rather than resolving them. The stage model is useful for locating where you are and what the next investment should be. The fractal model is more honest about what makes change durable. Neither is complete without the other.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -3104,7 +3776,6 @@
                     </div>
                 </div>
 
-
                 <div class="landscape-divider">
                     <span class="landscape-divider-label">India · Orchestration in practice</span>
                     <div class="landscape-divider-rule"></div>
@@ -3299,7 +3970,7 @@
                 <div class="org-card">
                     <div class="org-card-header">
                         <div><div class="org-name">Dasra</div><div style="margin-top:0.3rem;color:var(--text-muted);font-size:0.875rem;">India · $330M+ catalysed · 1,500+ NGOs · 750+ philanthropists advised</div></div>
-                        <span class="org-tag">Philanthropy Orchestrator</span>
+                        <span class="org-tag">Self-Declared Orchestrator</span>
                     </div>
                     <div class="org-body">
                         <p>The organisation most explicitly claiming the "systems orchestrator" title in India: "Dasra plays the role of a systems orchestrator in India's social sector, bringing together funders, nonprofits, governments, and communities to amplify grassroots voices and enable community-led change." Their collaborative platforms - 10to19 (adolescent health), NFSSM Alliance (urban sanitation), ClimateRISE Alliance (65+ partners), WomenLead India Alliance - represent backbone infrastructure for specific issue areas. They also produce the definitive annual India Philanthropy Report with Bain.</p>
@@ -3604,8 +4275,6 @@
                 <h1 class="section-title">50+ Top Resources on Systems Orchestration</h1>
                 <p class="section-intro">A curated resource database tracing the emergence and evolution of "systems orchestration" from foundational collective impact frameworks (2011) to contemporary research (2024–2025).</p>
 
-                
-
                 <div class="content-block">
                     <h2>Foundational Works &amp; Frameworks (2010–2015)</h2>
                     <div class="expandable"><div class="expandable-header" aria-expanded="false"><h3 class="expandable-title">1–8: Foundation Setting</h3><span class="expandable-icon">▼</span></div><div class="expandable-content"><div class="expandable-body">
@@ -3667,7 +4336,6 @@
                         </ol>
                     </div></div></div>
                 </div>
-
 
                 <div class="content-block" style="margin-top: 3.5rem;">
                     <h2>Video &amp; Multimedia Repository</h2>
@@ -3846,7 +4514,6 @@
             </div>
         </section>
 
-
         <!-- MINIMAL FOOTER BAR -->
         <div class="site-footer-bar">
             <span class="site-footer-bar-copy">© Systems Orchestration Fundamentals · <a href="https://systemsorchestration.org/" style="color:inherit;text-decoration:none;">systemsorchestration.org</a></span>
@@ -3883,7 +4550,7 @@
                 <!-- Disclaimer -->
                 <div class="site-ending-rule" style="margin-top:1rem;"></div>
                 <p style="font-size:0.6875rem; color:rgba(255,255,255,0.35); line-height:1.6; text-align:center; max-width:640px; margin:0.75rem auto 0; font-weight:300; letter-spacing:0.01em;">
-                    This site is a personal curation project, built in spare moments over many years of doing, engaging , listening ,reading & observing from the sidelines. It is a work in progress and always will be. Everything here comes from publicly available sources -no proprietary or confidential material has been used. It reflects my own learning and does not represent the views of any organisation I am affiliated with. More than anything, it is a tribute to the practitioners, thinkers, and field-builders whose work I have had the privilege of watching unfold & an attempt to share what I have gathered with others who are on the same journey.
+                    This site represents the personal curation and views of Arunabha Bhattacharya and does not reflect the official position, endorsement, or views of any organisation he is affiliated with, including Practical Action, Practical Action Consulting, or Practical Action Foundation. All information is drawn from publicly available sources. No proprietary or confidential information has been used.
                 </p>
             </div>
         </div>
@@ -4257,7 +4924,6 @@
             createPathwayDiagram();
             createContributionDiagram();
             createSpectrumDiagram();
-
 
         // ===== SYSTEM READINESS DIAGNOSTIC v2 =====
         (function() {
