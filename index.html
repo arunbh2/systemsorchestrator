@@ -2862,6 +2862,200 @@
     border-left: 2px solid rgba(201,169,98,0.3);
 }
 
+
+/* ─────────────────────────────────────────────
+   SEARCH OVERLAY
+   ───────────────────────────────────────────── */
+.search-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.3rem 0.75rem;
+    border: 1px solid rgba(201,169,98,0.25);
+    background: transparent;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.625rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: rgba(250,249,247,0.55);
+    cursor: pointer;
+    transition: all 0.15s;
+    border-radius: 2px;
+    white-space: nowrap;
+}
+.search-trigger:hover {
+    border-color: rgba(201,169,98,0.5);
+    color: rgba(250,249,247,0.9);
+}
+.search-trigger kbd {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.5625rem;
+    background: rgba(250,249,247,0.08);
+    padding: 0.1rem 0.3rem;
+    border-radius: 2px;
+    border: 1px solid rgba(250,249,247,0.12);
+}
+
+.search-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(10,13,26,0.85);
+    z-index: 9999;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: clamp(4rem, 12vh, 8rem);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    backdrop-filter: blur(4px);
+}
+.search-overlay.so-open {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.search-modal {
+    width: min(680px, 92vw);
+    background: #13172e;
+    border: 1px solid rgba(201,169,98,0.2);
+    border-radius: 6px;
+    overflow: hidden;
+    transform: translateY(-12px);
+    transition: transform 0.2s ease;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.6);
+}
+.search-overlay.so-open .search-modal {
+    transform: translateY(0);
+}
+
+.search-input-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid rgba(201,169,98,0.12);
+}
+.search-icon {
+    color: rgba(201,169,98,0.6);
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+#siteSearchInput {
+    flex: 1;
+    background: none;
+    border: none;
+    outline: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    color: #fff;
+    caret-color: var(--accent);
+}
+#siteSearchInput::placeholder {
+    color: rgba(250,249,247,0.3);
+}
+.search-close-hint {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    color: rgba(250,249,247,0.3);
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+}
+
+.search-results {
+    max-height: min(420px, 50vh);
+    overflow-y: auto;
+}
+.search-results::-webkit-scrollbar { width: 4px; }
+.search-results::-webkit-scrollbar-track { background: transparent; }
+.search-results::-webkit-scrollbar-thumb { background: rgba(201,169,98,0.3); border-radius: 2px; }
+
+.search-result-item {
+    display: block;
+    padding: 0.875rem 1.25rem;
+    border-bottom: 1px solid rgba(201,169,98,0.07);
+    cursor: pointer;
+    transition: background 0.12s;
+    text-decoration: none;
+}
+.search-result-item:hover, .search-result-item.sri-focused {
+    background: rgba(201,169,98,0.08);
+}
+.search-result-item:last-child { border-bottom: none; }
+
+.sri-section {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.575rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+    display: block;
+}
+.sri-title {
+    font-family: 'Fraunces', serif;
+    font-size: 0.9375rem;
+    color: #fff;
+    font-weight: 400;
+    margin-bottom: 0.25rem;
+    display: block;
+}
+.sri-excerpt {
+    font-size: 0.8rem;
+    color: rgba(250,249,247,0.5);
+    line-height: 1.55;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.sri-excerpt mark {
+    background: rgba(201,169,98,0.25);
+    color: rgba(250,249,247,0.85);
+    border-radius: 2px;
+    padding: 0 0.15rem;
+}
+
+.search-empty {
+    padding: 2rem 1.25rem;
+    text-align: center;
+    color: rgba(250,249,247,0.35);
+    font-size: 0.875rem;
+    font-style: italic;
+}
+.search-footer {
+    padding: 0.625rem 1.25rem;
+    border-top: 1px solid rgba(201,169,98,0.1);
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+.search-footer span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.5625rem;
+    letter-spacing: 0.06em;
+    color: rgba(250,249,247,0.25);
+}
+.search-footer kbd {
+    background: rgba(250,249,247,0.06);
+    border: 1px solid rgba(250,249,247,0.1);
+    padding: 0.1rem 0.3rem;
+    border-radius: 2px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.5rem;
+    color: rgba(250,249,247,0.4);
+}
+
+/* ─────────────────────────────────────────────
+   NAV ACTIVE STATE (scroll tracking)
+   ───────────────────────────────────────────── */
+.nav-item.nav-active {
+    color: var(--accent) !important;
+    font-weight: 600;
+}
+.nav-item.nav-active::after {
+    transform: scaleX(1) !important;
+}
     </style>
 </head>
 <body>
@@ -2889,6 +3083,9 @@
                     <span class="role-pill-x" title="Clear role">&#x2715;</span>
                 </a>
             </div>
+            <button class="search-trigger" id="searchTrigger" onclick="openSearch()" aria-label="Search site">
+                &#x2315; Search &nbsp;<kbd>⌘K</kbd>
+            </button>
             <nav aria-label="Main navigation">
                 <ul class="nav-links" id="nav-links">
                     <li><a href="#intro" class="nav-item active">The Idea</a></li>
@@ -2897,7 +3094,10 @@
                     <li><a href="#depths" class="nav-item">The Interior</a></li>
                     <li><a href="#mental-models" class="nav-item">Mental Models</a></li>
                     <li><a href="#implementation" class="nav-item">In Action</a></li>
+                    <li><a href="#evaluation" class="nav-item">Accountability</a></li>
                     <li><a href="#case-studies" class="nav-item">Evidence</a></li>
+                    <li><a href="#spectrum" class="nav-item">Maturity</a></li>
+                    <li><a href="#diagnostic" class="nav-item">Self-Assessment</a></li>
                     <li><a href="#voices" class="nav-item">Thought Leaders</a></li>
                     <li><a href="#organisations" class="nav-item">Organisations</a></li>
                     <li><a href="#resources" class="nav-item">Library</a></li>
@@ -3012,6 +3212,15 @@
         </div>
 
     </div>
+
+        <p style="margin-top:1rem; font-size:0.8125rem; color:var(--text-muted); text-align:center;">
+            <a href="#diagnostic" onclick="scrollToSection('#diagnostic'); return false;" 
+               style="color:var(--accent); text-decoration:none; font-weight:500; font-size:0.8125rem;">
+                → Skip ahead: take the Self-Assessment (section 10)
+            </a>
+            &nbsp;&middot;&nbsp;
+            <span style="color:rgba(201,169,98,0.5);">tells you whether your system is ready for orchestration</span>
+        </p>
 </div>
 
 <div class="content-block">
@@ -4338,14 +4547,10 @@
 
 
         <section id="mental-models">
-            <div class="section-header">
-                <div class="section-number">05</div>
-                <div>
-                    <h1 class="section-title">Mental Models</h1>
-                    <p class="section-subtitle">The conceptual toolkit for thinking about complex systems  -  50 models from ecology, game theory, network science, economics, political philosophy, cognitive psychology, and complexity</p>
-                </div>
-            </div>
             <div class="container">
+                <span class="section-eyebrow">05 / Mental Models</span>
+                <h1 class="section-title">The Conceptual Toolkit</h1>
+                <p class="section-intro">50 mental models drawn from ecology, game theory, network science, economics, political philosophy, cognitive psychology, and complexity theory. Each explained from first principles  -  the underlying logic before the application. Click any card to expand the full explanation and practitioner application. Filter by role to see what matters most to your work.</p>
                 <div class="content-block">
                     <p class="mm-intro">Systems orchestration draws on ideas from ecology, game theory, network science, evolutionary biology, economics, and cognitive psychology. These 22 mental models are the conceptual infrastructure that practitioners and funders find most practically useful. Each is explained from first principles - the underlying logic before the application - because a model you understand deeply is more useful than a model you can only cite. Click any card to expand the full explanation and practitioner application.</p>
 
@@ -6362,7 +6567,7 @@
 
                 <!-- TAXONOMY -->
                 <div class="content-block">
-                    <h2>Seven Types of Orchestrator</h2>
+                    <h2>Seven Types of Orchestrator  -  A Global Survey</h2>
                     <p>Not all orchestrators look the same. The field uses a dozen different names for what is effectively the same function. This taxonomy maps the range  -  from explicit backbone organisations to de-facto orchestrators who have never used the word.</p>
                     <div class="taxonomy-grid">
                         <div class="taxonomy-card">
@@ -6937,6 +7142,137 @@
                     <div class="org-keywords"><span class="org-keyword">Asia ecosystem</span><span class="org-keyword">Social investment</span><span class="org-keyword">Field catalysts</span><span class="org-keyword">Climate x health</span><span class="org-keyword">Unusual alliances</span></div>
                 </div>
 
+
+                <!-- THE ECF FAMILY TREE -->
+                <div class="content-block" style="margin-top:3.5rem;">
+                    <h2 class="with-rule" style="max-width:none; width:100%;">A Global Pattern: The Regional Climate Foundation Family</h2>
+                    <p style="max-width:none; width:100%; margin-bottom:1.5rem;">One of the most striking findings in mapping global orchestration is a coherent replication pattern: the European Climate Foundation has directly inspired or spawned a family of regional equivalents, each deploying the same backbone model - grantmaking, strategy development, and cross-border convening - in a different geography. This family represents the strongest global evidence that the backbone architecture is not culturally specific. It travels.</p>
+                    <div class="org-grid">
+
+                        <div class="org-card">
+                            <div class="org-card-header">
+                                <div><div class="org-name">European Climate Foundation (ECF)</div><div style="margin-top:0.3rem;color:var(--text-muted);font-size:0.875rem;">The Hague · Est. 2008 · The original model</div></div>
+                                <span class="org-tag">Regional Climate Backbone</span>
+                            </div>
+                            <div class="org-body">
+                                <p>The original European regional climate foundation - the model that iCS Brazil, ACF, and Tara Climate were each explicitly built on. ECF provides grants to 500+ partner organisations across Europe and beyond, develops regional climate strategy, and convenes funders and civil society across borders. Its model has three roles: funding, strategy, and convening. The convening function is structurally central: ECF coordinates among philanthropies, between civil society and policymakers, and within the network of its grantees. The ClimateWorks Funders Table, which coordinated the establishment of both ACF and supported iCS, drew on ECF's model. As the originator, ECF is the proof of concept from which a global family of regional backbones has emerged.</p>
+                                <div class="org-keywords"><span class="org-keyword">Regional backbone original</span><span class="org-keyword">Funder coordination</span><span class="org-keyword">500+ grantees</span><span class="org-keyword">Family model origin</span></div>
+                            </div>
+                        </div>
+
+                        <div class="org-card">
+                            <div class="org-card-header">
+                                <div><div class="org-name">Instituto Clima e Sociedade (iCS)</div><div style="margin-top:0.3rem;color:var(--text-muted);font-size:0.875rem;">Rio de Janeiro, Brazil · Est. 2015 · 40+ international funders</div></div>
+                                <span class="org-tag">Regional Climate Backbone</span>
+                            </div>
+                            <div class="org-body">
+                                <p>Brazil's ECF equivalent, established the same year as the Paris Agreement. iCS operates as a bridge between international and national funders and local partners - the classic re-granting backbone function. It explicitly aims to enable the conditions and architecture for society and decision makers to make informed choices rather than delivering solutions directly. In 2024/25, iCS led the BRB Finance Coalition (US$5.37 billion in commitments for forest restoration and bioeconomy) and co-hosted the Brazil Climate Action Hub at COP30. Its three-role model mirrors ECF: grants, strategy development, and convening - "building bridges between different sectors, and promoting dialogues and exchanges between ecosystems, seeking to reduce the approaches of working in silos." iCS was one of the explicit models on which the African Climate Foundation was built.</p>
+                                <div class="org-keywords"><span class="org-keyword">Brazil climate backbone</span><span class="org-keyword">Re-granting intermediary</span><span class="org-keyword">Paris Agreement origins</span><span class="org-keyword">Funder-to-local bridge</span></div>
+                            </div>
+                        </div>
+
+                        <div class="org-card">
+                            <div class="org-card-header">
+                                <div><div class="org-name">African Climate Foundation (ACF)</div><div style="margin-top:0.3rem;color:var(--text-muted);font-size:0.875rem;">Cape Town, South Africa · Est. April 2020 · Active across 6+ African countries</div></div>
+                                <span class="org-tag">Regional Climate Backbone</span>
+                            </div>
+                            <div class="org-body">
+                                <p>Africa's first African-led strategic climate change grant-making foundation - established through Funders Table discussions coordinated by ClimateWorks Foundation and CIFF, explicitly modelled on ECF and iCS Brazil. ACF identifies anchor grantees in each country to "convene key stakeholders and get projects off the ground quickly" - a classic backbone architecture for a continent where orchestration infrastructure is still being built. ACF co-hosted the platform through which philanthropies committed $500M to accelerate a just energy transition in Africa, supported the development of the RIPLE platform under ReNew2030, and has developed what it calls a "distinctly African approach to climate and development - one deeply attuned to the continent's needs." Leadership: Executive Director Saliem Fakir. Funders include Rockefeller Foundation ($10.9M+ announced at COP29), Gates Foundation, and IKEA Foundation.</p>
+                                <div class="org-keywords"><span class="org-keyword">Africa-led field-building</span><span class="org-keyword">Re-granting backbone</span><span class="org-keyword">Country-level anchor grantees</span><span class="org-keyword">ECF family member</span></div>
+                            </div>
+                        </div>
+
+                        <div class="org-card">
+                            <div class="org-card-header">
+                                <div><div class="org-name">Tara Climate Foundation</div><div style="margin-top:0.3rem;color:var(--text-muted);font-size:0.875rem;">Singapore · Est. 2021, independent 2022 · 12+ international funders</div></div>
+                                <span class="org-tag">Regional Climate Backbone</span>
+                            </div>
+                            <div class="org-body">
+                                <p>Asia's ECF equivalent - an ECF spinoff that became an independent foundation in 2022 with ECF's full backing and a dozen international philanthropic funders. Tara covers Southeast Asia, East Asia (excluding China), and South Asia (excluding India) - the geography most directly complementary to this site's South Asian focus. It explicitly plays three roles: providing grants to hundreds of civil society and research organisations, developing and assessing regional climate strategy, and convening partners within and across borders. The convening function is structurally central. Board Chair Sze Ping Lo (Sequoia Climate Foundation); board member Sonia Medina is CIFF's Chief Ecosystem Development Officer - placing Tara at the intersection of three organisations already documented on this site. Partner in ReNew2030 (Audacious Project) for renewable energy access across Asia and Africa.</p>
+                                <div class="org-keywords"><span class="org-keyword">Asia climate backbone</span><span class="org-keyword">ECF family member</span><span class="org-keyword">Cross-border convening</span><span class="org-keyword">Southeast and East Asia</span></div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="definition-box" style="margin-top:1.5rem; border-left:3px solid var(--accent);">
+                        <p><strong style="font-family:'Fraunces',serif;">The pattern:</strong> Each regional climate foundation was established through a deliberate act of infrastructure design - not by a single funder acting alone but through coordination between established actors (ECF, ClimateWorks, CIFF) who recognised that a regional backbone was missing and created the conditions for one to emerge. The sequencing is consistent: diagnosis of a coordination gap, seed capital from established funders, explicit adoption of the three-role model (grants + strategy + convening), and gradual independence. The ECF family is the clearest global evidence that backbone organisations are not historically contingent accidents. They are a replicable architecture.</p>
+                    </div>
+                </div>
+
+                <!-- GLOBAL FIELD CATALYSTS AND NEW ADDS -->
+                <div class="content-block" style="margin-top:3.5rem;">
+                    <h2 class="with-rule" style="max-width:none; width:100%;">Field-Builders and Ecosystem Catalysts: Latin America</h2>
+                    <p style="max-width:none; width:100%; margin-bottom:1.5rem;">Latin America has developed a distinct tradition of field-building philanthropy - rooted in movements for democracy, land rights, and environmental justice. These organisations sit at the intersection of philanthropy infrastructure and civil society backbone, building the ecosystem conditions rather than delivering programmes.</p>
+                    <div class="org-grid">
+
+                        <div class="org-card">
+                            <div class="org-card-header">
+                                <div><div class="org-name">Instituto Beja</div><div style="margin-top:0.3rem;color:var(--text-muted);font-size:0.875rem;">Rio de Janeiro, Brazil · Est. December 2021 · Founder: Cristiane Sultani</div></div>
+                                <span class="org-tag">Philanthropy Ecosystem Builder</span>
+                            </div>
+                            <div class="org-body">
+                                <p>Founded with an explicit mission to catalyse the philanthropy ecosystem in Brazil rather than deliver programmes itself. Instituto Beja's three pillars are Knowledge, Advocacy, and Collaboration - each oriented toward strengthening the institutional architecture around civil society rather than funding civil society directly. CEO Celia Cruz (former Ashoka Brazil, former Executive Director of ICE) describes the approach: "identifying actors with the capacity to create change - accelerator incubators, government, philanthropy and corporations - and building a collaboration of funders committed to a five-year effort to provide long-term capital." This resulted in a coalition of 11 funders. Beja is the Brazilian hub of the Centre for Exponential Change (C4EC), connecting it to the global Skoll ecosystem. Its "Philantropando" initiative convenes 20+ philanthropists annually. Partnership with Luminate on digital rights reflects its cross-sector coordination role. "Territorial diversity is key to strengthening the field."</p>
+                                <div class="org-keywords"><span class="org-keyword">Philanthropy ecosystem building</span><span class="org-keyword">Funder coalition</span><span class="org-keyword">Brazil field-building</span><span class="org-keyword">C4EC Brazil hub</span></div>
+                            </div>
+                        </div>
+
+                        <div class="org-card">
+                            <div class="org-card-header">
+                                <div><div class="org-name">Fundación Avina</div><div style="margin-top:0.3rem;color:var(--text-muted);font-size:0.875rem;">Panama City · Est. 1994 · Active in 14 Latin American countries</div></div>
+                                <span class="org-tag">Regional Backbone / Broker</span>
+                            </div>
+                            <div class="org-body">
+                                <p>30 years of orchestration practice across Latin America - the most experienced backbone actor in the region. Avina describes itself as a "broker, co-investor and facilitator" - language that maps precisely onto systems orchestration theory. Its proprietary CollaborAction methodology provides a structured approach to multi-sector coordination. Avina works across 14 countries on climate, democracy, and sustainable economies, consistently choosing to facilitate relationships between actors rather than become a delivery organisation. Connected to the Luminate/OSF civic technology ecosystem in Latin America through co-founding the Latin American Alliance for Civic Technology. One of the few organisations in the Global South with a multi-decade institutional memory of what makes cross-sector coordination work and what makes it fail.</p>
+                                <div class="org-keywords"><span class="org-keyword">CollaborAction methodology</span><span class="org-keyword">Multi-sector broker</span><span class="org-keyword">30 years practice</span><span class="org-keyword">14 countries</span></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- DIGITAL PUBLIC INFRASTRUCTURE AS ORCHESTRATION -->
+                <div class="content-block" style="margin-top:3.5rem;">
+                    <h2 class="with-rule" style="max-width:none; width:100%;">Digital Public Infrastructure as Coordination Architecture</h2>
+                    <p style="max-width:none; width:100%; margin-bottom:1.5rem;">Beyond social sector organisations, some of the most significant coordination-without-authority work of the past two decades has been done through digital public infrastructure - shared open-source platforms that function as coordination layers across otherwise fragmented systems. These are not technology stories. They are Ostrom's Commons applied to digital infrastructure: shared resources, governed through collective design, available to all without central ownership. The principles that make them work are exactly the principles that make backbone organisations work.</p>
+                    <div class="org-grid">
+
+                        <div class="org-card">
+                            <div class="org-card-header">
+                                <div><div class="org-name">DHIS2  -  District Health Information System</div><div style="margin-top:0.3rem;color:var(--text-muted);font-size:0.875rem;">University of Oslo · 80+ countries · 40% of world population</div></div>
+                                <span class="org-tag">Digital Coordination Layer</span>
+                            </div>
+                            <div class="org-body">
+                                <p>The world's largest health information management platform, reaching 3.2 billion people across more than 75 low- and middle-income countries - 69 of which have deployed it at national scale. DHIS2 functions as shared measurement infrastructure: creating a common data ledger across otherwise fragmented health systems, enabling coordination without requiring shared governance. No single actor controls it; no country can be locked out. The HISP community of practice that maintains it is itself an orchestration infrastructure - distributing expertise rather than centralising it. South-South knowledge transfer is structurally embedded: Eswatini implementing DHIS2 for education received direct support from Uganda and Mozambique. Supported by Norad, PEPFAR, UNICEF, Gates Foundation, and WHO as an official Collaborating Centre. In 2025, DHIS2-MOSIP interoperability was confirmed - marking the emergence of a connected DPI ecosystem.</p>
+                                <div class="org-keywords"><span class="org-keyword">Shared measurement infrastructure</span><span class="org-keyword">Open-source coordination</span><span class="org-keyword">3.2B people reached</span><span class="org-keyword">South-South knowledge transfer</span></div>
+                            </div>
+                        </div>
+
+                        <div class="org-card">
+                            <div class="org-card-header">
+                                <div><div class="org-name">MOSIP  -  Modular Open Source Identity Platform</div><div style="margin-top:0.3rem;color:var(--text-muted);font-size:0.875rem;">IIIT-Bangalore · Est. 2018 · 100M+ IDs issued across 11 countries</div></div>
+                                <span class="org-tag">Digital Coordination Layer</span>
+                            </div>
+                            <div class="org-body">
+                                <p>Open-source digital identity infrastructure that allows countries to build and own sovereign national ID systems without proprietary lock-in. MOSIP is modular - countries adopt the components they need, configure for their context, and retain full control. Philippines (79M+ registered through PhilSys), Ethiopia (77,000+ refugees via UNHCR), Morocco, and 8 other countries are live at national scale. The MOSIP community is an open governance architecture for shared infrastructure that no single actor controls - Ostrom's eight design principles applied to digital identity. Its 2025 collaboration with DHIS2 to create interoperability between identity and health systems marks the beginning of a connected DPI stack. Created by IIIT-Bangalore with support from Omidyar Network and the Bill and Melinda Gates Foundation.</p>
+                                <div class="org-keywords"><span class="org-keyword">Sovereign digital identity</span><span class="org-keyword">Open governance architecture</span><span class="org-keyword">100M+ IDs</span><span class="org-keyword">Country-owned infrastructure</span></div>
+                            </div>
+                        </div>
+
+                        <div class="org-card">
+                            <div class="org-card-header">
+                                <div><div class="org-name">GovStack Initiative</div><div style="margin-top:0.3rem;color:var(--text-muted);font-size:0.875rem;">Led by ITU, GIZ, Estonia, Digital Impact Alliance · Active in 8+ countries</div></div>
+                                <span class="org-tag">DPI Meta-Backbone</span>
+                            </div>
+                            <div class="org-body">
+                                <p>The coordination layer above individual digital public goods - a multi-stakeholder initiative that provides a blueprint for governments to assemble national digital infrastructure from certified interoperable components rather than building from scratch. GovStack maintains a curated marketplace (GovMarket) and sets standards for building blocks across identity (MOSIP), data exchange (X-Road), health data (DHIS2), payments, and registries. Countries such as Estonia, India, and Singapore contribute lessons; the GovTest sandbox enables testing. DHIS2 was listed on GovMarket in 2025, accelerating its integration into national DPI stacks. GovStack's approach is polycentric governance in practice: multiple overlapping authorities (ITU, GIZ, Estonia, country governments) coordinating without hierarchy to produce shared standards.</p>
+                                <div class="org-keywords"><span class="org-keyword">DPI standards backbone</span><span class="org-keyword">Interoperability architecture</span><span class="org-keyword">Building blocks framework</span><span class="org-keyword">Multi-stakeholder standards</span></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
                 <!-- PHILANTHROPY FOR ORCHESTRATION -->
                 <div class="content-block" style="margin-top:3.5rem;">
                     <h2 class="with-rule" style="max-width:none; width:100%;">Funders Who Explicitly Back Systems Orchestration</h2>
@@ -7025,6 +7361,83 @@
 
                     </div>
                 </div>
+
+                        <div class="org-card">
+                            <div class="org-card-header">
+                                <div><div class="org-name">William &amp; Flora Hewlett Foundation</div><div style="margin-top:0.3rem;color:var(--text-muted);font-size:0.875rem;">Menlo Park, California · Est. 1966 · Assets $13.9B</div></div>
+                                <span class="org-tag">Backbone Funder</span>
+                            </div>
+                            <div class="org-body">
+                                <p>One of the world's most strategically sophisticated backbone funders. Hewlett co-founded ClimateWorks Foundation (pledging $1B with Packard and McKnight), created the Madison Initiative ($50M+ for US democracy infrastructure), and runs an Organizational Effectiveness program that provides targeted capacity grants to its grantees - treating the strengthening of its partners as a legitimate investment rather than overhead. Its Effective Philanthropy Program explicitly funds philanthropic infrastructure organisations as a class. The strategy states directly: "Infrastructure organizations form a much-needed backbone for work on our most critical global challenges." Hewlett's approach emphasises long-term support, collaboration, and trust - multi-year flexible funding as a structural commitment, not a concession. In 2024, it distributed $631M across ~3,000 active grants.</p>
+                                <div class="org-keywords"><span class="org-keyword">Long-term flexible funding</span><span class="org-keyword">Infrastructure investment</span><span class="org-keyword">Backbone capacity grants</span><span class="org-keyword">Philanthropic sector building</span></div>
+                            </div>
+                        </div>
+
+                        <div class="org-card">
+                            <div class="org-card-header">
+                                <div><div class="org-name">Bloomberg Philanthropies / C40 Cities</div><div style="margin-top:0.3rem;color:var(--text-muted);font-size:0.875rem;">New York · $3.7B distributed in 2024 · 97 cities</div></div>
+                                <span class="org-tag">Urban Coordination Backbone</span>
+                            </div>
+                            <div class="org-body">
+                                <p>The world's most extensive city-level backbone architecture, operating at a scale no other actor matches. Bloomberg Philanthropies is the primary strategic funder of C40 Cities (97 cities representing one-quarter of global GDP), the Global Covenant of Mayors, Bloomberg Cities Network, What Works Cities certification (104 cities), and the Bloomberg Harvard City Leadership Initiative (40 mayors per year). The model: create shared infrastructure (peer learning, measurement, technical assistance, political voice amplification) that allows 97 cities to act more ambitiously than any could alone. C40 does not implement climate policy - it reduces the transaction costs of coordination across city governments. Bloomberg also committed over $770M to advance local climate progress and in 2025 pledged to fill the gap left by the US withdrawal from the Paris Agreement - demonstrating the backbone function of stepping in when a structural node disappears.</p>
+                                <div class="org-keywords"><span class="org-keyword">City network coordination</span><span class="org-keyword">Peer learning infrastructure</span><span class="org-keyword">Backbone-of-backbones</span><span class="org-keyword">Subnational climate leadership</span></div>
+                            </div>
+                        </div>
+
+                        <div class="org-card">
+                            <div class="org-card-header">
+                                <div><div class="org-name">The Audacious Project</div><div style="margin-top:0.3rem;color:var(--text-muted);font-size:0.875rem;">Housed at TED · Est. 2018 · $7.6B catalysed across 70 projects</div></div>
+                                <span class="org-tag">Philanthropic Intermediary</span>
+                            </div>
+                            <div class="org-body">
+                                <p>The purest intermediary orchestrator in global philanthropy. Audacious provides no direct funding - it coordinates multiple funders (including MacKenzie Scott, Skoll, Gates Foundation, MacArthur, ELMA) around bold bets by using TED's curation and storytelling to remove transaction costs from funder decision-making, and the pooled architecture to remove duplication from grantee fundraising. Over eight years, the donor community committed $4.6B for 70 projects; grantees subsequently leveraged an additional $3B from other funders - catalysing $7.6B total. This leverage ratio is evidence that the intermediary function creates value that direct giving does not. Supported by Bridgespan Group as backbone advisory infrastructure, Audacious demonstrates that an organisation can sit in the structural hole between bold ideas and dispersed capital without owning either side.</p>
+                                <div class="org-keywords"><span class="org-keyword">Pooled philanthropy</span><span class="org-keyword">Curation and convening</span><span class="org-keyword">Intermediary orchestration</span><span class="org-keyword">Funder coordination</span></div>
+                            </div>
+                        </div>
+
+                        <div class="org-card">
+                            <div class="org-card-header">
+                                <div><div class="org-name">The Sunrise Project</div><div style="margin-top:0.3rem;color:var(--text-muted);font-size:0.875rem;">Sydney/Global · Est. 2013 · Re-grants ~two-thirds of revenue</div></div>
+                                <span class="org-tag">Movement Backbone / Directed Network</span>
+                            </div>
+                            <div class="org-body">
+                                <p>The clearest articulation of a backbone architecture for social movements that exists in climate philanthropy. Sitting at the intersection of social movements and philanthropy, Sunrise has developed what it calls a "directed network model" - supporting networks of people and organisations to work together to achieve large-scale change that wouldn't have been possible by individual organisations acting alone. It re-grants approximately two-thirds of its revenue while coordinating strategy across grantees. Sunrise is not a grantmaker, not a campaign organisation, and not an advocacy body - it is the coordination infrastructure between all three. Its self-description: "We prioritise enabling others to do their best work rather than trying to do it ourselves." Current programmes focus on transforming Australia's climate ambition and shifting global finance out of fossil fuels. The directed network model is the movement equivalent of a collective impact backbone.</p>
+                                <div class="org-keywords"><span class="org-keyword">Directed network model</span><span class="org-keyword">Movement backbone</span><span class="org-keyword">Re-granting infrastructure</span><span class="org-keyword">Strategy coordination</span></div>
+                            </div>
+                        </div>
+
+                        <div class="org-card">
+                            <div class="org-card-header">
+                                <div><div class="org-name">MacKenzie Scott / Yield Giving</div><div style="margin-top:0.3rem;color:var(--text-muted);font-size:0.875rem;">Seattle · $19B+ donated to 2,000+ organisations since 2019</div></div>
+                                <span class="org-tag">Trust-Based Funder</span>
+                            </div>
+                            <div class="org-body">
+                                <p>The world's most significant live experiment in what happens when backbone organisations and field catalysts receive large, unrestricted grants without compliance overhead. Scott's model - no applications, no reporting requirements, organisations self-disclose receipt - is the most radical test of the Overjustification Effect in philanthropy at scale. Centre for Effective Philanthropy research found that more than 90% of recipient organisations reported her funding "has or will strengthen long-term financial sustainability" - and that nonprofits used the funds to expand programming, build cash reserves, and give staff raises. The finding most relevant to orchestration theory: funders who expressed concern about nonprofits' ability to handle unrestricted funding consistently exempted their own grantees. The constraint was not capability but trust. In 2024, Yield Giving's open call awarded $640M to 361 organisations, with a clear preference for systems change over direct service.</p>
+                                <div class="org-keywords"><span class="org-keyword">Trust-based philanthropy</span><span class="org-keyword">Unrestricted funding</span><span class="org-keyword">Systems change preference</span><span class="org-keyword">Compliance-free grantmaking</span></div>
+                            </div>
+                        </div>
+
+                        <div class="org-card">
+                            <div class="org-card-header">
+                                <div><div class="org-name">Quadrature Climate Foundation (QCF)</div><div style="margin-top:0.3rem;color:var(--text-muted);font-size:0.875rem;">London · Est. 2019 · $1B+ committed · Up to $325M annually</div></div>
+                                <span class="org-tag">Science-Led Funder</span>
+                            </div>
+                            <div class="org-body">
+                                <p>QCF's approach is the Theory of Constraints applied to climate philanthropy. An internal science team leads evidence reviews to identify systemic bottlenecks, then funds ecosystems of grantees to unlock them - rather than making individual grants. After a 2023 strategic review, QCF shifted from individual grants toward "supporting whole ecosystems of grantees that can leverage each other and the Foundation to unlock full system change." Its partnership with ClimateWorks through the Adaptation and Resilience Collaborative (~60 funders) demonstrates multi-funder coordination without authority. CEO Jess Ayers: "Our grantees work together across science, innovation, policy, finance, and social movements to identify and unlock the bottlenecks to the most urgent climate solutions." QCF sits at the intersection of science-led grantmaking and portfolio orchestration - a funder that is learning to orchestrate rather than simply grant.</p>
+                                <div class="org-keywords"><span class="org-keyword">Bottleneck identification</span><span class="org-keyword">Ecosystem grantmaking</span><span class="org-keyword">Science-led strategy</span><span class="org-keyword">Portfolio coordination</span></div>
+                            </div>
+                        </div>
+
+                        <div class="org-card">
+                            <div class="org-card-header">
+                                <div><div class="org-name">Wellcome Trust</div><div style="margin-top:0.3rem;color:var(--text-muted);font-size:0.875rem;">London · Est. 1936 · £1.9B annual expenditure</div></div>
+                                <span class="org-tag">Science-Philanthropy Backbone</span>
+                            </div>
+                            <div class="org-body">
+                                <p>One of the world's largest non-governmental funders of science and a significant backbone actor for global health research infrastructure. Wellcome's distinctive orchestration contribution: building the political coalition architecture around science. They co-developed the UK's case for a 30% increase in WHO funding with the Gates Foundation, demonstrating how major funders can exercise collective voice as a coordination function rather than competing for influence. In 2024/25, Wellcome launched the Climate and Health Funders Coalition at COP30 - uniting Bloomberg Philanthropies, CIFF, Gates Foundation, IKEA Foundation, QCF, Rockefeller Foundation, and Philanthropy Asia Alliance around a shared agenda for climate-health solutions. This coalition is itself an orchestration story: funders of systems change work becoming coordinated themselves. "Science alone doesn't change the world. At Wellcome, we combine discovery with equity and action."</p>
+                                <div class="org-keywords"><span class="org-keyword">Research infrastructure backbone</span><span class="org-keyword">Funder coalition building</span><span class="org-keyword">Science-to-policy bridge</span><span class="org-keyword">Climate and health nexus</span></div>
+                            </div>
+                        </div>
 
                 <!-- CROSS-CUTTING PATTERNS -->
                 <div class="content-block" style="margin-top:3.5rem;">
@@ -8760,7 +9173,269 @@ function toggleModel(card) {
     if (!wasOpen) card.classList.add('mmc-expanded');
 }
 
+
+// ════════════════════════════════════════════════════════════════
+//  SITE SEARCH
+// ════════════════════════════════════════════════════════════════
+var searchIndex = [];
+var searchFocusIdx = -1;
+
+function buildSearchIndex() {
+    var sections = [
+        {id:'intro',         label:'01 / The Idea'},
+        {id:'core-concepts', label:'02 / The Concept'},
+        {id:'frameworks',    label:'03 / The Practice'},
+        {id:'depths',        label:'04 / The Interior'},
+        {id:'mental-models', label:'05 / Mental Models'},
+        {id:'implementation',label:'06 / In Action'},
+        {id:'evaluation',    label:'07 / Accountability'},
+        {id:'case-studies',  label:'08 / Evidence'},
+        {id:'spectrum',      label:'09 / Maturity'},
+        {id:'diagnostic',    label:'10 / Self-Assessment'},
+        {id:'voices',        label:'11 / Thought Leaders'},
+        {id:'organisations', label:'12 / Organisations'},
+        {id:'resources',     label:'13 / Library'}
+    ];
+    searchIndex = [];
+    sections.forEach(function(sec) {
+        var el = document.getElementById(sec.id);
+        if (!el) return;
+        // Index headings
+        el.querySelectorAll('h1, h2, h3, h4').forEach(function(h) {
+            var text = h.textContent.trim();
+            if (text.length < 3) return;
+            searchIndex.push({
+                section: sec.id,
+                sectionLabel: sec.label,
+                title: text,
+                excerpt: '',
+                el: h,
+                type: 'heading'
+            });
+        });
+        // Index mental model cards
+        el.querySelectorAll('.mm-card').forEach(function(card) {
+            var nameEl = card.querySelector('.mm-name');
+            var hookEl = card.querySelector('.mm-hook');
+            if (!nameEl) return;
+            searchIndex.push({
+                section: sec.id,
+                sectionLabel: sec.label,
+                title: nameEl.textContent.trim(),
+                excerpt: hookEl ? hookEl.textContent.trim() : '',
+                el: nameEl,
+                type: 'model'
+            });
+        });
+        // Index org cards
+        el.querySelectorAll('.org-name').forEach(function(o) {
+            var orgName = o.textContent.trim();
+            var body = o.closest('.org-card');
+            var excerpt = body ? (body.querySelector('.org-body p') || {}).textContent || '' : '';
+            searchIndex.push({
+                section: sec.id,
+                sectionLabel: sec.label,
+                title: orgName,
+                excerpt: excerpt.substring(0, 200),
+                el: o,
+                type: 'org'
+            });
+        });
+        // Index person cards
+        el.querySelectorAll('.person-name').forEach(function(p) {
+            var name = p.textContent.trim();
+            var card = p.closest('.person-card');
+            var bio = card ? (card.querySelector('.person-bio') || {}).textContent || '' : '';
+            searchIndex.push({
+                section: sec.id,
+                sectionLabel: sec.label,
+                title: name,
+                excerpt: bio.substring(0, 200),
+                el: p,
+                type: 'person'
+            });
+        });
+        // Index mental model cards
+        el.querySelectorAll('.mm-name').forEach(function(m) {
+            var name = m.textContent.trim();
+            var card = m.closest('.mm-card');
+            var hook = card ? (card.querySelector('.mm-hook') || {}).textContent || '' : '';
+            searchIndex.push({
+                section: sec.id,
+                sectionLabel: sec.label,
+                title: name,
+                excerpt: hook,
+                el: m,
+                type: 'model'
+            });
+        });
+    });
+}
+
+function openSearch() {
+    if (!searchIndex.length) buildSearchIndex();
+    var overlay = document.getElementById('searchOverlay');
+    var input = document.getElementById('siteSearchInput');
+    overlay.classList.add('so-open');
+    setTimeout(function() { if (input) input.focus(); }, 60);
+    searchFocusIdx = -1;
+}
+
+function closeSearch() {
+    var overlay = document.getElementById('searchOverlay');
+    var input = document.getElementById('siteSearchInput');
+    overlay.classList.remove('so-open');
+    if (input) input.value = '';
+    document.getElementById('searchResults').innerHTML = '<div class="search-empty">Start typing to search across all 13 sections</div>';
+    searchFocusIdx = -1;
+}
+
+function highlight(text, query) {
+    if (!query) return text;
+    var escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    return text.replace(new RegExp('(' + escaped + ')', 'gi'), '<mark>$1</mark>');
+}
+
+function runSearch(q) {
+    var results = document.getElementById('searchResults');
+    if (!q || q.length < 2) {
+        results.innerHTML = '<div class="search-empty">Start typing to search across all 13 sections</div>';
+        searchFocusIdx = -1;
+        return;
+    }
+    var ql = q.toLowerCase();
+    var matches = searchIndex.filter(function(item) {
+        return item.title.toLowerCase().indexOf(ql) !== -1 ||
+               item.excerpt.toLowerCase().indexOf(ql) !== -1;
+    }).slice(0, 12);
+
+    if (!matches.length) {
+        results.innerHTML = '<div class="search-empty">No results for "' + q + '"</div>';
+        return;
+    }
+
+    results.innerHTML = matches.map(function(m, i) {
+        var excerptHl = m.excerpt ? highlight(m.excerpt.substring(0, 140), q) : '';
+        return '<a class="search-result-item" data-idx="' + i + '" ' +
+               'onclick="jumpToResult(' + i + ')">' +
+               '<span class="sri-section">' + m.sectionLabel + '</span>' +
+               '<span class="sri-title">' + highlight(m.title, q) + '</span>' +
+               (excerptHl ? '<span class="sri-excerpt">' + excerptHl + '&hellip;</span>' : '') +
+               '</a>';
+    }).join('');
+    searchFocusIdx = -1;
+    window._searchMatches = matches;
+}
+
+function jumpToResult(idx) {
+    var match = (window._searchMatches || [])[idx];
+    if (!match) return;
+    closeSearch();
+    setTimeout(function() {
+        match.el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        // Brief highlight
+        match.el.style.transition = 'background 0.3s';
+        match.el.style.background = 'rgba(201,169,98,0.18)';
+        setTimeout(function() { match.el.style.background = ''; }, 1500);
+    }, 200);
+}
+
+function moveSearchFocus(dir) {
+    var items = document.querySelectorAll('.search-result-item');
+    if (!items.length) return;
+    items.forEach(function(el) { el.classList.remove('sri-focused'); });
+    searchFocusIdx = Math.max(0, Math.min(items.length - 1, searchFocusIdx + dir));
+    items[searchFocusIdx].classList.add('sri-focused');
+    items[searchFocusIdx].scrollIntoView({ block: 'nearest' });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Keyboard shortcut Cmd+K / Ctrl+K
+    document.addEventListener('keydown', function(e) {
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+            e.preventDefault();
+            openSearch();
+        }
+        if (e.key === 'Escape') closeSearch();
+        var overlay = document.getElementById('searchOverlay');
+        if (!overlay || !overlay.classList.contains('so-open')) return;
+        if (e.key === 'ArrowDown') { e.preventDefault(); moveSearchFocus(1); }
+        if (e.key === 'ArrowUp')   { e.preventDefault(); moveSearchFocus(-1); }
+        if (e.key === 'Enter') {
+            var focused = document.querySelector('.search-result-item.sri-focused');
+            if (focused) { var idx = parseInt(focused.getAttribute('data-idx')); jumpToResult(idx); }
+        }
+    });
+    // Click outside to close
+    document.getElementById('searchOverlay').addEventListener('click', function(e) {
+        if (e.target === this) closeSearch();
+    });
+    // Input handler
+    var input = document.getElementById('siteSearchInput');
+    if (input) {
+        input.addEventListener('input', function() { runSearch(this.value.trim()); });
+    }
+});
+
+// ════════════════════════════════════════════════════════════════
+//  NAV SCROLL TRACKING  -  "you are here"
+// ════════════════════════════════════════════════════════════════
+(function() {
+    var sectionIds = ['intro','core-concepts','frameworks','depths','mental-models',
+                      'implementation','evaluation','case-studies','spectrum',
+                      'diagnostic','voices','organisations','resources'];
+    var navMap = {};
+    sectionIds.forEach(function(id) {
+        var link = document.querySelector('a.nav-item[href="#' + id + '"]');
+        if (link) navMap[id] = link;
+    });
+
+    function setActive(id) {
+        Object.keys(navMap).forEach(function(k) {
+            navMap[k].classList.toggle('nav-active', k === id);
+            navMap[k].classList.toggle('active', k === id);
+        });
+    }
+
+    if (!window.IntersectionObserver) return;
+    var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                setActive(entry.target.id);
+            }
+        });
+    }, { rootMargin: '-20% 0px -60% 0px', threshold: 0 });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        sectionIds.forEach(function(id) {
+            var el = document.getElementById(id);
+            if (el) observer.observe(el);
+        });
+    });
+})();
+
         </script>
     </main>
+
+    <!-- SITE SEARCH OVERLAY -->
+    <div class="search-overlay" id="searchOverlay" role="dialog" aria-label="Search">
+        <div class="search-modal">
+            <div class="search-input-wrap">
+                <span class="search-icon">&#x2315;</span>
+                <input type="text" id="siteSearchInput" placeholder="Search concepts, organisations, mental models..." 
+                       autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+                <span class="search-close-hint">ESC to close</span>
+            </div>
+            <div class="search-results" id="searchResults">
+                <div class="search-empty">Start typing to search across all 13 sections</div>
+            </div>
+            <div class="search-footer">
+                <span><kbd>&uarr;</kbd><kbd>&darr;</kbd> navigate</span>
+                <span><kbd>&#x23CE;</kbd> open</span>
+                <span><kbd>ESC</kbd> close</span>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
