@@ -225,7 +225,7 @@
         .container { max-width: 1280px; margin: 0 auto; padding: 0 clamp(1.5rem, 4vw, 3rem); }
 
         header {
-            position: fixed; top: 30px; left: 0; width: 100%; z-index: 1000;
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
             background: linear-gradient(110deg, #1a1f3c 0%, #2d3561 45%, #3a2d99 75%, #1a1f3c 100%);
             background-size: 200% 100%;
             border-bottom: 1px solid rgba(201,169,98,0.2);
@@ -247,43 +247,9 @@
             position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
             background: linear-gradient(90deg, transparent 0%, rgba(201,169,98,0.6) 30%, rgba(201,169,98,0.9) 50%, rgba(201,169,98,0.6) 70%, transparent 100%);
         }
-        .header-container { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; max-width: 1400px; margin: 0 auto; }
-        .logo { display: flex; align-items: center; gap: 0.875rem; font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.25rem; color: rgba(255,255,255,0.95); letter-spacing: -0.02em; text-decoration: none; }
-        .logo-text { display: flex; flex-direction: column; gap: 0.2rem; }
-        .logo-name { font-size: 1.375rem; font-weight: 600; color: #ffffff; letter-spacing: -0.02em; line-height: 1.2; }
-        .logo-sub { font-size: 0.75rem; font-weight: 400; font-style: italic; letter-spacing: 0.14em; color: rgba(201,169,98,1); line-height: 1; font-family: 'Fraunces', serif; }
-        .logo-icon {
-            width: 34px; height: 34px;
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-warm) 100%);
-            border-radius: 8px;
-            display: flex; align-items: center; justify-content: center;
-            color: var(--primary); font-size: 1rem; font-weight: 700;
-            box-shadow: 0 2px 10px rgba(201,169,98,0.4);
-        }
-        .nav-links { display: flex; list-style: none; gap: 0.125rem; }
-        .nav-links a {
-            color: rgba(255,255,255,0.82);
-            font-weight: 450; font-size: 0.9375rem;
-            padding: 0.5rem 0.9rem; border-radius: 6px;
-            transition: all var(--duration-fast) var(--ease-out-quart);
-            letter-spacing: 0.01em;
-        }
-        .nav-links a:hover { color: rgba(255,255,255,0.95); background: rgba(255,255,255,0.08); }
-        .nav-links a.active {
-            color: var(--accent);
-            background: rgba(201,169,98,0.12);
-            font-weight: 500;
-        }
-        .mobile-nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; color: rgba(255,255,255,0.8); font-size: 1.5rem; }
-
-        #network-container { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: -1; opacity: 0.04; transition: opacity var(--duration-slow) var(--ease-out-quart); }
-        #network-container.active { opacity: 0.08; }
-        .viz-toggle { position: fixed; bottom: 2rem; right: 2rem; width: 48px; height: 48px; border-radius: 50%; background: var(--white); border: 1px solid var(--border-medium); box-shadow: var(--shadow-lg); cursor: pointer; z-index: 100; display: flex; align-items: center; justify-content: center; transition: all var(--duration-normal) var(--ease-out-quart); color: var(--primary); font-size: 1.25rem; }
-        .viz-toggle:hover { transform: scale(1.05); box-shadow: var(--shadow-xl); background: var(--primary); color: var(--white); border-color: var(--primary); }
-        .skip-link { position: absolute; top: -100%; left: 50%; transform: translateX(-50%); background: var(--primary); color: white; padding: 1rem 2rem; border-radius: 0 0 8px 8px; z-index: 10000; transition: top var(--duration-fast); }
-        .skip-link:focus { top: 0; }
-
-        main { padding-top: 110px; }
+        
+        main { padding-top: 64px; }
+        
         section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: clamp(3rem, 5vw, 4.5rem) 0; position: relative; overflow: hidden; }
         section:nth-child(even) { background: var(--white); }
         section:nth-child(odd) { background: var(--cream); }
@@ -3056,6 +3022,403 @@
 .nav-item.nav-active::after {
     transform: scaleX(1) !important;
 }
+
+/* ══════════════════════════════════════════════════════
+   SITE HEADER  -  Redesigned
+   ══════════════════════════════════════════════════════ */
+#site-header {
+    position: fixed;
+    top: 0; left: 0; width: 100%;
+    z-index: 1000;
+    background: rgba(13, 16, 35, 0.88);
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    border-bottom: 1px solid rgba(201,169,98,0.14);
+    box-shadow: 0 1px 0 rgba(201,169,98,0.06), 0 8px 32px rgba(0,0,0,0.35);
+    transition: background 0.3s ease;
+}
+#site-header.scrolled {
+    background: rgba(10, 13, 28, 0.96);
+    border-bottom-color: rgba(201,169,98,0.2);
+}
+
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    height: 64px;
+}
+
+/* ── Logo ──────────────────────────────────────────── */
+.site-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    flex-shrink: 0;
+    transition: opacity 0.2s;
+}
+.site-logo:hover { opacity: 0.85; }
+
+.logo-glyph {
+    font-size: 1.5rem;
+    color: var(--accent);
+    line-height: 1;
+    filter: drop-shadow(0 0 6px rgba(201,169,98,0.4));
+    transition: filter 0.3s;
+}
+.site-logo:hover .logo-glyph {
+    filter: drop-shadow(0 0 10px rgba(201,169,98,0.65));
+}
+
+.logo-wordmark {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+.logo-primary {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(0.875rem, 1.5vw, 1.0625rem);
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+}
+.logo-secondary {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(201,169,98,0.6);
+    line-height: 1;
+}
+
+/* ── Node Navigation ───────────────────────────────── */
+.node-nav {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex: 1;
+    justify-content: center;
+    min-width: 0;
+}
+
+.node-list {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    list-style: none;
+    padding: 0; margin: 0;
+    flex-wrap: nowrap;
+}
+
+.node-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    padding: 6px 7px;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background 0.15s ease, transform 0.12s ease;
+    position: relative;
+    cursor: pointer;
+}
+.node-btn:hover {
+    background: rgba(201,169,98,0.1);
+    transform: translateY(-1px);
+}
+.node-btn span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.5625rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: rgba(255,255,255,0.38);
+    transition: color 0.15s ease;
+    line-height: 1;
+}
+.node-btn i {
+    display: block;
+    width: 16px;
+    height: 2px;
+    border-radius: 1px;
+    background: rgba(255,255,255,0.12);
+    transition: background 0.15s ease, width 0.2s ease;
+}
+.node-btn:hover span { color: rgba(255,255,255,0.7); }
+.node-btn:hover i    { background: rgba(201,169,98,0.4); }
+
+/* Active state */
+.node-btn.active span { color: var(--accent); font-weight: 700; }
+.node-btn.active i    { background: var(--accent); width: 22px; box-shadow: 0 0 6px rgba(201,169,98,0.6); }
+.node-btn.nav-active span { color: var(--accent); font-weight: 700; }
+.node-btn.nav-active i    { background: var(--accent); width: 22px; box-shadow: 0 0 6px rgba(201,169,98,0.6); }
+
+/* Tooltip */
+.node-tooltip {
+    position: absolute;
+    bottom: -36px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(13,16,35,0.97);
+    border: 1px solid rgba(201,169,98,0.25);
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.5625rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.85);
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+    z-index: 1010;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+}
+.node-tooltip::before {
+    content: '';
+    position: absolute;
+    top: -5px; left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-bottom-color: rgba(201,169,98,0.25);
+    width: 0; height: 0;
+    border-top: none;
+}
+.node-tooltip.tt-show { opacity: 1; }
+
+/* Reading progress line under nodes */
+.node-nav::after {
+    content: '';
+    position: absolute;
+    bottom: -1px; left: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    width: var(--read-progress, 0%);
+    transition: width 0.1s linear;
+    opacity: 0.6;
+}
+
+/* ── Right Controls ─────────────────────────────────── */
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    flex-shrink: 0;
+}
+
+.search-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.75rem;
+    border: 1px solid rgba(201,169,98,0.2);
+    background: rgba(201,169,98,0.05);
+    color: rgba(255,255,255,0.6);
+    border-radius: 5px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.5625rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+}
+.search-btn:hover {
+    border-color: rgba(201,169,98,0.45);
+    background: rgba(201,169,98,0.1);
+    color: rgba(255,255,255,0.9);
+}
+.search-btn svg { opacity: 0.7; flex-shrink: 0; }
+.search-btn kbd {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.5rem;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 1px 4px;
+    border-radius: 3px;
+    color: rgba(255,255,255,0.4);
+    margin-left: 2px;
+}
+
+/* Hamburger */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    padding: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+.hamburger span {
+    display: block;
+    width: 20px;
+    height: 1.5px;
+    background: rgba(255,255,255,0.7);
+    border-radius: 1px;
+    transition: all 0.2s ease;
+}
+.hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
+.hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
+
+/* ── Mobile Drawer ─────────────────────────────────── */
+.mobile-drawer {
+    display: none;
+    position: absolute;
+    top: 64px; left: 0; right: 0;
+    background: rgba(10,13,28,0.98);
+    border-top: 1px solid rgba(201,169,98,0.12);
+    border-bottom: 1px solid rgba(201,169,98,0.12);
+    padding: 1.25rem 2rem 1.5rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.35s ease;
+}
+.mobile-drawer.drawer-open {
+    display: block;
+    max-height: 600px;
+    overflow-y: auto;
+}
+.mobile-nav-list {
+    list-style: none;
+    padding: 0; margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.25rem;
+}
+.mobile-nav-list a {
+    display: block;
+    padding: 0.625rem 0.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.625rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    text-decoration: none;
+    border-radius: 4px;
+    transition: color 0.15s, background 0.15s;
+}
+.mobile-nav-list a:hover {
+    color: var(--accent);
+    background: rgba(201,169,98,0.07);
+}
+
+/* ══════════════════════════════════════════════════════
+   FLOATING CURATOR BADGE
+   ══════════════════════════════════════════════════════ */
+.curator-badge {
+    position: fixed;
+    right: 1.5rem;
+    bottom: 2rem;
+    z-index: 990;
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.5rem 0.875rem 0.5rem 0.5rem;
+    background: rgba(13,16,35,0.92);
+    border: 1px solid rgba(201,169,98,0.22);
+    border-radius: 40px;
+    backdrop-filter: blur(12px);
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.35), 0 0 0 1px rgba(201,169,98,0.06);
+    opacity: 0;
+    transform: translateY(12px) scale(0.95);
+    pointer-events: none;
+}
+.curator-badge.cb-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: all;
+}
+.curator-badge:hover {
+    border-color: rgba(201,169,98,0.45);
+    box-shadow: 0 6px 32px rgba(0,0,0,0.45), 0 0 0 1px rgba(201,169,98,0.15);
+    background: rgba(16,20,42,0.97);
+    transform: translateY(-2px) scale(1.02);
+}
+
+.cb-monogram {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(201,169,98,0.25) 0%, rgba(201,169,98,0.08) 100%);
+    border: 1.5px solid rgba(201,169,98,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Fraunces', serif;
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--accent);
+    flex-shrink: 0;
+    box-shadow: 0 0 8px rgba(201,169,98,0.15);
+}
+
+.cb-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+.cb-role {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.45rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(201,169,98,0.55);
+    line-height: 1;
+}
+.cb-name {
+    font-family: 'Fraunces', serif;
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: rgba(255,255,255,0.85);
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+.curator-badge:hover .cb-name { color: #fff; }
+.curator-badge:hover .cb-role { color: var(--accent); }
+
+/* ══════════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════════ */
+/* Hide word marks at certain breakpoints */
+@media (max-width: 1200px) {
+    .logo-secondary { display: none; }
+    .search-btn span { display: none; }
+    .search-btn { padding: 0.35rem 0.5rem; gap: 0; }
+    .search-btn kbd { display: none; }
+}
+@media (max-width: 1024px) {
+    .node-list { gap: 1px; }
+    .node-btn { padding: 5px 5px; }
+    .node-btn span { font-size: 0.5rem; }
+}
+@media (max-width: 860px) {
+    .node-nav .node-list { display: none; }
+    .hamburger { display: flex; }
+    .node-tooltip { display: none; }
+}
+@media (max-width: 640px) {
+    .header-inner { padding: 0 1rem; gap: 0.75rem; }
+    .logo-primary { font-size: 0.875rem; }
+    .curator-badge { right: 1rem; bottom: 1.5rem; }
+    .mobile-nav-list { grid-template-columns: 1fr; }
+}
+
+/* Remove old topbar space */
+main { padding-top: 64px; }
+body { padding-top: 0; }
+
     </style>
 </head>
 <body>
@@ -3063,47 +3426,95 @@
     <div id="network-container" aria-hidden="true"></div>
     <button class="viz-toggle" id="viz-toggle" aria-label="Toggle network visualization" aria-pressed="false"><span>⟁</span></button>
 
-    <div class="site-topbar" aria-hidden="true">
-        <span class="site-topbar-byline"><em>Curated by&thinsp;</em><a href="https://www.linkedin.com/in/arunabhabhattacharya/" target="_blank" rel="noopener">Arunabha Bhattacharya</a></span>
-    </div>
+    
 
-    <header>
-        <div class="header-container container">
-            <div class="logo">
-                <div class="logo-icon" aria-hidden="true">⟁</div>
-                <div class="logo-text">
-                    <span class="logo-name">Systems Orchestration</span>
-                    <span class="logo-sub">coordination without authority</span>
+        <!-- FLOATING CURATOR BADGE -->
+    <a class="curator-badge" id="curatorBadge"
+       href="https://www.linkedin.com/in/arunabhabhattacharya/"
+       target="_blank" rel="noopener"
+       aria-label="Curated by Arunabha Bhattacharya  -  view LinkedIn profile">
+        <div class="cb-monogram" aria-hidden="true">AB</div>
+        <div class="cb-text">
+            <span class="cb-role">Curated by</span>
+            <span class="cb-name">Arunabha Bhattacharya</span>
+        </div>
+    </a>
+
+<header id="site-header">
+        <div class="header-inner">
+
+            <!-- LOGO -->
+            <a href="#intro" class="site-logo" onclick="scrollToSection('#intro'); return false;" aria-label="Systems Orchestration  -  home">
+                <div class="logo-glyph" aria-hidden="true">⟁</div>
+                <div class="logo-wordmark">
+                    <span class="logo-primary">Systems Orchestration</span>
+                    <span class="logo-secondary">coordination without authority</span>
                 </div>
-            </div>
-            <div class="header-role-slot">
-                <a href="#intro" class="role-pill" id="rolePill" onclick="clearRole(event)">
-                    <span class="role-pill-dot"></span>
-                    <span id="rolePillText">Funder</span>
-                    <span class="role-pill-x" title="Clear role">&#x2715;</span>
-                </a>
-            </div>
-            <button class="search-trigger" id="searchTrigger" onclick="openSearch()" aria-label="Search site">
-                &#x2315; Search &nbsp;<kbd>⌘K</kbd>
-            </button>
-            <nav aria-label="Main navigation">
-                <ul class="nav-links" id="nav-links">
-                    <li><a href="#intro" class="nav-item active">The Idea</a></li>
-                    <li><a href="#core-concepts" class="nav-item">The Concept</a></li>
-                    <li><a href="#frameworks" class="nav-item">The Practice</a></li>
-                    <li><a href="#depths" class="nav-item">The Interior</a></li>
-                    <li><a href="#mental-models" class="nav-item">Mental Models</a></li>
-                    <li><a href="#implementation" class="nav-item">In Action</a></li>
-                    <li><a href="#evaluation" class="nav-item">Accountability</a></li>
-                    <li><a href="#case-studies" class="nav-item">Evidence</a></li>
-                    <li><a href="#spectrum" class="nav-item">Maturity</a></li>
-                    <li><a href="#diagnostic" class="nav-item">Self-Assessment</a></li>
-                    <li><a href="#voices" class="nav-item">Thought Leaders</a></li>
-                    <li><a href="#organisations" class="nav-item">Organisations</a></li>
-                    <li><a href="#resources" class="nav-item">Library</a></li>
-                </ul>
-                <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+            </a>
+
+            <!-- NUMBERED NAV NODES -->
+            <nav class="node-nav" aria-label="Main navigation">
+                <ol class="node-list" id="nodeNavList">
+                    <li><a href="#intro"          class="node-btn active" data-label="The Idea"         onclick="scrollToSection('#intro');return false"><span>01</span><i></i></a></li>
+                    <li><a href="#core-concepts"  class="node-btn"        data-label="The Concept"      onclick="scrollToSection('#core-concepts');return false"><span>02</span><i></i></a></li>
+                    <li><a href="#frameworks"     class="node-btn"        data-label="The Practice"     onclick="scrollToSection('#frameworks');return false"><span>03</span><i></i></a></li>
+                    <li><a href="#depths"         class="node-btn"        data-label="The Interior"     onclick="scrollToSection('#depths');return false"><span>04</span><i></i></a></li>
+                    <li><a href="#mental-models"  class="node-btn"        data-label="Mental Models"    onclick="scrollToSection('#mental-models');return false"><span>05</span><i></i></a></li>
+                    <li><a href="#implementation" class="node-btn"        data-label="In Action"        onclick="scrollToSection('#implementation');return false"><span>06</span><i></i></a></li>
+                    <li><a href="#evaluation"     class="node-btn"        data-label="Accountability"   onclick="scrollToSection('#evaluation');return false"><span>07</span><i></i></a></li>
+                    <li><a href="#case-studies"   class="node-btn"        data-label="Evidence"         onclick="scrollToSection('#case-studies');return false"><span>08</span><i></i></a></li>
+                    <li><a href="#spectrum"       class="node-btn"        data-label="Maturity"         onclick="scrollToSection('#spectrum');return false"><span>09</span><i></i></a></li>
+                    <li><a href="#diagnostic"     class="node-btn"        data-label="Self-Assessment"  onclick="scrollToSection('#diagnostic');return false"><span>10</span><i></i></a></li>
+                    <li><a href="#voices"         class="node-btn"        data-label="Thought Leaders"  onclick="scrollToSection('#voices');return false"><span>11</span><i></i></a></li>
+                    <li><a href="#organisations"  class="node-btn"        data-label="Organisations"    onclick="scrollToSection('#organisations');return false"><span>12</span><i></i></a></li>
+                    <li><a href="#resources"      class="node-btn"        data-label="Library"          onclick="scrollToSection('#resources');return false"><span>13</span><i></i></a></li>
+                </ol>
+                <!-- Tooltip -->
+                <div class="node-tooltip" id="nodeTooltip" aria-hidden="true"></div>
+
+                <!-- Mobile hamburger -->
+                <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
             </nav>
+
+            <!-- RIGHT CONTROLS -->
+            <div class="header-controls">
+                <div class="header-role-slot">
+                    <a href="#intro" class="role-pill" id="rolePill" onclick="clearRole(event)">
+                        <span class="role-pill-dot"></span>
+                        <span id="rolePillText">Funder</span>
+                        <span class="role-pill-x" title="Clear role">&#x2715;</span>
+                    </a>
+                </div>
+                <button class="search-btn" id="searchTrigger" onclick="openSearch()" aria-label="Search">
+                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
+                        <circle cx="6.5" cy="6.5" r="5" stroke="currentColor" stroke-width="1.4"/>
+                        <line x1="10.5" y1="10.5" x2="14" y2="14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+                    </svg>
+                    <span>Search</span>
+                    <kbd>⌘K</kbd>
+                </button>
+            </div>
+        </div>
+
+        <!-- MOBILE DRAWER -->
+        <div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+            <ol class="mobile-nav-list">
+                <li><a href="#intro"          onclick="closeMobileNav();scrollToSection('#intro');return false">01 &mdash; The Idea</a></li>
+                <li><a href="#core-concepts"  onclick="closeMobileNav();scrollToSection('#core-concepts');return false">02 &mdash; The Concept</a></li>
+                <li><a href="#frameworks"     onclick="closeMobileNav();scrollToSection('#frameworks');return false">03 &mdash; The Practice</a></li>
+                <li><a href="#depths"         onclick="closeMobileNav();scrollToSection('#depths');return false">04 &mdash; The Interior</a></li>
+                <li><a href="#mental-models"  onclick="closeMobileNav();scrollToSection('#mental-models');return false">05 &mdash; Mental Models</a></li>
+                <li><a href="#implementation" onclick="closeMobileNav();scrollToSection('#implementation');return false">06 &mdash; In Action</a></li>
+                <li><a href="#evaluation"     onclick="closeMobileNav();scrollToSection('#evaluation');return false">07 &mdash; Accountability</a></li>
+                <li><a href="#case-studies"   onclick="closeMobileNav();scrollToSection('#case-studies');return false">08 &mdash; Evidence</a></li>
+                <li><a href="#spectrum"       onclick="closeMobileNav();scrollToSection('#spectrum');return false">09 &mdash; Maturity</a></li>
+                <li><a href="#diagnostic"     onclick="closeMobileNav();scrollToSection('#diagnostic');return false">10 &mdash; Self-Assessment</a></li>
+                <li><a href="#voices"         onclick="closeMobileNav();scrollToSection('#voices');return false">11 &mdash; Thought Leaders</a></li>
+                <li><a href="#organisations"  onclick="closeMobileNav();scrollToSection('#organisations');return false">12 &mdash; Organisations</a></li>
+                <li><a href="#resources"      onclick="closeMobileNav();scrollToSection('#resources');return false">13 &mdash; Library</a></li>
+            </ol>
         </div>
     </header>
 
@@ -9413,6 +9824,115 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 })();
+
+
+// ════════════════════════════════════════════════════════
+//  NODE NAV  -  tooltip, active tracking, scroll progress
+// ════════════════════════════════════════════════════════
+(function() {
+    var tooltip = document.getElementById('nodeTooltip');
+    var sectionIds = ['intro','core-concepts','frameworks','depths','mental-models',
+                      'implementation','evaluation','case-studies','spectrum',
+                      'diagnostic','voices','organisations','resources'];
+    var nodeMap = {};
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Build node map
+        document.querySelectorAll('.node-btn').forEach(function(btn) {
+            var href = btn.getAttribute('href');
+            if (href) {
+                var id = href.replace('#','');
+                nodeMap[id] = btn;
+            }
+            // Tooltip
+            btn.addEventListener('mouseenter', function() {
+                if (!tooltip) return;
+                var label = this.getAttribute('data-label') || '';
+                tooltip.textContent = label;
+                // Position
+                var btnRect = this.getBoundingClientRect();
+                var navRect = this.closest('.node-nav').getBoundingClientRect();
+                var left = (btnRect.left + btnRect.width/2) - navRect.left;
+                tooltip.style.left = left + 'px';
+                tooltip.style.transform = 'translateX(-50%)';
+                tooltip.classList.add('tt-show');
+            });
+            btn.addEventListener('mouseleave', function() {
+                if (tooltip) tooltip.classList.remove('tt-show');
+            });
+        });
+
+        // Reading progress line
+        function updateProgress() {
+            var doc = document.documentElement;
+            var scrollTop = window.scrollY || doc.scrollTop;
+            var scrollHeight = doc.scrollHeight - doc.clientHeight;
+            var progress = scrollHeight > 0 ? (scrollTop / scrollHeight * 100).toFixed(2) + '%' : '0%';
+            var nav = document.querySelector('.node-nav');
+            if (nav) nav.style.setProperty('--read-progress', progress);
+        }
+        window.addEventListener('scroll', updateProgress, { passive: true });
+        updateProgress();
+
+        // Header scroll shadow
+        var header = document.getElementById('site-header');
+        window.addEventListener('scroll', function() {
+            if (header) header.classList.toggle('scrolled', window.scrollY > 40);
+        }, { passive: true });
+
+        // Curator badge visibility
+        var badge = document.getElementById('curatorBadge');
+        window.addEventListener('scroll', function() {
+            if (badge) badge.classList.toggle('cb-visible', window.scrollY > 120);
+        }, { passive: true });
+
+        // Hamburger / mobile drawer
+        var hamburger = document.getElementById('hamburger');
+        var drawer = document.getElementById('mobileDrawer');
+        if (hamburger && drawer) {
+            hamburger.addEventListener('click', function() {
+                var open = drawer.classList.toggle('drawer-open');
+                hamburger.classList.toggle('open', open);
+                hamburger.setAttribute('aria-expanded', open);
+                drawer.setAttribute('aria-hidden', !open);
+            });
+        }
+    });
+
+    // Scroll tracking  -  update active node
+    var observer;
+    document.addEventListener('DOMContentLoaded', function() {
+        if (!window.IntersectionObserver) return;
+        observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    // Deactivate all
+                    document.querySelectorAll('.node-btn').forEach(function(b) {
+                        b.classList.remove('active','nav-active');
+                    });
+                    // Activate current
+                    var btn = nodeMap[entry.target.id];
+                    if (btn) btn.classList.add('active', 'nav-active');
+                }
+            });
+        }, { rootMargin: '-15% 0px -65% 0px', threshold: 0 });
+
+        sectionIds.forEach(function(id) {
+            var el = document.getElementById(id);
+            if (el) observer.observe(el);
+        });
+    });
+})();
+
+// ════════════════════════════════════════════════════════
+//  MOBILE NAV  -  close on section link click
+// ════════════════════════════════════════════════════════
+function closeMobileNav() {
+    var drawer = document.getElementById('mobileDrawer');
+    var hamburger = document.getElementById('hamburger');
+    if (drawer) { drawer.classList.remove('drawer-open'); drawer.setAttribute('aria-hidden','true'); }
+    if (hamburger) { hamburger.classList.remove('open'); hamburger.setAttribute('aria-expanded','false'); }
+}
 
         </script>
     </main>
