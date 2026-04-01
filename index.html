@@ -160,7 +160,7 @@
             --duration-normal: 0.3s;
             --duration-slow: 0.5s;
             --duration-slower: 0.8s;
-        }
+        
 
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         html { font-size: 16px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
@@ -388,7 +388,7 @@
             width: 100%;
             height: 30px;
             z-index: 1001;
-            background: #0d0f1a;
+            background: #1A1A1A;
             display: flex;
             align-items: center;
             justify-content: flex-end;
@@ -3273,7 +3273,7 @@
     display: none;
     position: absolute;
     top: 64px; left: 0; right: 0;
-    background: rgba(10,13,28,0.98);
+    background: rgba(10, 13, 28, 0.96);
     border-top: 1px solid rgba(201,169,98,0.12);
     border-bottom: 1px solid rgba(201,169,98,0.12);
     padding: 1.25rem 2rem 1.5rem;
@@ -3418,6 +3418,7 @@
 /* Remove old topbar space */
 main { padding-top: 64px; }
 body { padding-top: 0; }
+
 
     </style>
 </head>
@@ -4399,7 +4400,7 @@ body { padding-top: 0; }
 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2.5rem;">
 
-                    <div style="background: var(--primary); border-radius: 16px; padding: 2rem; color: #fff; position: relative; overflow: hidden;">
+                    <div style="background: #1a1f3c; border-radius: 16px; padding: 2rem; color: #fff; position: relative; overflow: hidden;">
                         <div style="position: absolute; top: -20px; right: -20px; font-size: 5rem; opacity: 0.06; line-height: 1;">&#127807;</div>
                         <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.5625rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem;">Mycorrhizal Network</div>
                         <h3 style="font-family: 'Fraunces', serif; font-size: 1.25rem; font-weight: 500; color: #fff; margin: 0 0 0.875rem;">The fungal web beneath forests</h3>
@@ -4449,7 +4450,7 @@ body { padding-top: 0; }
             <div class="container">
                 <span class="section-eyebrow">03 / The Practice</span>
                 <h1 class="section-title">Frameworks Practitioners Use</h1>
-                <p class="section-intro">Frameworks do not tell you what to do. They tell you how to see. The six covered here are not competing alternatives - they are complementary instruments, each illuminating a different dimension of the orchestration challenge. Market Systems Development shows how to facilitate behaviour change across economic actors. Collective Impact shows how to align a bounded coalition. Systems Convening names the day-to-day leadership practice that holds all of it together. Network Weaving provides the operational mechanics of building coordination capacity. Theory U attends to the interior state the orchestrator brings into every room. Inspire-Overtake-Lead maps the political arc of a system transition. A serious practitioner will be fluent in all six, and know which the situation calls for.</p>
+                <p class="section-intro">Frameworks do not tell you what to do. They tell you how to see. The eight covered here are not competing alternatives - they are complementary instruments, each illuminating a different dimension of the orchestration challenge. Market Systems Development shows how to facilitate behaviour change across economic actors. Collective Impact shows how to align a bounded coalition. Systems Convening names the day-to-day leadership practice that holds all of it together. Network Weaving provides the operational mechanics of building coordination capacity. Theory U attends to the interior state the orchestrator brings into every room. Inspire-Overtake-Lead maps the political arc of a system transition. Partnership Brokering examines the micro-level practice of making a specific collaboration work. Value System Stage names the hidden strategic choice every orchestrator must make: which part of the value chain to own, and which to leave to others. A serious practitioner will be fluent in all eight, and know which the situation calls for. Partnership Brokering addresses the question this site is most asked: is it the same as systems orchestration? Value System Stage answers the question funders ask most: which part of the system are you here to own?</p>
 
                 <div class="framework-explorer">
                     <div class="framework-tabs" role="tablist">
@@ -4459,6 +4460,8 @@ body { padding-top: 0; }
                         <div class="framework-tab" data-framework="network-weaving" role="tab" aria-selected="false">Network Weaving</div>
                         <div class="framework-tab" data-framework="theory-u" role="tab" aria-selected="false">Theory U</div>
                         <div class="framework-tab" data-framework="inspire-overtake-lead" role="tab" aria-selected="false">Inspire · Overtake · Lead</div>
+                        <div class="framework-tab" data-framework="partnership-brokering" role="tab" aria-selected="false">Partnership Brokering</div>
+                        <div class="framework-tab" data-framework="value-system-stage" role="tab" aria-selected="false">Value System Stage</div>
                     </div>
 
                     <!-- ══════════ FRAMEWORK 1: MSD ══════════ -->
@@ -4610,50 +4613,142 @@ body { padding-top: 0; }
 
                     <!-- ══════════ FRAMEWORK 3: SYSTEMS CONVENING ══════════ -->
                     <div class="framework-content" id="systems-convening-content" role="tabpanel" aria-hidden="true">
-                        <h2>Systems Convening (Wenger-Trayner, 2021)</h2>
-                        <p>Of all the frameworks in this section, Systems Convening is the one most precisely aimed at the orchestration role itself. Etienne and Beverly Wenger-Trayner's 2021 book names what many orchestrators do without a label and could not fully articulate - and gives them language, legitimacy, and practical guidance for doing it more intentionally.</p>
-                        <p>The core observation: many of the complex challenges facing organisations, communities, and fields today cannot be addressed by a single practice, institution, or sector. They require learning across traditional boundaries - geographic, cultural, disciplinary, political, institutional. The people who make this cross-boundary learning possible are systems conveners. Most of them do not have this title. What they do is rarely in their job description. But they are here - working to make a difference in complex social landscapes.</p>
+                        <h2>Systems Convening <span style="font-size:0.875rem; font-weight:400; color:var(--text-muted);">Wenger-Trayner, 2021</span></h2>
 
-                        <div class="definition-box" style="margin:1.5rem 0;">
-                            <p style="font-size:0.9375rem; font-family:'Fraunces',serif; font-style:italic; color:var(--primary); margin:0;">"Systems conveners look at the social landscape in which they operate - an organization, a big challenge, a city, a community, a field, a country, the world - and they see unrealized potential across traditional boundaries and silos. Their stance is both visionary and pragmatic."</p>
-                            <p style="font-size:0.75rem; color:var(--text-muted); margin:0.75rem 0 0;">Wenger-Trayner, Systems Convening: A crucial form of leadership for the 21st century (2021)</p>
+                        <p>Of all the frameworks in this section, Systems Convening is the one most precisely aimed at the orchestration role itself. Etienne and Beverly Wenger-Trayner's 2021 book names what many orchestrators do without a label and could not fully articulate - and gives them language, legitimacy, and practical guidance for doing it more intentionally. The book itself was brought into being through convening: funders from Lankelly Chase, the Centre for Public Impact, and the Royal Society of Arts were convened by Matthew Mezey and Jenny Oppenheimer to commission it. It models what it describes.</p>
+
+                        <p>The core observation: many of the complex challenges facing organisations, communities, and fields today cannot be addressed by a single practice, institution, or sector. They require learning across traditional boundaries - geographic, cultural, disciplinary, political, institutional. The people who make this cross-boundary learning possible are systems conveners.</p>
+
+                        <div class="definition-box" style="margin: 1.5rem 0;">
+                            <p style="font-size: 0.9375rem; font-family: 'Fraunces', serif; font-style: italic; color: var(--primary); margin: 0 0 0.75rem;">"You may not have heard about them; what they do is rarely in their job description. You may not even be aware of what they do; they tend to act as enablers rather than taking credit or seeking the spotlight. But they are here - working on sustainable change, across challenging silos, in complex social landscapes, amid changing circumstances."</p>
+                            <p style="font-size: 0.75rem; color: var(--text-muted); margin: 0; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.06em; text-transform: uppercase;">Wenger-Trayner, Systems Convening (2021), p. 21</p>
                         </div>
 
-                        <h3>What systems conveners do - seven aspects of the work</h3>
-                        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:0.875rem; margin:1.25rem 0 2rem;">
-                            <div style="background:var(--cream); border:1px solid var(--border-light); border-left:3px solid var(--accent); border-radius:0 10px 10px 0; padding:1.125rem 1.25rem;">
-                                <strong style="color:var(--primary); font-size:0.875rem;">Take a landscape perspective</strong>
-                                <p style="font-size:0.8125rem; color:var(--text-secondary); margin:0.375rem 0 0;">Systems conveners take a wide-angle view of the entire social landscape, not just their own community or organisation. They ask: what is the learning potential of this whole landscape? Where are the unrealised connections?</p>
+                        <h3>The seven dimensions of systems convening work</h3>
+                        <p>Systems convening is not merely a vision or a sense of possible connections. It is work. Wenger-Trayner identify seven dimensions - each requiring different strands of intentionality, often tightly woven together.</p>
+
+                        <div style="display: grid; gap: 0.875rem; margin: 1.25rem 0 2rem;">
+
+                            <div style="background: var(--cream); border: 1px solid var(--border-light); border-left: 3px solid var(--accent); border-radius: 0 10px 10px 0; padding: 1.125rem 1.25rem;">
+                                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.375rem;">Dimension 1</div>
+                                <strong style="color: var(--primary); font-size: 0.9375rem; display: block; margin-bottom: 0.375rem;">Narrative work: crafting a convening call</strong>
+                                <p style="font-size: 0.8375rem; color: var(--text-secondary); margin: 0 0 0.625rem;">An aspirational narrative about the potential to approach a complex problem collaboratively. It is a call to action - an invitation for relevant constituents to take the first step in working together. The convening call has to be solid enough to inspire, but open enough that it can be appropriated and reworked by the people who respond to it.</p>
+                                <p style="font-size: 0.8125rem; color: var(--text-secondary); border-top: 1px solid var(--border-light); padding-top: 0.625rem; margin: 0; font-style: italic;">
+                                    <strong style="font-style: normal; color: var(--primary);">Esther Hall</strong> (NHS Systems Change Specialist, UK): <em>"I had to sing the song before knowing the words."</em>
+                                </p>
+                                <p style="font-size: 0.8125rem; color: var(--text-secondary); margin: 0.375rem 0 0; font-style: italic;">
+                                    <strong style="font-style: normal; color: var(--primary);">Lorna Prescott</strong> (community regeneration, Dudley, UK): <em>"We don't tell people we're doing deep culture change. We ask them what needs repairing in their house."</em>
+                                </p>
+                                <p style="font-size: 0.8125rem; color: var(--text-secondary); margin: 0.375rem 0 0; font-style: italic;">
+                                    <strong style="font-style: normal; color: var(--primary);">Lorna Prescott:</strong> <em>"My funder once asked me, 'Well, what's the vision?' I said, 'I'm not going to tell you what my vision is because that has to be something that is contested, collaborated on. It will be ever-changing and ever-growing.' So right early on in the project I refused to answer that because I'm creating the conditions for a collective vision to emerge."</em>
+                                </p>
                             </div>
-                            <div style="background:var(--cream); border:1px solid var(--border-light); border-left:3px solid var(--accent); border-radius:0 10px 10px 0; padding:1.125rem 1.25rem;">
-                                <strong style="color:var(--primary); font-size:0.875rem;">Create spaces for new conversations</strong>
-                                <p style="font-size:0.8125rem; color:var(--text-secondary); margin:0.375rem 0 0;">They set up spaces for new types of conversations between people who often live on different sides of a boundary. These spaces are not for announcing plans - they are for genuine inquiry across difference.</p>
+
+                            <div style="background: var(--cream); border: 1px solid var(--border-light); border-left: 3px solid var(--accent); border-radius: 0 10px 10px 0; padding: 1.125rem 1.25rem;">
+                                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.375rem;">Dimension 2</div>
+                                <strong style="color: var(--primary); font-size: 0.9375rem; display: block; margin-bottom: 0.375rem;">Legitimacy work: growing a sphere of influence</strong>
+                                <p style="font-size: 0.8375rem; color: var(--text-secondary); margin: 0 0 0.625rem;">A convening call only works to the extent that the convener has enough legitimacy to be listened to. Legitimacy does not come encapsulated in a job title - it is not guaranteed by position or qualification. To be effective, systems conveners must be convincing to multiple constituencies across boundaries and across levels of scale. Legitimacy is ultimately built through persistent commitment to making a difference.</p>
+                                <p style="font-size: 0.8125rem; color: var(--text-secondary); border-top: 1px solid var(--border-light); padding-top: 0.625rem; margin: 0; font-style: italic;">
+                                    <strong style="font-style: normal; color: var(--primary);">Michael Fung-Kee-Fung</strong> (oncologist and convener, Ottawa, Canada): <em>"A lot depends on the authentic articulation of the issue you are trying to bring forth. Things that are driven primarily by organizational quid pro quo endeavors are a little less exciting. It's things that are driven by people who see it as a genuine problem."</em>
+                                </p>
+                                <p style="font-size: 0.8125rem; color: var(--text-secondary); margin: 0.375rem 0 0; font-style: italic;">
+                                    <strong style="font-style: normal; color: var(--primary);">Esther Hall:</strong> <em>"You just constantly offer help. And not asking for anything in return. That's it. No expectation."</em>
+                                </p>
+                                <p style="font-size: 0.8125rem; color: var(--text-secondary); margin: 0.375rem 0 0; font-style: italic;">
+                                    <strong style="font-style: normal; color: var(--primary);">Travis Tennessen</strong> (Community Engagement Fellows, Western Washington University): <em>"They liked what I saw in them and saw why what they were doing is important. Just saying something like 'you have something good to offer.'"</em>
+                                </p>
                             </div>
-                            <div style="background:var(--cream); border:1px solid var(--border-light); border-left:3px solid var(--accent); border-radius:0 10px 10px 0; padding:1.125rem 1.25rem;">
-                                <strong style="color:var(--primary); font-size:0.875rem;">Build legitimacy across worlds</strong>
-                                <p style="font-size:0.8125rem; color:var(--text-secondary); margin:0.375rem 0 0;">Systems convening requires enough legitimacy in different worlds to invite people into a joint learning space. This is cultivated over time, through presence and reliability, not claimed through authority.</p>
+
+                            <div style="background: var(--cream); border: 1px solid var(--border-light); border-left: 3px solid var(--accent); border-radius: 0 10px 10px 0; padding: 1.125rem 1.25rem;">
+                                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.375rem;">Dimension 3</div>
+                                <strong style="color: var(--primary); font-size: 0.9375rem; display: block; margin-bottom: 0.375rem;">Boundary work: convening across silos</strong>
+                                <p style="font-size: 0.8375rem; color: var(--text-secondary); margin: 0 0 0.625rem;">Boundaries are significant features of the social landscape that present both obstacles and opportunities. Systems conveners do not treat boundaries as facts to accept or reject - they treat them as learning opportunities. They navigate a paradox: acknowledging existing boundaries as inherent in the social landscape, while being ready to push, reconfigure, cross, or break them when they stand in the way.</p>
+                                <p style="font-size: 0.8125rem; color: var(--text-secondary); border-top: 1px solid var(--border-light); padding-top: 0.625rem; margin: 0; font-style: italic;">
+                                    <strong style="font-style: normal; color: var(--primary);">Esther Hall:</strong> <em>"It's about bringing together lots of people's truths."</em>
+                                </p>
+                                <p style="font-size: 0.8125rem; color: var(--text-secondary); margin: 0.375rem 0 0; font-style: italic;">
+                                    <strong style="font-style: normal; color: var(--primary);">Matthew Mezey</strong> (Health Foundation, UK): <em>"I'm pushing the edges without falling out. I'm always trying to change the boundary so it doesn't become exclusive. You have to make sure things are loose enough that people feel like they can do something alongside the official members."</em>
+                                </p>
                             </div>
-                            <div style="background:var(--cream); border:1px solid var(--border-light); border-left:3px solid var(--accent); border-radius:0 10px 10px 0; padding:1.125rem 1.25rem;">
-                                <strong style="color:var(--primary); font-size:0.875rem;">Play the long game with tenacity</strong>
-                                <p style="font-size:0.8125rem; color:var(--text-secondary); margin:0.375rem 0 0;">Real transformation of contexts, cultures, boundaries, and identities takes time. Systems conveners know they are prepared to go the distance, moving incrementally through a series of successes and failures - and not expecting to be credited for what they enable.</p>
+
+                            <div style="background: var(--cream); border: 1px solid var(--border-light); border-left: 3px solid var(--accent); border-radius: 0 10px 10px 0; padding: 1.125rem 1.25rem;">
+                                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.375rem;">Dimension 4</div>
+                                <strong style="color: var(--primary); font-size: 0.9375rem; display: block; margin-bottom: 0.375rem;">Identity work: supporting personal transformation</strong>
+                                <p style="font-size: 0.8375rem; color: var(--text-secondary); margin: 0 0 0.625rem;">Working in a complex landscape can require people to develop the ability to identify with multiple places in the landscape at once. Systems conveners engage with people as meaning-making agents whose identities are key to reconfiguring the landscape. Changing identities and cultural norms is long-term work - more likely to be reflected in ongoing series of micro-shifts than sudden dramatic impact.</p>
+                                <p style="font-size: 0.8125rem; color: var(--text-secondary); border-top: 1px solid var(--border-light); padding-top: 0.625rem; margin: 0; font-style: italic;">
+                                    <strong style="font-style: normal; color: var(--primary);">Carl Davies</strong> (NHS, UK): <em>"As with any kind of behavior change you can always relapse and go back to the old way of doing things. But if we shift it so far - that gives us enough to produce some really good outcomes, and actually embed some of those behaviors."</em>
+                                </p>
                             </div>
-                            <div style="background:var(--cream); border:1px solid var(--border-light); border-left:3px solid var(--accent); border-radius:0 10px 10px 0; padding:1.125rem 1.25rem;">
-                                <strong style="color:var(--primary); font-size:0.875rem;">Navigate power without megalomania</strong>
-                                <p style="font-size:0.8125rem; color:var(--text-secondary); margin:0.375rem 0 0;">The authors are explicit: there is a danger of romanticising the role. People with a tendency toward megalomania or narcissism can cause harm while believing they are convening. The self-awareness required is as important as the skill.</p>
+
+                            <div style="background: var(--cream); border: 1px solid var(--border-light); border-left: 3px solid var(--accent); border-radius: 0 10px 10px 0; padding: 1.125rem 1.25rem;">
+                                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.375rem;">Dimension 5</div>
+                                <strong style="color: var(--primary); font-size: 0.9375rem; display: block; margin-bottom: 0.375rem;">Agency work: cultivating the power to act</strong>
+                                <p style="font-size: 0.8375rem; color: var(--text-secondary); margin: 0 0 0.625rem;">A core role is to unlock the capacity that already exists in the system, drawing on the experience of practice as a deep source of wisdom. The convener's question: what kind of convening will allow people to discover their own power? Who is not yet empowered to act on their understanding?</p>
+                                <p style="font-size: 0.8125rem; color: var(--text-secondary); border-top: 1px solid var(--border-light); padding-top: 0.625rem; margin: 0; font-style: italic;">
+                                    <strong style="font-style: normal; color: var(--primary);">Karen Tse</strong> (International Bridges to Justice, 100+ countries): <em>"We want to know 'What are your deeper values? Why did you become a police officer? We think you want the country to move forward. Who are you and who do you want to become? Where do you want to go? How can we co-create a future together?'"</em>
+                                </p>
                             </div>
-                            <div style="background:var(--cream); border:1px solid var(--border-light); border-left:3px solid var(--accent); border-radius:0 10px 10px 0; padding:1.125rem 1.25rem;">
-                                <strong style="color:var(--primary); font-size:0.875rem;">Enable rather than take credit</strong>
-                                <p style="font-size:0.8125rem; color:var(--text-secondary); margin:0.375rem 0 0;">Systems conveners tend to act as enablers rather than taking credit or seeking the spotlight. What they do is often unrecognised. Many do this work without any label, sometimes not even being able to articulate the full extent of what they are doing.</p>
+
+                            <div style="background: var(--cream); border: 1px solid var(--border-light); border-left: 3px solid var(--accent); border-radius: 0 10px 10px 0; padding: 1.125rem 1.25rem;">
+                                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.375rem;">Dimension 6</div>
+                                <strong style="color: var(--primary); font-size: 0.9375rem; display: block; margin-bottom: 0.375rem;">Power work: dealing with power structures</strong>
+                                <p style="font-size: 0.8375rem; color: var(--text-secondary); margin: 0 0 0.625rem;">The social landscape is shaped by power structures: institutions, hierarchies, practices, groups, historically defined categories of people, and individual trajectories. Systems conveners must enlist the support of existing power structures while also challenging those that obstruct their work. They bridge closeness to the ground with political savvy - operating closer to the ground to stay connected to the realities of practice, while being strategic about connecting with formal authority when needed.</p>
+                                <p style="font-size: 0.8125rem; color: var(--text-secondary); border-top: 1px solid var(--border-light); padding-top: 0.625rem; margin: 0; font-style: italic;">
+                                    <strong style="font-style: normal; color: var(--primary);">Samuel Mutambo</strong> (Movement for Community-led Development, Zambia): <em>"How to help people become self-reliant? How to enable people to take ownership over the process of their development?"</em>
+                                </p>
+                            </div>
+
+                            <div style="background: var(--cream); border: 1px solid var(--border-light); border-left: 3px solid var(--accent); border-radius: 0 10px 10px 0; padding: 1.125rem 1.25rem;">
+                                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.375rem;">Dimension 7</div>
+                                <strong style="color: var(--primary); font-size: 0.9375rem; display: block; margin-bottom: 0.375rem;">Narrative work: articulating the value</strong>
+                                <p style="font-size: 0.8375rem; color: var(--text-secondary); margin: 0 0 0.625rem;">The initial convening call needs to continue in order to articulate the results of the work - both within organisational reporting lines and across the wider system. Given the fundamentally incrementalistic nature of systems convening's true impact, this means playing the long game: documenting micro-shifts, telling value-creation stories, and helping participants see the difference they are making.</p>
+                                <p style="font-size: 0.8125rem; color: var(--text-secondary); border-top: 1px solid var(--border-light); padding-top: 0.625rem; margin: 0; font-style: italic;">
+                                    <strong style="font-style: normal; color: var(--primary);">Michael Fung-Kee-Fung:</strong> <em>"The communities of practice we had way back then still exist. They are now the backbone in our region for a whole health transformation ecosystem agenda."</em>
+                                </p>
+                                <p style="font-size: 0.8125rem; color: var(--text-secondary); margin: 0.375rem 0 0; font-style: italic;">
+                                    <strong style="font-style: normal; color: var(--primary);">Neil Pakenham-Walsh</strong> (<a href="https://www.hifa.org" target="_blank" rel="noopener" style="color:var(--accent);">HIFA.org</a>, 180+ countries): <em>"In the early 1990s nobody was actively convening people across the global healthcare information system. I saw this as a key weakness of the system and an opportunity to make a difference. When I started, I didn't realize it was going to be such a long and gradual process."</em>
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <h3>The four-dimension mindset of a systems convener</h3>
+                        <p>Underlying all seven dimensions of work is a common mindset. Wenger-Trayner distil this as four interrelated perspectives that systems conveners share, explicitly or implicitly, when striving to make a difference:</p>
+
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin: 1.25rem 0 2rem;">
+                            <div style="background: var(--cream); border: 1px solid var(--border-light); border-radius: 10px; padding: 1.125rem 1.25rem;">
+                                <strong style="color: var(--primary); font-size: 0.9375rem; display: block; margin-bottom: 0.375rem;">A restlessness to make a difference</strong>
+                                <p style="font-size: 0.8125rem; color: var(--text-secondary); margin: 0;">A determination that leads them to embrace challenges in their full complexity and requires navigating between opposites: passionate and pragmatic, willful and inviting, big-picture driven and detail oriented, impatient and persevering. They cannot bring themselves to simplify a problem to make it amenable to a quick solution.</p>
+                            </div>
+                            <div style="background: var(--cream); border: 1px solid var(--border-light); border-radius: 10px; padding: 1.125rem 1.25rem;">
+                                <strong style="color: var(--primary); font-size: 0.9375rem; display: block; margin-bottom: 0.375rem;">A social landscape perspective</strong>
+                                <p style="font-size: 0.8125rem; color: var(--text-secondary); margin: 0;">A deep awareness of the social texture of the human world in terms of three interrelated structuring forces: systems (designed elements and institutions), practices (what people actually do), and relationships (ties of commitment, friendship, shared experience). Systems conveners pay attention to how these interact at multiple levels of scale.</p>
+                            </div>
+                            <div style="background: var(--cream); border: 1px solid var(--border-light); border-radius: 10px; padding: 1.125rem 1.25rem;">
+                                <strong style="color: var(--primary); font-size: 0.9375rem; display: block; margin-bottom: 0.375rem;">A commitment to identity work</strong>
+                                <p style="font-size: 0.8125rem; color: var(--text-secondary); margin: 0;">An engagement with people as meaning-making agents in the landscape, whose identities are key to reconfiguring the landscape. Reconfiguring how people see themselves in relation to the challenge - moving from "my role" to "our whole" - is often the most durable and hardest-to-achieve outcome of convening work.</p>
+                            </div>
+                            <div style="background: var(--cream); border: 1px solid var(--border-light); border-radius: 10px; padding: 1.125rem 1.25rem;">
+                                <strong style="color: var(--primary); font-size: 0.9375rem; display: block; margin-bottom: 0.375rem;">A social learning approach</strong>
+                                <p style="font-size: 0.8125rem; color: var(--text-secondary); margin: 0;">Approaching a challenge by developing the ability of people to learn from and with each other. The convener is not the expert who brings the answer - they are the architect of the conditions in which people discover their own answers together. Cultivating social learning capability in the landscape is the lasting gift of a systems convener's work.</p>
                             </div>
                         </div>
 
-                        <h3>How this connects to the rest of the site</h3>
-                        <p>Systems Convening is the closest existing framework to a full theory of the orchestration role. Wenger-Trayner's book was based on wide-ranging interviews with systems conveners in very different contexts: community development in villages in Zambia, urban planning in a US town, tribal conflict resolution in Nigeria, NHS transformation in the UK. The contexts differ radically; the leadership pattern is consistent.</p>
-                        <p>The framework connects directly to this site's argument about coordination-without-authority: systems conveners derive their ability to bring people together not from positional power but from their legitimacy across different communities. They are granted influence because they have demonstrated over time that they hold no agenda except the health of the system they serve. The seven aspects of systems convening named above map closely onto the backstage functions documented in the "In Action" section of this site.</p>
+                        <h3>A practitioner from the field: Michael Fung-Kee-Fung</h3>
+                        <div style="background: var(--cream); border: 1px solid var(--border-light); border-radius: 12px; padding: 1.5rem; margin: 1rem 0 1.5rem;">
+                            <p style="font-size: 0.8375rem; color: var(--text-secondary); margin: 0 0 0.875rem;">Michael is a clinician and professor of gynaecologic oncology at a university hospital in Ottawa, Canada. He uses his legitimacy as a respected practitioner to convene regional, cross-organisational, interprofessional communities of practice that take on joint leadership in improving care for various types of cancer. The key to his convening work is getting all groups involved to agree on the nature of the problem - then to accept that they own part of the problem and part of the solution.</p>
+                            <p style="font-size: 0.8125rem; color: var(--text-secondary); margin: 0 0 0.625rem; font-style: italic;">"If our accountability is for the wait time for treating patients, well, that's not a surgeon's problem only - that's a hospital problem, a surgeon's problem, a radiology problem, a biopsy problem, etc. There's about 10 people involved in that problem. So now people have to share the ownership of the accountability problem."</p>
+                            <p style="font-size: 0.8125rem; color: var(--text-secondary); margin: 0; font-style: italic;">"My experience extends because I have a lot of people beyond me, who are driving their own convening. It's a ripple effect. I have a layer of people who are authentic in different areas who are driving this independently as well. It's not orchestrated. I may be a subliminal architect, but it's really driven by their authenticity."</p>
+                            <p style="font-size: 0.75rem; color: var(--text-muted); margin: 0.75rem 0 0; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.04em;">Source: Wenger-Trayner (2021), pp. 39-40, 52-53</p>
+                        </div>
+
+                        <h3>How this connects to the rest of this site</h3>
+                        <p>Systems Convening is the closest existing framework to a full theory of the orchestration role. Wenger-Trayner's book was based on around 40 interviews with systems conveners in very different contexts: community development in villages in Zambia, urban planning in a US town, tribal conflict resolution in Nigeria, NHS transformation in the UK. The contexts differ radically; the leadership pattern is consistent.</p>
+                        <p>The framework connects directly to this site's central argument: systems conveners derive their ability to bring people together not from positional power but from their legitimacy across different communities. They are granted influence because they have demonstrated over time that they hold no agenda except the health of the system they serve. The seven dimensions of work documented above map closely onto the backstage functions covered in section 06 (In Action).</p>
                         <p>For many people, being a systems convener is only something that exists in retrospect. This book is an act of recognition - giving language to work that has been invisible, and therefore harder to fund, resource, and sustain.</p>
 
-                        <div class="definition-box" style="margin-top:1.5rem;">
-                            <p style="font-size:0.8375rem; color:var(--text-secondary); margin:0;"><strong>Source:</strong> Wenger-Trayner, E. &amp; Wenger-Trayner, B. (2021). <em>Systems convening: A crucial form of leadership for the 21st century.</em> Social Learning Lab. ISBN 978-9895329007.</p>
+                        <div class="definition-box" style="margin-top: 1.5rem;">
+                            <p style="font-size: 0.8375rem; color: var(--text-secondary); margin: 0;"><strong>Source:</strong> Wenger-Trayner, E. &amp; Wenger-Trayner, B. (2021). <em>Systems convening: A crucial form of leadership for the 21st century.</em> Social Learning Lab. ISBN: 978-989-53290-0-7 (print), 978-989-53290-1-4 (PDF). Published under Creative Commons CC BY-NC 4.0. <a href="https://wenger-trayner.com/systems-convening/" target="_blank" rel="noopener" style="color: var(--accent);">wenger-trayner.com/systems-convening/ &rarr;</a></p>
                         </div>
                     </div>
 
@@ -4714,7 +4809,7 @@ body { padding-top: 0; }
                         <p>Holley's more recent work has had a strong equity focus and a commitment to dismantling racism and hierarchy in networks. This is not incidental - it is structural. Networks that are not intentionally designed for inclusion reproduce the power distributions of the society around them. Hub-and-spoke networks with a single dominant actor are especially vulnerable to capturing the benefits of coordination for those who are already well-connected. Equity in network weaving means actively recruiting periphery actors, ensuring that self-organising groups can form without the weaver's permission, and distributing network intelligence so no single actor controls what the network knows about itself.</p>
 
                         <div class="definition-box" style="margin-top:1.5rem;">
-                            <p style="font-size:0.8375rem; color:var(--text-secondary); margin:0;"><strong>Source:</strong> Holley, J. (2012). <em>Network Weaver Handbook: A Guide to Transformational Networks.</em> Krebs, V. &amp; Holley, J. (2006). "Building Smart Communities through Network Weaving." <a href="https://networkweaver.com" target="_blank" rel="noopener" style="color:var(--accent);">networkweaver.com</a></p>
+                            <p style="font-size:0.8375rem; color:var(--text-secondary); margin:0;"><strong>Source:</strong> <a href="https://networkweaver.com" target="_blank" rel="noopener" style="color:var(--accent);">Holley, J. (2012). <em>Network Weaver Handbook: A Guide to Transformational Networks.</em></a> Krebs, V. &amp; Holley, J. (2006). "Building Smart Communities through Network Weaving." <a href="https://networkweaver.com" target="_blank" rel="noopener" style="color:var(--accent);">networkweaver.com</a></p>
                         </div>
                     </div>
 
@@ -4770,7 +4865,7 @@ body { padding-top: 0; }
                         <p>Scharmer's 4.0 extension of Theory U - "from ego-system to eco-system awareness" - connects directly to the structural critique that Gautam John raises about orchestration: that the relational field itself is the site of transformation, not the structures built around it. Both are saying the same thing at different levels of abstraction: the quality of attention is the intervention.</p>
 
                         <div class="definition-box" style="margin-top:1.5rem;">
-                            <p style="font-size:0.8375rem; color:var(--text-secondary); margin:0;"><strong>Source:</strong> Scharmer, O. (2009). <em>Theory U: Leading from the Future as It Emerges.</em> Berrett-Koehler. Scharmer, O. (2018). <em>The Essentials of Theory U.</em> Presencing Institute: <a href="https://www.presencing.org" target="_blank" rel="noopener" style="color:var(--accent);">presencing.org</a></p>
+                            <p style="font-size:0.8375rem; color:var(--text-secondary); margin:0;"><strong>Source:</strong> <a href="https://www.presencing.org/resource/books" target="_blank" rel="noopener" style="color:var(--accent);">Scharmer, O. (2009). <em>Theory U: Leading from the Future as It Emerges.</em> Berrett-Koehler.</a> Scharmer, O. (2018). <em>The Essentials of Theory U.</em> Presencing Institute: <a href="https://www.presencing.org" target="_blank" rel="noopener" style="color:var(--accent);">presencing.org</a></p>
                         </div>
                     </div>
 
@@ -4826,6 +4921,564 @@ body { padding-top: 0; }
                                 </ul>
                             </div>
                         </div>
+                    <!-- ══════════ FRAMEWORK 7: PARTNERSHIP BROKERING ══════════ -->
+                    <div class="framework-content" <div class="framework-content" <div class="framework-content" id="partnership-brokering-content" role="tabpanel" aria-hidden="true">
+                        <h2>Partnership Brokering <span style="font-size:0.875rem; font-weight:400; color:var(--text-muted);">Partnership Brokers Association, 2003 onwards</span></h2>
+
+                        <p>Partnership brokering is the professional practice of managing the partnering process - helping organisations from different sectors, with different interests and accountabilities, to work together effectively. The Partnership Brokers Association (PBA), founded in 2003, has trained over 650 partnership brokers across every societal sector and most geographies, accumulating in its accreditation logbooks one of the most candid bodies of practitioner evidence in the collaboration field. The three documents held in this site's knowledge base - <em>What do Partnership Brokers Do?</em> (2012), <em>Brokering Better Partnerships Handbook</em> (2019), and <em>Animating Alliances</em> (2018) - are drawn on throughout this section.</p>
+
+                        <!-- ── IS PB SYSTEMS ORCHESTRATION? ─────────────────── -->
+                        <h3>Is partnership brokering systems orchestration?</h3>
+                        <p>This is the question this site is most often asked. The honest answer requires distinguishing scale from practice. Partnership brokering and systems orchestration share a deep structural kinship - both operate without formal authority, both derive influence from legitimacy and trust rather than position, both serve "the good of the whole" rather than any single actor's interest, both require holding the interests of multiple parties simultaneously. But they operate at different levels and timescales.</p>
+
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; margin:1.5rem 0 2rem;">
+                            <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:10px; padding:1.25rem;">
+                                <div style="font-family:'JetBrains Mono',monospace; font-size:0.5rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); margin-bottom:0.5rem;">Partnership Brokering</div>
+                                <ul style="font-size:0.8375rem; color:var(--text-secondary); margin:0; padding-left:1.1rem; line-height:1.75;">
+                                    <li>Works within a specific partnership or alliance</li>
+                                    <li>Focused on making <em>this</em> collaboration function</li>
+                                    <li>Often episodic - brought in for a phase or challenge</li>
+                                    <li>Works with 2-20 partner organisations</li>
+                                    <li>Success = the partnership delivers and is self-sustaining</li>
+                                    <li>Broker deliberately works toward making themselves unnecessary</li>
+                                    <li>Legitimacy from process skill, neutrality, and held space</li>
+                                </ul>
+                            </div>
+                            <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:10px; padding:1.25rem;">
+                                <div style="font-family:'JetBrains Mono',monospace; font-size:0.5rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); margin-bottom:0.5rem;">Systems Orchestration</div>
+                                <ul style="font-size:0.8375rem; color:var(--text-secondary); margin:0; padding-left:1.1rem; line-height:1.75;">
+                                    <li>Works across an entire field or ecosystem</li>
+                                    <li>Focused on changing what is possible for everyone</li>
+                                    <li>Long-term - the orchestrator often is the connective tissue</li>
+                                    <li>Works across dozens or hundreds of actors</li>
+                                    <li>Success = the field has new collective capacity</li>
+                                    <li>Builds infrastructure that outlasts the orchestrator</li>
+                                    <li>Legitimacy from field knowledge and trusted neutrality</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <p>The most precise framing: <strong>partnership brokering is a micro-level practice that systems orchestrators deploy constantly.</strong> A systems orchestrator who cannot broker a difficult partnership between two key actors will fail. A partnership broker working at field scale - as PBA did in evaluating and accompanying the Global Alliance for Community Philanthropy (see Case Study 9) - is doing systems orchestration. The practices converge most at the level of the <em>animator</em>: the person who holds space for a loosely-affiliated alliance to find its coherence and direction.</p>
+
+                        <!-- ── THE THREE FORCES ─────────────────────────────── -->
+                        <h3>The three forces: activating, restraining, reconciling</h3>
+                        <p>The most distinctive conceptual contribution from the PBA logbooks is the "three forces" framing, which a practitioner articulated in their logbook and which PBA has since used widely:</p>
+
+                        <div class="definition-box" style="margin:1rem 0 1.5rem;">
+                            <p style="font-size:0.9375rem; font-family:'Fraunces',serif; font-style:italic; color:var(--primary); margin:0 0 0.75rem;">"My belief is that there are three forces always operating in the world: an activating force (that which is trying to happen, energy moving in a certain direction); a restraining force (that can help refine what is trying to happen by challenging it and making it more robust) and a reconciling force (that helps people to work with these two forces to create something new). I think it is clear that a partnership broker works as a reconciling force, but what I recognized the other week is that, as a broker, I may also have to act as a restraining force and/or an activating force as well. Knowing in which of these ways to act at any particular time is an art as well as a science."</p>
+                            <p style="font-size:0.75rem; color:var(--text-muted); margin:0; font-family:'JetBrains Mono',monospace; letter-spacing:0.06em; text-transform:uppercase;">Partnership broker logbook, from: What do Partnership Brokers Do? (PBA, 2012), p.10</p>
+                        </div>
+
+                        <p>This three-forces model has direct relevance to systems orchestration. Most orchestrators default to the activating force - convening, catalysing, pushing. The rarer and often more powerful moves are the restraining force (slowing premature convergence, holding space for difficulty, preventing the loudest voice from dominating) and the reconciling force (making it possible for opposing positions to generate something new rather than simply compromising). The skill is reading which force the moment calls for.</p>
+
+                        <!-- ── FIVE PARTNERING PRINCIPLES ────────────────────── -->
+                        <h3>The five principles of principled partnering</h3>
+                        <p>Developed from a cross-sector workshop in Bangladesh in 1994 - where NGO, government, and business representatives each named what they needed to be able to partner with the other two sectors - these five principles have since been adopted internationally as the foundation of principled partnership practice. Equity, Openness, and Mutual Benefit emerged from that original workshop. Diversity and Courage were added by the PBA Trainers Community of Practice in 2016.</p>
+
+                        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1rem; margin:1.25rem 0 2rem;">
+                            <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:10px; padding:1.125rem;">
+                                <strong style="color:var(--primary); font-size:0.9375rem; display:block; margin-bottom:0.375rem;">Diversity</strong>
+                                <p style="font-size:0.8125rem; color:var(--text-secondary); margin:0; line-height:1.65;">The added value of collaboration comes from difference, not sameness. A commitment to exploring each other's motivations, values, and underlying interests builds understanding that replaces anxiety with appreciation. Many go into partnerships fearing that difference of views will lead to breakdown. The reverse is usually true: partnerships that surface and work through difference are stronger than those that paper over it.</p>
+                            </div>
+                            <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:10px; padding:1.125rem;">
+                                <strong style="color:var(--primary); font-size:0.9375rem; display:block; margin-bottom:0.375rem;">Equity</strong>
+                                <p style="font-size:0.8125rem; color:var(--text-secondary); margin:0; line-height:1.65;">Power comes in many forms. A partnership where some partners are or feel marginalised has serious problems that will surface eventually. Equity is built by truly respecting the views, attributes, and contributions of all those involved - not just those with the most resources, the longest history, or the loudest voice. This requires active work, not passive good intentions.</p>
+                            </div>
+                            <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:10px; padding:1.125rem;">
+                                <strong style="color:var(--primary); font-size:0.9375rem; display:block; margin-bottom:0.375rem;">Openness</strong>
+                                <p style="font-size:0.8125rem; color:var(--text-secondary); margin:0; line-height:1.65;">There is a difference between information that needs to be confidential for legitimate reasons and information that has a bearing on the partnership and is intentionally withheld. Hidden agendas are partnership killers. Trust is not a precondition for partnering - it is an outcome to be built. But openness about intent, constraints, and concerns is a precondition for trust.</p>
+                            </div>
+                            <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:10px; padding:1.125rem;">
+                                <strong style="color:var(--primary); font-size:0.9375rem; display:block; margin-bottom:0.375rem;">Mutual Benefit</strong>
+                                <p style="font-size:0.8125rem; color:var(--text-secondary); margin:0; line-height:1.65;">All partners have a right to gain from their engagement in the partnership. This is not charity. Competitiveness, especially within sectors, can become highly destructive in partnerships. Agreeing to explore and build on the added value of collaboration - and naming what each partner legitimately needs from it - is an essential starting point for building genuine commitment to shared goals.</p>
+                            </div>
+                            <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:10px; padding:1.125rem;">
+                                <strong style="color:var(--primary); font-size:0.9375rem; display:block; margin-bottom:0.375rem;">Courage</strong>
+                                <p style="font-size:0.8125rem; color:var(--text-secondary); margin:0; line-height:1.65;">The only thing all partners have in common at the start of any partnership is their uncertainty about each other and about what the work will demand. Even well-planned partnerships have many unknowns. Partners need to be bold rather than tentative if they are to achieve breakthrough results. This includes the broker's own courage: a certain amount of tension is required for a breakthrough and is not something to be avoided at all costs.</p>
+                            </div>
+                        </div>
+
+                        <!-- ── THE PARTNERING CYCLE ──────────────────────────── -->
+                        <h3>The partnering cycle: four phases</h3>
+                        <p>The PBA partnering cycle maps the phases of a partnership's life and the broker's changing role across them. The broker moves from pro-active and energising in the scoping and building phase, through coaching and capacity-building in managing and maintaining, toward advisory and mentoring in the reviewing and revising phase, and finally toward deliberate withdrawal as the partnership sustains its own outcomes. Partnerships are not linear - brokers often work in several phases simultaneously.</p>
+
+                        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:0.875rem; margin:1.25rem 0 2rem;">
+                            <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:10px; padding:1rem 1.125rem;">
+                                <div style="font-family:'JetBrains Mono',monospace; font-size:0.5rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); margin-bottom:0.375rem;">Phase 1</div>
+                                <strong style="color:var(--primary); font-size:0.875rem; display:block; margin-bottom:0.25rem;">Scoping and Building</strong>
+                                <p style="font-size:0.8rem; color:var(--text-secondary); margin:0; line-height:1.65;">Scoping potential, exploring drivers and underlying interests, embedding partnering principles, helping partners differentiate between their partnership and its projects, negotiating a detailed agreement. Signing an agreement before adequate scoping is one of the most common partnership failure modes.</p>
+                            </div>
+                            <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:10px; padding:1rem 1.125rem;">
+                                <div style="font-family:'JetBrains Mono',monospace; font-size:0.5rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); margin-bottom:0.375rem;">Phase 2</div>
+                                <strong style="color:var(--primary); font-size:0.875rem; display:block; margin-bottom:0.25rem;">Managing and Maintaining</strong>
+                                <p style="font-size:0.8rem; color:var(--text-secondary); margin:0; line-height:1.65;">Co-creating governance arrangements, working through complex internal and external challenges, building partner capacities to strengthen the partnership, enabling partners to explore ways of transforming systems. The temptation once agreements are signed is to assume the partnership will self-manage. It rarely does.</p>
+                            </div>
+                            <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:10px; padding:1rem 1.125rem;">
+                                <div style="font-family:'JetBrains Mono',monospace; font-size:0.5rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); margin-bottom:0.375rem;">Phase 3</div>
+                                <strong style="color:var(--primary); font-size:0.875rem; display:block; margin-bottom:0.25rem;">Reviewing and Revising</strong>
+                                <p style="font-size:0.8rem; color:var(--text-secondary); margin:0; line-height:1.65;">Supporting partners in reviewing added value and effectiveness, assisting in revising the collaboration agreement, helping partners implement changes needed to improve the partnership, guiding partners to plan for sustaining outcomes. Regular health checks are underused - those who adopt reflective practices see a return on investment.</p>
+                            </div>
+                            <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:10px; padding:1rem 1.125rem;">
+                                <div style="font-family:'JetBrains Mono',monospace; font-size:0.5rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); margin-bottom:0.375rem;">Phase 4</div>
+                                <strong style="color:var(--primary); font-size:0.875rem; display:block; margin-bottom:0.25rem;">Sustaining Outcomes</strong>
+                                <p style="font-size:0.8rem; color:var(--text-secondary); margin:0; line-height:1.65;">Exploring moving-on options, managing closure collaboratively, helping partners celebrate and learn from their story, ensuring outcomes are sustained, embedded, scaled, or transferred. Partnerships are a means to an end, not an end in themselves. Most are date-stamped. The broker's final task is ensuring it ends as well as it started.</p>
+                            </div>
+                        </div>
+
+                        <!-- ── WHAT BROKERS DO ───────────────────────────────── -->
+                        <h3>Four domains of broker work</h3>
+                        <p>Based on analysis of 250+ logbooks from the PBA Accreditation Scheme - practitioners writing honestly about their work, not for public positioning but for professional development - the enquiry found broker activities cluster into four domains. These are not sequential phases; they are concurrent modes of action.</p>
+
+                        <div style="display:grid; gap:0.875rem; margin:1.25rem 0 2rem;">
+                            <div style="background:var(--cream); border:1px solid var(--border-light); border-left:3px solid var(--accent); border-radius:0 10px 10px 0; padding:1.125rem 1.25rem;">
+                                <strong style="color:var(--primary); font-size:0.9375rem; display:block; margin-bottom:0.375rem;">Getting things started</strong>
+                                <p style="font-size:0.8375rem; color:var(--text-secondary); margin:0 0 0.5rem;">Making the case for partnering internally and externally. Exploring partner and partnership potential. Creating space for innovation. Brokers often become internal champions, scoping readiness, building profiles of potential partners, adapting the case for different interests while articulating a single overarching goal. Managing expectations is critical: "a fine balance to be visionary and optimistic on the one hand as well as realistic and cautious on the other."</p>
+                                <p style="font-size:0.8rem; color:var(--text-muted); margin:0; font-style:italic;">Logbook: "I tried to explore and clarify what might be expected of partners and what different roles each partner might play should the partnership go ahead. This seemed to reassure them that they would not be over-committed if they said 'yes' to the partnership idea."</p>
+                            </div>
+                            <div style="background:var(--cream); border:1px solid var(--border-light); border-left:3px solid var(--accent); border-radius:0 10px 10px 0; padding:1.125rem 1.25rem;">
+                                <strong style="color:var(--primary); font-size:0.9375rem; display:block; margin-bottom:0.375rem;">Building and maintaining working relationships</strong>
+                                <p style="font-size:0.8375rem; color:var(--text-secondary); margin:0 0 0.5rem;">Building sound working relationships and trust. Managing difficult people, situations, and conflicts. Providing reassurance and encouragement. Brokers consistently report that managing conflict is the most emotionally demanding part of their work - and that a certain amount of tension is required for breakthrough. "There is no such thing as a difficult person - just people whom we/others find difficult to deal with." The underlying interests driving difficult behaviour are always more important than the behaviour itself.</p>
+                                <p style="font-size:0.8rem; color:var(--text-muted); margin:0; font-style:italic;">Logbook: "The strength of any partnership is in the quality of its relationships. Where a relationship is long-standing and positive, you can start to trust that the relationship can withstand a level of scrutiny and that 'discomfort' can exist comfortably within the relationship."</p>
+                            </div>
+                            <div style="background:var(--cream); border:1px solid var(--border-light); border-left:3px solid var(--accent); border-radius:0 10px 10px 0; padding:1.125rem 1.25rem;">
+                                <strong style="color:var(--primary); font-size:0.9375rem; display:block; margin-bottom:0.375rem;">Making practical interventions</strong>
+                                <p style="font-size:0.8375rem; color:var(--text-secondary); margin:0 0 0.5rem;">Providing methods and tools to enhance the partnership. Intervening to keep it on track. Identifying additional resources - including non-cash contributions that partners often fail to see. Building partnering capacity so partners can eventually broker themselves. The broker is uniquely positioned to see the bigger resource picture precisely because they are not competing for any of it.</p>
+                                <p style="font-size:0.8rem; color:var(--text-muted); margin:0; font-style:italic;">Logbook: "I keep questioning myself: Are the decisions that are being made in the best interest of the partnership and not just of particular - or particularly demanding - partners?"</p>
+                            </div>
+                            <div style="background:var(--cream); border:1px solid var(--border-light); border-left:3px solid var(--accent); border-radius:0 10px 10px 0; padding:1.125rem 1.25rem;">
+                                <strong style="color:var(--primary); font-size:0.9375rem; display:block; margin-bottom:0.375rem;">Providing servant leadership</strong>
+                                <p style="font-size:0.8375rem; color:var(--text-secondary); margin:0 0 0.5rem;">Focusing on the interests of the partnership as a whole - including, when necessary, challenging the broker's own organisation. Being ready to "let go" when the time is right. Partners often find it hard to understand why a broker would work hard to make their role unnecessary. The broker's exit strategy should be embedded from the start: the coaching role is a central part of the exit. "Stepping out of the partnership is actually a sign of achievement and success not abandonment."</p>
+                                <p style="font-size:0.8rem; color:var(--text-muted); margin:0; font-style:italic;">Logbook: "As a broker I found myself advising my own organisation that it was important to keep a low profile and to let other partners take a lead in a number of areas. This was tough for my colleagues to understand since we work for an international NGO and thus very used to being 'in charge'. But they agreed - and when it proved to work well and to build far greater equity and commitment, they used it as a model for other partnerships in other parts of the world."</p>
+                            </div>
+                        </div>
+
+                        <!-- ── HOW BROKERS WORK ──────────────────────────────── -->
+                        <h3>How brokers work: explicit and implicit modes</h3>
+                        <p>The logbook enquiry distinguishes explicit and implicit modes of broker action. The explicit are visible and nameable. The implicit are subtle, often invisible - which is partly why broker value is so hard to demonstrate to donors and line managers.</p>
+
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin:1.25rem 0 2rem; font-size:0.8125rem;">
+                            <div>
+                                <div style="font-family:'JetBrains Mono',monospace; font-size:0.5rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); margin-bottom:0.625rem;">Explicit modes</div>
+                                <div style="display:grid; gap:0.5rem;">
+                                    <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:8px; padding:0.75rem 1rem;">
+                                        <strong style="color:var(--primary);">Asking lots of questions</strong>
+                                        <p style="color:var(--text-secondary); margin:0.25rem 0 0; line-height:1.6;">Not providing answers. Partners who want quick fixes often resist this at first - but throwing responsibility back onto the group is one of the broker's main intentions. "I felt it was very important that the partners did not assume that I had all (or even any!) of the answers."</p>
+                                    </div>
+                                    <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:8px; padding:0.75rem 1rem;">
+                                        <strong style="color:var(--primary);">Pushing boundaries and norms</strong>
+                                        <p style="color:var(--text-secondary); margin:0.25rem 0 0; line-height:1.6;">Keeping partners focused on the big picture by "continually injecting both the reality and the possibility of the situation into the equation." Introducing ideas that are beyond the normal ways of working for one or more partners.</p>
+                                    </div>
+                                    <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:8px; padding:0.75rem 1rem;">
+                                        <strong style="color:var(--primary);">Working through conflict</strong>
+                                        <p style="color:var(--text-secondary); margin:0.25rem 0 0; line-height:1.6;">Confrontation is sometimes required in defence of foundational partnership principles. A tension is not something to defuse at all costs - it may be exactly what the partnership needs to move forward.</p>
+                                    </div>
+                                    <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:8px; padding:0.75rem 1rem;">
+                                        <strong style="color:var(--primary);">Influencing without direct authority</strong>
+                                        <p style="color:var(--text-secondary); margin:0.25rem 0 0; line-height:1.6;">"I had to learn how to broker while looking like I was doing other things." Directing from a distance. Getting out of the habit of needing to control every aspect and instead leading partners in the right direction from behind rather than from in front.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div style="font-family:'JetBrains Mono',monospace; font-size:0.5rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); margin-bottom:0.625rem;">Implicit modes</div>
+                                <div style="display:grid; gap:0.5rem;">
+                                    <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:8px; padding:0.75rem 1rem;">
+                                        <strong style="color:var(--primary);">Creating a safe space</strong>
+                                        <p style="color:var(--text-secondary); margin:0.25rem 0 0; line-height:1.6;">When difficult issues or disagreements arise, brokers create safe space often without partners being aware that is what is happening. This includes choice of venue, rotation of meeting locations, managing who is in the room, and the timing of difficult conversations.</p>
+                                    </div>
+                                    <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:8px; padding:0.75rem 1rem;">
+                                        <strong style="color:var(--primary);">Navigating complexity and anxiety</strong>
+                                        <p style="color:var(--text-secondary); margin:0.25rem 0 0; line-height:1.6;">Partnering is always complex and sometimes full of emotional angst, cultural insensitivity, and feelings of hopelessness - "rarely acknowledged." Brokers bring empathy and understanding to what individuals are experiencing, not just what the partnership needs.</p>
+                                    </div>
+                                    <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:8px; padding:0.75rem 1rem;">
+                                        <strong style="color:var(--primary);">Transforming transaction into collaboration</strong>
+                                        <p style="color:var(--text-secondary); margin:0.25rem 0 0; line-height:1.6;">Moving partners from a series of transactional agreements to working genuinely as a group. "By assigning roles to each of the partners early on, we ensured their buy-in as they felt they owned the partnership. Quite a new experience for most of them!"</p>
+                                    </div>
+                                    <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:8px; padding:0.75rem 1rem;">
+                                        <strong style="color:var(--primary);">Using the self as an instrument</strong>
+                                        <p style="color:var(--text-secondary); margin:0.25rem 0 0; line-height:1.6;">The broker's own self-awareness, values, and presence are active instruments in the partnership. "Parenting and brokering are both about transcending the self - getting over our personal fears and weaknesses to help our children - in the broker's case, the partnership and its partners - become what they are meant to be."</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ── WHAT GETS IN THE WAY ──────────────────────────── -->
+                        <h3>What gets in the way: honest practitioner testimony</h3>
+                        <p>The logbooks are unusually candid because they were written for professional development, not public positioning. The challenges they document fall into three categories: challenges from within the partnership, challenges from misunderstanding of the brokering role, and challenges from the broker's own professional limitations.</p>
+
+                        <div style="display:grid; gap:0.75rem; margin:1.25rem 0 2rem;">
+                            <div style="background:rgba(231,76,60,0.04); border:1px solid rgba(231,76,60,0.12); border-radius:8px; padding:1rem 1.25rem;">
+                                <strong style="color:var(--primary); font-size:0.875rem;">The "no-win" paradox of visibility</strong>
+                                <p style="font-size:0.8125rem; color:var(--text-secondary); margin:0.375rem 0 0; line-height:1.65;">Brokers are most successful when most invisible - but invisibility makes their value impossible to demonstrate. Simultaneously, they face the paradox that "half the group think I am doing too much, the other half complain that I am doing too little." Internal brokers are seen by partners as biased toward their organisation; they are seen internally as biased toward the partners. There is no neutral position to occupy.</p>
+                            </div>
+                            <div style="background:rgba(231,76,60,0.04); border:1px solid rgba(231,76,60,0.12); border-radius:8px; padding:1rem 1.25rem;">
+                                <strong style="color:var(--primary); font-size:0.875rem;">Partner dependency</strong>
+                                <p style="font-size:0.8125rem; color:var(--text-secondary); margin:0.375rem 0 0; line-height:1.65;">"I realise that I have been too much of a bridge between the three organisations because when I was absent for any period of time, there would be absolutely no communication amongst the partners." The broker's effectiveness in holding the partnership together can prevent partners from developing their own capacity to hold it. The exit strategy must be built in from the beginning.</p>
+                            </div>
+                            <div style="background:rgba(231,76,60,0.04); border:1px solid rgba(231,76,60,0.12); border-radius:8px; padding:1rem 1.25rem;">
+                                <strong style="color:var(--primary); font-size:0.875rem;">Broker over-attachment</strong>
+                                <p style="font-size:0.8125rem; color:var(--text-secondary); margin:0.375rem 0 0; line-height:1.65;">"I found it hard to untangle whether my reluctance was out of genuine concern of what might happen without me or whether I just didn't want to let go. I am still working this out." Being passionate about the partnership's potential can translate into needing the partnership to work for the broker's own emotional or professional satisfaction - which distorts the broker's judgment at exactly the moments when clear judgment is most needed.</p>
+                            </div>
+                            <div style="background:rgba(231,76,60,0.04); border:1px solid rgba(231,76,60,0.12); border-radius:8px; padding:1rem 1.25rem;">
+                                <strong style="color:var(--primary); font-size:0.875rem;">Failing to question whether partnership is the right vehicle</strong>
+                                <p style="font-size:0.8125rem; color:var(--text-secondary); margin:0.375rem 0 0; line-height:1.65;">The logbooks reveal that brokers very rarely raise fundamental questions about whether a partnership is the appropriate approach or whether this specific partnership configuration is the right one. "Perhaps because brokers have too much personal investment in the partnership succeeding to be able to make this judgment dispassionately." PBA's Principle 6 of good brokering practice directly addresses this: "Explore any available alternative approaches before promoting a partnering process."</p>
+                            </div>
+                            <div style="background:rgba(231,76,60,0.04); border:1px solid rgba(231,76,60,0.12); border-radius:8px; padding:1rem 1.25rem;">
+                                <strong style="color:var(--primary); font-size:0.875rem;">Changes of partner personnel</strong>
+                                <p style="font-size:0.8125rem; color:var(--text-secondary); margin:0.375rem 0 0; line-height:1.65;">This was among the most frequently cited challenges in the logbooks: "It was almost impossible to feel we were building from one year to the next as we seemed repeatedly to be pulled back to the beginning." Incoming representatives have different expectations, relationships, and institutional priorities. The partnership's relational infrastructure is harder to transfer than its paperwork.</p>
+                            </div>
+                        </div>
+
+                        <!-- ── TEN COMMON PARTNERING CHALLENGES ──────────────── -->
+                        <h3>Ten common partnering challenges</h3>
+                        <p>From the Brokering Better Partnerships Handbook - a taxonomy of the challenges that appear repeatedly in partnership reviews and case studies, independent of sector, geography, or issue area.</p>
+
+                        <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:12px; overflow:hidden; margin:1.25rem 0 2rem;">
+                            <table style="width:100%; border-collapse:collapse; font-size:0.8rem;">
+                                <thead>
+                                    <tr style="background:var(--primary); color:#fff;">
+                                        <th style="padding:0.625rem 1rem; text-align:left; font-family:'JetBrains Mono',monospace; font-size:0.5rem; letter-spacing:0.1em; text-transform:uppercase; width:28%;">Challenge</th>
+                                        <th style="padding:0.625rem 1rem; text-align:left; font-family:'JetBrains Mono',monospace; font-size:0.5rem; letter-spacing:0.1em; text-transform:uppercase;">What it means in practice</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="border-bottom:1px solid var(--border-light);">
+                                        <td style="padding:0.625rem 1rem; font-weight:600; color:var(--primary); vertical-align:top;">Lack of partnering experience</td>
+                                        <td style="padding:0.625rem 1rem; color:var(--text-secondary); line-height:1.6;">Partnering requires different attitudes and behaviours, not just different activities. Partners who are new to it often don't realise this until the partnership is in difficulty.</td>
+                                    </tr>
+                                    <tr style="border-bottom:1px solid var(--border-light); background:rgba(255,255,255,0.5);">
+                                        <td style="padding:0.625rem 1rem; font-weight:600; color:var(--primary); vertical-align:top;">Governance contradictions</td>
+                                        <td style="padding:0.625rem 1rem; color:var(--text-secondary); line-height:1.6;">Managing both horizontal accountabilities (between partners) and vertical accountabilities (to senior managers and funders) simultaneously. These frequently pull in opposite directions.</td>
+                                    </tr>
+                                    <tr style="border-bottom:1px solid var(--border-light);">
+                                        <td style="padding:0.625rem 1rem; font-weight:600; color:var(--primary); vertical-align:top;">The wrong paperwork</td>
+                                        <td style="padding:0.625rem 1rem; color:var(--text-secondary); line-height:1.6;">A conventional contract is appropriate for a project. A jointly written collaboration agreement is appropriate for a partnership. Both are needed. The legal team understanding this distinction is harder than it sounds.</td>
+                                    </tr>
+                                    <tr style="border-bottom:1px solid var(--border-light); background:rgba(255,255,255,0.5);">
+                                        <td style="padding:0.625rem 1rem; font-weight:600; color:var(--primary); vertical-align:top;">Not counting what counts</td>
+                                        <td style="padding:0.625rem 1rem; color:var(--text-secondary); line-height:1.6;">Non-cash contributions - knowledge, relationships, legitimacy, convening power, access - are rarely given proper acknowledgement. This distorts perceptions of who is contributing and creates resentment.</td>
+                                    </tr>
+                                    <tr style="border-bottom:1px solid var(--border-light);">
+                                        <td style="padding:0.625rem 1rem; font-weight:600; color:var(--primary); vertical-align:top;">Poor communication</td>
+                                        <td style="padding:0.625rem 1rem; color:var(--text-secondary); line-height:1.6;">Partners need tailored communication, not broadcast updates. Images rather than words, calls rather than emails, stories rather than reports. Communication style that works for one partner alienates another.</td>
+                                    </tr>
+                                    <tr style="border-bottom:1px solid var(--border-light); background:rgba(255,255,255,0.5);">
+                                        <td style="padding:0.625rem 1rem; font-weight:600; color:var(--primary); vertical-align:top;">Too many comings and goings</td>
+                                        <td style="padding:0.625rem 1rem; color:var(--text-secondary); line-height:1.6;">Personnel turnover in partner organisations is a major and underacknowledged barrier. Institutional memory is harder to transfer than documents. New arrivals need genuine onboarding into the partnership's relational history.</td>
+                                    </tr>
+                                    <tr style="border-bottom:1px solid var(--border-light);">
+                                        <td style="padding:0.625rem 1rem; font-weight:600; color:var(--primary); vertical-align:top;">Loss of momentum</td>
+                                        <td style="padding:0.625rem 1rem; color:var(--text-secondary); line-height:1.6;">Meetings become formulaic; key players send deputies; project priorities crowd out partnership considerations. The partnership loses its energy and falls short of its wider potential for influence and system change.</td>
+                                    </tr>
+                                    <tr style="border-bottom:1px solid var(--border-light); background:rgba(255,255,255,0.5);">
+                                        <td style="padding:0.625rem 1rem; font-weight:600; color:var(--primary); vertical-align:top;">Reverting to business as usual</td>
+                                        <td style="padding:0.625rem 1rem; color:var(--text-secondary); line-height:1.6;">Under pressure, partners revert to conventional patterns of behaviour, undermining the partnership's potential to bring about real change. This is especially common at the exact moments when the partnership most needs to be different.</td>
+                                    </tr>
+                                    <tr style="border-bottom:1px solid var(--border-light);">
+                                        <td style="padding:0.625rem 1rem; font-weight:600; color:var(--primary); vertical-align:top;">An ever-changing context</td>
+                                        <td style="padding:0.625rem 1rem; color:var(--text-secondary); line-height:1.6;">Partnerships do not work in a vacuum. Changes in partners' strategic priorities, new government policies, or unexpected crises all affect what is and is not possible - and the partnership has no control over any of them.</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:0.625rem 1rem; font-weight:600; color:var(--primary); vertical-align:top;">The ticking clock</td>
+                                        <td style="padding:0.625rem 1rem; color:var(--text-secondary); line-height:1.6;">"Having no time" is the most frequently cited reason for lack of engagement - and usually means some give far more time than others, creating resentment. But the global clock is also ticking: the partnership needs partners to give it priority if it is to have real impact.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- ── TEN PRINCIPLES OF GOOD PRACTICE ───────────────── -->
+                        <h3>Ten principles of partnership brokering good practice</h3>
+                        <p>These are the PBA's standards for how brokers themselves should operate - distinct from the five partnering principles above, which govern how partners should relate to each other. Principle 6 is worth particular note: knowing when not to promote a partnership is as important as knowing how to broker one.</p>
+
+                        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:0.75rem; margin:1.25rem 0 2rem; font-size:0.8125rem;">
+                            <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:8px; padding:0.875rem 1rem;"><span style="font-family:'JetBrains Mono',monospace; color:var(--accent); font-size:0.6875rem; font-weight:700;">01</span> Keep up to date with new developments in the theory and practice of brokering multi-stakeholder partnerships.</div>
+                            <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:8px; padding:0.875rem 1rem;"><span style="font-family:'JetBrains Mono',monospace; color:var(--accent); font-size:0.6875rem; font-weight:700;">02</span> Be reflective and strive for diversity, equity, openness, mutual benefit and courageous practice - modelling this behaviour to partners.</div>
+                            <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:8px; padding:0.875rem 1rem;"><span style="font-family:'JetBrains Mono',monospace; color:var(--accent); font-size:0.6875rem; font-weight:700;">03</span> Be prepared to challenge assumptions and poor partnering behaviour at any stage of the partnering cycle in ways most likely to bring about constructive change.</div>
+                            <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:8px; padding:0.875rem 1rem;"><span style="font-family:'JetBrains Mono',monospace; color:var(--accent); font-size:0.6875rem; font-weight:700;">04</span> Take every opportunity to build partnering and partnership brokering capacity in others.</div>
+                            <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:8px; padding:0.875rem 1rem;"><span style="font-family:'JetBrains Mono',monospace; color:var(--accent); font-size:0.6875rem; font-weight:700;">05</span> Share knowledge generously and don't hold onto knowledge for personal aggrandisement or gain.</div>
+                            <div style="background:rgba(201,169,98,0.07); border:1px solid rgba(201,169,98,0.25); border-radius:8px; padding:0.875rem 1rem;"><span style="font-family:'JetBrains Mono',monospace; color:var(--accent); font-size:0.6875rem; font-weight:700;">06</span> <strong>Explore any available alternative approaches before promoting a partnering process</strong>, in a commitment to achieving the best possible outcomes. <em>Know when not to partner.</em></div>
+                            <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:8px; padding:0.875rem 1rem;"><span style="font-family:'JetBrains Mono',monospace; color:var(--accent); font-size:0.6875rem; font-weight:700;">07</span> Be open about risks and seek prior endorsement of those most likely to be affected by them before taking actions that might entail such risks.</div>
+                            <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:8px; padding:0.875rem 1rem;"><span style="font-family:'JetBrains Mono',monospace; color:var(--accent); font-size:0.6875rem; font-weight:700;">08</span> Be an ethical and responsible practitioner by raising concerns about the partnership or the actions of individual partners.</div>
+                            <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:8px; padding:0.875rem 1rem;"><span style="font-family:'JetBrains Mono',monospace; color:var(--accent); font-size:0.6875rem; font-weight:700;">09</span> Acknowledge competence limitations and be open to requesting assistance from others who will bring complementary skills or different approaches.</div>
+                            <div style="background:rgba(201,169,98,0.07); border:1px solid rgba(201,169,98,0.25); border-radius:8px; padding:0.875rem 1rem;"><span style="font-family:'JetBrains Mono',monospace; color:var(--accent); font-size:0.6875rem; font-weight:700;">10</span> <strong>Be willing to let go and hand over the partnership brokering role when the time is right.</strong> <em>The broker's success is measured by their own dispensability.</em></div>
+                        </div>
+
+                        <!-- ── REFLECTIVE PRACTICE ───────────────────────────── -->
+                        <h3>Reflective practice: the broker as a learning practitioner</h3>
+                        <p>A defining feature of PBA's approach is its insistence on reflective practice as a professional discipline. The PBAS accreditation requires a 3.5-month logbook of mentored practice. Practitioners consistently report three categories of value from sustained reflection:</p>
+
+                        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1rem; margin:1.25rem 0 2rem;">
+                            <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:10px; padding:1.125rem;">
+                                <strong style="color:var(--primary); font-size:0.875rem; display:block; margin-bottom:0.375rem;">Building professional competence</strong>
+                                <p style="font-size:0.8125rem; color:var(--text-secondary); margin:0; line-height:1.65;">Developing a systematic understanding of brokering skills, tools, and approaches. Partnership brokering may look like common sense - and much of it is - but even highly experienced practitioners report that the reflective practice structure gives them a breadth and depth they could not develop through experience alone.</p>
+                            </div>
+                            <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:10px; padding:1.125rem;">
+                                <strong style="color:var(--primary); font-size:0.875rem; display:block; margin-bottom:0.375rem;">Deepening insight into what the partnership needs</strong>
+                                <p style="font-size:0.8125rem; color:var(--text-secondary); margin:0; line-height:1.65;">Brokers must at all times be interpreting and channelling the views of the partners - not expressing their own. It is not easy to understand other people. Reflection builds the discipline of separating an objective brokering perspective from personal opinions.</p>
+                            </div>
+                            <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:10px; padding:1.125rem;">
+                                <strong style="color:var(--primary); font-size:0.875rem; display:block; margin-bottom:0.375rem;">Gaining a stronger sense of self</strong>
+                                <p style="font-size:0.8125rem; color:var(--text-secondary); margin:0; line-height:1.65;">Only if we really know ourselves can we truly be useful to others. Brokers operate in a subtle, demanding, and often isolated role that requires considerable inner strength. "Becoming more 'present' and self-aware - which includes the essential brokering skills of effective listening, empathising and questioning - is a challenge. It is a journey one must take intentionally."</p>
+                            </div>
+                        </div>
+
+                        <!-- ── ANIMATING ALLIANCES ───────────────────────────── -->
+                        <h3>Animating Alliances: eight structural models and how to work with them</h3>
+                        <p>Ros Tennyson's Animating Alliances framework (PBA, 2018) addresses a specific challenge: most people involved in alliances are time-poor, which means the central coordinating function tends to carry both the administrative burden and the animating burden - and the tension between these two roles is a persistent source of alliance dysfunction. The framework identifies eight structural models and twelve areas of operational focus for the animator.</p>
+
+                        <p>The most important distinction the framework makes is between the <strong>secretariat function</strong> (servant - providing support services) and the <strong>animator function</strong> (shaping and driving the work). Many alliance failures stem not from personality clashes but from insufficient clarity about which function the central entity is expected to perform - and by whom. This distinction is illustrated precisely in the GACP case study (Section 08, Case 9).</p>
+
+                        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:0.875rem; margin:1.25rem 0 1.5rem;">
+                            <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:8px; padding:1rem;"><strong style="color:var(--primary); font-size:0.875rem; display:block; margin-bottom:0.25rem;">Container</strong><p style="font-size:0.8rem; color:var(--text-secondary); margin:0; line-height:1.6;">A holding space for diverse actors with no central direction. Pure convening, high member autonomy. Value lies in the shared identity and peer connection, not coordination.</p></div>
+                            <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:8px; padding:1rem;"><strong style="color:var(--primary); font-size:0.875rem; display:block; margin-bottom:0.25rem;">Hub and Spokes</strong><p style="font-size:0.8rem; color:var(--text-secondary); margin:0; line-height:1.6;">A central coordinating body with bilateral relationships to members. Classic backbone architecture. The hub holds the connective tissue; members retain full autonomy in their own domains.</p></div>
+                            <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:8px; padding:1rem;"><strong style="color:var(--primary); font-size:0.875rem; display:block; margin-bottom:0.25rem;">Umbrella</strong><p style="font-size:0.8rem; color:var(--text-secondary); margin:0; line-height:1.6;">A shared brand or platform under which members operate independently. Coordination through shared identity rather than shared process. Members benefit from collective credibility.</p></div>
+                            <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:8px; padding:1rem;"><strong style="color:var(--primary); font-size:0.875rem; display:block; margin-bottom:0.25rem;">Flexible Organism</strong><p style="font-size:0.8rem; color:var(--text-secondary); margin:0; line-height:1.6;">A living structure that adapts its form to circumstance. High responsiveness and lower predictability. Leadership and authority shift with the situation.</p></div>
+                            <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:8px; padding:1rem;"><strong style="color:var(--primary); font-size:0.875rem; display:block; margin-bottom:0.25rem;">Self-Organising Group</strong><p style="font-size:0.8rem; color:var(--text-secondary); margin:0; line-height:1.6;">Members coordinate through peer relationships with no permanent centre. Stigmergic coordination - see Model 53 in Section 05. Resilient to loss of any single actor.</p></div>
+                            <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:8px; padding:1rem;"><strong style="color:var(--primary); font-size:0.875rem; display:block; margin-bottom:0.25rem;">Web</strong><p style="font-size:0.8rem; color:var(--text-secondary); margin:0; line-height:1.6;">A distributed network with multiple nodes and no single centre. Resilient, scalable, diffuse accountability. The web's strength is also its weakness: it can sustain itself without any single actor but it can also drift without anyone noticing.</p></div>
+                            <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:8px; padding:1rem;"><strong style="color:var(--primary); font-size:0.875rem; display:block; margin-bottom:0.25rem;">Backbone Organisation</strong><p style="font-size:0.8rem; color:var(--text-secondary); margin:0; line-height:1.6;">A dedicated neutral entity providing coordination infrastructure for the whole field. The Collective Impact model. Requires sustainable resourcing, genuine neutrality, and clarity on the secretariat vs. animator distinction.</p></div>
+                            <div style="background:rgba(201,169,98,0.07); border:1px solid rgba(201,169,98,0.2); border-radius:8px; padding:1rem;"><strong style="color:var(--primary); font-size:0.875rem; display:block; margin-bottom:0.25rem;">Others - yet to be invented</strong><p style="font-size:0.8rem; color:var(--text-secondary); margin:0; line-height:1.6;">Tennyson's explicit acknowledgement that the field of collaborative structures is still evolving. The right architecture depends on context, purpose, and the nature of the actors - not on theory.</p></div>
+                        </div>
+
+                        <p>For each of these models, Tennyson identifies twelve areas of operational focus for the animator: Membership, Model, Mission, Assumptions, Actions, Accountability, Permission, Protocols, Processes, Risk, Reward, and Results. The key across all twelve is creating conditions in which the alliance can be genuinely flexible, inclusive, and responsive - not merely nominally so.</p>
+
+                        <div class="definition-box" style="margin-top:1.5rem;">
+                            <p style="font-size:0.8375rem; color:var(--text-secondary); margin:0;"><strong>Sources:</strong> Partnership Brokers Association (2012). <em>What do Partnership Brokers Do? An Enquiry into Practice.</em> &bull; Tennyson, R. &amp; Mundy, J. (2019). <em>Brokering Better Partnerships Handbook, 2nd Edition.</em> &bull; Tennyson, R. (2018). <em>Animating Alliances.</em> All: Partnership Brokers Association. <a href="https://www.partnershipbrokers.org" target="_blank" rel="noopener" style="color:var(--accent);">partnershipbrokers.org &rarr;</a></p>
+                        </div>
+                    </div>
+                    <!-- ══════════ FRAMEWORK 8: VALUE SYSTEM STAGE ══════════ -->
+                    <div class="framework-content" id="value-system-stage-content" role="tabpanel" aria-hidden="true">
+                        <h2>Value System Stage <span style="font-size:0.875rem; font-weight:400; color:var(--text-muted);">The Hidden Where-to-Play Choice for System Orchestrators</span></h2>
+
+                        <p>System orchestrators are often told to think big - to see the whole system, convene actors, bridge silos, enable collaboration, catalyse change. Much of this is right. And yet many orchestration efforts become muddled, overextended, and underpowered not because their intent is wrong, but because the institution leading them never became clear about which stage of the value creation chain it is actually designed to occupy.</p>
+
+                        <p>That is the hidden problem. A project can fail through poor execution. A coalition can fail through weak trust. But an orchestration effort often fails earlier and more invisibly: it fails because nobody chose its strategic role in the system deliberately.</p>
+
+                        <div class="definition-box" style="margin: 1.5rem 0;">
+                            <p style="font-size:0.9375rem; font-family:'Fraunces',serif; font-style:italic; color:var(--primary); margin:0 0 0.75rem;">"The most important strategic question for a system orchestrator is not 'How do we change the whole system?' It is 'Which part of the system's value creation chain must we own, which part must we influence, and which part must we deliberately leave to others?'"</p>
+                            <p style="font-size:0.75rem; color:var(--text-muted); margin:0; font-family:'JetBrains Mono',monospace; letter-spacing:0.06em; text-transform:uppercase;">The Hidden Where-to-Play Choice for System Orchestrators</p>
+                        </div>
+
+                        <h3>What a value system looks like in practice</h3>
+                        <p>Every system has multiple stages of value creation. In a climate resilience system they might include: sensing risk, generating evidence, translating evidence, convening actors, prototyping solutions, financing action, supporting frontline implementation, codifying learning, embedding routines, influencing policy, enabling scale, monitoring performance, sustaining legitimacy. No single organisation can own all of these at high quality. The orchestrator's question is not "Are we working on climate resilience?" It is "At which stage in the climate resilience value system do we create the most irreplaceable value?"</p>
+
+                        <p>This reframes institutional identity away from broad topic labels and toward sharper role definitions:</p>
+
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin:1.25rem 0 2rem; font-size:0.8375rem;">
+                            <div style="background:rgba(201,169,98,0.05); border:1px solid rgba(201,169,98,0.15); border-radius:8px; padding:1rem;">
+                                <div style="font-family:'JetBrains Mono',monospace; font-size:0.5rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-muted); margin-bottom:0.5rem;">Blurry identity</div>
+                                <div style="color:var(--text-secondary); line-height:1.7;">
+                                    "We are a climate NGO"<br>
+                                    "We are a multi-stakeholder platform"<br>
+                                    "We support local solutions"
+                                </div>
+                            </div>
+                            <div style="background:rgba(26,31,60,0.04); border:1px solid var(--border-medium); border-radius:8px; padding:1rem;">
+                                <div style="font-family:'JetBrains Mono',monospace; font-size:0.5rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); margin-bottom:0.5rem;">Sharp role</div>
+                                <div style="color:var(--text-primary); font-weight:500; line-height:1.7;">
+                                    "We are an institutional adoption accelerator"<br>
+                                    "We translate fragmented experiments into investable pathways"<br>
+                                    "We create architecture through which local solutions become legible to funders and government"
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3>The six postures: Own, Enable, Borrow, Broker, Influence, Exit</h3>
+                        <p>For each major function in an ecosystem, a mature orchestrator should take one of six deliberate postures. The question is never merely "Is this important?" It is "What is our <em>role</em> in relation to this function?"</p>
+
+                        <div style="display:grid; gap:0.75rem; margin:1.25rem 0 2rem;">
+                            <div style="display:grid; grid-template-columns:120px 1fr; gap:1rem; align-items:start; background:var(--cream); border:1px solid var(--border-light); border-radius:10px; padding:1.125rem 1.25rem;">
+                                <div>
+                                    <div style="font-family:'JetBrains Mono',monospace; font-weight:700; color:var(--primary); font-size:0.875rem; margin-bottom:0.25rem;">01. OWN</div>
+                                    <div style="font-size:0.6875rem; color:var(--accent); font-family:'JetBrains Mono',monospace; letter-spacing:0.06em; text-transform:uppercase;">Core to you</div>
+                                </div>
+                                <div>
+                                    <p style="font-size:0.8375rem; color:var(--text-secondary); margin:0 0 0.375rem;">You do this directly because it is central to your distinctiveness and too important to leave structurally outside your institution. This is the function that would hollow you out if outsourced or neglected.</p>
+                                    <p style="font-size:0.8rem; color:var(--text-muted); margin:0; font-style:italic;">Ask: What capability, if removed from inside our institution, would make us cease to be who we are?</p>
+                                </div>
+                            </div>
+                            <div style="display:grid; grid-template-columns:120px 1fr; gap:1rem; align-items:start; background:var(--cream); border:1px solid var(--border-light); border-radius:10px; padding:1.125rem 1.25rem;">
+                                <div>
+                                    <div style="font-family:'JetBrains Mono',monospace; font-weight:700; color:var(--primary); font-size:0.875rem; margin-bottom:0.25rem;">02. ENABLE</div>
+                                    <div style="font-size:0.6875rem; color:var(--accent); font-family:'JetBrains Mono',monospace; letter-spacing:0.06em; text-transform:uppercase;">Strengthen others</div>
+                                </div>
+                                <div>
+                                    <p style="font-size:0.8375rem; color:var(--text-secondary); margin:0 0 0.375rem;">You strengthen another actor to do this because the system needs it done well but you are not and should not be the long-term owner. Enabling is not abdication - it is deliberate capacity-building in the right actor.</p>
+                                    <p style="font-size:0.8rem; color:var(--text-muted); margin:0; font-style:italic;">Ask: Who is the right long-term owner of this function? What would it take to make them capable and confident?</p>
+                                </div>
+                            </div>
+                            <div style="display:grid; grid-template-columns:120px 1fr; gap:1rem; align-items:start; background:var(--cream); border:1px solid var(--border-light); border-radius:10px; padding:1.125rem 1.25rem;">
+                                <div>
+                                    <div style="font-family:'JetBrains Mono',monospace; font-weight:700; color:var(--primary); font-size:0.875rem; margin-bottom:0.25rem;">03. BORROW</div>
+                                    <div style="font-size:0.6875rem; color:var(--accent); font-family:'JetBrains Mono',monospace; letter-spacing:0.06em; text-transform:uppercase;">Access expertise</div>
+                                </div>
+                                <div>
+                                    <p style="font-size:0.8375rem; color:var(--text-secondary); margin:0 0 0.375rem;">You rely on an external specialist because they can do it better, faster, or cheaper without weakening your strategic position. Branding mattered enormously to P&amp;G but they outsourced advertising copy. Research may be essential but you do not need to be the university.</p>
+                                    <p style="font-size:0.8rem; color:var(--text-muted); margin:0; font-style:italic;">Ask: Does owning this function make us better at what we are here to do, or does it distract us from it?</p>
+                                </div>
+                            </div>
+                            <div style="display:grid; grid-template-columns:120px 1fr; gap:1rem; align-items:start; background:var(--cream); border:1px solid var(--border-light); border-radius:10px; padding:1.125rem 1.25rem;">
+                                <div>
+                                    <div style="font-family:'JetBrains Mono',monospace; font-weight:700; color:var(--primary); font-size:0.875rem; margin-bottom:0.25rem;">04. BROKER</div>
+                                    <div style="font-size:0.6875rem; color:var(--accent); font-family:'JetBrains Mono',monospace; letter-spacing:0.06em; text-transform:uppercase;">Design the handoff</div>
+                                </div>
+                                <div>
+                                    <p style="font-size:0.8375rem; color:var(--text-secondary); margin:0 0 0.375rem;">You do not perform the function yourself but create the relationships, incentives, and handoffs that allow others to do it together. The broker position is the orchestrator's most distinctive contribution: not doing, but architecting doing.</p>
+                                    <p style="font-size:0.8rem; color:var(--text-muted); margin:0; font-style:italic;">Ask: What coordination architecture would make this function happen reliably without our direct involvement in delivery?</p>
+                                </div>
+                            </div>
+                            <div style="display:grid; grid-template-columns:120px 1fr; gap:1rem; align-items:start; background:var(--cream); border:1px solid var(--border-light); border-radius:10px; padding:1.125rem 1.25rem;">
+                                <div>
+                                    <div style="font-family:'JetBrains Mono',monospace; font-weight:700; color:var(--primary); font-size:0.875rem; margin-bottom:0.25rem;">05. INFLUENCE</div>
+                                    <div style="font-size:0.6875rem; color:var(--accent); font-family:'JetBrains Mono',monospace; letter-spacing:0.06em; text-transform:uppercase;">Shape the rules</div>
+                                </div>
+                                <div>
+                                    <p style="font-size:0.8375rem; color:var(--text-secondary); margin:0 0 0.375rem;">You do not own or deliver the function, but you shape the rules, narratives, standards, or public decisions around it. Influence is a legitimate strategic posture - not a consolation prize. It is often where orchestrators create disproportionate leverage relative to resource.</p>
+                                    <p style="font-size:0.8rem; color:var(--text-muted); margin:0; font-style:italic;">Ask: What norms, standards, or policy frameworks would, if changed, unlock value across the whole system?</p>
+                                </div>
+                            </div>
+                            <div style="display:grid; grid-template-columns:120px 1fr; gap:1rem; align-items:start; background:var(--cream); border:1px solid var(--border-light); border-left:3px solid var(--accent); border-radius:0 10px 10px 0; padding:1.125rem 1.25rem;">
+                                <div>
+                                    <div style="font-family:'JetBrains Mono',monospace; font-weight:700; color:var(--primary); font-size:0.875rem; margin-bottom:0.25rem;">06. EXIT</div>
+                                    <div style="font-size:0.6875rem; color:var(--accent); font-family:'JetBrains Mono',monospace; letter-spacing:0.06em; text-transform:uppercase;">Let go deliberately</div>
+                                </div>
+                                <div>
+                                    <p style="font-size:0.8375rem; color:var(--text-secondary); margin:0 0 0.375rem;">You deliberately stop doing something because continued ownership reduces focus, duplicates others, or blocks system maturation. This is the hardest posture. It requires admitting that presence is not always contribution. Many of an orchestrator's temporary bridge functions should become exit plans from the start.</p>
+                                    <p style="font-size:0.8rem; color:var(--text-muted); margin:0; font-style:italic;">Ask: Are we doing this because we are genuinely the right actor, or because nobody else has stepped up yet?</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3>The five traps that blur orchestration strategy</h3>
+                        <p>Before applying the six postures, it helps to name the recurring patterns that prevent orchestrators from choosing their role at all.</p>
+
+                        <div style="display:grid; gap:0.75rem; margin:1.25rem 0 2rem;">
+                            <div style="background:rgba(231,76,60,0.04); border:1px solid rgba(231,76,60,0.12); border-radius:8px; padding:1rem 1.25rem;">
+                                <strong style="color:var(--primary); font-size:0.875rem;">Trap 1: "Everything Matters, So We Do Everything"</strong>
+                                <p style="font-size:0.8125rem; color:var(--text-secondary); margin:0.375rem 0 0;">This comes from seriousness. Leaders see correctly that systems are interconnected. From that they draw the wrong conclusion: that their institution must cover the whole terrain. But interconnectedness does not require total ownership. It requires clarity of role plus strength of linkage. Owning everything usually weakens the orchestrator's true comparative advantage.</p>
+                            </div>
+                            <div style="background:rgba(231,76,60,0.04); border:1px solid rgba(231,76,60,0.12); border-radius:8px; padding:1rem 1.25rem;">
+                                <strong style="color:var(--primary); font-size:0.875rem;">Trap 2: Mistaking convening for strategy</strong>
+                                <p style="font-size:0.8125rem; color:var(--text-secondary); margin:0.375rem 0 0;">Many organisations can convene. Fewer know why they are convening, what specific function the convening serves, and what downstream change it is meant to unlock. Convening is not a role - it is a mechanism. The question is: convening for what stage of value creation? Without that clarity, convening becomes performative.</p>
+                            </div>
+                            <div style="background:rgba(231,76,60,0.04); border:1px solid rgba(231,76,60,0.12); border-radius:8px; padding:1rem 1.25rem;">
+                                <strong style="color:var(--primary); font-size:0.875rem;">Trap 3: Letting funding define institutional identity</strong>
+                                <p style="font-size:0.8125rem; color:var(--text-secondary); margin:0.375rem 0 0;">One year the funder wants research. Another year pilots. Another year coalition work. The institution keeps adapting until it loses a stable centre. A stronger institution uses funding to reinforce its chosen value system position rather than constantly replacing it. Strategy begins to erode when grants become the primary determinant of role.</p>
+                            </div>
+                            <div style="background:rgba(231,76,60,0.04); border:1px solid rgba(231,76,60,0.12); border-radius:8px; padding:1rem 1.25rem;">
+                                <strong style="color:var(--primary); font-size:0.875rem;">Trap 4: Confusing centrality with internalisation</strong>
+                                <p style="font-size:0.8125rem; color:var(--text-secondary); margin:0.375rem 0 0;">An activity may be central to your success and still belong with a partner. Community legitimacy may be essential but you may not need to be the primary community-based organisation. Policy uptake may be essential but you may not need to be the lead think tank. The question is not whether a function matters - it is whether you must own it for your strategy to work.</p>
+                            </div>
+                            <div style="background:rgba(231,76,60,0.04); border:1px solid rgba(231,76,60,0.12); border-radius:8px; padding:1rem 1.25rem;">
+                                <strong style="color:var(--primary); font-size:0.875rem;">Trap 5: Treating partnerships as gestures rather than architecture</strong>
+                                <p style="font-size:0.8125rem; color:var(--text-secondary); margin:0.375rem 0 0;">Many partnerships are announced as collaborative gestures. Fewer are designed as strategic decisions about role architecture. A real partner architecture is not "we will collaborate." It is: this actor owns legitimacy, this actor owns research depth, this actor owns policy access, this actor owns local trust, this actor owns financing instruments - and we own the integrative layer that makes the pieces cohere. That is not networking. That is system design.</p>
+                            </div>
+                        </div>
+
+                        <h3>Applied example: heat resilience as a system</h3>
+                        <p>Consider an organisation trying to act as a "heat resilience orchestrator" across a city or region. Many actors are required: meteorological agencies, local governments, public health departments, employers, worker collectives, women's groups, urban planners, researchers, media, funders, infrastructure operators, social protection systems. Which posture should the orchestrator take toward each function?</p>
+
+                        <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:12px; overflow:hidden; margin:1.25rem 0 2rem;">
+                            <table style="width:100%; border-collapse:collapse; font-size:0.8rem;">
+                                <thead>
+                                    <tr style="background:var(--primary); color:#fff;">
+                                        <th style="padding:0.75rem 1rem; text-align:left; font-family:'JetBrains Mono',monospace; font-size:0.55rem; letter-spacing:0.1em; text-transform:uppercase; font-weight:600;">Posture</th>
+                                        <th style="padding:0.75rem 1rem; text-align:left; font-family:'JetBrains Mono',monospace; font-size:0.55rem; letter-spacing:0.1em; text-transform:uppercase; font-weight:600;">Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="border-bottom:1px solid var(--border-light);">
+                                        <td style="padding:0.625rem 1rem; font-weight:700; color:var(--primary); white-space:nowrap; font-family:'JetBrains Mono',monospace; font-size:0.6875rem;">OWN</td>
+                                        <td style="padding:0.625rem 1rem; color:var(--text-secondary); line-height:1.6;">Risk-corridor framing; cross-actor architecture; translation of field evidence into institutional action; design of local nodes; learning loop between pilots and policy; partner choreography</td>
+                                    </tr>
+                                    <tr style="border-bottom:1px solid var(--border-light); background:rgba(255,255,255,0.5);">
+                                        <td style="padding:0.625rem 1rem; font-weight:700; color:var(--primary); white-space:nowrap; font-family:'JetBrains Mono',monospace; font-size:0.6875rem;">BORROW</td>
+                                        <td style="padding:0.625rem 1rem; color:var(--text-secondary); line-height:1.6;">Remote sensing; climate analytics; epidemiological modelling; digital tool development</td>
+                                    </tr>
+                                    <tr style="border-bottom:1px solid var(--border-light);">
+                                        <td style="padding:0.625rem 1rem; font-weight:700; color:var(--primary); white-space:nowrap; font-family:'JetBrains Mono',monospace; font-size:0.6875rem;">ENABLE</td>
+                                        <td style="padding:0.625rem 1rem; color:var(--text-secondary); line-height:1.6;">Local women's groups and worker associations to run community response; municipal departments to absorb planning tools; civil society partners for last-mile mobilisation</td>
+                                    </tr>
+                                    <tr style="border-bottom:1px solid var(--border-light); background:rgba(255,255,255,0.5);">
+                                        <td style="padding:0.625rem 1rem; font-weight:700; color:var(--primary); white-space:nowrap; font-family:'JetBrains Mono',monospace; font-size:0.6875rem;">BROKER</td>
+                                        <td style="padding:0.625rem 1rem; color:var(--text-secondary); line-height:1.6;">Between employers and worker groups; between city planners and informal settlement representatives; between researchers and municipal finance actors</td>
+                                    </tr>
+                                    <tr style="border-bottom:1px solid var(--border-light);">
+                                        <td style="padding:0.625rem 1rem; font-weight:700; color:var(--primary); white-space:nowrap; font-family:'JetBrains Mono',monospace; font-size:0.6875rem;">INFLUENCE</td>
+                                        <td style="padding:0.625rem 1rem; color:var(--text-secondary); line-height:1.6;">Heat action plans; labour standards; budget routines; procurement norms; state guidelines</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:0.625rem 1rem; font-weight:700; color:var(--accent); white-space:nowrap; font-family:'JetBrains Mono',monospace; font-size:0.6875rem;">EXIT</td>
+                                        <td style="padding:0.625rem 1rem; color:var(--text-secondary); line-height:1.6;">Direct implementation of pilot functions once public systems adopt them</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <p>This is far more than an organisational chart. It is a statement of value system stage. And once articulated, the fundraising proposition also becomes stronger: the organisation is no longer saying "Fund our broad commitment to heat." It is saying "Fund the orchestration layer required to turn fragmented heat responses into durable institutional adoption." That is a far more investable idea.</p>
+
+                        <h3>Three rules for deciding what not to own</h3>
+                        <div style="display:grid; gap:0.875rem; margin:1.25rem 0 2rem;">
+                            <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:10px; padding:1.125rem 1.25rem;">
+                                <strong style="color:var(--primary); font-size:0.9rem; display:block; margin-bottom:0.375rem;">Rule 1: Let others own the function if the system becomes stronger when they do</strong>
+                                <p style="font-size:0.8125rem; color:var(--text-secondary); margin:0;">If another actor can create more value - greater legitimacy, better reach, lower cost - then be cautious about owning that function. A local federation may be better placed to lead community mobilisation. A research institute may be better placed to run rigorous longitudinal studies. The test is not ego. The test is whether the system gets stronger.</p>
+                            </div>
+                            <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:10px; padding:1.125rem 1.25rem;">
+                                <strong style="color:var(--primary); font-size:0.9rem; display:block; margin-bottom:0.375rem;">Rule 2: Do not place critical dependencies where others can hold you hostage</strong>
+                                <p style="font-size:0.8125rem; color:var(--text-secondary); margin:0;">Some partnerships look efficient at first but create long-term fragility: a platform owned by one vendor; a coalition dependent on one charismatic broker; a local engagement channel that collapses if one intermediary exits; a data source nobody else can verify. Ask: if we do not own this, do we become strategically captive? If yes, either build safeguards, diversify, or retain partial ownership.</p>
+                            </div>
+                            <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:10px; padding:1.125rem 1.25rem;">
+                                <strong style="color:var(--primary); font-size:0.9rem; display:block; margin-bottom:0.375rem;">Rule 3: Do not outsource the very capability that makes you strategically meaningful</strong>
+                                <p style="font-size:0.8125rem; color:var(--text-secondary); margin:0;">If you outsource your core integrative intelligence - your systems analysis, trust architecture, partner design, adoption logic, or translation capability - you may still appear active, but your institutional centre hollows out. You become a shell coordinating other people's substance. Protect your irreducible contribution even when it is invisible to funders.</p>
+                            </div>
+                        </div>
+
+                        <h3>The deepest shift: from heroic centrality to designed indispensability</h3>
+                        <p>Many mission-driven institutions are rewarded, internally and externally, for appearing central. The organisation becomes the protagonist. But system change rarely rewards heroic centrality for long. It rewards <strong>designed indispensability</strong>.</p>
+
+                        <p>Designed indispensability means you are essential not because you do everything, but because you hold a function nobody else is reliably holding and you hold it in a way that makes others more effective, not more dependent. It is quieter, more architectural, less theatrical - but often more durable. It is the difference between being the loudest actor in the room and being the one without whom the room cannot coordinate.</p>
+
+                        <div class="definition-box" style="margin:1.5rem 0;">
+                            <p style="font-size:0.875rem; color:var(--text-secondary); margin:0; line-height:1.8;"><strong>What a mature orchestration strategy sounds like:</strong> "We do not seek to control the whole system. We seek to strengthen the system by owning the integrative functions that are chronically under-owned: problem framing across actors, architecture for coordination, translation from field insight to institutional action, and pathways from proof to adoption. We partner for specialist functions, strengthen local actors for legitimacy and sustained delivery, and work to shift long-term ownership of public routines into the institutions that must ultimately carry them."</p>
+                        </div>
+
+                        <h3>Self-diagnostic: which posture are you actually taking?</h3>
+                        <p>Before designing an ideal role, reverse-engineer the strategy you are already living - not just the one you say you have.</p>
+                        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:0.875rem; margin:1.25rem 0 1.5rem; font-size:0.8125rem; color:var(--text-secondary);">
+                            <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:8px; padding:1rem;">
+                                <div style="font-family:'JetBrains Mono',monospace; font-size:0.5rem; letter-spacing:0.1em; color:var(--accent); text-transform:uppercase; margin-bottom:0.375rem;">What you actually do</div>
+                                What do we truly spend time, money, and leadership energy on? Not what is in the strategy deck.
+                            </div>
+                            <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:8px; padding:1rem;">
+                                <div style="font-family:'JetBrains Mono',monospace; font-size:0.5rem; letter-spacing:0.1em; color:var(--accent); text-transform:uppercase; margin-bottom:0.375rem;">Disproportionate value</div>
+                                Where do partners most rely on us? What would genuinely be missed if we disappeared?
+                            </div>
+                            <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:8px; padding:1rem;">
+                                <div style="font-family:'JetBrains Mono',monospace; font-size:0.5rem; letter-spacing:0.1em; color:var(--accent); text-transform:uppercase; margin-bottom:0.375rem;">Legacy residues</div>
+                                What are we still doing because of history, not because of present strategic advantage?
+                            </div>
+                            <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:8px; padding:1rem;">
+                                <div style="font-family:'JetBrains Mono',monospace; font-size:0.5rem; letter-spacing:0.1em; color:var(--accent); text-transform:uppercase; margin-bottom:0.375rem;">Better elsewhere</div>
+                                Where are we duplicating, crowding, or compensating unnecessarily for another actor's absence?
+                            </div>
+                            <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:8px; padding:1rem;">
+                                <div style="font-family:'JetBrains Mono',monospace; font-size:0.5rem; letter-spacing:0.1em; color:var(--accent); text-transform:uppercase; margin-bottom:0.375rem;">Temporary bridges</div>
+                                What should exist only until the system matures enough for another actor to own it?
+                            </div>
+                            <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:8px; padding:1rem;">
+                                <div style="font-family:'JetBrains Mono',monospace; font-size:0.5rem; letter-spacing:0.1em; color:var(--accent); text-transform:uppercase; margin-bottom:0.375rem;">Institutional edge</div>
+                                Which capabilities would hollow us out if outsourced or neglected?
+                            </div>
+                        </div>
+
+                        <p>The most dangerous thing about the hidden where-to-play choice is that you are making it whether you mean to or not. Every partnership you enter, every grant you accept, every capability you build, every function you retain - these are all votes for a particular value-system-stage position. The choice is not whether you have one. The choice is whether it will be deliberate.</p>
+
+                        <div class="definition-box" style="margin-top:1.5rem;">
+                            <p style="font-size:0.8375rem; color:var(--text-secondary); margin:0;"><strong>Reference:</strong> "The Hidden Where-to-Play Choice for System Orchestrators." Draws on Roger Martin's work on value system stage in strategy. See also: Donella Meadows, <em>Leverage Points</em> (model 08); the Inspire-Overtake-Lead framework for the political arc of system transition; and the Self-Assessment section (10) for applying these questions to your own institution.</p>
+                        </div>
+                    </div>
+
+
+
+
 
                         <h3>Three practical frameworks that bridge theory to action</h3>
 
@@ -4938,7 +5591,7 @@ body { padding-top: 0; }
                                     <p style="font-size:0.8125rem; color:var(--text-secondary); margin:0.25rem 0 0;">Complex systems do not hold still. DE is explicitly designed for highly emergent, rapidly changing contexts where the programme needs real-time feedback, not annual reporting cycles.</p>
                                 </div>
                             </div>
-                            <p style="font-size:0.8125rem; color:var(--text-muted); margin-top:1rem;"><strong>Source:</strong> Patton, M.Q. (2010). <em>Developmental Evaluation: Applying Complexity Concepts to Enhance Innovation and Use.</em> Guilford Press.</p>
+                            <p style="font-size:0.8125rem; color:var(--text-muted); margin-top:1rem;"><strong>Source:</strong> Patton, M.Q. (2010). Developmental Evaluation: Applying Complexity Concepts to Enhance Innovation and Use. Guilford Press.</p>
                         </div>
                     </div>
                 </div>
@@ -4957,7 +5610,7 @@ body { padding-top: 0; }
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 2rem; margin-top: 2.5rem;">
 
                     <!-- HANSEATIC LEAGUE -->
-                    <div style="background: var(--primary); border-radius: 16px; padding: 2.25rem; color: #fff; position: relative; overflow: hidden; display: flex; flex-direction: column;">
+                    <div style="background: #1a1f3c; border-radius: 16px; padding: 2.25rem; color: #fff; position: relative; overflow: hidden; display: flex; flex-direction: column;">
                         <div style="position: absolute; top: -15px; right: -15px; font-size: 6rem; opacity: 0.04; line-height: 1; font-family: serif;">&#9773;</div>
                         <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem;">1267 &mdash; 1669 &middot; Northern Europe</div>
                         <h2 style="font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 500; color: #fff; margin: 0 0 0.25rem;">The Hanseatic League</h2>
@@ -4993,7 +5646,7 @@ body { padding-top: 0; }
                     </div>
 
                     <!-- MARSHALL PLAN -->
-                    <div style="background: #1e2d1a; border-radius: 16px; padding: 2.25rem; color: #fff; position: relative; overflow: hidden; display: flex; flex-direction: column;">
+                    <div style="background: #1c2e1a; border-radius: 16px; padding: 2.25rem; color: #fff; position: relative; overflow: hidden; display: flex; flex-direction: column;">
                         <div style="position: absolute; top: -15px; right: -15px; font-size: 6rem; opacity: 0.04; line-height: 1; font-family: serif;">&#x2605;</div>
                         <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem;">1948 &mdash; 1952 &middot; Western Europe</div>
                         <h2 style="font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 500; color: #fff; margin: 0 0 0.25rem;">The Marshall Plan</h2>
@@ -6705,7 +7358,8 @@ body { padding-top: 0; }
                     <h2>Five Moves That Recur Across Every Orchestration Effort</h2>
                     <p>These are not sequential phases. They are moves that orchestrators make repeatedly, in different orders, at different scales. An effective orchestrator is always doing several simultaneously and knows which the system most needs at any given moment.</p>
 
-                    <div class="expandable"><div class="expandable-header" role="button" aria-expanded="false"><h3 class="expandable-title">Move 1  -  Sense-making: Building a shared picture before a shared agenda</h3><div class="expandable-icon" aria-hidden="true">▼</div></div><div class="expandable-content"><div class="expandable-body">
+                    <div class="expandable"><div class="expandable-header" role="button" aria-expanded="false"><h3 class="expandable-title">Move 1  -  Sense-making: Building a shared picture before a shared agenda</h3>
+                    <div class="expandable-icon" aria-hidden="true">▼</div></div><div class="expandable-content"><div class="expandable-body">
                         <p>The most common premature move in orchestration is calling a multi-stakeholder convening before the system has been mapped. Actors show up with different mental models of the problem, different theories of why previous efforts failed, and different assumptions about who is in the room. Without a shared picture, a common agenda is not a genuine meeting of minds  -  it is an artefact of whoever held the pen.</p>
                         <p>Sense-making is the work of building a collective understanding of the system before trying to change it. This includes stakeholder analysis (who holds what forms of power  -  visible, hidden, invisible), ecosystem mapping (who is doing what and how efforts relate to each other), and narrative research (how different actors tell the story of the problem). The India Climate Collaborative's landscape studies do this for climate philanthropy: before funders can coordinate, they need to see the same map of where money is flowing and where gaps exist.</p>
                         <p>Sense-making tools: Rich Pictures (Checkland's Soft Systems Methodology), participatory causal loop diagrams, stakeholder influence-interest matrices, Bob Williams' boundary analysis, Gaventa's Power Cube. What distinguishes orchestration-quality sense-making from standard needs assessments is two things: it is done <em>with</em> actors rather than <em>for</em> them, and it includes the orchestrator's own position in the map rather than treating the orchestrator as outside the system.</p>
@@ -7054,8 +7708,8 @@ body { padding-top: 0; }
         <section id="case-studies">
             <div class="container">
                 <span class="section-eyebrow">08 / Evidence</span>
-                <h1 class="section-title">Seven Cases: Orchestration in the World</h1>
-                <p class="section-intro">Each case below shows orchestration doing something specific: not coordination in general, but the particular move that changed what was possible for everyone else in the system. EYElliance is about shared procurement infrastructure. Crisis Action is about coalition-as-leverage. Strive is about shared measurement as alignment technology. Freedom to Marry is about field-building as phase-discipline. SEforALL is about norm-setting at global scale. The Moving Energy Initiative is about treating humanitarian settings as market systems. Farmer Saved Seed is about participation reshaping power. Read each for the mechanism, not just the outcome.</p>
+                <h1 class="section-title">Nine Cases: Orchestration in the World</h1>
+                <p class="section-intro">Each case below shows orchestration doing something specific: not coordination in general, but the particular move that changed what was possible for everyone else in the system. EYElliance is about shared procurement infrastructure. Crisis Action is about coalition-as-leverage. Strive is about shared measurement as alignment technology. Freedom to Marry is about field-building as phase-discipline. SEforALL is about norm-setting at global scale. The Moving Energy Initiative is about treating humanitarian settings as market systems. Farmer Saved Seed is about participation reshaping power. The Marshall Plan is about capital conditionality producing lasting institutional architecture. GACP is about funder orchestration without pooled funds. Read each for the mechanism, not just the outcome.</p>
                 <div class="content-block">
                     <div class="case-study visible">
                         <div class="case-study-header"><h2 class="case-study-title">EYElliance – Shared Infrastructure for Vision Care</h2><div class="case-study-meta">Global Health · Coalition Backbone</div></div>
@@ -7130,6 +7784,31 @@ body { padding-top: 0; }
                             <div class="case-study-section">
                                 <h3>What this case contributes to the site's argument</h3>
                                 <p>The Marshall Plan demonstrates that the backbone function can be produced by a funder's architecture, not just by a dedicated backbone organisation. When a funder requires collective coordination as the price of capital, it inserts a coordination mechanism into the field without having to maintain one. The legacy institution &mdash; the OEEC/OECD &mdash; emerged as a side effect of that requirement, sustained by the member nations long after the original funder's involvement ended. This is the highest form of backbone work: creating the conditions for coordination to become self-sustaining, and then stepping back.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="case-study">
+                        <div class="case-study-header"><h2 class="case-study-title">Global Alliance for Community Philanthropy - Funder Orchestration Without Pooled Funds</h2><div class="case-study-meta">Funder collaboration &middot; Field-building &middot; Alliance orchestration</div></div>
+                        <div class="case-study-tags"><span class="case-study-tag">Funder Orchestration</span><span class="case-study-tag">Alliance Architecture</span><span class="case-study-tag">Field-Building</span><span class="case-study-tag">Community Philanthropy</span></div>
+                        <div class="case-study-body">
+                            <div class="case-study-section">
+                                <h3>The orchestration move</h3>
+                                <p>Between 2013 and 2019, six US-based donor organisations - Aga Khan Foundation, Charles Stewart Mott Foundation, Ford Foundation, Inter-American Foundation, Rockefeller Brothers Fund, and USAID - came together as the Global Alliance for Community Philanthropy (GACP) to advance community philanthropy as a global movement. The Alliance was not about pooling funds. It was about promoting an idea, learning from each other, and collectively influencing how other donors understood and supported community philanthropy. The Global Fund for Community Foundations (GFCF) served as secretariat. The Partnership Brokers Association (PBA) was contracted to evaluate the collaboration - and over time moved into an "accompaniment" role, actively supporting the Alliance's collaborative processes rather than simply observing them.</p>
+                            </div>
+                            <div class="case-study-section">
+                                <h3>What this case reveals about funder orchestration</h3>
+                                <p>The GACP demonstrates that orchestration can exist without a traditional backbone organisation, without pooled resources, and without any single donor "in charge." The Alliance's primary instrument was coordination through a shared idea - community philanthropy - rather than through money. Alliance members could individually claim legitimacy from belonging to a group of credible funders committed to the same agenda. As one member noted: "When a group of donors like ours comes together to endorse a concept and way of working, people pay attention in ways they might not otherwise."</p>
+                                <p>The GFCF's role evolved in ways the Alliance did not fully anticipate. Rather than acting as a conventional secretariat (serving), the GFCF acted as a field animator (shaping). It organised the Global Summit on Community Philanthropy (Johannesburg, December 2016, 400+ practitioners from 62 countries), drove the #ShiftThePower agenda, and produced the GrantCraft guide for donors interested in community philanthropy. These were GFCF initiatives that the Alliance supported - not Alliance initiatives that the GFCF delivered. The distinction mattered enormously to Alliance members, and the tension it created is one of the case's most instructive features.</p>
+                            </div>
+                            <div class="case-study-section">
+                                <h3>Getting beyond politeness</h3>
+                                <p>PBA's evaluation found that the Alliance's collaborative culture involved disagreements and divergence of views being largely addressed in informal or private conversations rather than being discussed by the group as a whole. The PBA's "prescription for courage" - the title of the case study's concluding section - argues that this is the defining challenge of all alliances: "Collaboration is hard work because it requires an articulation and framing of the differences - not the similarities - of those involved." Polite alignment around a shared idea is not the same as genuine collaboration. The Alliance achieved more than any single member could have independently. It fell short of what deeper collaboration might have produced.</p>
+                                <p>A key finding: "In our experience, it is usually a lack of clarity with regard to structures and operations more than 'personality clashes' that undermine collaborative working relationships, though personality clashes are often cited as the more important issue." This applies to every backbone organisation and every orchestration initiative. When things go wrong, the problem is usually architectural, not personal.</p>
+                            </div>
+                            <div class="case-study-section">
+                                <h3>What this case contributes to the site's argument</h3>
+                                <p>The GACP shows orchestration operating at the funder level - coordinating not what grantees do, but what funders believe and advocate. It is an example of the "normative orchestration" dimension: using the credibility of a coalition to shift what counts as legitimate development practice. The Summit's #ShiftThePower framing moved community philanthropy from a marginal approach to a recognised development paradigm. The Alliance also illustrates the "secretariat vs. animator" tension that Ros Tennyson's Animating Alliances framework names directly: the GFCF was the field's most effective orchestrator precisely because it acted as an animator rather than an administrator. The Alliance's difficulty was that it didn't fully recognise or legitimise this role until late in the collaboration's life.</p>
                             </div>
                         </div>
                     </div>
